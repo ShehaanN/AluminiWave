@@ -1,0 +1,17 @@
+.mainTopic{
+      align-items: center;
+      padding-left: 600px;
+      padding-top: 100px;
+   
+}
+.mainTopic span{
+      padding-left: 150px;
+      color: #2F4EDA;
+      font-weight: bold;
+}
+.paragraph{
+      display: flex;
+      gap: 200px;
+      justify-content: center;
+      padding-top: 40px;
+}
