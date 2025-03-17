@@ -1,0 +1,35 @@
+.mainContent{
+      display: flex;
+      justify-content: space-between;
+}
+
+.rightContent img{
+      width: 800px;
+      height: auto;
+      
+      
+      
+}
+.leftContent{
+      padding-top: 50px;
+      padding-left: 100px;
+}
+span h1{
+      color: #269EB2;
+      font-weight: 800;
+}
+.leftContent .para{
+      font-family: Cantarell;
+      color: #6B7280;
+}
+.mainContentButton{
+      display: flex;
+      gap: 30px;
+}
+.mainContentButton button{
+      width: 140px;
+      height: 60px;
+      border-radius: 10px;
+      background: #269EB2;
+      border: none;
+}
