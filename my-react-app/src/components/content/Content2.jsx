@@ -1,5 +1,6 @@
 import React from 'react'
 import './Content2.css'
+import active from '../../assets/active.png'
 
 function Content2() {
   return (
@@ -31,6 +32,10 @@ function Content2() {
                                     professionals who understand your journey.
               </div>
         </div>
+       
+      </div>
+      <div className="longImage">
+        <img src={active} alt="" />
       </div>
     </div>
   )
