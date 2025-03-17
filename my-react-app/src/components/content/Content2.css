@@ -40,3 +40,12 @@
 .joinPart{
       padding-top: 60px;
 }
+.footer{
+      display: flex;
+      margin-left: 200px;
+      margin-right: 200px;
+      justify-content: space-between;
+      padding-top: 100px;
+      
+      
+}
