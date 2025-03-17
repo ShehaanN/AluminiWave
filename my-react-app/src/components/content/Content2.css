@@ -34,6 +34,8 @@
 .joinPart button{
       margin-left: 740px;
       margin-top: 10px;
-      width: ;
+      width: 250px;
+      height: 60px;
 }
-.joinPart{padding-top: 60px;}
+.joinPart{padding-top: 60px;
+}
