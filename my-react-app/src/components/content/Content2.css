@@ -40,3 +40,37 @@
 .joinPart{
       padding-top: 60px;
 }
+.footer{
+      background:#1F2937;
+      display: flex;
+      padding-left: 200px;
+      justify-content: space-between;
+      padding-right: 200px;
+      height: 300px;
+      margin-top: 100px;
+      
+      
+      
+}
+.part1 {
+      margin-top: 100px;
+      display: flex;
+      
+}
+.part2 {
+      margin-top: 100px;
+}
+.part3 {
+      margin-top: 100px;
+}
+.part4 {
+      margin-top: 100px;
+}
+.footer a{
+      text-decoration: none;
+      
+}
+.footer ul{
+      list-style: none;
+      
+}
