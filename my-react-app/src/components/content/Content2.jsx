@@ -42,6 +42,40 @@ function Content2() {
         <p>Create your profile in minutes and start building meaningful professional connections that last a lifetime.</p>
         <button>Create your profile</button>
       </div>
+      <div className="footer">
+        <div className="part1">
+          <ul>
+            <li><a href="">Company</a></li>
+            <li><a href="">About</a></li>
+            <li><a href="">Carrers</a></li>
+            <li><a href="">Blog</a></li>
+          </ul>
+        </div>
+        <div className="part2">
+          <ul>
+            <li><a href="">Future</a></li>
+            <li><a href="">Membership</a></li>
+            <li><a href="">Event</a></li>
+            <li><a href="">Jobs</a></li>
+          </ul>
+        </div>
+        <div className="part3">
+          <ul>
+            <li><a href="">Support</a></li>
+            <li><a href="">Help Center</a></li>
+            <li><a href="">Privacy</a></li>
+            <li><a href="">Terms</a></li>
+          </ul>
+        </div>
+        <div className="part4">
+          <ul>
+            <li><a href="">Connect</a></li>
+            <li><a href=""><img src="" alt="" /></a></li>
+            <li><a href=""><img src="" alt="" /></a></li>
+            <li><a href=""><img src="" alt="" /></a></li>
+          </ul>
+        </div>
+      </div>
     </div>
   )
 }
