@@ -20,8 +20,20 @@
       height: auto;
       padding-top: 80px;
 }
-.joinPart{
-      position: absolute;
-      align-items: center;
+.joinPart h3{
+      margin-left: 650px;
+      
+      
       
 }
+.joinPart p{
+      margin-left: 480px;
+      padding-top: 10px;
+
+}
+.joinPart button{
+      margin-left: 740px;
+      margin-top: 10px;
+      width: ;
+}
+.joinPart{padding-top: 60px;}
