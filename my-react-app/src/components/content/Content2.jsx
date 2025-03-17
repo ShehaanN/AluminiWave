@@ -59,20 +59,20 @@ function Content2() {
             <li><a href="">Jobs</a></li>
           </ul>
         </div>
-        <div className="part1">
+        <div className="part3">
           <ul>
-            <li><a href="">Company</a></li>
-            <li><a href="">About</a></li>
-            <li><a href="">Carrers</a></li>
-            <li><a href="">Blog</a></li>
+            <li><a href="">Support</a></li>
+            <li><a href="">Help Center</a></li>
+            <li><a href="">Privacy</a></li>
+            <li><a href="">Terms</a></li>
           </ul>
         </div>
-        <div className="part1">
+        <div className="part4">
           <ul>
-            <li><a href="">Company</a></li>
-            <li><a href="">About</a></li>
-            <li><a href="">Carrers</a></li>
-            <li><a href="">Blog</a></li>
+            <li><a href="">Connect</a></li>
+            <li><a href=""><img src="" alt="" /></a></li>
+            <li><a href=""><img src="" alt="" /></a></li>
+            <li><a href=""><img src="" alt="" /></a></li>
           </ul>
         </div>
       </div>
