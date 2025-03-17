@@ -54,6 +54,8 @@
 }
 .part1 {
       margin-top: 100px;
+      display: flex;
+      
 }
 .part2 {
       margin-top: 100px;
@@ -63,4 +65,12 @@
 }
 .part4 {
       margin-top: 100px;
+}
+.footer a{
+      text-decoration: none;
+      
+}
+.footer ul{
+      list-style: none;
+      
 }
