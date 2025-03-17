@@ -15,3 +15,27 @@
       justify-content: center;
       padding-top: 40px;
 }
+.longImage img{
+      width: 1689px;
+      height: auto;
+      padding-top: 80px;
+}
+.joinPart h3{
+      margin-left: 650px;
+      
+      
+      
+}
+.joinPart p{
+      margin-left: 480px;
+      padding-top: 10px;
+
+}
+.joinPart button{
+      margin-left: 740px;
+      margin-top: 10px;
+      width: 250px;
+      height: 60px;
+}
+.joinPart{padding-top: 60px;
+}

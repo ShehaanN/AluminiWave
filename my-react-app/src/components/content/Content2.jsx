@@ -1,5 +1,6 @@
 import React from 'react'
 import './Content2.css'
+import active from '../../assets/active.png'
 
 function Content2() {
   return (
@@ -31,6 +32,15 @@ function Content2() {
                                     professionals who understand your journey.
               </div>
         </div>
+       
+      </div>
+      <div className="longImage">
+        <img src={active} alt="" />
+      </div>
+      <div className="joinPart">
+        <h3>Join the AluminiWave Community Today</h3>
+        <p>Create your profile in minutes and start building meaningful professional connections that last a lifetime.</p>
+        <button>Create your profile</button>
       </div>
     </div>
   )
