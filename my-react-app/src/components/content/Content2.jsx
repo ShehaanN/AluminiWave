@@ -55,8 +55,8 @@ function Content2() {
           <ul>
             <li><a href="">Future</a></li>
             <li><a href="">Membership</a></li>
-            <li><a href="">Carrers</a></li>
-            <li><a href="">Blog</a></li>
+            <li><a href="">Event</a></li>
+            <li><a href="">Jobs</a></li>
           </ul>
         </div>
         <div className="part1">
