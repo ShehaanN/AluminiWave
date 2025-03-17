@@ -37,6 +37,11 @@ function Content2() {
       <div className="longImage">
         <img src={active} alt="" />
       </div>
+      <div className="joinPart">
+        <h3>Join the AluminiWave Community Today</h3>
+        <p>Create your profile in minutes and start building meaningful professional connections that last a lifetime.</p>
+        <button>Create your profile</button>
+      </div>
     </div>
   )
 }
