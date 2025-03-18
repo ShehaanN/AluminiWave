@@ -61,10 +61,7 @@ function Content2() {
         </div>
         <div className="part3">
           <ul>
-            <li><a href="">Support</a></li>
-            <li><a href="">Help Center</a></li>
-            <li><a href="">Privacy</a></li>
-            <li><a href="">Terms</a></li>
+           
           </ul>
         </div>
         <div className="part4">
