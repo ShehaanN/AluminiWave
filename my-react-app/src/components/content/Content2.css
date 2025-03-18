@@ -78,4 +78,6 @@
 .part1 li{
       row-gap: 100px;
 }
-
+.footer li {
+      margin-bottom: 20px; /* Adjust space as needed */
+  }
