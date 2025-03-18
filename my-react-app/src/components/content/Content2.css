@@ -51,6 +51,7 @@
       
       
       
+      
 }
 .part1 {
       margin-top: 100px;
@@ -74,3 +75,7 @@
       list-style: none;
       
 }
+.part1 li{
+      row-gap: 100px;
+}
+
