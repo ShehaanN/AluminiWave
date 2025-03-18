@@ -68,7 +68,12 @@ function Content2() {
           </ul>
         </div>
         <div className="part4">
-          
+          <ul>
+            <li><a href="">Connect</a></li>
+            <li><a href=""><img src="" alt="" /></a></li>
+            <li><a href=""><img src="" alt="" /></a></li>
+            <li><a href=""><img src="" alt="" /></a></li>
+          </ul>
         </div>
        
       </div>
