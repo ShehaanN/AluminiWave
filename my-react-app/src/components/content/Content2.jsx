@@ -75,8 +75,10 @@ function Content2() {
             <li><a href=""><img src="" alt="" /></a></li>
           </ul>
         </div>
+        <p>© 2025 AluminiWave. All rights reserved.</p>
       </div>
       <hr />
+     
     </div>
   )
 }
