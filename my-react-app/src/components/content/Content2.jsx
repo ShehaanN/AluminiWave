@@ -44,7 +44,7 @@ function Content2() {
       </div>
       <div className="footer">
         <div className="part1">
-          <ul>
+          <ul className='a'>
             <li><a href="">Company</a></li>
             <li><a href="">About</a></li>
             <li><a href="">Carrers</a></li>
@@ -75,7 +75,14 @@ function Content2() {
             <li><a href=""><img src="" alt="" /></a></li>
           </ul>
         </div>
+       
       </div>
+      <div className="all">
+        <p>© 2025 AluminiWave. All rights reserved.</p>
+
+        </div>
+      <hr />
+     
     </div>
   )
 }
