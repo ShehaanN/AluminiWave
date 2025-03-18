@@ -76,6 +76,7 @@ function Content2() {
           </ul>
         </div>
       </div>
+      <hr />
     </div>
   )
 }
