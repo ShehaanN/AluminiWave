@@ -1,12 +1,13 @@
 import React from 'react'
 import './Content2.css'
 import active from '../../assets/active.png'
+import sara from '../../assets/sara.png'
 
 function Content2() {
   return (
     <div>
       <div className='mainTopic'>
-        <span>Value Propositions</span><br />
+        <span>Value Propositions</span>
         <h1>Everything you need to succeed</h1>
       </div>
       <div className="paragraph">
@@ -34,6 +35,38 @@ function Content2() {
         </div>
        
       </div>
+      <div className="hear">
+        <div className='mainTopic'>
+          <span>Testimonials</span>
+          <h1>Hear from our community</h1>
+        </div>
+        <div className="mainPart">
+          <div className="partA">
+           
+            <div className="paraA">
+              <div className="imagePart">
+                <div className="sara"><img src={sara} alt="" /> </div>
+                <div className="info">Sarah Chen <br />Class of 2015, Senior Product Manager</div>
+
+              </div>
+            <p>"AluminiWave transformed how I give back to my university community. The platform made it <br />
+             incredibly easy to connect with students who could benefit most from my experience, and the <br />
+              structured mentorship tools helped ensure our time together was productive."</p>
+            </div>
+          </div>
+          <div className="partB">
+            <div className="paraB">
+              <div className="imagePart"><img src={sara} alt="" /></div>
+              <div className="info">Sarah Chen <br />Class of 2015, Senior Product Manager</div>
+            </div>
+            <p>"AluminiWave transformed how I give back to my university community. The platform made it <br />
+             incredibly easy to connect with students who could benefit most from my experience, and the <br />
+              structured mentorship tools helped ensure our time together was productive."</p>
+          </div>
+        </div>
+        
+      </div>
+
       <div className="longImage">
         <img src={active} alt="" />
       </div>

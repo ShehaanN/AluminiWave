@@ -1,24 +1,29 @@
 .mainTopic{
       align-items: center;
       padding-left: 600px;
-      padding-top: 100px;
+      padding-top: 20px;
    
 }
 .mainTopic span{
       padding-left: 150px;
       color: #2F4EDA;
       font-weight: bold;
+      
 }
 .paragraph{
       display: flex;
       gap: 200px;
       justify-content: center;
-      padding-top: 40px;
+      margin-top: -60px;
+      
 }
 .longImage img{
       width: 1689px;
       height: auto;
       padding-top: 80px;
+}
+.joinPart{
+      padding-left: 100px;
 }
 .joinPart h3{
       margin-left: 500px;
@@ -70,6 +75,7 @@
 }
 .footer a{
       text-decoration: none;
+      color: #9CA3AF;
       
 }
 .footer ul{
@@ -86,4 +92,23 @@
       background: #1F2937;
       text-align: center;
       color: #9CA3AF;
+      padding-bottom: 40px;
 }
+.mainPart{
+      display: flex;
+      justify-content: center;
+      gap: 200px;
+}
+.imagePart{
+      display: flex;
+}
+.paraB{
+      display: flex;
+}
+.sara img{
+      width: 40px;
+}
+.imagePart img{
+      width: 40px;
+}
+
