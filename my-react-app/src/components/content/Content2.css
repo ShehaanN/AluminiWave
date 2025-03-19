@@ -21,7 +21,7 @@
       padding-top: 80px;
 }
 .joinPart{
-      padding-left: 10px;
+      padding-left: 100px;
 }
 .joinPart h3{
       margin-left: 500px;
@@ -73,6 +73,7 @@
 }
 .footer a{
       text-decoration: none;
+      color: #9CA3AF;
       
 }
 .footer ul{
@@ -89,4 +90,5 @@
       background: #1F2937;
       text-align: center;
       color: #9CA3AF;
+      padding-bottom: 40px;
 }
