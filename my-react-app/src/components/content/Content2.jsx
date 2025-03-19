@@ -6,7 +6,7 @@ function Content2() {
   return (
     <div>
       <div className='mainTopic'>
-        <span>Value Propositions</span><br />
+        <span>Value Propositions</span>
         <h1>Everything you need to succeed</h1>
       </div>
       <div className="paragraph">
