@@ -94,3 +94,11 @@
       color: #9CA3AF;
       padding-bottom: 40px;
 }
+.mainPart{
+      display: flex;
+      justify-content: center;
+      gap: 200px;
+}
+.imagePart{
+      display: flex;
+}
