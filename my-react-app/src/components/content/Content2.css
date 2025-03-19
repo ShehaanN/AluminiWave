@@ -1,13 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Cantarell:wght@400;700&display=swap');
+
 .mainTopic{
       align-items: center;
       padding-left: 600px;
       padding-top: 40px;
+      font-family: 'Cantarell', sans-serif;
    
 }
 .mainTopic span{
       padding-left: 150px;
       color: #2F4EDA;
       font-weight: bold;
+      font-family: 'Cantarell', sans-serif;
       
 }
 .paragraph{
@@ -15,6 +19,7 @@
       gap: 200px;
       justify-content: center;
       margin-top: -60px;
+      font-family: 'Cantarell', sans-serif;
       
 }
 .longImage img{
@@ -34,6 +39,7 @@
 .joinPart p{
       margin-left: 350px;
       padding-top: 10px;
+      font-family: 'Cantarell', sans-serif;
 
 }
 .joinPart button{
@@ -41,9 +47,15 @@
       margin-top: 10px;
       width: 250px;
       height: 60px;
+      font-family: 'Cantarell', sans-serif;
+      border: none;
+      background: #269EB2;
+      border-radius: 10px;
+      color: #9CA3AF;
 }
 .joinPart{
       padding-top: 60px;
+      font-family: 'Cantarell', sans-serif;
 }
 .footer{
       background:#1F2937;
@@ -53,6 +65,7 @@
       padding-right: 200px;
       height: 300px;
       margin-top: 100px;
+      font-family: 'Cantarell', sans-serif;
       
       
       
@@ -117,5 +130,6 @@
 }
 .hear{
       padding-top: 20px;
+      font-family: 'Cantarell', sans-serif;
 }
 
