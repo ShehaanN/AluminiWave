@@ -34,7 +34,7 @@ function Content2() {
               </div>
         </div>
        
-      </div>
+      </div><br />
       <div className="hear">
         <div className='mainTopic'>
           <span>Testimonials</span>
