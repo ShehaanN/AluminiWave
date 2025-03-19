@@ -3,6 +3,8 @@ import './Content2.css'
 import active from '../../assets/active.png'
 import sara from '../../assets/sara.png'
 
+
+
 function Content2() {
   return (
     <div>
