@@ -102,3 +102,13 @@
 .imagePart{
       display: flex;
 }
+.paraB{
+      display: flex;
+}
+.sara img{
+      width: 40px;
+}
+.imagePart img{
+      width: 40px;
+}
+
