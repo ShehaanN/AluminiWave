@@ -1,7 +1,7 @@
 .mainTopic{
       align-items: center;
       padding-left: 600px;
-      padding-top: 20px;
+      padding-top: 40px;
    
 }
 .mainTopic span{
@@ -23,7 +23,7 @@
       padding-top: 80px;
 }
 .joinPart{
-      padding-left: 100px;
+      padding-left: 150px;
 }
 .joinPart h3{
       margin-left: 500px;
@@ -114,5 +114,8 @@
 }
 .imagePart img{
       width: 40px;
+}
+.hear{
+      padding-top: 20px;
 }
 
