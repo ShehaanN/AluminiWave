@@ -7,6 +7,10 @@ function Login() {
     <div>
       <div className="header">
             <img src={logo}alt="" />
+            <div className="headerTopic">
+                  <h1>Join Our Alumni Network</h1>
+                  <p>Connect, Share, and Grow with Fellow Graduates</p>
+            </div>
       </div>
     </div>
   )
