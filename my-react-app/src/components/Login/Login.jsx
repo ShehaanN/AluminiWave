@@ -12,6 +12,7 @@ function Login() {
                   <p>Connect, Share, and Grow with Fellow Graduates</p>
             </div>
       </div>
+      <div className="loginForm">
       <div class="progress">
             <div class="circle done">
                   <span class="label">1</span>
@@ -38,6 +39,7 @@ function Login() {
                   <span class="title">Finish</span>
                   </div>
             </div>
+      </div>
     </div>
   )
 }
