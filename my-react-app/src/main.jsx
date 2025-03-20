@@ -9,8 +9,8 @@ import Content2 from './components/content/Content2.jsx'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     
-    <Nav/>
+    {/* <Nav/>
     <Content></Content>
-    <Content2></Content2>
+    <Content2></Content2> */}
   </StrictMode>,
 )
