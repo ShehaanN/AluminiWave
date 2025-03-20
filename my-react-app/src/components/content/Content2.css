@@ -2,7 +2,7 @@
 
 .mainTopic{
       align-items: center;
-      padding-left: 600px;
+      padding-left: 400px;
       padding-top: 40px;
       font-family: 'Cantarell', sans-serif;
    
@@ -16,19 +16,19 @@
 }
 .paragraph{
       display: flex;
-      gap: 200px;
+      gap: 140px;
       justify-content: center;
       margin-top: -60px;
       font-family: 'Cantarell', sans-serif;
       
 }
 .longImage img{
-      width: 1689px;
+      width: 1350px;
       height: auto;
       padding-top: 80px;
 }
 .joinPart{
-      padding-left: 150px;
+      padding-left: 10px;
 }
 .joinPart h3{
       margin-left: 500px;
@@ -110,7 +110,7 @@
 .mainPart{
       display: flex;
       justify-content: center;
-      gap: 200px;
+      gap: 180px;
       padding-top: 40px;
 }
 .imagePart{
@@ -131,5 +131,6 @@
 .hear{
       padding-top: 20px;
       font-family: 'Cantarell', sans-serif;
+      font-size: 15px;
 }
 

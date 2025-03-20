@@ -51,8 +51,8 @@ function Content2() {
                 <div className="info">Sarah Chen <br />Class of 2015, Senior Product Manager</div>
 
               </div><br />
-            <p>"AluminiWave transformed how I give back to my university community. The platform made it <br />
-             incredibly easy to connect with students who could benefit most from my experience, and the <br />
+            <p>"AluminiWave transformed how I give back to my university community.<br /> The platform made it 
+             incredibly easy to connect with <br /> students who could benefit most from my experience, and the <br />
               structured mentorship tools helped ensure our time together was productive."</p>
             </div>
           </div>
@@ -61,8 +61,8 @@ function Content2() {
               <div className="imagePart"><img src={sara} alt="" /></div>
               <div className="info">Sarah Chen <br />Class of 2015, Senior Product Manager</div>
             </div><br />
-            <p>"AluminiWave transformed how I give back to my university community. The platform made it <br />
-             incredibly easy to connect with students who could benefit most from my experience, and the <br />
+            <p>"AluminiWave transformed how I give back to my university community. <br /> The platform made it
+             incredibly easy to connect with students who <br /> could benefit most from my experience, and the <br />
               structured mentorship tools helped ensure our time together was productive."</p>
           </div>
         </div>
