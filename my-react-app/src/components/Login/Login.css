@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Cantarell:wght@400;700&display=swap');
+*{
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+     font-family: 'Cantarell', sans-serif; 
+}
+
+
+.header{
+      background: linear-gradient(to right, #3a5058 20%, #00a8c5 80%);
+      height: 100px;
+
+}
+.header img{
+      width: 130px;
+      height: 100px;
+}
+.headerTopic{
+      background: linear-gradient(to right, #3a5058 20%, #00a8c5 80%);
+      margin-top: -40px;
+      padding-left: 500px;
+      height: 100px;
+      
+
+}
+.headerTopic p{
+      padding-left: 20px;
+}
