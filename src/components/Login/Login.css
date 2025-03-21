@@ -19,17 +19,20 @@
 .headerTopic{
       background: linear-gradient(to right, #3a5058 20%, #00a8c5 80%);
       margin-top: -40px;
-      padding-left: 500px;
+      padding-left: 490px;
       height: 100px;
       
 
 }
 .headerTopic p{
-      padding-left: 20px;
+      margin-right: 200px;
       color:#FFFFFF ;
 }
 .header h1{
       color:#FFFFFF ;
+      font-size: 24px;
+      padding-left: 40px;
+      
 }
 /* Form Progress */
 .progress {
