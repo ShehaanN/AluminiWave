@@ -80,6 +80,12 @@
 }
 .social-buttons{
   display: flex;
-  gap: 20px;
+  gap: 100px;
   padding-left: 90px;
+}
+.social-buttons img{
+  width: 20px;
+}
+.social-buttons button{
+  
 }
