@@ -31,16 +31,16 @@ function Login() {
             </div>
             <div className="terms">
                   <input type="checkbox" id="terms" />
-                  <label htmlFor="terms">
-                        I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
-                  </label>
+                  I agree to the <a href="">Terms of Service </a>and <a href="">privacy policy </a>
+                 
+                
             </div>
             <button className="continue-btn">Continue</button>
             <p className="or-text">Or continue with</p>
             <div className="social-buttons">
-                  <button className="social-btn linkedin">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn" />
-                        LinkedIn
+                  <button className="social-btn-linkedin">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn" /> <span>linkdln</span>
+                        
                   </button>
                   <button className="social-btn google">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google" />
