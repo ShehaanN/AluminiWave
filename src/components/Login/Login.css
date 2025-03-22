@@ -35,7 +35,7 @@
       
 }
 .loginInfo{
-      background: #3a5058;
+      background: #e5eaec;
       width: 700px;
       height: 500px;
       margin-left: 400px;
@@ -44,6 +44,15 @@
     
 }
 input{
-      border: 1px solid #00a8c5;
+      border: 1px solid #D1D5DB;
       width: 600px;
+      height: 50px;
+}
+.loginInfo .creation{
+  font-size: 25px;
+  font-weight: 800;
+  
+}
+.info{
+  padding-top: 10px;
 }
