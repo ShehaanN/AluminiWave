@@ -40,7 +40,7 @@ function Login() {
             <div className="social-buttons">
                   <button className="social-btn-linkedin">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn" />
-                        LinkedIn
+                        
                   </button>
                   <button className="social-btn google">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google" />

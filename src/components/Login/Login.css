@@ -83,17 +83,16 @@
   gap: 100px;
   padding-left: 90px;
 }
-.social-buttons img{
-  width: 20px;
-}
+
+
 .social-buttons button{
   border: 1px solid #3a5058;
   width: 200px;
   height: 45px;
 }
-.social-btn-linkedin{
-  display: flex;
-}
+
 .social-btn-linkedin img{
-  margin-left: 20px;
+  width: 30px;
+  height: 20px;
+  padding-left: 10px;
 }
