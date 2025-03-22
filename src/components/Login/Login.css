@@ -68,3 +68,9 @@
   margin-top: 10px;
   
 }
+.continue-btn{
+  border: 1px solid #00a8c5;
+  width: 630px;
+  background: #00a8c5;
+  height: 50px;
+}
