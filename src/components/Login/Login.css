@@ -43,7 +43,7 @@
       padding-left: 40px;
     
 }
-input{
+.info input{
       border: 1px solid #D1D5DB;
       width: 600px;
       height: 50px;
@@ -68,6 +68,40 @@ input{
   margin-top: 10px;
   
 }
+.continue-btn{
+  border: 1px solid #00a8c5;
+  width: 630px;
+  background: #00a8c5;
+  height: 50px;
+  margin-top: 10px;
+}
 .terms{
-  padding-right: 100px;
+  padding-top: 10px;
+}
+.social-buttons{
+  display: flex;
+  gap: 100px;
+  padding-left: 90px;
+}
+
+
+.social-buttons button{
+  border: 1px solid #3a5058;
+  width: 200px;
+  height: 45px;
+}
+.social-btn-linkedin button{
+  display: flex;
+}
+
+.social-btn-linkedin img{
+  width: 30px;
+  height: 20px;
+  padding-left: 10px;
+  margin-top: 10px;
+}
+.social-btn-linkedin span{
+  padding-left: 40px;
+  padding-bottom: 80px;
+  
 }
