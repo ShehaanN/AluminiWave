@@ -31,6 +31,7 @@ function Login() {
             </div>
             <div className="terms">
                   <input type="checkbox" id="terms" />
+                  I agree to the <a href="">Terms of Service </a>and <a href="">privacy policy </a>
                  
                 
             </div>
