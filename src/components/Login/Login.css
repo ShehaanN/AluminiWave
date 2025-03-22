@@ -43,7 +43,7 @@
       padding-left: 40px;
     
 }
-input{
+.info input{
       border: 1px solid #D1D5DB;
       width: 600px;
       height: 50px;
@@ -67,7 +67,4 @@ input{
   height: 45px;
   margin-top: 10px;
   
-}
-.terms{
-  padding-right: 100px;
 }
