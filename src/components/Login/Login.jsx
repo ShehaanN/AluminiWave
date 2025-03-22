@@ -13,11 +13,14 @@ function Login() {
             </div>
       </div>
       <div className="loginInfo">
-            <p>Account Creation</p>
-            Email or Phone <br />
-            <input type="email" /><br />
-            Password <br />
-            <input type="password" /><br />
+                  <p className='creation'>Account Creation</p>
+            <div className="info">
+                  Email or Phone <br />
+                  <input type="email" placeholder='Enter your email or phone'/><br />
+                  Password <br />
+                  <input type="password" placeholder='Create password'/><br />
+            </div>
+           
             <p className="password-hint">✅ 8+ characters ✅ 1 number ✅ 1 special character</p><br />
             I am a <br />
             <div className="buttons">

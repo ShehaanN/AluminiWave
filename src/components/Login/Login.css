@@ -34,3 +34,40 @@
       padding-left: 40px;
       
 }
+.loginInfo{
+      background: #e5eaec;
+      width: 700px;
+      height: 500px;
+      margin-left: 400px;
+      margin-top: 100px;
+      padding-left: 40px;
+    
+}
+input{
+      border: 1px solid #D1D5DB;
+      width: 600px;
+      height: 50px;
+}
+.loginInfo .creation{
+  font-size: 25px;
+  font-weight: 800;
+  
+}
+.info{
+  padding-top: 10px;
+}
+.buttons {
+  display: flex;
+  gap: 40px;
+  padding-left: 90px;
+}
+.buttons button{
+  border: 1px solid #00a8c5;
+  width: 200px;
+  height: 45px;
+  margin-top: 10px;
+  
+}
+.terms{
+  padding-right: 100px;
+}
