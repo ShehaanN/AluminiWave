@@ -19,82 +19,213 @@
 .headerTopic{
       background: linear-gradient(to right, #3a5058 20%, #00a8c5 80%);
       margin-top: -40px;
-      padding-left: 500px;
+      padding-left: 490px;
       height: 100px;
       
 
 }
 .headerTopic p{
-      padding-left: 20px;
+      margin-right: 200px;
       color:#FFFFFF ;
 }
 .header h1{
       color:#FFFFFF ;
+      font-size: 24px;
+      padding-left: 40px;
+      
 }
-/* Form Progress */
-.progress {
-      width: 1000px;
-      margin-top: 100px;
-      margin-left: 200px;
-      text-align: center;
-    }
-    .progress .circle,
-    .progress .bar {
-      display: inline-block;
-      background: #fff;
-      width: 40px; height: 40px;
-      border-radius: 40px;
-      border: 1px solid #d5d5da;
-    }
-    .progress .bar {
-      position: relative;
-      width: 80px;
-      height: 6px;
-      top: -33px;
-      margin-left: -5px;
-      margin-right: -5px;
-      border-left: none;
-      border-right: none;
-      border-radius: 0;
-    }
-    .progress .circle .label {
-      display: inline-block;
-      width: 32px;
-      height: 32px;
-      line-height: 32px;
-      border-radius: 32px;
-      margin-top: 3px;
-      color: #b5b5ba;
-      font-size: 17px;
-    }
-    .progress .circle .title {
-      color: #b5b5ba;
-      font-size: 13px;
-      line-height: 30px;
-      margin-left: -5px;
-    }
-    
-    /* Done / Active */
-    .progress .bar.done,
-    .progress .circle.done {
-      background: #eee;
-    }
-    .progress .bar.active {
-      background: linear-gradient(to right, #EEE 40%, #FFF 60%);
-    }
-    .progress .circle.done .label {
-      color: #FFF;
-      background: #8bc435;
-      box-shadow: inset 0 0 2px rgba(0,0,0,.2);
-    }
-    .progress .circle.done .title {
-      color: #444;
-    }
-    .progress .circle.active .label {
-      color: #FFF;
-      background: #0c95be;
-      box-shadow: inset 0 0 2px rgba(0,0,0,.2);
-    }
-    .progress .circle.active .title {
-      color: #0c95be;
-    }
+//* Center the form */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f7f7f7;
+}
+
+/* Form Box */
+.form-box {
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 350px;
+  text-align: center;
+}
+
+/* Step Progress Bar */
+.step-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+}
+
+.step-number {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 50%;
+  background: #ccc;
+  color: white;
+  text-align: center;
+  font-size: 14px;
+}
+
+.step.active .step-number {
+  background: #0073b1;
+}
+
+.step-line {
+  width: 50px;
+  height: 4px;
+  background: #ccc;
+  margin: 0 10px;
+}
+
+.step.active + .step .step-line {
+  background: #0073b1;
+}
+
+/* Form Elements */
+h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  text-align: left;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.password-hint {
+  font-size: 12px;
+  color: #666;
+  text-align: left;
+  margin-top: 5px;
+}
+
+/* Role Selection */
+.sub-heading {
+  text-align: left;
+  font-size: 14px;
+  margin-top: 15px;
+}
+
+.role-selection {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+}
+
+.role-btn {
+  width: 48%;
+  padding: 8px;
+  border: 1px solid #0073b1;
+  background: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.role-btn:hover {
+  background: #0073b1;
+  color: white;
+}
+
+/* Terms */
+.terms {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+  font-size: 12px;
+  text-align: left;
+}
+
+.terms input {
+  margin-right: 5px;
+}
+
+.terms a {
+  color: #0073b1;
+  text-decoration: none;
+}
+
+/* Continue Button */
+.continue-btn {
+  width: 100%;
+  padding: 10px;
+  margin-top: 15px;
+  background: #0073b1;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.continue-btn:hover {
+  background: #005f8a;
+}
+
+/* Social Login */
+.or-text {
+  margin-top: 15px;
+  font-size: 12px;
+  color: #666;
+}
+
+.social-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.social-btn {
+  width: 48%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  background: white;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.social-btn img {
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+}
+
+.linkedin {
+  border-color: #0073b1;
+}
+
+.linkedin:hover {
+  background: #0073b1;
+  color: white;
+}
+
+.google {
+  border-color: #db4437;
+}
+
+.google:hover {
+  background: #db4437;
+  color: white;
+}
