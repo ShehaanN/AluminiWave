@@ -78,3 +78,8 @@
 .terms{
   padding-top: 10px;
 }
+.social-buttons{
+  display: flex;
+  gap: 20px;
+  padding-left: 90px;
+}
