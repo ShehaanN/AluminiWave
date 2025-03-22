@@ -56,3 +56,18 @@ input{
 .info{
   padding-top: 10px;
 }
+.buttons {
+  display: flex;
+  gap: 40px;
+  padding-left: 90px;
+}
+.buttons button{
+  border: 1px solid #00a8c5;
+  width: 200px;
+  height: 45px;
+  margin-top: 10px;
+  
+}
+.terms{
+  padding-right: 100px;
+}
