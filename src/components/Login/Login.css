@@ -90,9 +90,18 @@
   width: 200px;
   height: 45px;
 }
+.social-btn-linkedin button{
+  display: flex;
+}
 
 .social-btn-linkedin img{
   width: 30px;
   height: 20px;
   padding-left: 10px;
+  margin-top: 10px;
+}
+.social-btn-linkedin span{
+  padding-left: 40px;
+  padding-bottom: 80px;
+  
 }

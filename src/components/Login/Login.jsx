@@ -39,7 +39,7 @@ function Login() {
             <p className="or-text">Or continue with</p>
             <div className="social-buttons">
                   <button className="social-btn-linkedin">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn" />
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn" /> <span>linkdln</span>
                         
                   </button>
                   <button className="social-btn google">
