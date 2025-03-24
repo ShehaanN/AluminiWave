@@ -17,26 +17,27 @@ function Login() {
         <p className="creation">Account Creation</p>
         <div className="info">
           Email or Phone <br />
-          <input type="email" placeholder="Enter your email or phone" /> <br />
+          <input type="email" placeholder="Enter your email or phone" /> <br /><br />
           Password <br />
-          <input type="password" placeholder="Create password" /> <br />
+          <input type="password" placeholder="Create password" /> <br /><br />
         </div>
 
-        <p className="password-hint">✅ 8+ characters ✅ 1 number ✅ 1 special character</p>
+        <p className="password-hint">✅ 8+ characters ✅ 1 number ✅ 1 special character</p><br />
 
         <p>I am a:</p>
         <div className="buttons">
           <button className="student">Student</button>
           <button className="alumini">Alumni</button>
-        </div>
+        </div><br />
 
         <div className="terms">
           <input type="checkbox" id="terms" /> I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
-        </div>
+        </div><br />
 
-        <button className="continue-btn">Continue</button>
 
-        <p className="or-text">Or continue with</p>
+        <button className="continue-btn">Continue</button><br /><br />
+
+        <p className="or-text">Or continue with</p><br />
 
         <div className="social-buttons">
           <button className="social-btn-linkedin">
