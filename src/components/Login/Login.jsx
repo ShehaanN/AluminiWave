@@ -16,14 +16,14 @@ function Login() {
       <div className="loginInfo">
         <p className="creation">Account Creation</p>
         <div className="info">
-          <label>Email or Phone</label> <br />
+          Email or Phone <br />
           <input type="email" placeholder="Enter your email or phone" /> <br />
-          <label>Password</label> <br />
+          Password <br />
           <input type="password" placeholder="Create password" /> <br />
         </div>
 
         <p className="password-hint">✅ 8+ characters ✅ 1 number ✅ 1 special character</p>
-        
+
         <p>I am a:</p>
         <div className="buttons">
           <button className="student">Student</button>
@@ -37,7 +37,7 @@ function Login() {
         <button className="continue-btn">Continue</button>
 
         <p className="or-text">Or continue with</p>
-        
+
         <div className="social-buttons">
           <button className="social-btn-linkedin">
             <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn" />
