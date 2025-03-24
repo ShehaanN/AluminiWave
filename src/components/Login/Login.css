@@ -1,107 +1,112 @@
 @import url('https://fonts.googleapis.com/css2?family=Cantarell:wght@400;700&display=swap');
-*{
-     margin: 0;
-     padding: 0;
-     box-sizing: border-box;
-     font-family: 'Cantarell', sans-serif; 
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Cantarell', sans-serif;
 }
 
+.header {
+  background: linear-gradient(to right, #3a5058 20%, #00a8c5 80%);
+  height: 100px;
+}
 
-.header{
-      background: linear-gradient(to right, #3a5058 20%, #00a8c5 80%);
-      height: 100px;
+.header img {
+  width: 130px;
+  height: 100px;
+}
 
+.headerTopic {
+  background: linear-gradient(to right, #3a5058 20%, #00a8c5 80%);
+  margin-top: -40px;
+  padding-left: 490px;
+  height: 100px;
 }
-.header img{
-      width: 130px;
-      height: 100px;
-}
-.headerTopic{
-      background: linear-gradient(to right, #3a5058 20%, #00a8c5 80%);
-      margin-top: -40px;
-      padding-left: 490px;
-      height: 100px;
-      
 
+.headerTopic p {
+  margin-right: 200px;
+  color: #FFFFFF;
 }
-.headerTopic p{
-      margin-right: 200px;
-      color:#FFFFFF ;
+
+.header h1 {
+  color: #FFFFFF;
+  font-size: 24px;
+  padding-left: 40px;
 }
-.header h1{
-      color:#FFFFFF ;
-      font-size: 24px;
-      padding-left: 40px;
-      
+
+.loginInfo {
+  background: #e5eaec;
+  width: 700px;
+  height: 700px;
+  margin-left: 400px;
+  margin-top: 100px;
+  padding-left: 40px;
 }
-.loginInfo{
-      background: #e5eaec;
-      width: 700px;
-      height: 500px;
-      margin-left: 400px;
-      margin-top: 100px;
-      padding-left: 40px;
-    
+
+.info input {
+  border: 1px solid #D1D5DB;
+  width: 600px;
+  height: 50px;
 }
-.info input{
-      border: 1px solid #D1D5DB;
-      width: 600px;
-      height: 50px;
-}
-.loginInfo .creation{
+
+.loginInfo .creation {
   font-size: 25px;
   font-weight: 800;
-  
 }
-.info{
+
+.info {
   padding-top: 10px;
 }
+
 .buttons {
   display: flex;
   gap: 40px;
   padding-left: 90px;
 }
-.buttons button{
+
+.buttons button {
   border: 1px solid #00a8c5;
   width: 200px;
   height: 45px;
   margin-top: 10px;
-  
+  cursor: pointer;
 }
-.continue-btn{
+
+.continue-btn {
   border: 1px solid #00a8c5;
   width: 630px;
   background: #00a8c5;
   height: 50px;
   margin-top: 10px;
+  cursor: pointer;
 }
-.terms{
+
+.terms {
   padding-top: 10px;
 }
-.social-buttons{
+
+
+.social-buttons {
   display: flex;
-  gap: 100px;
-  padding-left: 90px;
+  justify-content: center; 
+  gap: 80px;
+  padding-left: 0;
 }
 
-
-.social-buttons button{
-  border: 1px solid #3a5058;
+.social-buttons button {
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  gap: 10px; 
   width: 200px;
   height: 45px;
-}
-.social-btn-linkedin button{
-  display: flex;
+  border: 1px solid #3a5058;
+  background: white;
+  cursor: pointer;
 }
 
-.social-btn-linkedin img{
-  width: 30px;
+.social-buttons img {
+  width: 20px;
   height: 20px;
-  padding-left: 10px;
-  margin-top: 10px;
-}
-.social-btn-linkedin span{
-  padding-left: 40px;
-  padding-bottom: 80px;
-  
 }
