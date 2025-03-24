@@ -70,6 +70,7 @@
   width: 200px;
   height: 45px;
   margin-top: 10px;
+  cursor: pointer;
 }
 
 .continue-btn {
@@ -78,25 +79,26 @@
   background: #00a8c5;
   height: 50px;
   margin-top: 10px;
+  cursor: pointer;
 }
 
 .terms {
   padding-top: 10px;
 }
 
-/* Updated Social Buttons CSS */
+
 .social-buttons {
   display: flex;
-  justify-content: center; /* Centers buttons horizontally */
-  gap: 20px;
-  padding-left: 0; /* Removes extra padding */
+  justify-content: center; 
+  gap: 80px;
+  padding-left: 0;
 }
 
 .social-buttons button {
   display: flex;
-  align-items: center; /* Centers items vertically */
-  justify-content: center; /* Centers items horizontally */
-  gap: 10px; /* Space between icon and text */
+  align-items: center; 
+  justify-content: center;
+  gap: 10px; 
   width: 200px;
   height: 45px;
   border: 1px solid #3a5058;
