@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 function Loginstep({ currentStep } ) {
       const steps = [1, 2, 3, 4];
@@ -20,5 +20,24 @@ function Loginstep({ currentStep } ) {
     </div>
   )
 }
+export default function SignupProcess() {
+      const [currentStep, setCurrentStep] = useState(1);
+    
+      const nextStep = () => {
+        if (currentStep < 4) {
+          setCurrentStep(currentStep + 1);
+        }
+      };
+    
+      return (
+        <div className="container">
+          <h2>Signup Process</h2>
+          <Stepper currentStep={currentStep} />
+          <button onClick={nextStep} disabled={currentStep === 4}>
+            Next
+          </button>
+        </div>
+      );
+    }
 
-export default Loginstep
+
