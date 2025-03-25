@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import './Loginstep.css'
 
 function Loginstep({ currentStep } ) {
       const steps = [1, 2, 3, 4];
