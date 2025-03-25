@@ -42,6 +42,11 @@ function SignupStep2() {
                               </div>
                         </div>
                   </div>
+                  <p>Location</p>
+                  <input type="text" placeholder='Enter Location'/><br />
+                  <div className="continue">
+                        <button>Continue</button>
+                  </div>
             </div>
     </div>
   )
