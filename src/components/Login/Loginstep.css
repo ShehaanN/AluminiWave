@@ -1,0 +1,53 @@
+.step-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px;
+  }
+  
+  .step-wrapper {
+      display: flex;
+      align-items: center;
+  }
+  
+  .step {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-weight: bold;
+      color: white;
+      background-color: #d3d3d3; 
+      transition: 0.3s;
+  }
+  
+  
+  .first-active {
+      background-color: #269EB2;
+  }
+  
+  
+  .active {
+      background-color: #3498db;
+  }
+  
+ 
+  .line {
+      width: 50px;
+      height: 4px;
+      background-color: #d3d3d3; 
+      transition: 0.3s;
+  }
+  
+  
+  .first-active-line {
+      background-color: #269EB2;
+  }
+  
+ 
+  .active-line {
+      background-color: #3498db;
+  }
+  

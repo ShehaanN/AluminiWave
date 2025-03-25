@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from '../../assets/logo.png';
 import './Login.css';
+import Loginstep from './Loginstep';
 
 function Login() {
   return (
@@ -14,6 +15,7 @@ function Login() {
       </div>
 
       <div className="loginInfo">
+        <div className="steps"><Loginstep></Loginstep></div><br />
         <p className="creation">Account Creation</p>
         <div className="info">
           Email or Phone <br />
