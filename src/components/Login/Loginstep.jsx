@@ -1,44 +1,31 @@
-import React, { useState } from 'react'
-import './Loginstep.css'
+import React from "react";
+import "./Loginstep.css"; // Import CSS file
 
-function Loginstep({ currentStep } ) {
-      const steps = [1, 2, 3, 4];
+function Loginstep({ currentStep }) {
+  const steps = [1, 2, 3, 4];
+
   return (
-    <div>
-      
-            <div className="stepper">
-            {steps.map((step, index) => (
-            <div key={index} className="step-container">
-            <div className={`step ${step <= currentStep ? "active" : ""}`}>
+    <div className="step-container">
+      {steps.map((step, index) => (
+        <div key={index} className="step-wrapper">
+          <div
+            className={`step ${
+              step === 1 ? "first-active" : step <= currentStep ? "active" : ""
+            }`}
+          >
             {step}
-            </div>
-            {index < steps.length - 1 && (
-            <div className={`line ${step < currentStep ? "active-line" : ""}`}></div>
+          </div>
+          {index < steps.length - 1 && (
+            <div
+              className={`line ${
+                step === 1 ? "first-active-line" : step < currentStep ? "active-line" : ""
+              }`}
+            ></div>
           )}
         </div>
       ))}
     </div>
-    </div>
-  )
+  );
 }
-export default function SignupProcess() {
-      const [currentStep, setCurrentStep] = useState(1);
-    
-      const nextStep = () => {
-        if (currentStep < 4) {
-          setCurrentStep(currentStep + 1);
-        }
-      };
-    
-      return (
-        <div className="container">
-          <h2>Signup Process</h2>
-          <Stepper currentStep={currentStep} />
-          <button onClick={nextStep} disabled={currentStep === 4}>
-            Next
-          </button>
-        </div>
-      );
-    }
 
-
+export default Loginstep;

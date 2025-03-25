@@ -1,0 +1,53 @@
+.step-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px;
+  }
+  
+  .step-wrapper {
+      display: flex;
+      align-items: center;
+  }
+  
+  .step {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-weight: bold;
+      color: white;
+      background-color: #d3d3d3; /* Default gray */
+      transition: 0.3s;
+  }
+  
+  /* First step color */
+  .first-active {
+      background-color: #269EB2;
+  }
+  
+  /* Other active steps */
+  .active {
+      background-color: #3498db;
+  }
+  
+  /* Default line */
+  .line {
+      width: 50px;
+      height: 4px;
+      background-color: #d3d3d3; /* Default gray */
+      transition: 0.3s;
+  }
+  
+  /* First step's connecting line */
+  .first-active-line {
+      background-color: #269EB2;
+  }
+  
+  /* Other active lines */
+  .active-line {
+      background-color: #3498db;
+  }
+  
