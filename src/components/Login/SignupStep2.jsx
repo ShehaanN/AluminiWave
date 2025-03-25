@@ -26,7 +26,22 @@ function SignupStep2() {
                         </div>
                   </div>
                   <p>Professional Headline</p>
-                  <input type="text" placeholder='Enter Professional Headline'/>
+                  <input type="text" placeholder='Enter Professional Headline'/><br />
+                  <p>Graduation Year</p>
+                  <input type="text" placeholder=''/><br />
+                  <p>Major/Department</p>
+                  <input type="text" placeholder='Enter Major/Department'/><br />
+                  <div className="current">
+                        <p>Current Position</p>
+                        <div className="jobNcompany">
+                              <div className="job">
+                                    <input type="text" placeholder='Enter Job Title'/>
+                              </div>
+                              <div className="company">
+                                    <input type="text" placeholder='Enter Company'/>
+                              </div>
+                        </div>
+                  </div>
             </div>
     </div>
   )
