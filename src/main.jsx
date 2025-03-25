@@ -7,13 +7,14 @@ import Content from "./components/content/Content.jsx";
 import Content2 from "./components/content/Content2.jsx";
 import Login from "./components/Login/Login.jsx";
 import Loginstep from "./components/Login/Loginstep.jsx";
+import SignupStep2 from "./components/Login/SignupStep2.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     {/* <Nav />
     <Content></Content>
     <Content2></Content2> */}
-    <Login />
-   
+    {/* <Login /> */}
+   <SignupStep2></SignupStep2>
   </StrictMode>
 );
