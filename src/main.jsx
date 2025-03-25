@@ -14,6 +14,6 @@ createRoot(document.getElementById("root")).render(
     <Content></Content>
     <Content2></Content2> */}
     <Login />
-    <Loginstep></Loginstep>
+   
   </StrictMode>
 );

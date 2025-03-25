@@ -38,16 +38,18 @@
 .loginInfo {
   background: #e5eaec;
   width: 700px;
-  height: 700px;
-  margin-left: 400px;
-  margin-top: 100px;
+  height: 750px;
+  margin-left: 320px;
+  margin-top: 30px;
   padding-left: 40px;
+  border-radius: 10px;
 }
 
 .info input {
   border: 1px solid #D1D5DB;
   width: 600px;
   height: 50px;
+  padding-left: 10px;
 }
 
 .loginInfo .creation {
@@ -91,7 +93,7 @@
   display: flex;
   justify-content: center; 
   gap: 80px;
-  padding-left: 0;
+  padding-right: 20px;
 }
 
 .social-buttons button {
@@ -109,4 +111,8 @@
 .social-buttons img {
   width: 20px;
   height: 20px;
+}
+.steps{
+  padding-top: 10px;
+  padding-right: 30px;
 }
