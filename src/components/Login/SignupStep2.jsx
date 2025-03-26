@@ -1,6 +1,9 @@
 import React from 'react'
 import logo from '../../assets/logo.png'
 import Loginstep from './Loginstep'
+import ProfilePic from './ProfilePic'
+import './SignupStep2.css'
+
 
 function SignupStep2() {
   return (
@@ -13,8 +16,9 @@ function SignupStep2() {
               </div>
             </div>
             <div className="loginInfo2">
-                  <div className="steps1"><Loginstep></Loginstep></div>
-                  <p>Basic Profile Information</p>
+                  <div className="steps1"><Loginstep></Loginstep></div><br />
+                  <p className='basic'>Basic Profile Information</p><br />
+                  <div className="profile"><ProfilePic></ProfilePic></div><br />
                   <div className="names">
                         <div className="fname">
                               First Name <br />
@@ -24,13 +28,13 @@ function SignupStep2() {
                               Second Name <br />
                               <input type="text" placeholder='Enter Second Name'/>
                         </div>
-                  </div>
+                  </div><br />
                   <p>Professional Headline</p>
-                  <input type="text" placeholder='Enter Professional Headline'/><br />
+                  <input type="text" placeholder='Enter Professional Headline'/><br /><br />
                   <p>Graduation Year</p>
-                  <input type="text" placeholder=''/><br />
+                  <input type="text" placeholder='Year'/> <br /><br />
                   <p>Major/Department</p>
-                  <input type="text" placeholder='Enter Major/Department'/><br />
+                  <input type="text" placeholder='Enter Major/Department'/><br /><br />
                   <div className="current">
                         <p>Current Position</p>
                         <div className="jobNcompany">
@@ -41,13 +45,14 @@ function SignupStep2() {
                                     <input type="text" placeholder='Enter Company'/>
                               </div>
                         </div>
-                  </div>
+                  </div><br />
                   <p>Location</p>
-                  <input type="text" placeholder='Enter Location'/><br />
+                  <input type="text" placeholder='Enter Location'/><br /><br />
                   <div className="continue">
                         <button>Continue</button>
                   </div>
             </div>
+            <div className="need">Need help?<a href="">Contact Support</a></div>
     </div>
   )
 }
