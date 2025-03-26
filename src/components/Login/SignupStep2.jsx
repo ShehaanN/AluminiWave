@@ -52,6 +52,7 @@ function SignupStep2() {
                         <button>Continue</button>
                   </div>
             </div>
+            <div className="need">Need help?<a href="">Contact Support</a></div>
     </div>
   )
 }

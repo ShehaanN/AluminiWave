@@ -5,6 +5,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Cantarell', sans-serif;
+  height: auto;
   
 }
 
@@ -83,4 +84,10 @@
   font-weight: 1000;
   color: black;
   font-size: 20px;
+}
+.need{
+  padding-left: 540px;
+}
+.need a{
+  color: #00a8c5;
 }
