@@ -40,9 +40,10 @@
   margin-left: 300px;
   padding-left: 50px;
   color: #6B7280;
-  height: 800px;
+  height: 1000px;
   width: 700px;
   margin-top: 20px;
+  border-radius:10px ;
 
 }
 .names{
@@ -67,4 +68,19 @@
   height: 50px;
   padding-left: 10px;
   
+}
+.continue button{
+ background: #00a8c5;
+ width: 600px;
+ padding-right: 50px;
+ border: 1px solid #00a8c5;
+ height: 50px;
+ border-radius: 4px;
+  
+}
+
+.basic{
+  font-weight: 1000;
+  color: black;
+  font-size: 20px;
 }
