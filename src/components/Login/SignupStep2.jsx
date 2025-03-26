@@ -1,6 +1,8 @@
 import React from 'react'
 import logo from '../../assets/logo.png'
 import Loginstep from './Loginstep'
+import ProfilePic from './ProfilePic'
+
 
 function SignupStep2() {
   return (
@@ -15,6 +17,7 @@ function SignupStep2() {
             <div className="loginInfo2">
                   <div className="steps1"><Loginstep></Loginstep></div>
                   <p>Basic Profile Information</p>
+                  <ProfilePic></ProfilePic>
                   <div className="names">
                         <div className="fname">
                               First Name <br />
