@@ -17,7 +17,7 @@ function SignupStep3() {
                   <Loginstep></Loginstep>
             </div>
             <div className="info3">
-                  <p>Career Interests & Expertise</p>
+                  <p className='career'>Career Interests & Expertise</p>
                   <p>Select Your Industries of Interest (Multiple)</p>
                   <div className="checkBoxes">
                         <div className="firstRow">
