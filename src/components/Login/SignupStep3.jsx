@@ -68,6 +68,10 @@ function SignupStep3() {
                         <button>Email</button>
                         <button>Chat</button>
                   </div>
+                  <div className="saveButons">
+                        <button>Save & Continue</button>
+                        
+                  </div>
             </div>
     </div>
   )
