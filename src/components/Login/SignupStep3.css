@@ -11,3 +11,10 @@
       display: flex;
       gap: 100px;
 }
+.career{
+      font-size: 24px;
+      font-weight: 600;
+}
+.checkBoxes input{
+      border: 1px solid #000000;
+}
