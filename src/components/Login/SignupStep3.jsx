@@ -58,6 +58,16 @@ function SignupStep3() {
                   from mentors...">
                         
                   </textarea>
+                  <p>Preferred Communication Methods</p>
+                  <div className="buttonFirstRow">
+                        <button>Virtual Meetings</button>
+                        <button>In-person Meetings</button>
+                       
+                  </div>
+                  <div className="buttonSecondRow">
+                        <button>Email</button>
+                        <button>Chat</button>
+                  </div>
             </div>
     </div>
   )
