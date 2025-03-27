@@ -1,0 +1,13 @@
+*{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+}
+.firstRow {
+      display: flex;
+      gap: 100px;
+}
+.secondRow {
+      display: flex;
+      gap: 100px;
+}
