@@ -13,12 +13,13 @@ function SignupStep3() {
                 <p>Connect, Share, and Grow with Fellow Graduates</p>
               </div>
             </div>
-            <div className="steps3">
-                  <Loginstep></Loginstep>
-            </div>
+            
             <div className="info3">
-                  <p className='career'>Career Interests & Expertise</p>
-                  <p>Select Your Industries of Interest (Multiple)</p>
+                  <div className="steps3">
+                        <Loginstep></Loginstep>
+                  </div><br />
+                  <p className='career'>Career Interests & Expertise</p><br />
+                  <p className='select'>Select Your Industries of Interest (Multiple)</p> <br />
                   <div className="checkBoxes">
                         <div className="firstRow">
                               <label htmlFor="technology">
@@ -42,17 +43,19 @@ function SignupStep3() {
                                     <input type="checkbox" name="" id="" /> Healthcare
                               </label>
                         </div>
-                  </div>
-                  <p>Skills & Expertise</p>
-                  <input type="text" placeholder='Type a skill (e.g., Leadership, Marketing, Data Analysis...)'/>
-                  <p>Career Stage</p>
+                  </div><br />
+                  <p className='skill'>Skills & Expertise</p>
+                  <input type="text" placeholder='Type a skill (e.g., Leadership, Marketing, Data Analysis...)' className='skillInput'/>
+                  <p className='stage'>Career Stage</p>
                   <select name="" id="">
                         <option value="">Current Student</option>
                   </select>
-                  <p>Mentorship Preferences</p>
-                  <label htmlFor=""><input type="checkbox" /> I want to be a mentor</label><br />
-                  <label htmlFor=""><input type="checkbox" /> I'm looking for a mentor</label><br />
-                  <label htmlFor=""><input type="checkbox" /> Interested in group mentoring sessions</label><br />
+                  <p className='mentor'>Mentorship Preferences</p>
+                  <div className="mentorCheckbox">
+                        <label htmlFor=""><input type="checkbox" /> I want to be a mentor</label><br />
+                        <label htmlFor=""><input type="checkbox" /> I'm looking for a mentor</label><br />
+                        <label htmlFor=""><input type="checkbox" /> Interested in group mentoring sessions</label><br />
+                  </div>
                   <p>Areas of Expertise/Interest</p>
                   <textarea name="" id="" placeholder="Share your specific areas of expertise or topics you'd like to learn about 
                   from mentors...">
