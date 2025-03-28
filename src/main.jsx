@@ -9,6 +9,7 @@ import Login from "./components/Login/Login.jsx";
 import Loginstep from "./components/Login/Loginstep.jsx";
 import SignupStep2 from "./components/Login/SignupStep2.jsx";
 import SignupStep3 from "./components/Login/SignupStep3";
+import SignupComplete from "./components/Login/SignupComplete";
 
 
 createRoot(document.getElementById("root")).render(
@@ -19,6 +20,7 @@ createRoot(document.getElementById("root")).render(
     {/* <Login /> */}
    {/* {<SignupStep2></SignupStep2> } */}
    {/* <SignupStep3></SignupStep3> */}
+   <SignupComplete></SignupComplete>
    
   </StrictMode>
 );
