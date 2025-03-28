@@ -1,12 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Cantarell:wght@400;700&display=swap');
+
 *{
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      font-family: 'Cantarell', sans-serif;
 }
 .info3{
       background: #e5eaec;
       width: 700px;
-      height: 750px;
+      height: 1000px;
       margin-left: 320px;
       margin-top: 30px;
       padding-left: 40px;
@@ -72,6 +75,62 @@ select{
       padding-top: 10px;
       
 }
-.mentorCheckbox label{
-      margin-bottom: 40px;
+.area{
+      color: #374151;
+      padding-top: 10px;
+}
+textarea{
+      border: 1px solid #D1D5DB;
+      width: 600px;
+      height: 100px;
+      padding-left: 10px;
+      margin-top: 10px;
+}
+.communi{
+      color: #374151;
+      padding-top: 10px;
+}
+.buttonFirstRow{
+      display: flex;
+      gap: 40px;
+      padding-left: 90px;
+      
+      
+}
+.buttonFirstRow button{
+      border: 1px solid #00a8c5;
+      width: 200px;
+      height: 45px;
+      margin-top: 10px;
+      cursor: pointer;
+      border-radius: 7px;
+}
+.buttonSecondRow{
+      display: flex;
+      gap: 40px;
+      padding-left: 90px;
+}
+.buttonSecondRow button{
+      border: 1px solid #00a8c5;
+      width: 200px;
+      height: 45px;
+      margin-top: 10px;
+      cursor: pointer;
+      border-radius: 7px;
+}
+.saveButons{
+      
+      padding-top: 20px;
+      
+}
+.saveButons button{
+      border: none;
+      width: 600px;
+      background: #00a8c5;
+      height: 45px;
+      margin-top: 10px;
+      cursor: pointer;
+      border-radius: 7px;
+      color: #FFFFFF;
+
 }
