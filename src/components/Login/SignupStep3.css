@@ -3,18 +3,32 @@
       padding: 0;
       box-sizing: border-box;
 }
+.info3{
+      background: #e5eaec;
+      width: 700px;
+      height: 750px;
+      margin-left: 320px;
+      margin-top: 30px;
+      padding-left: 40px;
+      border-radius: 10px;
+}
 .firstRow {
       display: flex;
-      gap: 100px;
+      gap: 60px;
 }
 .secondRow {
       display: flex;
-      gap: 100px;
+      gap: 60px;
+      padding-top: 20px;
+
 }
 .career{
       font-size: 24px;
       font-weight: 600;
 }
-.checkBoxes input{
-      border: 1px solid #000000;
+.checkBoxes label{
+      border: 1px solid black;
+      width: 120px;
+      height: 28px;
+      
 }
