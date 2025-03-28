@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Cantarell:wght@400;700&display=swap');
+
 *{
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      font-family: 'Cantarell', sans-serif;
 }
 .info3{
       background: #e5eaec;
@@ -114,4 +117,20 @@ textarea{
       margin-top: 10px;
       cursor: pointer;
       border-radius: 7px;
+}
+.saveButons{
+      
+      padding-top: 20px;
+      
+}
+.saveButons button{
+      border: none;
+      width: 600px;
+      background: #00a8c5;
+      height: 45px;
+      margin-top: 10px;
+      cursor: pointer;
+      border-radius: 7px;
+      color: #FFFFFF;
+
 }
