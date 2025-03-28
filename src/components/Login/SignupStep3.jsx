@@ -56,12 +56,12 @@ function SignupStep3() {
                         <label htmlFor=""><input type="checkbox" /> I'm looking for a mentor</label><br />
                         <label htmlFor=""><input type="checkbox" /> Interested in group mentoring sessions</label><br />
                   </div>
-                  <p>Areas of Expertise/Interest</p>
+                  <p className='area'>Areas of Expertise/Interest</p>
                   <textarea name="" id="" placeholder="Share your specific areas of expertise or topics you'd like to learn about 
                   from mentors...">
                         
                   </textarea>
-                  <p>Preferred Communication Methods</p>
+                  <p className='communi'>Preferred Communication Methods</p>
                   <div className="buttonFirstRow">
                         <button>Virtual Meetings</button>
                         <button>In-person Meetings</button>
