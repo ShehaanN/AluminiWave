@@ -18,7 +18,7 @@ function SignupComplete() {
                   <p className='welcome'>Welcome back to the community!</p>
                   <p className='your'>Your experience in Technology can help shape the next generation.</p>
                   <p className='start'>✓ You can start connecting with other alumni</p>
-                  <button>Go to Dashboard</button>
+                  <button className='go'>Go to Dashboard</button>
             </div>
 
     </div>

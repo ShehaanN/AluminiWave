@@ -1,0 +1,50 @@
+*{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+}
+.info4{
+      background: #e5eaec;
+      width: 700px;
+      height: 1000px;
+      margin-left: 320px;
+      margin-top: 30px;
+      padding-left: 40px;
+      border-radius: 10px;
+
+}
+.info4 img{
+      width: 300px;
+      height: 250px;
+      margin-left: 140px;
+      
+}
+.rComplete{
+      font-size: 24px;
+      font-weight: 600;
+      padding-left: 130px;
+      color: #269EB2;
+     
+
+}
+.welcome{
+      color: #374151;
+      padding-left: 150px;
+}
+.your{
+      color: #374151;
+      padding-left: 45px;
+}
+.start{
+      color: #374151;
+      padding-left: 140px;
+      font-size: 13px;
+}
+.go{
+      color:#ffff ;
+      width: 600px;
+      height: 40px;
+      font-size: 13px;
+      background: #269EB2;
+      margin-top: 20px;
+}
