@@ -18,7 +18,7 @@ createRoot(document.getElementById("root")).render(
     <Content2></Content2> */}
     {/* <Login /> */}
    {/* {<SignupStep2></SignupStep2> } */}
-   <SignupStep3></SignupStep3>
+   {/* <SignupStep3></SignupStep3> */}
    
   </StrictMode>
 );
