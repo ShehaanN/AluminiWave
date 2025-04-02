@@ -14,13 +14,13 @@ import SignupComplete from "./components/Login/SignupComplete";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    {/* <Nav />
+     <Nav />
     <Content></Content>
-    <Content2></Content2> */}
-    {/* <Login /> */}
+    <Content2></Content2> 
+    {/* { <Login /> } */}
    {/* {<SignupStep2></SignupStep2> } */}
-   {/* <SignupStep3></SignupStep3> */}
-   <SignupComplete></SignupComplete>
+   {/* { <SignupStep3></SignupStep3> } */}
+   {/* <SignupComplete></SignupComplete> */}
    
   </StrictMode>
 );
