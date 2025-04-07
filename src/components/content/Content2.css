@@ -14,6 +14,9 @@
       font-family: 'Cantarell', sans-serif;
       
 }
+.mainTopic h1{
+      padding-left: 120px;
+}
 .paragraph{
       display: flex;
       gap: 140px;
@@ -110,28 +113,42 @@
 .mainPart{
       display: flex;
       justify-content: center;
-      gap: 180px;
+      gap: 140px;
       padding-top: 40px;
 }
-.imagePart{
+.imagePartA{
       display: flex;
-      gap: 20px;
       
+      
+} 
+.imagePartB{
+      display: flex;
 }
 .paraB{
       display: flex;
       gap: 20px;
 }
-.sara img{
-      width: 40px;
+
+.imagePartA img{
+      width: 35px;
+      height: 40px;
 }
-.imagePart img{
-      width: 40px;
+
+.imagePartB img{
+      width: 38px;
+      height: 40px;
 }
 .hear{
       padding-top: 20px;
       font-family: 'Cantarell', sans-serif;
       font-size: 15px;
+}
+.infoA{
+      padding-left: 10px;
+      margin-bottom:-100px;
+}
+.infoB{
+      margin-bottom: -200px;
 }
 
 
