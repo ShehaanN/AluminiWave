@@ -2,10 +2,16 @@ import React from 'react'
 import './Content2.css'
 import active from '../../assets/active.png'
 import sara from '../../assets/sara.png'
+import { useNavigate } from 'react-router-dom';
+
 
 
 
 function Content2() {
+  const navigate = useNavigate();
+  const handleLoginRedirect=()=>{
+    navigate('/Login')
+  }
   return (
     <div>
       <div className='mainTopic'>
@@ -75,7 +81,7 @@ function Content2() {
       <div className="joinPart">
         <h3>Join the AluminiWave Community Today</h3>
         <p>Create your profile in minutes and start building meaningful professional connections that last a lifetime.</p>
-        <button>Create your profile</button>
+        <button onClick={handleLoginRedirect}>Create your profile</button>
       </div>
       <div className="footer">
         <div className="part1">
