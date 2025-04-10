@@ -54,7 +54,8 @@
       border: none;
       background: #269EB2;
       border-radius: 10px;
-      color: #9CA3AF;
+      color: white;
+      cursor: pointer;
 }
 .joinPart{
       padding-top: 60px;
