@@ -3,9 +3,15 @@ import logo from '../../assets/logo.png'
 import Loginstep from './Loginstep'
 import ProfilePic from './ProfilePic'
 import './SignupStep2.css'
+import { useNavigate } from 'react-router-dom';
+
 
 
 function SignupStep2() {
+const navigate2 = useNavigate();
+const handleSignUpStep3Redirect=()=>{
+      navigate2('/SignupStep3')
+    }
   return (
     <div>
       <div className="header">
@@ -49,7 +55,7 @@ function SignupStep2() {
                   <p>Location</p>
                   <input type="text" placeholder='Enter Location'/><br /><br />
                   <div className="continue">
-                        <button>Continue</button>
+                        <button onClick={handleSignUpStep3Redirect}>Continue</button>
                   </div>
             </div>
             <div className="need">Need help?<a href="">Contact Support</a></div>
