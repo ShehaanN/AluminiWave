@@ -10,17 +10,49 @@ import Loginstep from "./components/Login/Loginstep.jsx";
 import SignupStep2 from "./components/Login/SignupStep2.jsx";
 import SignupStep3 from "./components/Login/SignupStep3";
 import SignupComplete from "./components/Login/SignupComplete";
+import{
+  createBrowserRouter,
+  RouterProvider,
+
+}from "react-router-dom";
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: (
+      <>
+        <Nav />
+        <Content />
+        <Content2 />
+      </>
+    )
+  },
+  {
+    path: "/login",
+    element:<Login />,
+  },
+  {
+    path: "/signupStep2",
+    element:<SignupStep2 />,
+  },
+  {
+    path: "/signupStep3",
+    element:<SignupStep3 />,
+  }
+  
+]);
+
 
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    {/* <Nav />
-    <Content></Content>
-    <Content2></Content2> */}
-    {/* <Login /> */}
+     {/* <Nav /> */}
+    {/* <Content></Content>
+    <Content2></Content2>  */}
+     {/* <Login /> */}
    {/* {<SignupStep2></SignupStep2> } */}
-   {/* <SignupStep3></SignupStep3> */}
-   <SignupComplete></SignupComplete>
+   {/* { <SignupStep3></SignupStep3> } */}
+   {/* <SignupComplete></SignupComplete> */}
+   <RouterProvider router={router} />
    
   </StrictMode>
 );

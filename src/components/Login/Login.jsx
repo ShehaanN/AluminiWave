@@ -2,8 +2,14 @@ import React from 'react';
 import logo from '../../assets/logo.png';
 import './Login.css';
 import Loginstep from './Loginstep';
+import { useNavigate } from 'react-router-dom';
+
 
 function Login() {
+  const navigate1 = useNavigate();
+const handleSignUpStep2Redirect=()=>{
+      navigate1('/SignupStep2')
+    }
   return (
     <div>
       <div className="header">
@@ -37,7 +43,7 @@ function Login() {
         </div><br />
 
 
-        <button className="continue-btn">Continue</button><br /><br />
+        <button className="continue-btn" onClick={handleSignUpStep2Redirect}>Continue</button><br /><br />
 
         <p className="or-text">Or continue with</p><br />
 

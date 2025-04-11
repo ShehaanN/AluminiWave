@@ -2,10 +2,16 @@ import React from 'react'
 import './Content2.css'
 import active from '../../assets/active.png'
 import sara from '../../assets/sara.png'
+import { useNavigate } from 'react-router-dom';
+
 
 
 
 function Content2() {
+  const navigate = useNavigate();
+  const handleLoginRedirect=()=>{
+    navigate('/Login')
+  }
   return (
     <div>
       <div className='mainTopic'>
@@ -46,9 +52,9 @@ function Content2() {
           <div className="partA">
            
             <div className="paraA">
-              <div className="imagePart">
+              <div className="imagePartA">
                 <div className="sara"><img src={sara} alt="" /> </div>
-                <div className="info">Sarah Chen <br />Class of 2015, Senior Product Manager</div>
+                <div className="infoA">Sarah Chen <br />Class of 2015, Senior Product Manager</div>
 
               </div><br />
             <p>"AluminiWave transformed how I give back to my university community.<br /> The platform made it 
@@ -58,8 +64,8 @@ function Content2() {
           </div>
           <div className="partB">
             <div className="paraB">
-              <div className="imagePart"><img src={sara} alt="" /></div>
-              <div className="info">Sarah Chen <br />Class of 2015, Senior Product Manager</div>
+              <div className="imagePartB"><img src={sara} alt="" /></div>
+              <div className="infoB">Sarah Chen <br />Class of 2015, Senior Product Manager</div>
             </div><br />
             <p>"AluminiWave transformed how I give back to my university community. <br /> The platform made it
              incredibly easy to connect with students who <br /> could benefit most from my experience, and the <br />
@@ -75,7 +81,7 @@ function Content2() {
       <div className="joinPart">
         <h3>Join the AluminiWave Community Today</h3>
         <p>Create your profile in minutes and start building meaningful professional connections that last a lifetime.</p>
-        <button>Create your profile</button>
+        <button onClick={handleLoginRedirect}>Create your profile</button>
       </div>
       <div className="footer">
         <div className="part1">

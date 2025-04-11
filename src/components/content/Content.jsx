@@ -7,7 +7,7 @@ function Content() {
     <div>
       <div className="mainContent">
             <div className="leftContent">
-                  <div className="header">
+                  <div className="header123">
                         <h1>Connect, Mentor,<br />
                         Grow:</h1>
                         <span>
