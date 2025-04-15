@@ -2,8 +2,13 @@ import React from 'react'
 import logo from '../../assets/logo.png';
 import Loginstep from './Loginstep';
 import './SignupStep3.css'
+import { useNavigate } from 'react-router-dom';
 
 function SignupStep3() {
+      const navigate1 = useNavigate();
+        const handleSignUpStep4Redirect=()=>{
+            navigate1('/SignupComplete')
+          }
   return (
     <div>
         <div className="header">
@@ -72,7 +77,7 @@ function SignupStep3() {
                         <button>Chat</button>
                   </div>
                   <div className="saveButons">
-                        <button>Save & Continue</button>
+                        <button onClick={handleSignUpStep4Redirect}>Save & Continue</button>
                         
                   </div>
             </div>
