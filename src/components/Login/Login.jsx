@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const navigate1 = useNavigate();
-const handleSignUpStep2Redirect=()=>{
+  const handleSignUpStep2Redirect=()=>{
       navigate1('/SignupStep2')
     }
   return (
