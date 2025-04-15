@@ -18,7 +18,9 @@
       width: 100px;
       height: auto;
       display: block;
-      margin: 40px auto 20px auto;
+      width: 200px;
+      margin-left: 90px;
+      margin-bottom: -70px;
     }
     
     .rComplete {
