@@ -6,6 +6,13 @@ import './SignupComplete.css';
 function SignupComplete() {
   return (
     <div>
+      <div className="header">
+              <img src={logo} alt="Logo" />
+              <div className="headerTopic">
+                <h1>Join Our Alumni Network</h1>
+                <p>Connect, Share, and Grow with Fellow Graduates</p>
+              </div>
+            </div>
             
             <div className="info4">
                   <div className="completeImg">
@@ -15,7 +22,7 @@ function SignupComplete() {
                   <p className='welcome'>Welcome back to the community!</p>
                   <p className='your'>Your experience in Technology can help shape the next generation.</p>
                   <p className='start'>✓ You can  start connecting with other alumni</p>
-                  <button className='go'>Go to Dashboard buthmika</button>
+                  <button className='go'>Go to Dashboard </button>
             </div>
 
     </div>
