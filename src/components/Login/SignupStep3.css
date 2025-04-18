@@ -1,136 +1,93 @@
 @import url('https://fonts.googleapis.com/css2?family=Cantarell:wght@400;700&display=swap');
 
-*{
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Cantarell', sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Cantarell', sans-serif;
 }
-.info3{
-      background: #e5eaec;
-      width: 700px;
-      height: 1000px;
-      margin-left: 320px;
-      margin-top: 30px;
-      padding-left: 40px;
-      border-radius: 10px;
-}
-.firstRow {
-      display: flex;
-      gap: 60px;
-}
-.secondRow {
-      display: flex;
-      gap: 60px;
-      padding-top: 20px;
 
+body {
+  background: #f0f0f0;
 }
-.career{
-      font-size: 24px;
-      font-weight: 600;
-}
-.checkBoxes label{
-      border: 1px solid #D1D5DB;
-      width: 130px;
-      height: 33px;
-      padding-left: 3px;
-      padding-top: 2px;
-      border-radius: 6px;
-      
-}
-.steps3{
-      padding-top: 10px;
-      padding-right: 10px;
-}
-.select{
-      color: #374151;
-      font-weight: 800;
-}
-.skill{
-      color: #374151;
-}
-.skillInput{
-      border: 1px solid #D1D5DB;
-      width: 600px;
-      height: 50px;
-      padding-left: 10px;
-      margin-top: 10px;
-}
-.stage{
-      color: #374151;
-      padding-top: 10px;
-}
-select{
-      border: 1px solid #D1D5DB;
-      width: 600px;
-      height: 50px;
-      padding-left: 10px;
-      margin-top: 10px;
-}
-.mentor{
-      color: #374151;
-      padding-top: 10px;
-}
-.mentorCheckbox{
-      padding-top: 10px;
-      
-}
-.area{
-      color: #374151;
-      padding-top: 10px;
-}
-textarea{
-      border: 1px solid #D1D5DB;
-      width: 600px;
-      height: 100px;
-      padding-left: 10px;
-      margin-top: 10px;
-}
-.communi{
-      color: #374151;
-      padding-top: 10px;
-}
-.buttonFirstRow{
-      display: flex;
-      gap: 40px;
-      padding-left: 90px;
-      
-      
-}
-.buttonFirstRow button{
-      border: 1px solid #00a8c5;
-      width: 200px;
-      height: 45px;
-      margin-top: 10px;
-      cursor: pointer;
-      border-radius: 7px;
-}
-.buttonSecondRow{
-      display: flex;
-      gap: 40px;
-      padding-left: 90px;
-}
-.buttonSecondRow button{
-      border: 1px solid #00a8c5;
-      width: 200px;
-      height: 45px;
-      margin-top: 10px;
-      cursor: pointer;
-      border-radius: 7px;
-}
-.saveButons{
-      
-      padding-top: 20px;
-      
-}
-.saveButons button{
-      border: none;
-      width: 600px;
-      background: #00a8c5;
-      height: 45px;
-      margin-top: 10px;
-      cursor: pointer;
-      border-radius: 7px;
-      color: #FFFFFF;
 
+.signup-step3-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+}
+
+/* Header section */
+.signup-header {
+  background: linear-gradient(90deg, #1c8ebc, #20c4b3);
+  color: white;
+  width: 100%;
+  text-align: center;
+  padding: 30px 0;
+}
+
+.logo {
+  width: 120px;
+  margin-bottom: 10px;
+}
+
+/* Card section */
+.signup-card {
+  background: white;
+  padding: 40px;
+  border-radius: 10px;
+  margin-top: -30px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.card-logo {
+  width: 100px;
+  margin-bottom: 20px;
+}
+
+.registration-complete {
+  color: #1c8ebc;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.welcome-text {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.description,
+.start-check {
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+.dashboard-btn {
+  background: #00a8c5;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 15px;
+  transition: background 0.3s;
+}
+
+.dashboard-btn:hover {
+  background: #008fa6;
+}
+
+.footer-link {
+  margin-top: 20px;
+  font-size: 12px;
+  color: #1c8ebc;
+  text-decoration: underline;
+  cursor: pointer;
 }
