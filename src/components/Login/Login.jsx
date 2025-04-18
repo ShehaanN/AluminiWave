@@ -22,7 +22,7 @@ function Login() {
 
       <div className="loginInfo">
         <div className="steps"><Loginstep></Loginstep></div><br />
-        <p className="creation">Account Creation</p>
+        <p className="creation">Account Creation </p>
         <div className="info">
           Email or Phone <br />
           <input type="email" placeholder="Enter your email or phone" /> <br /><br />
