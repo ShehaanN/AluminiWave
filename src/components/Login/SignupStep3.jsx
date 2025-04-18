@@ -1,20 +1,18 @@
-import React from 'react';
-import './SignupComplete.css';
-import logo from '../../assets/logo.png'; // Make sure the path is correct
+import React from 'react'
+import logo from '../../assets/logo.png';
 
-function SignupComplete() {
+function SignupStep3() {
   return (
-    <div className="info4">
-      <img src={logo} alt="Logo" />
-      <p className="rComplete">Registration Complete!</p>
-      <p className="welcome">Welcome back to the community!</p>
-      <p className="your">
-        Your experience in Technology can help shape the next generation.
-      </p>
-      <p className="start">✓ You can start connecting with other alumni</p>
-      <button className="go">Go to Dashboard</button>
+    
+      <div className="header">
+                    <img src={logo} alt="Logo" />
+                    <div className="headerTopic">
+                      <h1>Join Our Alumni Network</h1>
+                      <p>Connect, Share, and Grow with Fellow Graduates</p>
+                    </div>
+                    
     </div>
-  );
+  )
 }
 
-export default SignupComplete;
+export default SignupStep3
