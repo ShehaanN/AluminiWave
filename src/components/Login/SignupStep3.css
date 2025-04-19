@@ -6,88 +6,59 @@
   box-sizing: border-box;
   font-family: 'Cantarell', sans-serif;
 }
-
-body {
-  background: #f0f0f0;
-}
-
-.signup-step3-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 40px;
-}
-
-/* Header section */
-.signup-header {
-  background: linear-gradient(90deg, #1c8ebc, #20c4b3);
-  color: white;
-  width: 100%;
-  text-align: center;
-  padding: 30px 0;
-}
-
-.logo {
-  width: 120px;
-  margin-bottom: 10px;
-}
-
-/* Card section */
-.signup-card {
-  background: white;
-  padding: 40px;
+.finalContent{
+  
+  background: rgb(224, 219, 219);
+  height: 350px;
+  width: 600px;
+  padding-bottom: 100px;
+  margin-left: 380px;
+  padding-left: 120px;
+  margin-top: -35px;
   border-radius: 10px;
-  margin-top: -30px;
-  width: 90%;
-  max-width: 500px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
 }
+.complete{
 
-.card-logo {
-  width: 100px;
-  margin-bottom: 20px;
+  color: #269EB2;
+  font-size: 30px;
+  font-weight: 800;
+  
 }
-
-.registration-complete {
-  color: #1c8ebc;
-  font-size: 24px;
-  margin-bottom: 10px;
+.finalContent img{
+  margin-left: 80px;
+  height: 150px;
+  width: 140px;
+  margin-bottom: -50px;
 }
-
-.welcome-text {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 10px;
+.welcome{
+  padding-left: 45px;
+  color: #4B5563;
 }
-
-.description,
-.start-check {
-  font-size: 14px;
-  color: #444;
-  margin-bottom: 10px;
+.exp{
+  margin-left: -70px;
+  color: #4B5563;
 }
-
-.dashboard-btn {
-  background: #00a8c5;
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  margin-top: 15px;
-  transition: background 0.3s;
+.we{
+  padding-left: 10px;
+  color: #4B5563;
 }
-
-.dashboard-btn:hover {
-  background: #008fa6;
-}
-
-.footer-link {
+.finalbutton{
+  
+  background: #269EB2;
+  height: 40px;
+  width: 550px;
+  margin-left: -90px;
   margin-top: 20px;
-  font-size: 12px;
-  color: #1c8ebc;
-  text-decoration: underline;
-  cursor: pointer;
+  border-radius: 7px;
+  color: white;
+}
+.need{
+  padding-left: 580px;
+  padding-top: 10px;
+}
+.is{
+  padding-left: 80px;
+}
+.headerTopic h1{
+  font-weight: 900;
 }
