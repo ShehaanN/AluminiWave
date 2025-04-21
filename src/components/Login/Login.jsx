@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const navigate1 = useNavigate();
-const handleSignUpStep2Redirect=()=>{
+  const handleSignUpStep2Redirect=()=>{
       navigate1('/SignupStep2')
     }
   return (
@@ -22,7 +22,7 @@ const handleSignUpStep2Redirect=()=>{
 
       <div className="loginInfo">
         <div className="steps"><Loginstep></Loginstep></div><br />
-        <p className="creation">Account Creation</p>
+        <p className="creation">Account Creation </p>
         <div className="info">
           Email or Phone <br />
           <input type="email" placeholder="Enter your email or phone" /> <br /><br />
