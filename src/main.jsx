@@ -11,6 +11,7 @@ import SignupStep2 from "./components/Login/SignupStep2.jsx";
 import SignupStep3 from "./components/Login/SignupStep3";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Dashboard from "./components/Dashboard/Dashboard";
+import Settings from "./components/Settings/Settings.jsx";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <Dashboard />,
+  },
+  {
+    path: "/settings",
+    element: <Settings />,
   },
 ]);
 
