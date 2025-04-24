@@ -1,5 +1,14 @@
 import logo from "../../assets/logo.png";
 import dp from "..//../assets/mdp.jpg";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const Dashboard = () => {
   return (
@@ -81,11 +90,32 @@ const Dashboard = () => {
 
       <main className="flex-1 ml-64">
         <div className="max-w-7xl mx-auto px-8 py-8">
-          <div className="mb-8">
-            <h1 className="text-2xl font-bold text-gray-900">
-              Welcome back, Alex!
-            </h1>
-            <p className="text-gray-600 mt-1">Your alumni dashboard</p>
+          <div className="mb-8 flex flex-row w-full justify-between">
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900">
+                Welcome back, Alex!
+              </h1>
+              <p className="text-gray-600 mt-1">Your alumni dashboard</p>
+            </div>
+            <div>
+              <hi>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Avatar className="size-12">
+                      <AvatarImage src="https://github.com/shadcn.png" />
+                      <AvatarFallback>CN</AvatarFallback>
+                    </Avatar>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-40">
+                    <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem>Profile</DropdownMenuItem>
+
+                    <DropdownMenuItem>Log out</DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </hi>
+            </div>
           </div>
           <div className="grid grid-cols-3 gap-6 mb-8">
             <div className="bg-white p-6 rounded-lg border border-gray-200">
