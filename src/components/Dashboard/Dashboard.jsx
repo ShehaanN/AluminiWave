@@ -1,4 +1,5 @@
 import logo from "../../assets/logo.png";
+import dp from "..//../assets/mdp.jpg";
 
 const Dashboard = () => {
   return (
@@ -244,7 +245,7 @@ const Dashboard = () => {
               <div className="bg-white p-6 rounded-lg border border-gray-200">
                 <div className="flex items-center mb-4">
                   <img
-                    src="https://creatie.ai/ai/api/search-image?query=A professional headshot of a young Asian woman in business attire with a friendly smile against a neutral background&width=40&height=40&orientation=squarish&flag=4c2d2d52-7bcd-4d4d-99ec-6a52de283a21"
+                    src={dp}
                     className="w-10 h-10 rounded-full"
                     alt="Sarah Chen"
                   />
@@ -271,7 +272,7 @@ const Dashboard = () => {
               <div className="bg-white p-6 rounded-lg border border-gray-200">
                 <div className="flex items-center mb-4">
                   <img
-                    src="https://creatie.ai/ai/api/search-image?query=A professional headshot of a Latino man in business casual attire with a confident expression against a neutral background&width=40&height=40&orientation=squarish&flag=3d7e6dd3-5b0b-40b8-bc43-90ea12aa2518"
+                    src={dp}
                     className="w-10 h-10 rounded-full"
                     alt="Michael Rodriguez"
                   />
@@ -300,7 +301,7 @@ const Dashboard = () => {
               <div className="bg-white p-6 rounded-lg border className-gray-200">
                 <div className="flex items-center mb-4">
                   <img
-                    src="https://creatie.ai/ai/api/search-image?query=A professional headshot of a woman with a creative style in design industry attire with an artistic background&width=40&height=40&orientation=squarish&flag=25c73d89-c6e1-4e64-8615-fe6c23f8a67c"
+                    src={dp}
                     className="w-10 h-10 rounded-full"
                     alt="Jamie Wilson"
                   />
@@ -380,7 +381,6 @@ const Dashboard = () => {
                     <button className="text-gray-400 hover:text-gray-500">
                       <i className="fas fa-share-alt"></i>
                     </button>
-                    className{" "}
                   </div>
                 </div>
 
