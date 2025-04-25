@@ -13,6 +13,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Settings from "./components/Settings/Settings.jsx";
 import Events from "./components/Events/Events.jsx";
+import EventUnit from "./components/Events/EventUnit.jsx";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
   {
     path: "/events",
     element: <Events />,
+  },
+  {
+    path: "/events/:id",
+    element: <EventUnit />,
   },
 ]);
 
