@@ -13,7 +13,7 @@ import Sidebar from "../Sidebar/Sidebar";
 const Dashboard = () => {
   return (
     <div className="min-h-screen flex">
-      <Sidebar />
+      <Sidebar type="Alumini" />
 
       <main className="flex-1 ml-64">
         <div className="max-w-7xl mx-auto px-8 py-8">
@@ -25,7 +25,7 @@ const Dashboard = () => {
               <p className="text-gray-600 mt-1">Your alumni dashboard</p>
             </div>
             <div>
-              <hi>
+              <div>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Avatar className="size-12">
@@ -36,12 +36,13 @@ const Dashboard = () => {
                   <DropdownMenuContent className="w-40">
                     <DropdownMenuLabel>My Account</DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem>Profile</DropdownMenuItem>
+                    <DropdownMenuItem>Update Profile</DropdownMenuItem>
+                    <DropdownMenuItem>Change Password</DropdownMenuItem>
 
                     <DropdownMenuItem>Log out</DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
-              </hi>
+              </div>
             </div>
           </div>
           <div className="grid grid-cols-3 gap-6 mb-8">

@@ -1,6 +1,6 @@
 import logo from "../../assets/logo.png";
 
-const Sidebar = () => {
+const Sidebar = ({ type }) => {
   return (
     <div>
       <aside className="w-64 bg-white border-r border-gray-200 fixed h-full">
@@ -30,13 +30,25 @@ const Sidebar = () => {
             <i className="fas fa-users w-5"></i>
             <span className="ml-3">Mentorship</span>
           </a>
-          <a
-            href="#"
-            className="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50"
-          >
-            <i className="fas fa-briefcase w-5"></i>
-            <span className="ml-3">Job Portal</span>
-          </a>
+
+          {type === "Alumini" ? (
+            <a
+              href="#"
+              className="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50 "
+            >
+              <i className="fas fa-briefcase w-5"></i>
+              <span className="ml-3">Job Portal</span>
+            </a>
+          ) : (
+            <a
+              href="#"
+              className="items-center px-6 py-3 text-gray-600 hover:bg-gray-50 hidden"
+            >
+              <i className="fas fa-briefcase w-5"></i>
+              <span className="ml-3">Job Portal</span>
+            </a>
+          )}
+
           <a
             href="#"
             className="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50"
@@ -55,20 +67,6 @@ const Sidebar = () => {
           >
             <i className="fas fa-user w-5"></i>
             <span className="ml-3">Profile</span>
-          </a>
-          <a
-            href="#"
-            className="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50"
-          >
-            <i className="fas fa-award w-5"></i>
-            <span className="ml-3">Achievements</span>
-          </a>
-          <a
-            href="#"
-            className="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50"
-          >
-            <i className="fas fa-cog w-5"></i>
-            <span className="ml-3">Settings</span>
           </a>
         </nav>
       </aside>
