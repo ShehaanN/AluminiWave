@@ -1,4 +1,3 @@
-import logo from "../../assets/logo.png";
 import dp from "..//../assets/mdp.jpg";
 import {
   DropdownMenu,
@@ -9,84 +8,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import Sidebar from "../Sidebar/Sidebar";
 
 const Dashboard = () => {
   return (
     <div className="min-h-screen flex">
-      <aside className="w-64 bg-white border-r border-gray-200 fixed h-full">
-        <div className="p-6">
-          <img src={logo} alt="AlumniWave" className="w-full h-2/3 " />
-        </div>
-        <nav className="mt-6">
-          <a
-            href="#"
-            className="flex items-center px-6 py-3 text-custom bg-purple-50"
-          >
-            <i
-              className="fas fa-chart-line w-5 fill-current"
-              style={{ color: "var(--color-aluwave)" }}
-            ></i>
-
-            <span className="ml-3 " style={{ color: "var(--color-aluwave)" }}>
-              Dashboard
-            </span>
-          </a>
-          <a
-            href="#"
-            className="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50"
-          >
-            <i className="fas fa-calendar w-5"></i>
-            <span className="ml-3">Events</span>
-          </a>
-          <a
-            href="#"
-            className="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50"
-          >
-            <i className="fas fa-users w-5"></i>
-            <span className="ml-3">Mentorship</span>
-          </a>
-          <a
-            href="#"
-            className="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50"
-          >
-            <i className="fas fa-briefcase w-5"></i>
-            <span className="ml-3">Job Portal</span>
-          </a>
-          <a
-            href="#"
-            className="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50"
-          >
-            <i className="fas fa-network-wired w-5"></i>
-            <span className="ml-3">Networking</span>
-          </a>
-          <div className="px-6 py-4 mt-6">
-            <p className="text-xs font-semibold text-gray-400 uppercase">
-              My Account
-            </p>
-          </div>
-          <a
-            href="#"
-            className="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50"
-          >
-            <i className="fas fa-user w-5"></i>
-            <span className="ml-3">Profile</span>
-          </a>
-          <a
-            href="#"
-            className="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50"
-          >
-            <i className="fas fa-award w-5"></i>
-            <span className="ml-3">Achievements</span>
-          </a>
-          <a
-            href="#"
-            className="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50"
-          >
-            <i className="fas fa-cog w-5"></i>
-            <span className="ml-3">Settings</span>
-          </a>
-        </nav>
-      </aside>
+      <Sidebar />
 
       <main className="flex-1 ml-64">
         <div className="max-w-7xl mx-auto px-8 py-8">
@@ -119,25 +46,20 @@ const Dashboard = () => {
           </div>
           <div className="grid grid-cols-3 gap-6 mb-8">
             <div className="bg-white p-6 rounded-lg border border-gray-200">
-              <div className="flex items-center justify-between mb-4">
-                <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-                  <i
-                    className="fas fa-calendar text-custom fill-current"
-                    style={{ color: "var(--color-aluwave)" }}
-                  ></i>
+              <div className="">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                    <i
+                      className="fas fa-calendar text-custom fill-current"
+                      style={{ color: "var(--color-aluwave)" }}
+                    ></i>
+                  </div>
                 </div>
+                <h3 className="font-semibold text-gray-900">UPCOMING EVENTS</h3>
               </div>
-              <h3 className="font-semibold text-gray-900">UPCOMING</h3>
-              <p className="text-lg font-bold mt-1">Tech Career Fair</p>
-              <p className="text-sm text-gray-600 mt-1">
-                Connect with top employers in the tech industry, May 15, 2023
-              </p>
-              <div className="mt-4 flex gap-3">
-                <button className="!rounded-button bg-custom text-white px-4 py-2 text-sm font-medium">
-                  Register
-                </button>
-                <button className="!rounded-button border border-gray-200 text-gray-700 px-4 py-2 text-sm font-medium">
-                  Details
+              <div className="mt-4 flex  gap-3">
+                <button className="!rounded-button bg-custom w-30 text-white px-4 py-2 text-sm font-medium">
+                  More Events
                 </button>
               </div>
             </div>
@@ -148,18 +70,11 @@ const Dashboard = () => {
                   <i className="fas fa-users text-custom"></i>
                 </div>
               </div>
-              <h3 className="font-semibold text-gray-900">MENTORSHIP</h3>
-              <p className="text-lg font-bold mt-1">3 Pending Requests</p>
-              <p className="text-sm text-gray-600 mt-1">
-                Students seeking guidance in software development and data
-                science
-              </p>
+              <h3 className="font-semibold text-gray-900">MENTORSHIPS</h3>
+
               <div className="mt-4 flex gap-3">
-                <button className="!rounded-button bg-custom text-white px-4 py-2 text-sm font-medium">
+                <button className="!rounded-button bg-custom w-30 text-white px-4 py-2 text-sm font-medium">
                   Review
-                </button>
-                <button className="!rounded-button border border-gray-200 text-gray-700 px-4 py-2 text-sm font-medium">
-                  View All
                 </button>
               </div>
             </div>
@@ -170,17 +85,11 @@ const Dashboard = () => {
                   <i className="fas fa-briefcase text-custom"></i>
                 </div>
               </div>
-              <h3 className="font-semibold text-gray-900">JOBS</h3>
-              <p className="text-lg font-bold mt-1">5 New Opportunities</p>
-              <p className="text-sm text-gray-600 mt-1">
-                New job postings matching your profile in the last week
-              </p>
+              <h3 className="font-semibold text-gray-900">JOB OPPOTUNITIES</h3>
+
               <div className="mt-4 flex gap-3">
-                <button className="!rounded-button bg-custom text-white px-4 py-2 text-sm font-medium">
+                <button className="!rounded-button bg-custom w-30 text-white px-4 py-2 text-sm font-medium">
                   Explore
-                </button>
-                <button className="!rounded-button border border-gray-200 text-gray-700 px-4 py-2 text-sm font-medium">
-                  Job Board
                 </button>
               </div>
             </div>
@@ -192,23 +101,14 @@ const Dashboard = () => {
               </h2>
               <div className="flex gap-4 border-b border-gray-200">
                 <button className="px-4 py-2 text-custom border-b-2 border-custom font-medium">
-                  All Events
-                </button>
-                <button className="px-4 py-2 text-gray-500 hover:text-gray-700">
-                  Career Fairs
-                </button>
-                <button className="px-4 py-2 text-gray-500 hover:text-gray-700">
-                  Networking
-                </button>
-                <button className="px-4 py-2 text-gray-500 hover:text-gray-700">
-                  Workshops
+                  Events
                 </button>
               </div>
               <div className="divide-y divide-gray-200">
                 <div className="py-4 flex items-center justify-between">
                   <div className="flex items-center">
                     <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-                      <i className="fas fa-calendar text-custom"></i>
+                      <i className="fas fa-users text-custom"></i>
                     </div>
                     <div className="ml-4">
                       <h4 className="font-medium text-gray-900">
@@ -219,9 +119,6 @@ const Dashboard = () => {
                       </p>
                     </div>
                   </div>
-                  <button className="text-gray-400 hover:text-gray-500">
-                    <i className="fas fa-bookmark"></i>
-                  </button>
                 </div>
                 <div className="py-4 flex items-center justify-between">
                   <div className="flex items-center">
@@ -237,14 +134,11 @@ const Dashboard = () => {
                       </p>
                     </div>
                   </div>
-                  <button className="text-gray-400 hover:text-gray-500">
-                    <i className="fas fa-bookmark"></i>
-                  </button>
                 </div>
                 <div className="py-4 flex items-center justify-between">
                   <div className="flex items-center">
                     <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-                      <i className="fas fa-file-alt text-custom"></i>
+                      <i className="fas fa-users text-custom"></i>
                     </div>
                     <div className="ml-4">
                       <h4 className="font-medium text-gray-900">
@@ -255,9 +149,6 @@ const Dashboard = () => {
                       </p>
                     </div>
                   </div>
-                  <button className="text-gray-400 hover:text-gray-500">
-                    <i className="fas fa-bookmark"></i>
-                  </button>
                 </div>
               </div>
               <div className="mt-6">
@@ -365,7 +256,7 @@ const Dashboard = () => {
                 <div className="py-4 flex items-center justify-between">
                   <div className="flex items-center">
                     <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-                      <i className="fas fa-code text-custom"></i>
+                      <i className="fas fa-briefcase text-custom"></i>
                     </div>
                     <div className="ml-4">
                       <h4 className="font-medium text-gray-900">
@@ -378,19 +269,13 @@ const Dashboard = () => {
                     <span className="text-sm text-gray-500">
                       Posted 2 days ago
                     </span>
-                    <button className="text-gray-400 hover:text-gray-500">
-                      <i className="fas fa-bookmark"></i>
-                    </button>
-                    <button className="text-gray-400 hover:text-gray-500">
-                      <i className="fas fa-share-alt"></i>
-                    </button>
                   </div>
                 </div>
 
                 <div className="py-4 flex items-center justify-between">
                   <div className="flex items-center">
                     <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-                      <i className="fas fa-chart-bar text-custom"></i>
+                      <i className="fas fa-briefcase text-custom"></i>
                     </div>
                     <div className="ml-4">
                       <h4 className="font-medium text-gray-900">
@@ -405,19 +290,13 @@ const Dashboard = () => {
                     <span className="text-sm text-gray-500">
                       Posted 3 days ago
                     </span>
-                    <button className="text-gray-400 hover:text-gray-500">
-                      <i className="fas fa-bookmark"></i>
-                    </button>
-                    <button className="text-gray-400 hover:text-gray-500">
-                      <i className="fas fa-share-alt"></i>
-                    </button>
                   </div>
                 </div>
 
                 <div className="py-4 flex items-center justify-between">
                   <div className="flex items-center">
                     <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-                      <i className="fas fa-paint-brush text-custom"></i>
+                      <i className="fas fa-briefcase text-custom"></i>
                     </div>
                     <div className="ml-4">
                       <h4 className="font-medium text-gray-900">
@@ -432,12 +311,6 @@ const Dashboard = () => {
                     <span className="text-sm text-gray-500">
                       Posted 5 days ago
                     </span>
-                    <button className="text-gray-400 hover:text-gray-500">
-                      <i className="fas fa-bookmark"></i>
-                    </button>
-                    <button className="text-gray-400 hover:text-gray-500">
-                      <i className="fas fa-share-alt"></i>
-                    </button>
                   </div>
                 </div>
               </div>
@@ -446,47 +319,6 @@ const Dashboard = () => {
                   View All Jobs
                 </button>
               </div>
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-6 mb-8">
-            <div className="bg-white p-6 rounded-lg border border-gray-200">
-              <div className="flex items-center justify-between mb-6">
-                <div>
-                  <p className="text-sm font-semibold text-gray-500">BADGE</p>
-                  <h3 className="text-lg font-bold text-gray-900 mt-1">
-                    Mentor Star
-                  </h3>
-                </div>
-                <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
-                  <i className="fas fa-star text-xl text-custom"></i>
-                </div>
-              </div>
-              <p className="text-sm text-gray-600 mb-4">
-                Mentored 5+ students successfully
-              </p>
-              <button className="!rounded-button w-full border border-gray-200 text-gray-700 py-2 font-medium">
-                View All Badges
-              </button>
-            </div>
-
-            <div className="bg-white p-6 rounded-lg border border-gray-200">
-              <div className="flex items-center justify-between mb-6">
-                <div>
-                  <p className="text-sm font-semibold text-gray-500">POINTS</p>
-                  <h3 className="text-lg font-bold text-gray-900 mt-1">
-                    1,250 Points
-                  </h3>
-                </div>
-                <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
-                  <i className="fas fa-trophy text-xl text-custom"></i>
-                </div>
-              </div>
-              <p className="text-sm text-gray-600 mb-4">
-                You're in the top 10% of active alumni
-              </p>
-              <button className="!rounded-button w-full border border-gray-200 text-gray-700 py-2 font-medium">
-                Leaderboard
-              </button>
             </div>
           </div>
         </div>
