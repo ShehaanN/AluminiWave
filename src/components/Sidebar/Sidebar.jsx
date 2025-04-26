@@ -9,7 +9,7 @@ const Sidebar = ({ type }) => {
         </div>
         <nav className="mt-6">
           <a
-            href="#"
+            href="/dashboard"
             className="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50 "
           >
             <i className="fas fa-chart-line w-5 "></i>
@@ -17,7 +17,7 @@ const Sidebar = ({ type }) => {
             <span className="ml-3 ">Dashboard</span>
           </a>
           <a
-            href="#"
+            href="/events"
             className="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50"
           >
             <i className="fas fa-calendar w-5"></i>

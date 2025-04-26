@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Sidebar from "../Sidebar/Sidebar";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   return (
@@ -36,10 +37,14 @@ const Dashboard = () => {
                   <DropdownMenuContent className="w-40">
                     <DropdownMenuLabel>My Account</DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem>Update Profile</DropdownMenuItem>
+                    <Link to="/settings">
+                      <DropdownMenuItem>Update Profile</DropdownMenuItem>
+                    </Link>
                     <DropdownMenuItem>Change Password</DropdownMenuItem>
 
-                    <DropdownMenuItem>Log out</DropdownMenuItem>
+                    <Link to="/">
+                      <DropdownMenuItem>Log out</DropdownMenuItem>
+                    </Link>
                   </DropdownMenuContent>
                 </DropdownMenu>
               </div>
