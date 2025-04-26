@@ -1,0 +1,64 @@
+.mentorship-layout {
+    display: flex;
+    min-height: 100vh;
+  }
+  
+  .sidebar {
+    width: 220px;
+    background-color: #f1f5f9;
+    padding: 20px;
+    border-right: 1px solid #e5e7eb;
+  }
+  
+  .sidebar h2 {
+    margin-bottom: 16px;
+    font-size: 18px;
+    color: #0f172a;
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar li {
+    margin-bottom: 12px;
+    color: #334155;
+    cursor: pointer;
+  }
+  
+  .main-content {
+    flex: 1;
+    padding: 24px;
+    background-color: #f9fafb;
+  }
+  
+  .page-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 24px;
+    color: #0f172a;
+  }
+  
+  .content-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  
+  .mentor-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 2;
+    min-width: 300px;
+  }
+  
+  .right-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    flex: 1;
+    min-width: 300px;
+  }
+  
