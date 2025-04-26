@@ -27,7 +27,39 @@ const Events = () => {
                   <h2 class="text-xl font-semibold">Upcoming Events</h2>
                 </div>
                 <div class="grid md:grid-cols-3 grid-cols-1 gap-6">
-                  <div class="border rounded-lg p-4">
+                  <div id="e1" class="border rounded-lg p-4">
+                    <Link to="/events/e1">
+                      <img
+                        src={Event2}
+                        class="w-full h-48 object-cover rounded mb-4"
+                      />
+                    </Link>
+                    <h3 class="font-semibold mb-2">Alumni Networking Night</h3>
+                    <p class="text-gray-600 text-sm mb-2">
+                      <i class="far fa-calendar mr-2"></i>Jun 15, 2024
+                    </p>
+                    <p class="text-gray-600 text-sm">
+                      <i class="fas fa-map-marker-alt mr-2"></i>San Francisco,
+                      CA
+                    </p>
+                  </div>
+                  <div id="e2" class="border rounded-lg p-4">
+                    <Link to="/events/e2">
+                      <img
+                        src={Event1}
+                        class="w-full h-48 object-cover rounded mb-4"
+                      />
+                    </Link>
+                    <h3 class="font-semibold mb-2">Alumni Networking Night</h3>
+                    <p class="text-gray-600 text-sm mb-2">
+                      <i class="far fa-calendar mr-2"></i>Jun 15, 2024
+                    </p>
+                    <p class="text-gray-600 text-sm">
+                      <i class="fas fa-map-marker-alt mr-2"></i>San Francisco,
+                      CA
+                    </p>
+                  </div>
+                  <div id="e3" class="border rounded-lg p-4">
                     <img
                       src={Event2}
                       class="w-full h-48 object-cover rounded mb-4"
@@ -41,7 +73,7 @@ const Events = () => {
                       CA
                     </p>
                   </div>
-                  <div class="border rounded-lg p-4">
+                  <div id="e4" class="border rounded-lg p-4">
                     <img
                       src={Event1}
                       class="w-full h-48 object-cover rounded mb-4"
@@ -55,7 +87,7 @@ const Events = () => {
                       CA
                     </p>
                   </div>
-                  <div class="border rounded-lg p-4">
+                  <div id="e5" class="border rounded-lg p-4">
                     <img
                       src={Event2}
                       class="w-full h-48 object-cover rounded mb-4"
@@ -69,35 +101,7 @@ const Events = () => {
                       CA
                     </p>
                   </div>
-                  <div class="border rounded-lg p-4">
-                    <img
-                      src={Event1}
-                      class="w-full h-48 object-cover rounded mb-4"
-                    />
-                    <h3 class="font-semibold mb-2">Alumni Networking Night</h3>
-                    <p class="text-gray-600 text-sm mb-2">
-                      <i class="far fa-calendar mr-2"></i>Jun 15, 2024
-                    </p>
-                    <p class="text-gray-600 text-sm">
-                      <i class="fas fa-map-marker-alt mr-2"></i>San Francisco,
-                      CA
-                    </p>
-                  </div>
-                  <div class="border rounded-lg p-4">
-                    <img
-                      src={Event2}
-                      class="w-full h-48 object-cover rounded mb-4"
-                    />
-                    <h3 class="font-semibold mb-2">Alumni Networking Night</h3>
-                    <p class="text-gray-600 text-sm mb-2">
-                      <i class="far fa-calendar mr-2"></i>Jun 15, 2024
-                    </p>
-                    <p class="text-gray-600 text-sm">
-                      <i class="fas fa-map-marker-alt mr-2"></i>San Francisco,
-                      CA
-                    </p>
-                  </div>
-                  <div class="border rounded-lg p-4">
+                  <div id="e6" class="border rounded-lg p-4">
                     <img
                       src={Event1}
                       class="w-full h-48 object-cover rounded mb-4"

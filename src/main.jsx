@@ -14,6 +14,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import Settings from "./components/Settings/Settings.jsx";
 import Events from "./components/Events/Events.jsx";
 import EventUnit from "./components/Events/EventUnit.jsx";
+import CreateEvent from "./components/Events/CreateEvent.jsx";
 
 const router = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
   {
     path: "/events/:id",
     element: <EventUnit />,
+  },
+  {
+    path: "/createevent",
+    element: <CreateEvent />,
   },
 ]);
 
