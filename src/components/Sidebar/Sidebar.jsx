@@ -12,7 +12,7 @@ const Sidebar = ({ type }) => {
             href="/dashboard"
             className="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50 "
           >
-            <i className="fas fa-chart-line w-5 "></i>
+            <i className="fas fa-chart-line w-5  "></i>
 
             <span className="ml-3 ">Dashboard</span>
           </a>

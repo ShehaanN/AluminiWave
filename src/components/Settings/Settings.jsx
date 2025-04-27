@@ -8,7 +8,7 @@ const Settings = () => {
               <div className="bg-white rounded-lg shadow-lg p-4 lg:p-6">
                 <div className="border-b border-gray-200">
                   <div className="flex lg:space-x-8 space-x-4 overflow-x-auto pb-2">
-                    <div className="px-4 py-2 text-custom border-b-2 border-custom whitespace-nowrap min-h-[44px] min-w-[44px] flex items-center">
+                    <div className="px-4 py-2 text-[#269EB2] border-b-2 border-[#269EB2] whitespace-nowrap min-h-[44px] min-w-[44px] flex items-center">
                       Account
                     </div>
                   </div>
@@ -27,7 +27,7 @@ const Settings = () => {
                         />
                         <label
                           for="email-notifications"
-                          className="bg-gray-200 peer-checked:bg-custom absolute cursor-pointer rounded-full w-12 h-6 transition-colors"
+                          className="bg-gray-200 peer-checked:bg-[#269EB2] absolute cursor-pointer rounded-full w-12 h-6 transition-colors"
                         ></label>
                         <span className="absolute w-4 h-4 bg-white rounded-full left-1 top-1 peer-checked:translate-x-3 transition-transform"></span>
                       </div>
@@ -74,7 +74,7 @@ const Settings = () => {
                           </div>
                         </div>
                         <div className="mt-6">
-                          <button className="bg-custom text-white px-4 py-2 rounded-lg mr-4">
+                          <button className="bg-[#269EB2] text-white px-4 py-2 rounded-lg mr-4">
                             Save Changes
                           </button>
                         </div>
@@ -164,7 +164,7 @@ const Settings = () => {
                           </div>
                         </div>
                         <div className="mt-6">
-                          <button className="bg-custom text-white px-4 py-2 rounded-lg mr-4">
+                          <button className="bg-[#269EB2] text-white px-4 py-2 rounded-lg mr-4">
                             Save Changes
                           </button>
                         </div>

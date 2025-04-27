@@ -92,7 +92,7 @@ const CreateEvent = () => {
                   </form>
                 </CardContent>
                 <CardFooter className="flex justify-between">
-                  <Button className="bg-custom text-white px-7 py-5">
+                  <Button className="bg-[#269EB2] text-white px-7 py-5">
                     Submit
                   </Button>
                   <Button className="  px-7 py-5" variant="outline">

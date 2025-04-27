@@ -56,7 +56,7 @@ const Dashboard = () => {
                 <div className="flex items-center justify-between mb-4">
                   <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
                     <i
-                      className="fas fa-calendar text-custom fill-current"
+                      className="fas fa-calendar text-[#269EB2] fill-current"
                       style={{ color: "var(--color-aluwave)" }}
                     ></i>
                   </div>
@@ -64,7 +64,7 @@ const Dashboard = () => {
                 <h3 className="font-semibold text-gray-900">UPCOMING EVENTS</h3>
               </div>
               <div className="mt-4 flex  gap-3">
-                <button className="!rounded-button bg-custom w-30 text-white px-4 py-2 text-sm font-medium">
+                <button className="!rounded-button rounded-lg bg-[#269EB2] w-30 text-white px-4 py-2 text-sm font-medium">
                   More Events
                 </button>
               </div>
@@ -73,13 +73,16 @@ const Dashboard = () => {
             <div className="bg-white p-6 rounded-lg border border-gray-200">
               <div className="flex items-center justify-between mb-4">
                 <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-                  <i className="fas fa-users text-custom"></i>
+                  <i
+                    className="fas fa-users "
+                    style={{ color: "var(--color-aluwave)" }}
+                  ></i>
                 </div>
               </div>
               <h3 className="font-semibold text-gray-900">MENTORSHIPS</h3>
 
               <div className="mt-4 flex gap-3">
-                <button className="!rounded-button bg-custom w-30 text-white px-4 py-2 text-sm font-medium">
+                <button className="!rounded-button rounded-lg bg-[#269EB2] w-30 text-white px-4 py-2 text-sm font-medium">
                   Review
                 </button>
               </div>
@@ -88,13 +91,13 @@ const Dashboard = () => {
             <div className="bg-white p-6 rounded-lg border border-gray-200">
               <div className="flex items-center justify-between mb-4">
                 <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-                  <i className="fas fa-briefcase text-custom"></i>
+                  <i className="fas fa-briefcase text-[#269EB2]"></i>
                 </div>
               </div>
               <h3 className="font-semibold text-gray-900">JOB OPPOTUNITIES</h3>
 
               <div className="mt-4 flex gap-3">
-                <button className="!rounded-button bg-custom w-30 text-white px-4 py-2 text-sm font-medium">
+                <button className="!rounded-button rounded-lg bg-[#269EB2] w-30 text-white px-4 py-2 text-sm font-medium">
                   Explore
                 </button>
               </div>
@@ -106,7 +109,7 @@ const Dashboard = () => {
                 Upcoming Events
               </h2>
               <div className="flex gap-4 border-b border-gray-200">
-                <button className="px-4 py-2 text-custom border-b-2 border-custom font-medium">
+                <button className="px-4 py-2  text-[#269EB2] border-b-2 border-[#269EB2] font-medium">
                   Events
                 </button>
               </div>
@@ -114,7 +117,7 @@ const Dashboard = () => {
                 <div className="py-4 flex items-center justify-between">
                   <div className="flex items-center">
                     <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-                      <i className="fas fa-users text-custom"></i>
+                      <i className="fas fa-users text-[#269EB2]"></i>
                     </div>
                     <div className="ml-4">
                       <h4 className="font-medium text-gray-900">
@@ -129,7 +132,7 @@ const Dashboard = () => {
                 <div className="py-4 flex items-center justify-between">
                   <div className="flex items-center">
                     <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-                      <i className="fas fa-users text-custom"></i>
+                      <i className="fas fa-users text-[#269EB2]"></i>
                     </div>
                     <div className="ml-4">
                       <h4 className="font-medium text-gray-900">
@@ -144,7 +147,7 @@ const Dashboard = () => {
                 <div className="py-4 flex items-center justify-between">
                   <div className="flex items-center">
                     <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-                      <i className="fas fa-users text-custom"></i>
+                      <i className="fas fa-users text-[#269EB2]"></i>
                     </div>
                     <div className="ml-4">
                       <h4 className="font-medium text-gray-900">
@@ -158,7 +161,7 @@ const Dashboard = () => {
                 </div>
               </div>
               <div className="mt-6">
-                <button className="!rounded-button w-full bg-custom text-white py-2 font-medium">
+                <button className="!rounded-button rounded-lg w-full bg-[#269EB2] text-white py-2 font-medium">
                   View All Events
                 </button>
               </div>
@@ -187,10 +190,10 @@ const Dashboard = () => {
                   Seeking guidance in software engineering career paths
                 </p>
                 <div className="flex gap-3">
-                  <button className="!rounded-button flex-1 bg-custom text-white py-2 text-sm font-medium">
+                  <button className="!rounded-button rounded-lg flex-1 bg-[#269EB2] text-white py-2 text-sm font-medium">
                     Accept
                   </button>
-                  <button className="!rounded-button flex-1 border border-gray-200 text-gray-700 py-2 text-sm font-medium">
+                  <button className="!rounded-button rounded-lg flex-1 border border-gray-200 text-gray-700 py-2 text-sm font-medium">
                     View Profile
                   </button>
                 </div>
@@ -216,10 +219,10 @@ const Dashboard = () => {
                   Looking for advice on data science internships
                 </p>
                 <div className="flex gap-3">
-                  <button className="!rounded-button flex-1 bg-custom text-white py-2 text-sm font-medium">
+                  <button className="!rounded-button rounded-lg flex-1 bg-[#269EB2] text-white py-2 text-sm font-medium">
                     Accept
                   </button>
-                  <button className="!rounded-button flex-1 border border-gray-200 text-gray-700 py-2 text-sm font-medium">
+                  <button className="!rounded-button rounded-lg flex-1 border border-gray-200 text-gray-700 py-2 text-sm font-medium">
                     View Profile
                   </button>
                 </div>
@@ -243,10 +246,10 @@ const Dashboard = () => {
                   Interested in discussing UX/UI design industry trends
                 </p>
                 <div className="flex gap-3">
-                  <button className="!rounded-button flex-1 bg-custom text-white py-2 text-sm font-medium">
+                  <button className="!rounded-button rounded-lg flex-1 bg-[#269EB2] text-white py-2 text-sm font-medium">
                     Accept
                   </button>
-                  <button className="!rounded-button flex-1 border border-gray-200 text-gray-700 py-2 text-sm font-medium">
+                  <button className="!rounded-button rounded-lg flex-1 border border-gray-200 text-gray-700 py-2 text-sm font-medium">
                     View Profile
                   </button>
                 </div>
@@ -262,7 +265,7 @@ const Dashboard = () => {
                 <div className="py-4 flex items-center justify-between">
                   <div className="flex items-center">
                     <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-                      <i className="fas fa-briefcase text-custom"></i>
+                      <i className="fas fa-briefcase text-[#269EB2]"></i>
                     </div>
                     <div className="ml-4">
                       <h4 className="font-medium text-gray-900">
@@ -281,7 +284,7 @@ const Dashboard = () => {
                 <div className="py-4 flex items-center justify-between">
                   <div className="flex items-center">
                     <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-                      <i className="fas fa-briefcase text-custom"></i>
+                      <i className="fas fa-briefcase text-[#269EB2]"></i>
                     </div>
                     <div className="ml-4">
                       <h4 className="font-medium text-gray-900">
@@ -302,7 +305,7 @@ const Dashboard = () => {
                 <div className="py-4 flex items-center justify-between">
                   <div className="flex items-center">
                     <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-                      <i className="fas fa-briefcase text-custom"></i>
+                      <i className="fas fa-briefcase text-[#269EB2]"></i>
                     </div>
                     <div className="ml-4">
                       <h4 className="font-medium text-gray-900">
@@ -321,7 +324,7 @@ const Dashboard = () => {
                 </div>
               </div>
               <div className="mt-6">
-                <button className="!rounded-button w-full bg-custom text-white py-2 font-medium">
+                <button className="!rounded-button rounded-lg w-full bg-[#269EB2] text-white py-2 font-medium">
                   View All Jobs
                 </button>
               </div>

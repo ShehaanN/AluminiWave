@@ -1,6 +1,11 @@
-import './MentorCard.css';
+import "./MentorCard.css";
 
-export default function MentorCard({ name, matchPercent, expertise, onProfileClick }) {
+export default function MentorCard({
+  name,
+  matchPercent,
+  expertise,
+  onProfileClick,
+}) {
   return (
     <div className="mentor-card">
       <div className="mentor-top">
@@ -24,19 +29,31 @@ export default function MentorCard({ name, matchPercent, expertise, onProfileCli
   );
 }
 
-import SessionScheduler from '../components/SessionScheduler';
+import SessionScheduler from "../Mentorship/SessionScheduler";
 
 // Example dummy session
 const session = {
-  date: 'April 25, 2025',
-  time: '3:00 PM',
-  mentor: 'Jane Smith',
+  date: "April 25, 2025",
+  time: "3:00 PM",
+  mentor: "Jane Smith",
 };
 
-export default function Mentorship() {
+export function Mentorship() {
+  const dummyMentors = [
+    {
+      name: "Jane Smith",
+      matchPercent: 94,
+      expertise: ["AI", "Career Guidance", "Project Planning"],
+    },
+    {
+      name: "Michael Johnson",
+      matchPercent: 89,
+      expertise: ["Web Development", "Internships", "React"],
+    },
+  ];
   return (
-    <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
-      <div style={{ flex: 1, minWidth: '300px' }}>
+    <div style={{ display: "flex", gap: "24px", flexWrap: "wrap" }}>
+      <div style={{ flex: 1, minWidth: "300px" }}>
         {dummyMentors.map((mentor, i) => (
           <MentorCard
             key={i}
@@ -48,10 +65,10 @@ export default function Mentorship() {
         ))}
       </div>
 
-      <div style={{ flex: 1, minWidth: '300px' }}>
+      <div style={{ flex: 1, minWidth: "300px" }}>
         <SessionScheduler
           nextSession={session}
-          onScheduleClick={() => alert('Redirect to scheduling page')}
+          onScheduleClick={() => alert("Redirect to scheduling page")}
         />
       </div>
     </div>

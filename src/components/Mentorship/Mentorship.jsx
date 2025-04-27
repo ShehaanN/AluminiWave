@@ -1,25 +1,25 @@
-import MentorCard from '../components/MentorCard';
-import SessionScheduler from '../components/SessionScheduler';
-import ActiveMentorshipCard from '../components/ActiveMentorshipCard';
-import './Mentorship.css';
+import MentorCard from "./MentorCard";
+import SessionScheduler from "./SessionScheduler";
+import ActiveMentorshipCard from "./ActiveMentorshipCard";
+import "./Mentorship.css";
 
 const dummyMentors = [
   {
-    name: 'Jane Smith',
+    name: "Jane Smith",
     matchPercent: 94,
-    expertise: ['AI', 'Career Guidance', 'Project Planning'],
+    expertise: ["AI", "Career Guidance", "Project Planning"],
   },
   {
-    name: 'Michael Johnson',
+    name: "Michael Johnson",
     matchPercent: 89,
-    expertise: ['Web Development', 'Internships', 'React'],
+    expertise: ["Web Development", "Internships", "React"],
   },
 ];
 
 const nextSession = {
-  date: 'April 25, 2025',
-  time: '3:00 PM',
-  mentor: 'Jane Smith',
+  date: "April 25, 2025",
+  time: "3:00 PM",
+  mentor: "Jane Smith",
 };
 
 export default function Mentorship() {
@@ -58,7 +58,7 @@ export default function Mentorship() {
           <div className="right-panel">
             <SessionScheduler
               nextSession={nextSession}
-              onScheduleClick={() => alert('Go to scheduling page')}
+              onScheduleClick={() => alert("Go to scheduling page")}
             />
 
             <ActiveMentorshipCard

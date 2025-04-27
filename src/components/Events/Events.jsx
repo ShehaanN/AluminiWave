@@ -7,13 +7,13 @@ const Events = () => {
   return (
     <div class="min-h-screen flex">
       <Sidebar type="Alumini" />
-      <main class="flex-1 md:ml-64 ml-0">
+      <main class="flex-1 md:ml-64 ml-0 px-8 py-4">
         <div class="p-6">
           <div class="flex justify-between items-center mb-6">
             <h1 class="text-2xl font-bold">Event Management</h1>
             <div class="flex flex-wrap md:flex-nowrap space-x-0 md:space-x-4 space-y-2 md:space-y-0 w-full md:w-auto">
               <Link to="/createevent">
-                <button class="px-4 py-2 bg-custom text-white rounded-lg w-full md:w-auto min-h-[44px]">
+                <button class="px-4 py-2 bg-[#269EB2] text-white rounded-lg w-full md:w-auto min-h-[44px]">
                   <i class="fas fa-plus mr-2"></i>Create Event
                 </button>
               </Link>
