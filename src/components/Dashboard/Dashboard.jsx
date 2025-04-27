@@ -16,8 +16,8 @@ const Dashboard = () => {
     <div className="min-h-screen flex">
       <Sidebar type="Alumini" />
 
-      <main className="flex-1 ml-64">
-        <div className="max-w-7xl mx-auto px-8 py-8">
+      <main className="flex-1 ml-64 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-2 py-10">
           <div className="mb-8 flex flex-row w-full justify-between">
             <div>
               <h1 className="text-2xl font-bold text-gray-900">
