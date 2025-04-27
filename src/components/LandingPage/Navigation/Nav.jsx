@@ -30,9 +30,9 @@ function Nav() {
               <button>Sign Up</button>
             </Link>
           </div>
-          <div className="login">
+         <Link to="/login"> <div className="login">
             <button>Login</button>
-          </div>
+          </div></Link>
         </div>
       </div>
     </div>
