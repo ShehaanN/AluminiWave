@@ -1,6 +1,6 @@
 import logo from "../../assets/logo.png";
 
-const Sidebar = ({ type }) => {
+const Sidebar = ({ userType }) => {
   return (
     <div>
       <aside className="w-64 bg-white border-r border-gray-200 fixed h-full">
@@ -31,18 +31,10 @@ const Sidebar = ({ type }) => {
             <span className="ml-3">Mentorship</span>
           </a>
 
-          {type === "Alumini" ? (
+          {userType === "alumini" && (
             <a
               href="/JobPortal"
               className="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50 "
-            >
-              <i className="fas fa-briefcase w-5"></i>
-              <span className="ml-3">Job Portal</span>
-            </a>
-          ) : (
-            <a
-              href="#"
-              className="items-center px-6 py-3 text-gray-600 hover:bg-gray-50 hidden"
             >
               <i className="fas fa-briefcase w-5"></i>
               <span className="ml-3">Job Portal</span>

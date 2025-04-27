@@ -15,9 +15,11 @@ import Settings from "./components/Settings/Settings.jsx";
 import Events from "./components/Events/Events.jsx";
 import EventUnit from "./components/Events/EventUnit.jsx";
 import CreateEvent from "./components/Events/CreateEvent.jsx";
-import Mentorship, { Mentors } from "./components/Mentorship/Mentorship.jsx";
+import Mentorship from "./components/Mentorship/Mentorship.jsx";
 import Register from "./components/Register/Register.jsx";
 import JobPortal from "./components/Jobportal/JobPortal.jsx";
+import Mentors from "./components/Mentorship/Mentors.jsx";
+import StuRequests from "./components/Mentorship/StuRequests.jsx";
 
 const router = createBrowserRouter([
   {
@@ -77,6 +79,10 @@ const router = createBrowserRouter([
   {
     path: "/mentors",
     element: <Mentors />,
+  },
+  {
+    path: "/sturequest",
+    element: <StuRequests />,
   },
 ]);
 

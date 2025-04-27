@@ -58,7 +58,7 @@ function Content2() {
             <div className="paraA">
               <div className="imagePartA">
                 <div className="sara">
-                  <img src={sara} alt="" />{" "}
+                  <img src={sara} alt="sara" />
                 </div>
                 <div className="infoA">
                   Sarah Chen <br />
@@ -166,19 +166,13 @@ function Content2() {
               <a href="">Connect</a>
             </li>
             <li>
-              <a href="">
-                <img src="" alt="" />
-              </a>
+              <a href=""></a>
             </li>
             <li>
-              <a href="">
-                <img src="" alt="" />
-              </a>
+              <a href=""></a>
             </li>
             <li>
-              <a href="">
-                <img src="" alt="" />
-              </a>
+              <a href=""></a>
             </li>
           </ul>
         </div>

@@ -1,5 +1,3 @@
-import Event1 from "../../assets/Tech-Events1.jpg";
-import Event2 from "../../assets/Tech-Events2.jpg";
 import { Link } from "react-router-dom";
 import sara from "../../assets/sara.png";
 import mdp from "../../assets/mdp.jpg";
@@ -30,9 +28,6 @@ const Mentors = () => {
                   <div className="bg-white rounded-lg shadow p-6">
                     <div className="flex items-center justify-between mb-4">
                       <img src={sara} className="w-12 h-12 rounded-full" />
-                      <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">
-                        95% Match
-                      </span>
                     </div>
                     <h3 className="font-semibold text-lg">Dr. Sarah Johnson</h3>
                     <p className="text-gray-600 text-sm mb-3">
@@ -57,9 +52,6 @@ const Mentors = () => {
                   <div className="bg-white rounded-lg shadow p-6">
                     <div className="flex items-center justify-between mb-4">
                       <img src={sara} className="w-12 h-12 rounded-full" />
-                      <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">
-                        95% Match
-                      </span>
                     </div>
                     <h3 className="font-semibold text-lg">Dr. Sarah Johnson</h3>
                     <p className="text-gray-600 text-sm mb-3">
@@ -84,9 +76,6 @@ const Mentors = () => {
                   <div className="bg-white rounded-lg shadow p-6">
                     <div className="flex items-center justify-between mb-4">
                       <img src={sara} className="w-12 h-12 rounded-full" />
-                      <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">
-                        95% Match
-                      </span>
                     </div>
                     <h3 className="font-semibold text-lg">Dr. Sarah Johnson</h3>
                     <p className="text-gray-600 text-sm mb-3">
@@ -111,9 +100,6 @@ const Mentors = () => {
                   <div className="bg-white rounded-lg shadow p-6">
                     <div className="flex items-center justify-between mb-4">
                       <img src={sara} className="w-12 h-12 rounded-full" />
-                      <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">
-                        95% Match
-                      </span>
                     </div>
                     <h3 className="font-semibold text-lg">Dr. Sarah Johnson</h3>
                     <p className="text-gray-600 text-sm mb-3">
@@ -138,9 +124,6 @@ const Mentors = () => {
                   <div className="bg-white rounded-lg shadow p-6">
                     <div className="flex items-center justify-between mb-4">
                       <img src={sara} className="w-12 h-12 rounded-full" />
-                      <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">
-                        95% Match
-                      </span>
                     </div>
                     <h3 className="font-semibold text-lg">Dr. Sarah Johnson</h3>
                     <p className="text-gray-600 text-sm mb-3">
@@ -165,9 +148,6 @@ const Mentors = () => {
                   <div className="bg-white rounded-lg shadow p-6">
                     <div className="flex items-center justify-between mb-4">
                       <img src={mdp} className="w-12 h-12 rounded-full" />
-                      <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">
-                        88% Match
-                      </span>
                     </div>
                     <h3 className="font-semibold text-lg">Michael Chen</h3>
                     <p className="text-gray-600 text-sm mb-3">
@@ -192,9 +172,6 @@ const Mentors = () => {
                   <div className="bg-white rounded-lg shadow p-6">
                     <div className="flex items-center justify-between mb-4">
                       <img src={sara} className="w-12 h-12 rounded-full" />
-                      <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">
-                        82% Match
-                      </span>
                     </div>
                     <h3 className="font-semibold text-lg">Emma Williams</h3>
                     <p className="text-gray-600 text-sm mb-3">
@@ -219,9 +196,6 @@ const Mentors = () => {
                   <div className="bg-white rounded-lg shadow p-6">
                     <div className="flex items-center justify-between mb-4">
                       <img src={mdp} className="w-12 h-12 rounded-full" />
-                      <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">
-                        78% Match
-                      </span>
                     </div>
                     <h3 className="font-semibold text-lg">David Kumar</h3>
                     <p className="text-gray-600 text-sm mb-3">

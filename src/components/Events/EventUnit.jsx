@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import mdp from "../../assets/mdp.jpg";
 import Saradp from "../../assets/sara.png";
 import Event1 from "../../assets/Tech-Events1.jpg";
@@ -7,7 +8,16 @@ const EventUnit = () => {
   return (
     <div>
       <div className="bg-purple-50 py-10">
-        <h1 className="text-5xl font-bold mx-52 mb-10 ">Events</h1>
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-5xl font-bold mx-52 mb-10 ">Events</h1>
+          <div className="mr-56">
+            <Link to="/events">
+              <button className="px-6 py-2 bg-[#269EB2] text-white rounded-lg w-full md:w-auto min-h-[44px]">
+                <i class="fa-solid fa-backward mr-2"></i>Back
+              </button>
+            </Link>
+          </div>
+        </div>
         <div className="bg-white rounded-lg shadow p-6 mb-6 mx-48">
           <div className="relative h-64 mb-6">
             <img

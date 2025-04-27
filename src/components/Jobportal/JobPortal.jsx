@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useState } from "react";
 import {
   Search,
   Upload,
@@ -16,41 +16,38 @@ import {
   Share2,
 } from "lucide-react";
 import Sidebar from "../Sidebar/Sidebar";
+import { Link } from "react-router-dom";
 
 export default function JobPortal() {
-  const [timeFilter, setTimeFilter] = useState("Last 30 days");
-
-  // Sample chart data
+  // const [timeFilter, setTimeFilter] = useState("Last 30 days");
+  const userType = "alumini";
 
   return (
     <div className="flex min-h-screen bg-gray-50">
-      <Sidebar type="Alumini" />
+      <Sidebar userType={userType} />
 
       {/* Main Content */}
-
-      <div className="flex-1 ml-64">
-        <div className="max-w-7xl mx-auto px-8 py-8 flex justify-between">
-          <h1 className="text-2xl font-bold text-gray-800">Job Portal</h1>
-          <div className="flex space-x-2">
-            <button className="flex items-center px-4 py-2 text-sm font-medium text-white bg-[#269EB2] rounded-lg hover:bg-teal-700">
-              <Search className="w-4 h-4 mr-2" />
-              Advanced Search
-            </button>
-            <button className="flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
-              <ChevronDown className="w-4 h-4 mr-2" />
-              Sort
-            </button>
-            <button className="flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-600 rounded-lg hover:bg-gray-700">
-              <Edit className="w-4 h-4 mr-2" />
-              Post a Job
-            </button>
-          </div>
-        </div>
-
-        {/* Content */}
+      <main className="flex-1 md:ml-64 ml-0 px-8 py-4 bg-purple-50">
         <div className="p-6">
-          {/* Application Tracking */}
-          <div className="mb-6">
+          <div className="flex justify-between items-center mb-6">
+            <h1 className="text-3xl font-bold">Job Portal</h1>
+
+            {userType === "alumini" && (
+              <div className="flex ">
+                <Link to="/mentors">
+                  <button className="px-4 py-2 bg-[#269EB2] text-white rounded-lg w-full md:w-auto min-h-[44px]">
+                    <i className="fas fa-plus mr-2"></i>Post a Job
+                  </button>
+                </Link>
+              </div>
+            )}
+          </div>
+
+          {/* Content */}
+          <div className="grid  grid-cols-1 gap-6">
+            <div className="bg-white rounded-lg shadow-md p-6 min-h-screen">
+              {/* Application Tracking */}
+              {/* <div className="mb-6">
             <h2 className="mb-4 text-lg font-semibold text-gray-800">
               Application Tracking
             </h2>
@@ -76,10 +73,10 @@ export default function JobPortal() {
                 <span className="mt-1 text-sm text-gray-500">Rejected</span>
               </div>
             </div>
-          </div>
+          </div> */}
 
-          {/* Upcoming Interviews */}
-          <div className="p-5 mb-6 bg-white rounded-lg shadow-sm">
+              {/* Upcoming Interviews */}
+              {/* <div className="p-5 mb-6 bg-white rounded-lg shadow-sm">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-lg font-semibold text-gray-800">
                 Upcoming Interviews
@@ -94,10 +91,10 @@ export default function JobPortal() {
                 Join Call
               </button>
             </div>
-          </div>
+          </div> */}
 
-          {/* Document Repository */}
-          <div className="p-5 mb-6 bg-white rounded-lg shadow-sm">
+              {/* Document Repository */}
+              {/* <div className="p-5 mb-6 bg-white rounded-lg shadow-sm">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-lg font-semibold text-gray-800">
                 Document Repository
@@ -115,10 +112,10 @@ export default function JobPortal() {
                 portfolio.pdf
               </span>
             </div>
-          </div>
+          </div> */}
 
-          {/* Application Analytics */}
-          <div className="p-5 mb-6 bg-white rounded-lg shadow-sm">
+              {/* Application Analytics */}
+              {/* <div className="p-5 mb-6 bg-white rounded-lg shadow-sm">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-lg font-semibold text-gray-800">
                 Application Analytics
@@ -138,118 +135,124 @@ export default function JobPortal() {
             <div className="flex justify-center items-center h-64 bg-gray-50 rounded-lg">
               <p className="text-gray-500">Chart Placeholder</p>
             </div>
-          </div>
+          </div> */}
 
-          {/* Job Listings */}
-          <div className="grid grid-cols-3 gap-4 mb-6">
-            {/* Job Card 1 */}
-            <div className="p-5 bg-white rounded-lg shadow-sm">
-              <div className="flex justify-between mb-3">
-                <h3 className="font-bold text-gray-800">
-                  Senior Software Engineer
-                </h3>
-                <button className="text-blue-500 hover:text-blue-600">
-                  <Bookmark className="w-5 h-5" />
-                </button>
-              </div>
-              <p className="mb-3 text-sm text-gray-600">
-                Google • San Francisco, CA
-              </p>
-              <div className="flex flex-wrap gap-2 mb-3">
-                <span className="px-2 py-1 text-xs bg-gray-100 rounded-md">
-                  Full-time
-                </span>
-                <span className="px-2 py-1 text-xs bg-gray-100 rounded-md">
-                  Remote
-                </span>
-                <span className="px-2 py-1 text-xs bg-gray-100 rounded-md">
-                  $120k-$180k
-                </span>
-              </div>
-              <p className="mb-4 text-sm text-gray-700">
-                We're looking for an experienced software engineer to join our
-                team and help build the next generation of cloud
-                infrastructure...
-              </p>
-              <div className="flex justify-between items-center">
-                <span className="text-xs text-gray-500">Posted 2 days ago</span>
-                <button className="px-3 py-1 text-sm font-medium text-white bg-[#269EB2] rounded-md hover:bg-teal-700">
-                  Quick Apply
-                </button>
-              </div>
-            </div>
+              {/* Job Listings */}
+              <div className="grid grid-cols-3 gap-12 mb-6">
+                {/* Job Card 1 */}
+                <div className="bg-white rounded-lg shadow-lg p-6">
+                  <div className="flex justify-between mb-3">
+                    <h3 className="font-bold text-gray-800">
+                      Senior Software Engineer
+                    </h3>
+                    <button className="text-blue-500 hover:text-blue-600">
+                      <Bookmark className="w-5 h-5" />
+                    </button>
+                  </div>
+                  <p className="mb-3 text-sm text-gray-600">
+                    Google • San Francisco, CA
+                  </p>
+                  <div className="flex flex-wrap gap-2 mb-3">
+                    <span className="px-2 py-1 text-xs bg-gray-100 rounded-md">
+                      Full-time
+                    </span>
+                    <span className="px-2 py-1 text-xs bg-gray-100 rounded-md">
+                      Remote
+                    </span>
+                    <span className="px-2 py-1 text-xs bg-gray-100 rounded-md">
+                      $120k-$180k
+                    </span>
+                  </div>
+                  <p className="mb-4 text-sm text-gray-700">
+                    We're looking for an experienced software engineer to join
+                    our team and help build the next generation of cloud
+                    infrastructure...
+                  </p>
+                  <div className="flex justify-between items-center">
+                    <span className="text-xs text-gray-500">
+                      Posted 2 days ago
+                    </span>
+                    <button className="px-3 py-1 text-sm font-medium text-white bg-[#269EB2] rounded-md hover:bg-teal-700">
+                      Quick Apply
+                    </button>
+                  </div>
+                </div>
 
-            {/* Job Card 2 */}
-            <div className="p-5 bg-white rounded-lg shadow-sm">
-              <div className="flex justify-between mb-3">
-                <h3 className="font-bold text-gray-800">Product Manager</h3>
-                <button className="text-blue-500 hover:text-blue-600">
-                  <Bookmark className="w-5 h-5" />
-                </button>
-              </div>
-              <p className="mb-3 text-sm text-gray-600">
-                Microsoft • Seattle, WA
-              </p>
-              <div className="flex flex-wrap gap-2 mb-3">
-                <span className="px-2 py-1 text-xs bg-gray-100 rounded-md">
-                  Full-time
-                </span>
-                <span className="px-2 py-1 text-xs bg-gray-100 rounded-md">
-                  On-site
-                </span>
-                <span className="px-2 py-1 text-xs bg-gray-100 rounded-md">
-                  $140k-$200k
-                </span>
-              </div>
-              <p className="mb-4 text-sm text-gray-700">
-                Join our product team to drive innovation and shape the future
-                of enterprise software solutions...
-              </p>
-              <div className="flex justify-between items-center">
-                <span className="text-xs text-gray-500">Posted 3 days ago</span>
-                <button className="px-3 py-1 text-sm font-medium text-white bg-[#269EB2] rounded-md hover:bg-teal-700">
-                  Quick Apply
-                </button>
-              </div>
-            </div>
+                {/* Job Card 2 */}
+                <div className="bg-white rounded-lg shadow-lg p-6">
+                  <div className="flex justify-between mb-3">
+                    <h3 className="font-bold text-gray-800">Product Manager</h3>
+                    <button className="text-blue-500 hover:text-blue-600">
+                      <Bookmark className="w-5 h-5" />
+                    </button>
+                  </div>
+                  <p className="mb-3 text-sm text-gray-600">
+                    Microsoft • Seattle, WA
+                  </p>
+                  <div className="flex flex-wrap gap-2 mb-3">
+                    <span className="px-2 py-1 text-xs bg-gray-100 rounded-md">
+                      Full-time
+                    </span>
+                    <span className="px-2 py-1 text-xs bg-gray-100 rounded-md">
+                      On-site
+                    </span>
+                    <span className="px-2 py-1 text-xs bg-gray-100 rounded-md">
+                      $140k-$200k
+                    </span>
+                  </div>
+                  <p className="mb-4 text-sm text-gray-700">
+                    Join our product team to drive innovation and shape the
+                    future of enterprise software solutions...
+                  </p>
+                  <div className="flex justify-between items-center">
+                    <span className="text-xs text-gray-500">
+                      Posted 3 days ago
+                    </span>
+                    <button className="px-3 py-1 text-sm font-medium text-white bg-[#269EB2] rounded-md hover:bg-teal-700">
+                      Quick Apply
+                    </button>
+                  </div>
+                </div>
 
-            {/* Job Card 3 */}
-            <div className="p-5 bg-white rounded-lg shadow-sm">
-              <div className="flex justify-between mb-3">
-                <h3 className="font-bold text-gray-800">Data Scientist</h3>
-                <button className="text-blue-500 hover:text-blue-600">
-                  <Bookmark className="w-5 h-5" />
-                </button>
+                {/* Job Card 3 */}
+                <div className="bg-white rounded-lg shadow-lg p-6">
+                  <div className="flex justify-between mb-3">
+                    <h3 className="font-bold text-gray-800">Data Scientist</h3>
+                    <button className="text-blue-500 hover:text-blue-600">
+                      <Bookmark className="w-5 h-5" />
+                    </button>
+                  </div>
+                  <p className="mb-3 text-sm text-gray-600">
+                    Amazon • New York, NY
+                  </p>
+                  <div className="flex flex-wrap gap-2 mb-3">
+                    <span className="px-2 py-1 text-xs bg-gray-100 rounded-md">
+                      Full-time
+                    </span>
+                    <span className="px-2 py-1 text-xs bg-gray-100 rounded-md">
+                      Hybrid
+                    </span>
+                    <span className="px-2 py-1 text-xs bg-gray-100 rounded-md">
+                      $130k-$190k
+                    </span>
+                  </div>
+                  <p className="mb-4 text-sm text-gray-700">
+                    Looking for a talented data scientist to help us leverage
+                    big data and machine learning to drive business decisions...
+                  </p>
+                  <div className="flex justify-between items-center">
+                    <span className="text-xs text-gray-500">
+                      Posted 1 week ago
+                    </span>
+                    <button className="px-3 py-1 text-sm font-medium text-white bg-[#269EB2] rounded-md hover:bg-teal-700">
+                      Quick Apply
+                    </button>
+                  </div>
+                </div>
               </div>
-              <p className="mb-3 text-sm text-gray-600">
-                Amazon • New York, NY
-              </p>
-              <div className="flex flex-wrap gap-2 mb-3">
-                <span className="px-2 py-1 text-xs bg-gray-100 rounded-md">
-                  Full-time
-                </span>
-                <span className="px-2 py-1 text-xs bg-gray-100 rounded-md">
-                  Hybrid
-                </span>
-                <span className="px-2 py-1 text-xs bg-gray-100 rounded-md">
-                  $130k-$190k
-                </span>
-              </div>
-              <p className="mb-4 text-sm text-gray-700">
-                Looking for a talented data scientist to help us leverage big
-                data and machine learning to drive business decisions...
-              </p>
-              <div className="flex justify-between items-center">
-                <span className="text-xs text-gray-500">Posted 1 week ago</span>
-                <button className="px-3 py-1 text-sm font-medium text-white bg-[#269EB2] rounded-md hover:bg-teal-700">
-                  Quick Apply
-                </button>
-              </div>
-            </div>
-          </div>
 
-          {/* Job Search Filters */}
-          <div className="p-5 mb-6 bg-white rounded-lg shadow-sm">
+              {/* Job Search Filters */}
+              {/* <div className="p-5 mb-6 bg-white rounded-lg shadow-sm">
             <h2 className="mb-4 text-lg font-semibold text-gray-800">
               Job Search Filters
             </h2>
@@ -300,10 +303,10 @@ export default function JobPortal() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
-          {/* Job Alerts */}
-          <div className="p-5 bg-white rounded-lg shadow-sm">
+              {/* Job Alerts */}
+              {/* <div className="p-5 bg-white rounded-lg shadow-sm">
             <h2 className="mb-4 text-lg font-semibold text-gray-800">
               Job Alerts
             </h2>
@@ -345,9 +348,11 @@ export default function JobPortal() {
                 </div>
               </div>
             </div>
+          </div> */}
+            </div>
           </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 }

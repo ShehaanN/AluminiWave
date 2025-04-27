@@ -4,25 +4,28 @@ import Event2 from "../../assets/Tech-Events2.jpg";
 import { Link } from "react-router-dom";
 
 const Events = () => {
+  const userType = "alumini";
   return (
     <div className="min-h-screen flex ">
-      <Sidebar type="Alumini" />
+      <Sidebar userType={userType} />
       <main className="flex-1 md:ml-64 ml-0 px-8 py-4 bg-purple-50">
         <div className="p-6">
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-2xl font-bold">Event Management</h1>
-            <div className="flex flex-wrap md:flex-nowrap space-x-0 md:space-x-4 space-y-2 md:space-y-0 w-full md:w-auto">
-              <Link to="/createevent">
-                <button className="px-4 py-2 bg-[#7a999e] text-white rounded-lg w-full md:w-auto min-h-[44px]">
-                  <i className="fas fa-cog mr-2"></i>Manage
-                </button>
-              </Link>
-              <Link to="/createevent">
-                <button className="px-4 py-2 bg-[#269EB2] text-white rounded-lg w-full md:w-auto min-h-[44px]">
-                  <i className="fas fa-plus mr-2"></i>Create Event
-                </button>
-              </Link>
-            </div>
+            {userType === "alumini" && (
+              <div className="flex flex-wrap space-x-4  ">
+                <Link to="/createevent">
+                  <button className="px-4 py-2 bg-[#7a999e] text-white rounded-lg w-full md:w-auto min-h-[44px]">
+                    <i className="fas fa-cog mr-2"></i>Manage
+                  </button>
+                </Link>
+                <Link to="/createevent">
+                  <button className="px-4 py-2 bg-[#269EB2] text-white rounded-lg w-full md:w-auto min-h-[44px]">
+                    <i className="fas fa-plus mr-2"></i>Create Event
+                  </button>
+                </Link>
+              </div>
+            )}
           </div>
 
           <div className="grid md:grid-cols-1 grid-cols-1 gap-6">
