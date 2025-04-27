@@ -33,7 +33,7 @@ const Sidebar = ({ type }) => {
 
           {type === "Alumini" ? (
             <a
-              href="#"
+              href="/JobPortal"
               className="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50 "
             >
               <i className="fas fa-briefcase w-5"></i>
