@@ -1,6 +1,7 @@
 import React from "react";
 import "./Nav.css";
 import logo from "../../../assets/logo.png";
+import { Link } from "react-router-dom";
 
 function Nav() {
   return (
@@ -25,7 +26,9 @@ function Nav() {
         </div>
         <div className="loginButton">
           <div className="login">
-            <button>Sign Up</button>
+            <Link to="/register">
+              <button>Sign Up</button>
+            </Link>
           </div>
           <div className="login">
             <button>Login</button>

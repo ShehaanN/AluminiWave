@@ -16,6 +16,7 @@ import Events from "./components/Events/Events.jsx";
 import EventUnit from "./components/Events/EventUnit.jsx";
 import CreateEvent from "./components/Events/CreateEvent.jsx";
 import Mentorship from "./components/Mentorship/Mentorship.jsx";
+import Register from "./components/Register/Register.jsx";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
   },
   {
     path: "/signupStep2",

@@ -7,7 +7,7 @@ const Events = () => {
   return (
     <div class="min-h-screen flex">
       <Sidebar type="Alumini" />
-      <main class="flex-1 md:ml-64 ml-0">
+      <main class="flex-1 md:ml-64 ml-0 px-8 py-4">
         <div class="p-6">
           <div class="flex justify-between items-center mb-6">
             <h1 class="text-2xl font-bold">Event Management</h1>
