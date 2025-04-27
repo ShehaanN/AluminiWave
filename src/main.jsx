@@ -17,6 +17,7 @@ import EventUnit from "./components/Events/EventUnit.jsx";
 import CreateEvent from "./components/Events/CreateEvent.jsx";
 import Mentorship from "./components/Mentorship/Mentorship.jsx";
 import Register from "./components/Register/Register.jsx";
+import JobPortal from "./components/Jobportal/JobPortal.jsx";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <Dashboard />,
+  },
+  {
+    path: "/jobportal",
+    element: <JobPortal />,
   },
   {
     path: "/settings",
