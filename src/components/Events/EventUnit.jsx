@@ -6,33 +6,36 @@ import Event2 from "../../assets/Tech-Events2.jpg";
 const EventUnit = () => {
   return (
     <div>
-      <div class="mt-14">
-        <h1 class="text-5xl font-bold mx-52 mb-10">Events</h1>
-        <div class="bg-white rounded-lg shadow p-6 mb-6 mx-48">
-          <div class="relative h-64 mb-6">
+      <div className="bg-purple-50 py-10">
+        <h1 className="text-5xl font-bold mx-52 mb-10 ">Events</h1>
+        <div className="bg-white rounded-lg shadow p-6 mb-6 mx-48">
+          <div className="relative h-64 mb-6">
             <img
               src={Event2}
-              class="w-full h-full object-cover rounded-lg"
+              className="w-full h-full object-cover rounded-lg"
               alt="Event Banner"
             />
-            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-6 text-white">
-              <h1 class="text-3xl font-bold mb-2">Alumni Networking Night</h1>
-              <div class="flex items-center space-x-4">
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-6 text-white">
+              <h1 className="text-3xl font-bold mb-2">
+                Alumni Networking Night
+              </h1>
+              <div className="flex items-center space-x-4">
                 <span>
-                  <i class="far fa-calendar mr-2"></i>Jun 15, 2024
+                  <i className="far fa-calendar mr-2"></i>Jun 15, 2024
                 </span>
                 <span>
-                  <i class="fas fa-map-marker-alt mr-2"></i>San Francisco, CA
+                  <i className="fas fa-map-marker-alt mr-2"></i>San Francisco,
+                  CA
                 </span>
               </div>
             </div>
           </div>
 
-          <div class="space-y-6">
+          <div className="space-y-6">
             <div>
-              <h2 class="text-xl font-semibold mb-5">Event Description</h2>
-              <div class="space-y-3 p-4 bg-gray-50 rounded-lg mb-5">
-                <span class="font-medium w-24 ">
+              <h2 className="text-xl font-semibold mb-5">Event Description</h2>
+              <div className="space-y-3 p-4 bg-gray-50 rounded-lg mb-5">
+                <span className="font-medium w-24 ">
                   Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                   Blanditiis temporibus eius commodi maxime voluptatum libero
                   placeat! Sequi error neque ea quisquam voluptatem inventore
@@ -45,25 +48,25 @@ const EventUnit = () => {
               </div>
             </div>
             <div>
-              <h2 class="text-xl font-semibold mb-5">Featured Speakers</h2>
-              <div class="flex gap-10">
-                <div class="text-center">
+              <h2 className="text-xl font-semibold mb-5">Featured Speakers</h2>
+              <div className="flex gap-10">
+                <div className="text-center">
                   <img
                     src={Saradp}
-                    class="w-20 h-20 rounded-full mx-auto mb-2"
+                    className="w-20 h-20 rounded-full mx-auto mb-2"
                     alt="Speaker 1"
                   />
-                  <h3 class="font-medium">Sarah Johnson</h3>
-                  <p class="text-sm text-gray-600">CEO, Tech Corp</p>
+                  <h3 className="font-medium">Sarah Johnson</h3>
+                  <p className="text-sm text-gray-600">CEO, Tech Corp</p>
                 </div>
-                <div class="text-center">
+                <div className="text-center">
                   <img
                     src={mdp}
-                    class="w-20 h-20 rounded-full mx-auto mb-2"
+                    className="w-20 h-20 rounded-full mx-auto mb-2"
                     alt="Speaker 2"
                   />
-                  <h3 class="font-medium">Michael Chen</h3>
-                  <p class="text-sm text-gray-600">VP Engineering</p>
+                  <h3 className="font-medium">Michael Chen</h3>
+                  <p className="text-sm text-gray-600">VP Engineering</p>
                 </div>
               </div>
             </div>

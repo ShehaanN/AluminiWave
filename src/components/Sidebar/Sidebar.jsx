@@ -24,7 +24,7 @@ const Sidebar = ({ type }) => {
             <span className="ml-3">Events</span>
           </a>
           <a
-            href="#"
+            href="/mentorship"
             className="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50"
           >
             <i className="fas fa-users w-5"></i>
