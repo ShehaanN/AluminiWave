@@ -21,7 +21,7 @@ import { useState } from "react";
 
 export default function Mentorship() {
   const [date, setDate] = useState(new Date());
-  const userType = "alumini";
+  const userType = "student";
 
   return (
     <div className="min-h-screen flex ">
@@ -33,6 +33,12 @@ export default function Mentorship() {
 
             {userType === "student" && (
               <div className="flex ">
+                <Link to="/activementorships">
+                  <button className="px-4 py-2 bg-[#269EB2] text-white rounded-lg w-full md:w-auto min-h-[44px] mr-2">
+                    <i className="fa-solid fa-magnifying-glass mr-2"></i>Active
+                    Mentorships
+                  </button>
+                </Link>
                 <Link to="/mentors">
                   <button className="px-4 py-2 bg-[#269EB2] text-white rounded-lg w-full md:w-auto min-h-[44px]">
                     <i className="fa-solid fa-magnifying-glass mr-2"></i>Find
