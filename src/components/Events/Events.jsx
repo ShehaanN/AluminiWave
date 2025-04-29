@@ -8,7 +8,7 @@ const Events = () => {
   return (
     <div className="min-h-screen flex ">
       <Sidebar userType={userType} />
-      <main className="flex-1 md:ml-64 ml-0 px-8 py-4 bg-purple-50">
+      <main className="flex-1 md:ml-64 ml-0 px-8 py-4 bg-gray-50">
         <div className="p-6">
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-2xl font-bold">Event Management</h1>
