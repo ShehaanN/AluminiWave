@@ -1,100 +1,118 @@
 @import url('https://fonts.googleapis.com/css2?family=Cantarell:wght@400;700&display=swap');
-*{
-     margin: 0;
-     padding: 0;
-     box-sizing: border-box;
-     font-family: 'Cantarell', sans-serif; 
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Cantarell', sans-serif;
+}
+
+.header {
+  background: linear-gradient(to right, #3a5058 20%, #00a8c5 80%);
+  height: 100px;
+}
+
+.header img {
+  width: 130px;
+  height: 100px;
+}
+
+.headerTopic {
+  background: linear-gradient(to right, #3a5058 20%, #00a8c5 80%);
+  margin-top: -40px;
+  padding-left: 490px;
+  height: 100px;
+}
+
+.headerTopic p {
+  margin-right: 200px;
+  color: #FFFFFF;
+}
+
+.header h1 {
+  color: #FFFFFF;
+  font-size: 24px;
+  padding-left: 40px;
+}
+
+.loginInfo {
+  background: #e5eaec;
+  width: 700px;
+  height: 750px;
+  margin-left: 320px;
+  margin-top: 30px;
+  padding-left: 40px;
+  border-radius: 10px;
+}
+
+.info input {
+  border: 1px solid #D1D5DB;
+  width: 600px;
+  height: 50px;
+  padding-left: 10px;
+}
+
+.loginInfo .creation {
+  font-size: 25px;
+  font-weight: 800;
+}
+
+.info {
+  padding-top: 10px;
+}
+
+.buttons {
+  display: flex;
+  gap: 40px;
+  padding-left: 90px;
+}
+
+.buttons button {
+  border: 1px solid #00a8c5;
+  width: 200px;
+  height: 45px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.continue-btn {
+  border: 1px solid #00a8c5;
+  width: 630px;
+  background: #00a8c5;
+  height: 50px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.terms {
+  padding-top: 10px;
 }
 
 
-.header{
-      background: linear-gradient(to right, #3a5058 20%, #00a8c5 80%);
-      height: 100px;
+.social-buttons {
+  display: flex;
+  justify-content: center; 
+  gap: 80px;
+  padding-right: 20px;
+}
 
+.social-buttons button {
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  gap: 10px; 
+  width: 200px;
+  height: 45px;
+  border: 1px solid #3a5058;
+  background: white;
+  cursor: pointer;
 }
-.header img{
-      width: 130px;
-      height: 100px;
-}
-.headerTopic{
-      background: linear-gradient(to right, #3a5058 20%, #00a8c5 80%);
-      margin-top: -40px;
-      padding-left: 500px;
-      height: 100px;
-      
 
+.social-buttons img {
+  width: 20px;
+  height: 20px;
 }
-.headerTopic p{
-      padding-left: 20px;
-      color:#FFFFFF ;
+.steps{
+  padding-top: 10px;
+  padding-right: 30px;
 }
-.header h1{
-      color:#FFFFFF ;
-}
-/* Form Progress */
-.progress {
-      width: 1000px;
-      margin-top: 100px;
-      margin-left: 200px;
-      text-align: center;
-    }
-    .progress .circle,
-    .progress .bar {
-      display: inline-block;
-      background: #fff;
-      width: 40px; height: 40px;
-      border-radius: 40px;
-      border: 1px solid #d5d5da;
-    }
-    .progress .bar {
-      position: relative;
-      width: 80px;
-      height: 6px;
-      top: -33px;
-      margin-left: -5px;
-      margin-right: -5px;
-      border-left: none;
-      border-right: none;
-      border-radius: 0;
-    }
-    .progress .circle .label {
-      display: inline-block;
-      width: 32px;
-      height: 32px;
-      line-height: 32px;
-      border-radius: 32px;
-      margin-top: 3px;
-      color: #b5b5ba;
-      font-size: 17px;
-    }
-    .progress .circle .title {
-      color: #b5b5ba;
-      font-size: 13px;
-      line-height: 30px;
-      margin-left: -5px;
-    }
-    
-    /* Done / Active */
-    .progress .bar.done,
-    .progress .circle.done {
-      background: #eee;
-    }
-    .progress .bar.active {
-      background: linear-gradient(to right, #EEE 40%, #FFF 60%);
-    }
-    .progress .circle.done .label {
-      color: #FFF;
-      background: #8bc435;
-      box-shadow: inset 0 0 2px rgba(0,0,0,.2);
-    }
-    .progress .circle.done .title {
-      color: #444;
-    }
-    .progress .circle.active .label {
-      color: #FFF;
-      background: #0c95be;
-      box-shadow: inset 0 0 2px rgba(0,0,0,.2);
-    }
-    .progress .circle.active .title {
-      color: #0c95be;
-    }
