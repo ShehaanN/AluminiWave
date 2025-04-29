@@ -10,6 +10,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Sidebar from "../Sidebar/Sidebar";
 import { Link } from "react-router-dom";
+import sara from "../../assets/sara.png";
 
 const Dashboard = () => {
   const userType = "alumini";
@@ -387,6 +388,38 @@ const Dashboard = () => {
                 </div>
               </div>
             </>
+          )}
+
+          {userType === "student" && (
+            <div className="bg-white rounded-lg border border-gray-200 mb-8">
+              <div className="p-6">
+                <h2 className="text-xl font-bold text-gray-900 mb-6">
+                  Active Mentorships
+                </h2>
+                <div className="bg-white rounded-lg shadow-md">
+                  <div className="p-4 border-b">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center">
+                        <img src={sara} className="w-12 h-12 rounded-full" />
+                        <div className="ml-4">
+                          <h3 className="font-semibold">
+                            Session with Dr. Sarah Johnson
+                          </h3>
+                          <p className="text-sm text-gray-600">
+                            Meeting: June 25 , 8:00 PM
+                          </p>
+                        </div>
+                      </div>
+                      <Link to="/activementorships">
+                        <button className="px-4 py-2 bg-[#269EB2] text-white rounded-lg">
+                          View Session
+                        </button>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           )}
 
           {/* ------------------------------------- */}
