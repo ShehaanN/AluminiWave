@@ -5,10 +5,8 @@ import App from "./App.jsx";
 import Nav from "./components/LandingPage/Navigation/Nav.jsx";
 import Content from "./components/LandingPage/content/Content.jsx";
 import Content2 from "./components/LandingPage/content/Content2.jsx";
-import Login from "./components/Register/Login.jsx";
-import Loginstep from "./components/Register/Loginstep.jsx";
-import SignupStep2 from "./components/Register/SignupStep2.jsx";
-import SignupStep3 from "./components/Register/SignupStep3.jsx";
+import Login from "./components/Login/Login.jsx";
+
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Settings from "./components/Settings/Settings.jsx";
@@ -22,6 +20,7 @@ import Mentors from "./components/Mentorship/Mentors.jsx";
 import StuRequests from "./components/Mentorship/StuRequests.jsx";
 import ActiveMentorships from "./components/Mentorship/ActiveMentorships.jsx";
 import PostJob from "./components/Jobportal/PostJob.jsx";
+import MentorProfile from "./components/Profiles/MentorProfile.jsx";
 
 const router = createBrowserRouter([
   {
@@ -42,14 +41,7 @@ const router = createBrowserRouter([
     path: "/register",
     element: <Register />,
   },
-  {
-    path: "/signupStep2",
-    element: <SignupStep2 />,
-  },
-  {
-    path: "/signupStep3",
-    element: <SignupStep3 />,
-  },
+
   {
     path: "/dashboard",
     element: <Dashboard />,
@@ -93,6 +85,10 @@ const router = createBrowserRouter([
   {
     path: "/postjob",
     element: <PostJob />,
+  },
+  {
+    path: "/profile",
+    element: <MentorProfile />,
   },
 ]);
 
