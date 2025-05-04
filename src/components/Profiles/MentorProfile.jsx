@@ -2,7 +2,6 @@ import React from "react";
 import "./MentorProfile.css";
 
 const MentorProfile = () => {
-
   const profile = {
     name: "Sarah Johnson",
     title: "Class of 2023, Computer Science Major",
@@ -23,13 +22,7 @@ const MentorProfile = () => {
         description: "Managed mobile app development team",
       },
     ],
-    skills: [
-      "Python",
-      "Java",
-      "Machine Learning",
-      "Web Development",
-      "SQL",
-    ],
+    skills: ["Python", "Java", "Machine Learning", "Web Development", "SQL"],
     mentorship: {
       seeking: true,
       interests: "Software Development, AI/ML Career Guidance",
@@ -90,14 +83,20 @@ const MentorProfile = () => {
                 <li>
                   <strong>{profile.academicTimeline[0].degree}</strong>
                   <div>{profile.academicTimeline[0].university}</div>
-                  <div className="period">{profile.academicTimeline[0].period}</div>
+                  <div className="period">
+                    {profile.academicTimeline[0].period}
+                  </div>
                   <div className="gpa">{profile.academicTimeline[0].gpa}</div>
                 </li>
                 <li>
                   <strong>{profile.academicTimeline[1].company}</strong>
                   <div>{profile.academicTimeline[1].role}</div>
-                  <div className="period">{profile.academicTimeline[1].period}</div>
-                  <div className="desc">{profile.academicTimeline[1].description}</div>
+                  <div className="period">
+                    {profile.academicTimeline[1].period}
+                  </div>
+                  <div className="desc">
+                    {profile.academicTimeline[1].description}
+                  </div>
                 </li>
               </ul>
             </div>
@@ -118,7 +117,9 @@ const MentorProfile = () => {
             <div className="profile-card">
               <h3>Mentorship Preferences</h3>
               <div className="mentorship-status seeking">
-                {profile.mentorship.seeking ? "Seeking Mentorship" : "Mentoring"}
+                {profile.mentorship.seeking
+                  ? "Seeking Mentorship"
+                  : "Mentoring"}
               </div>
               <div className="mentorship-interests">
                 Interested in: {profile.mentorship.interests}
