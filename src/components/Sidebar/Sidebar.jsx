@@ -1,52 +1,69 @@
-import React from 'react';
-import { User, Settings, BarChart, Calendar, Users, Briefcase, Network } from 'lucide-react';
+import logo from "../../assets/logo.png";
 
-function Sidebar() {
-    return (
-        <div className="w-64 bg-white border-r border-gray-200">
-
-            <div className="p-4 border-b border-gray-200">
-                <div className="flex items-center">
-                    <Logo />
-                </div>
-            </div>
-
-            <nav>
-                <NavItem icon={<BarChart size={20} />} label="Dashboard" active />
-                <NavItem icon={<Calendar size={20} />} label="Events" />
-                <NavItem icon={<Users size={20} />} label="Mentorship" />
-                <NavItem icon={<Briefcase size={20} />} label="Job Portal" />
-                <NavItem icon={<Network size={20} />} label="Network" active />
-            </nav>
-
-            <div className="mt-8 px-4">
-                <div className="text-xs font-medium text-gray-400 mb-2">MY ACCOUNT</div>
-                <NavItem icon={<User size={20} />} label="Profile" textColor="text-teal-500" />
-                <NavItem icon={<Settings size={20} />} label="Settings" />
-            </div>
-
+const Sidebar = ({ userType }) => {
+  return (
+    <div>
+      <aside className="w-64 bg-white border-r border-gray-200 fixed h-full">
+        <div className="p-6">
+          <img src={logo} alt="AlumniWave" className="w-full h-2/3 " />
         </div>
-    );
-}
+        <nav className="mt-6">
+          <a
+            href="/dashboard"
+            className="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50 "
+          >
+            <i className="fas fa-chart-line w-5  "></i>
 
-function NavItem({ icon, label, active = false, textColor = 'text-gray-600' }) {
-    return (
-        <div className={`flex items-center px-4 py-2 my-1 ${active ? 'bg-gray-100' : ''} rounded-md`}>
-            <div className={textColor}>{icon}</div>
-            <span className={`ml-3 ${textColor}`}>{label}</span>
-        </div>
-    );
-}
+            <span className="ml-3 ">Dashboard</span>
+          </a>
+          <a
+            href="/events"
+            className="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50"
+          >
+            <i className="fas fa-calendar w-5"></i>
+            <span className="ml-3">Events</span>
+          </a>
+          <a
+            href="/mentorship"
+            className="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50"
+          >
+            <i className="fas fa-users w-5"></i>
+            <span className="ml-3">Mentorship</span>
+          </a>
 
-function Logo() {
-    return (
-    <div className="text-xl font-semibold">
-      <span className="text-gray-700">(</span>
-      <span className="text-gray-700">Alumini</span>
-      <span className="text-teal-500">Wave</span>
-      <span className="text-gray-700">)</span>
+          {userType === "alumini" && (
+            <a
+              href="/JobPortal"
+              className="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50 "
+            >
+              <i className="fas fa-briefcase w-5"></i>
+              <span className="ml-3">Job Portal</span>
+            </a>
+          )}
+
+          <a
+            href="#"
+            className="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50"
+          >
+            <i className="fas fa-network-wired w-5"></i>
+            <span className="ml-3">Networking</span>
+          </a>
+          <div className="px-6 py-4 mt-6">
+            <p className="text-xs font-semibold text-gray-400 uppercase">
+              My Account
+            </p>
+          </div>
+          <a
+            href="#"
+            className="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50"
+          >
+            <i className="fas fa-user w-5"></i>
+            <span className="ml-3">Profile</span>
+          </a>
+        </nav>
+      </aside>
     </div>
-    );
-}
+  );
+};
 
 export default Sidebar;
