@@ -3,7 +3,8 @@ import MentorProfile from './componets/Profiles/MentorProfile';
 import StudentProfile from './components/Profiles/StudentProfile';
 
 function App() {
-  return <StudentProfile />
+  return <MentorProfile />;
+  return <StudentProfile />;
 }
 
 export default App
