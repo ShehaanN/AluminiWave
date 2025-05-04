@@ -21,7 +21,7 @@ import { useState } from "react";
 
 export default function Mentorship() {
   const [date, setDate] = useState(new Date());
-  const userType = "alumini";
+  const userType = "student";
 
   return (
     <div className="min-h-screen flex ">
