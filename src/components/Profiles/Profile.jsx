@@ -1,8 +1,7 @@
 import React from "react";
-import "./StudentProfile.css";
+import "./Profile.css";
 
-const StudentProfile = () => {
-
+const Profile = () => {
   const profile = {
     name: "Sarah Johnson",
     title: "Senior Product Manager at Tech Corp",
@@ -137,4 +136,4 @@ const StudentProfile = () => {
   );
 };
 
-export default StudentProfile;
+export default Profile;

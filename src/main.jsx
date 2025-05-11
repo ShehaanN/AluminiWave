@@ -20,7 +20,7 @@ import Mentors from "./components/Mentorship/Mentors.jsx";
 import StuRequests from "./components/Mentorship/StuRequests.jsx";
 import ActiveMentorships from "./components/Mentorship/ActiveMentorships.jsx";
 import PostJob from "./components/Jobportal/PostJob.jsx";
-import MentorProfile from "./components/Profiles/MentorProfile.jsx";
+import Profile from "./components/Profiles/Profile.jsx";
 
 const router = createBrowserRouter([
   {
@@ -88,7 +88,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/profile",
-    element: <MentorProfile />,
+    element: <Profile />,
   },
 ]);
 
