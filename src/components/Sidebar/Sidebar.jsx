@@ -54,7 +54,7 @@ const Sidebar = ({ userType }) => {
             </p>
           </div>
           <a
-            href="#"
+            href="/profile"
             className="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50"
           >
             <i className="fas fa-user w-5"></i>
