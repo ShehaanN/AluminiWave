@@ -22,6 +22,8 @@ import ActiveMentorships from "./components/Mentorship/ActiveMentorships.jsx";
 import PostJob from "./components/Jobportal/PostJob.jsx";
 import Profile from "./components/Profiles/Profile.jsx";
 
+
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -88,6 +90,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/profile",
+
     element: <Profile />,
   },
 ]);
