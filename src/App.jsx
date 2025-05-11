@@ -1,7 +1,7 @@
-import MentorProfile from "./components/Profiles/MentorProfile";
 
 function App() {
-  return <MentorProfile />;
+  return <div>Hello</div>;
+
 }
 
 export default App;
