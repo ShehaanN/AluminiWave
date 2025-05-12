@@ -35,7 +35,7 @@ const Profile = () => {
         <div className="p-6">
           <div className="max-w-7xl mx-auto">
             <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-              <div className="relative h-64">
+              <div className="relative h-56">
                 <div className="absolute inset-0 gradient-bg"></div>
                 <div className="absolute bottom-0 left-0 right-0 p-6 text-white flex items-end">
                   <div className="flex items-center space-x-6">
@@ -59,7 +59,7 @@ const Profile = () => {
             {/* ----------------------- */}
             <div className="grid grid-cols-3  gap-8 mt-8">
               <div className="col-span-2  space-y-6">
-                <div className="bg-white rounded-lg shadow p-6">
+                <div className="bg-white rounded-lg shadow-lg p-6">
                   {userType === "student" && (
                     <h2 className="text-xl font-semibold mb-4">
                       Academic Summary
@@ -77,7 +77,7 @@ const Profile = () => {
                 </div>
               </div>
               <div className="col-span-1 space-y-6">
-                <div className="bg-white rounded-lg shadow p-6">
+                <div className="bg-white rounded-lg shadow-lg p-6">
                   {userType === "student" && (
                     <h2 className="text-xl font-semibold mb-4">
                       Technical Skills
@@ -109,7 +109,7 @@ const Profile = () => {
                 </div>
               </div>
               <div className="col-span-3 space-y-6">
-                <div className="bg-white rounded-lg shadow p-6">
+                <div className="bg-white rounded-lg shadow-lg p-6">
                   {userType === "student" && (
                     <h2 className="text-xl font-semibold mb-4">
                       Academic Timeline

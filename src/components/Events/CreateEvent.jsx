@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import MultiSelect from "./MultiSelect";
+import { Link } from "react-router-dom";
 
 const CreateEvent = () => {
   return (
@@ -82,11 +83,12 @@ const CreateEvent = () => {
                           id="description"
                         />
                       </div>
+
                       <div className="flex flex-col space-y-1.5">
-                        <Label className="text-lg mb-1" htmlFor="speakers">
-                          Featured Speakers
+                        <Label className="text-lg mb-1" htmlFor="eventbanner">
+                          Event Banner
                         </Label>
-                        <MultiSelect />
+                        <Input id="eventbanner" type="file" className="h-10" />
                       </div>
                     </div>
                   </form>
@@ -95,9 +97,11 @@ const CreateEvent = () => {
                   <Button className="bg-[#269EB2] text-white px-7 py-5">
                     Submit
                   </Button>
-                  <Button className="  px-7 py-5" variant="outline">
-                    Cancel
-                  </Button>
+                  <Link to="/events">
+                    <Button className="  px-7 py-5" variant="outline">
+                      Cancel
+                    </Button>
+                  </Link>
                 </CardFooter>
               </Card>
             </div>

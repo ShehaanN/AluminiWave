@@ -14,7 +14,7 @@ const Events = () => {
             <h1 className="text-2xl font-bold">Event Management</h1>
             {userType === "alumini" && (
               <div className="flex flex-wrap space-x-4  ">
-                <Link to="/createevent">
+                <Link to="/manageevent">
                   <button className="px-4 py-2 bg-[#7a999e] text-white rounded-lg w-full md:w-auto min-h-[44px]">
                     <i className="fas fa-cog mr-2"></i>Manage
                   </button>

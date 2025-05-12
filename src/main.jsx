@@ -21,8 +21,7 @@ import StuRequests from "./components/Mentorship/StuRequests.jsx";
 import ActiveMentorships from "./components/Mentorship/ActiveMentorships.jsx";
 import PostJob from "./components/Jobportal/PostJob.jsx";
 import Profile from "./components/Profiles/Profile.jsx";
-
-
+import ManageEvent from "./components/Events/ManageEvent.jsx";
 
 const router = createBrowserRouter([
   {
@@ -67,6 +66,10 @@ const router = createBrowserRouter([
   {
     path: "/createevent",
     element: <CreateEvent />,
+  },
+  {
+    path: "/manageevent",
+    element: <ManageEvent />,
   },
   {
     path: "/mentorship",
