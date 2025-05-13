@@ -41,7 +41,6 @@ const Dashboard = () => {
                     <Link to="/settings">
                       <DropdownMenuItem>Update Profile</DropdownMenuItem>
                     </Link>
-                    <DropdownMenuItem>Change Password</DropdownMenuItem>
 
                     <Link to="/">
                       <DropdownMenuItem>Log out</DropdownMenuItem>

@@ -24,7 +24,7 @@ const StuRequests = () => {
             <div className="col-span-2">
               <div className="bg-white min-h-screen rounded-lg shadow p-6">
                 <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-xl font-semibold">Request List</h2>
+                  <h2 className="text-xl font-semibold">Available Requests</h2>
                 </div>
                 <div className="grid grid-cols-4  gap-8">
                   <div className="bg-white p-6 rounded-lg border border-gray-200 shadow">

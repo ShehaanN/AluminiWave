@@ -4,7 +4,7 @@ import Sidebar from "./../Sidebar/Sidebar";
 import mdp from "./../../assets/mdp.jpg";
 
 const Profile = () => {
-  const userType = "alumini";
+  const userType = "student";
 
   const alumini = {
     name: "Dr Sarah Johnson",

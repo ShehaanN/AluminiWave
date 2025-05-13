@@ -4,7 +4,7 @@ import Event2 from "../../assets/Tech-Events2.jpg";
 import { Link } from "react-router-dom";
 
 const Events = () => {
-  const userType = "alumini";
+  const userType = "student";
   return (
     <div className="min-h-screen flex ">
       <Sidebar userType={userType} />
