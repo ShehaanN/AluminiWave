@@ -1,0 +1,130 @@
+:root {
+  --line-border-fill: #269eb2;
+  --line-border-empty: #383838;
+}
+
+/* body {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #f9fafb;
+} */
+
+.container {
+  width: 780px;
+  background-color: white;
+  padding: 2rem 3rem;
+  border-radius: 15px;
+  overflow-x: hidden;
+}
+
+.container .content h2 {
+  font-size: 2rem;
+  color: var(--line-border-empty);
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.progress_container {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 0;
+  position: relative;
+
+  width: 30rem;
+}
+
+.progress_container::before {
+  content: "";
+  position: absolute;
+  background-color: #ddd;
+
+  height: 4px;
+  width: 100%;
+  top: 50%;
+  left: 0;
+  z-index: 1;
+  transform: translateY(-50%);
+}
+
+.progress {
+  background-color: var(--line-border-fill);
+  position: absolute;
+  top: 50%;
+  width: 50px;
+  left: 0;
+  transform: translateY(-50%);
+  height: 4px;
+  z-index: 1;
+  transition: all 0.8s ease-in;
+}
+
+.circle {
+  background-color: #ddd;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.circle.active {
+  border-color: var(--line-border-empty);
+  color: #ddd;
+  background-color: #269eb2;
+  z-index: 1;
+}
+
+.btns {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 4.5rem;
+}
+
+.btn {
+  outline: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1rem;
+  border-radius: 7px;
+  background-color: #269eb2;
+  color: #fff;
+  padding: 9px 35px;
+}
+
+.disabled {
+  outline: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  border-radius: 4px;
+  color: #000;
+  padding: 9px 35px;
+  background-color: #ddd;
+  cursor: not-allowed;
+}
+
+/* Form */
+
+.form-container h2 {
+  text-align: center;
+}
+
+.form-container form input {
+  width: 94%;
+  border: 1px solid #ddd;
+  padding: 0.75rem 0.5rem;
+  font-family: inherit;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+}
+
+.form-container form input:focus {
+  outline: none;
+  border: none;
+}
