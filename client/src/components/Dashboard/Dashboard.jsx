@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 import sara from "../../assets/sara.png";
 
 const Dashboard = () => {
-  const userType = "student";
+  const userType = "alumini";
   return (
     <div className="min-h-screen flex">
       <Sidebar userType={userType} />

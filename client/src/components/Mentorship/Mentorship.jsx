@@ -14,14 +14,15 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Calendar } from "@/components/ui/calendar";
 
 import { Textarea } from "@/components/ui/textarea";
-import { Calendar } from "@/components/ui/calendar";
 import { useState } from "react";
 
 export default function Mentorship() {
-  const [date, setDate] = useState(new Date());
   const userType = "student";
+
+  const [date, setDate] = useState(new Date());
 
   return (
     <div className="min-h-screen flex ">
@@ -178,13 +179,15 @@ export default function Mentorship() {
               {/* -------------------------- */}
               <div className="flex flex-row justify-between">
                 <div className=" mt-4 p-8 ml-24">
+                  {/* -----------calender ------------------*/}
                   <Calendar
                     mode="single"
                     selected={date}
                     onSelect={setDate}
-                    className="rounded-md border shadow day_selected"
+                    className="rounded-md border"
                   />
                 </div>
+
                 {userType === "student" && (
                   <Card className="w-[650px] p-8 border-none mt-4 shadow-none">
                     <CardHeader>
