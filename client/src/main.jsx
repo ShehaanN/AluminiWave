@@ -22,6 +22,8 @@ import ActiveMentorships from "./components/Mentorship/ActiveMentorships.jsx";
 import PostJob from "./components/Jobportal/PostJob.jsx";
 import Profile from "./components/Profiles/Profile.jsx";
 import ManageEvent from "./components/Events/ManageEvent.jsx";
+import SuperDashboard from "./components/Dashboard/SuperDashboard.jsx";
+import SuperSettings from "./components/Settings/SuperSettings.jsx";
 
 const router = createBrowserRouter([
   {
@@ -48,12 +50,20 @@ const router = createBrowserRouter([
     element: <Dashboard />,
   },
   {
+    path: "/superdashboard",
+    element: <SuperDashboard />,
+  },
+  {
     path: "/jobportal",
     element: <JobPortal />,
   },
   {
     path: "/settings",
     element: <Settings />,
+  },
+  {
+    path: "/supersettings",
+    element: <SuperSettings />,
   },
 
   {

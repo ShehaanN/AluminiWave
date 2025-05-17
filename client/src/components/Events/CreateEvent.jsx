@@ -41,11 +41,7 @@ const CreateEvent = () => {
                         <Label className="text-lg mb-1" htmlFor="title">
                           Event Title
                         </Label>
-                        <Input
-                          id="title"
-                          className="h-10"
-                          placeholder="Title of your event"
-                        />
+                        <Input id="title" className="h-10" />
                       </div>
                       <div className="flex flex-col space-y-1.5">
                         <Label className="text-lg mb-1" htmlFor="date">
@@ -57,31 +53,25 @@ const CreateEvent = () => {
                         <Label className="text-lg mb-1" htmlFor="time">
                           Time Slot
                         </Label>
-                        <Input
-                          id="time"
-                          type="time"
-                          className="h-10"
-                          placeholder="Name of your project"
-                        />
+                        <Input id="time" type="time" className="h-10" />
                       </div>
                       <div className="flex flex-col space-y-1.5">
                         <Label className="text-lg mb-1" htmlFor="location">
                           Location
                         </Label>
-                        <Input
-                          id="location"
-                          className="h-10"
-                          placeholder="Name of your project"
-                        />
+                        <Input id="location" className="h-10" />
+                      </div>
+                      <div className="flex flex-col space-y-1.5">
+                        <Label className="text-lg mb-1" htmlFor="organizer">
+                          Organizer
+                        </Label>
+                        <Input id="organizer" className="h-10" />
                       </div>
                       <div className="flex flex-col space-y-1.5">
                         <Label className="text-lg mb-1" htmlFor="description">
                           Description
                         </Label>
-                        <Textarea
-                          placeholder="Type your message here."
-                          id="description"
-                        />
+                        <Textarea id="description" />
                       </div>
 
                       <div className="flex flex-col space-y-1.5">
