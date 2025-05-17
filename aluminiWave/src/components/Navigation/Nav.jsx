@@ -4,7 +4,7 @@ import logo from '../../assets/logo.png'
 import { useNavigate } from 'react-router-dom';
 
 function Nav() {
-      const navigate1 = useNavigate();
+      const navigate = useNavigate();
   return (
     <div>
       <div className="nav">
@@ -21,7 +21,7 @@ function Nav() {
                   </ul>
             </div>
             <div className="loginButton">
-                  <div className="login"><button>Sign Up</button></div>
+                  <div className="login"><button onClick={()=>navigate('/Login')}>Sign Up</button></div>
                   <div className="login"><button>Login</button></div>
                   
 
