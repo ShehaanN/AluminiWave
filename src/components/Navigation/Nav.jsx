@@ -1,8 +1,10 @@
 import React from 'react'
 import './Nav.css'
 import logo from '../../assets/logo.png'
+import { useNavigate } from 'react-router-dom';
 
 function Nav() {
+      const navigate1 = useNavigate();
   return (
     <div>
       <div className="nav">
