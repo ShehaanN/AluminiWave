@@ -21,14 +21,14 @@ function LightStep() {
   
   <div className="section">
     <label className="section-label">Select Your Industries of Interest (Multiple)</label>
-    <div className="industries-group">
-      <label><input type="checkbox" /> Technology</label>
-      <label><input type="checkbox" /> Business</label>
-      <label><input type="checkbox" /> Engineering</label>
-      <label><input type="checkbox" /> Arts & Design</label>
-      <label><input type="checkbox" /> Healthcare</label>
-      <label><input type="checkbox" /> Education</label>
-    </div>
+    <div className="industries-grid">
+  <label><input type="checkbox" /> Technology</label>
+  <label><input type="checkbox" /> Business</label>
+  <label><input type="checkbox" /> Engineering</label>
+  <label><input type="checkbox" /> Arts & Design</label>
+  <label><input type="checkbox" /> Healthcare</label>
+  <label><input type="checkbox" /> Education</label>
+</div>
   </div>
   
   <div className="section">
@@ -51,9 +51,9 @@ function LightStep() {
   </div>
   
   <div className="section mentorship-group">
-    <label className="section-label">Mentorship Preferences</label>
-    <label><input type="checkbox" /> I want to be a mentor</label>
-    <label><input type="checkbox" /> I'm looking for a mentor</label>
+    <label className="section-label">Mentorship Preferences</label><br />
+    <label><input type="checkbox" /> I want to be a mentor</label><br />
+    <label><input type="checkbox" /> I'm looking for a mentor</label><br />
     <label><input type="checkbox" /> Interested in group mentoring sessions</label>
   </div>
   
