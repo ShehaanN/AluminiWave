@@ -63,6 +63,37 @@ app.post('/profile', async (req, res) => {
     res.status(500).json({ error: 'Database error' });
   }
 });
+app.post('/career', async (req, res) => {
+      const {
+        industries,
+        skills,
+        careerStage,
+        mentorshipPrefs,
+        areasOfExpertise,
+        commMethods,
+      } = req.body;
+    
+      try {
+        const result = await pool.query(
+          `INSERT INTO career_info
+            (industries, skills, career_stage, mentorship_prefs, areas_of_expertise, comm_methods)
+            VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
+          [
+            JSON.stringify(industries),
+            JSON.stringify(skills),
+            careerStage,
+            JSON.stringify(mentorshipPrefs),
+            areasOfExpertise,
+            JSON.stringify(commMethods),
+          ]
+        );
+        res.json({ career: result.rows[0] });
+      } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Database error' });
+      }
+    });
+    
 
 
 // Start server
