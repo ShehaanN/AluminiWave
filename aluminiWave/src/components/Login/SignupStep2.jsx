@@ -40,7 +40,7 @@ function SignupStep2() {
       });
       if (res.ok) {
         // Go to next step
-        navigate2('/SignupStep3');
+        navigate2('/LightStep');
       } else {
         alert('Error saving profile info');
       }

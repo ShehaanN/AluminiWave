@@ -9,6 +9,7 @@ import Login from "./components/Login/Login.jsx";
 import Loginstep from "./components/Login/Loginstep.jsx";
 import SignupStep2 from "./components/Login/SignupStep2.jsx";
 import SignupStep3 from "./components/Login/SignupStep3";
+import LightStep from "./components/Login/LightStep";
 import{
   createBrowserRouter,
   RouterProvider,
@@ -32,6 +33,12 @@ const router = createBrowserRouter([
   {
     path: "/signupStep2",
     element:<SignupStep2 />,
+  },
+  {
+    
+    path: "/LightStep",
+    element:<LightStep />,
+  
   },
   {
     path: "/signupStep3",
