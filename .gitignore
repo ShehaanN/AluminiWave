@@ -1,24 +1,41 @@
-# Logs
-logs
+# IDE and OS files
+.idea/
+.vscode/
+*.swp
+*~
+.DS_Store
+Thumbs.db
+
+# Node modules
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Environment files
+.env
+client/.env
+client/.env.*
+server/.env
+server/.env.*
+!.env.example # If you have example env files
+
+# Build output
+dist/
+build/
+client/dist/
+client/build/
+# server/dist/ # If using TypeScript and compiling backend
+
+# Prisma generated client (often good to keep generated, but can be ignored if always re-generated)
+# server/prisma/generated/
+
+# Log files
+logs/
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+# Coverage directory
+coverage/

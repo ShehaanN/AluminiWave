@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Cantarell:wght@400;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Cantarell', sans-serif;
+}
+
+.header {
+  background: linear-gradient(to right, #3a5058 20%, #00a8c5 80%);
+  height: 100px;
+}
+
+.header img {
+  width: 130px;
+  height: 100px;
+}
+
+.headerTopic {
+  background: linear-gradient(to right, #3a5058 20%, #00a8c5 80%);
+  margin-top: -40px;
+  padding-left: 490px;
+  height: 100px;
+}
+
+.headerTopic p {
+  margin-right: 200px;
+  color: #FFFFFF;
+}
+
+.header h1 {
+  color: #FFFFFF;
+  font-size: 24px;
+  padding-left: 40px;
+}
+
+.loginInfo {
+  background: #e5eaec;
+  width: 700px;
+  height: 750px;
+  margin-left: 320px;
+  margin-top: 30px;
+  padding-left: 40px;
+  border-radius: 10px;
+}
+
+.info input {
+  border: 1px solid #D1D5DB;
+  width: 600px;
+  height: 50px;
+  padding-left: 10px;
+}
+
+.loginInfo .creation {
+  font-size: 25px;
+  font-weight: 800;
+}
+
+.info {
+  padding-top: 10px;
+}
+
+.buttons {
+  display: flex;
+  gap: 40px;
+  padding-left: 90px;
+}
+
+.buttons button {
+  border: 1px solid #00a8c5;
+  width: 200px;
+  height: 45px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.continue-btn {
+  border: 1px solid #00a8c5;
+  width: 630px;
+  background: #00a8c5;
+  height: 50px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.terms {
+  padding-top: 10px;
+}
+
+
+.social-buttons {
+  display: flex;
+  justify-content: center; 
+  gap: 80px;
+  padding-right: 20px;
+}
+
+.social-buttons button {
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  gap: 10px; 
+  width: 200px;
+  height: 45px;
+  border: 1px solid #3a5058;
+  background: white;
+  cursor: pointer;
+}
+
+.social-buttons img {
+  width: 20px;
+  height: 20px;
+}
+.steps{
+  padding-top: 10px;
+  padding-right: 30px;
+}
