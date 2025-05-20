@@ -4,7 +4,7 @@ const Progress = ({ totalSteps, step }) => {
   const progress = ((step - 1) / (totalSteps - 1)) * 100;
   return (
     <div
-      className="progress"
+      className="progress "
       style={{
         height: "4px",
         background: "#ddd",
