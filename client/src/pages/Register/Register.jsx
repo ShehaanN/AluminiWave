@@ -4,8 +4,7 @@ import Progress from "./Progress";
 import { Personal, Signup, Sociallinks } from "./Form";
 import logo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
-
-const message = ["Learn React", "Apply for jobs", "Invest your income"];
+// import { supabase } from "../../supabaseClient";
 
 const Register = () => {
   return (
@@ -26,23 +25,50 @@ const Multi = () => {
     if (step < 3) setStep((step) => step + 1);
   }
 
-  const renderSteps = () => {
+  const RenderSteps = () => {
+    const [formData, setFormData] = useState({
+      // Step 1
+      email: "",
+      password: "",
+      confirmPassword: "",
+      role: "alumni",
+      acceptTerms: false,
+      // Step 2
+      profilePhotoFile: null,
+      profilePhotoUrl: "",
+      fullName: "",
+      gender: "Male",
+      dateOfBirth: "",
+      graduationYear: "",
+      course: "",
+      institute: "",
+      currentJobTitle: "",
+      currentCompany: "",
+      locationCityCountry: "",
+      // Step 3
+      industriesOfInterest: [],
+
+      skillsExpertise: [],
+    });
+
+    console.log(formData);
+
     switch (step) {
       case 1:
-        return <Personal />;
+        return <Personal formData={formData} setFormData={setFormData} />;
       case 2:
-        return <Signup />;
+        return <Signup formData={formData} setFormData={setFormData} />;
       case 3:
-        return <Sociallinks />;
+        return <Sociallinks formData={formData} setFormData={setFormData} />;
       default:
         return null;
     }
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen font-['Inter']">
+    <div className="bg-gray-100 min-h-screen font-['Inter'] ">
       <div className="bg-cyan-700">
-        <div className="max-w-8xl mx-auto px-4 py-8">
+        <div className="max-w-8xl mx-auto px-4 py-8 ">
           <img src={logo} alt="AluminiWave" className="h-18 " />
           <div className="text-white mt-8 text-center">
             <h1 className="text-4xl font-bold">Join Our Alumni Network</h1>
@@ -54,7 +80,7 @@ const Multi = () => {
       </div>
 
       <div className="max-w-8xl mx-auto px-4 -mt-6 container ">
-        <div className="flex justify-center">
+        <div className="flex justify-center  ">
           <div className="progress_container">
             <Progress totalSteps={totalSteps} step={step} />
             <div className={`${step >= 1 ? "circle active" : "circle"}`}>1</div>
@@ -62,10 +88,7 @@ const Multi = () => {
             <div className={`${step >= 3 ? "circle active" : "circle"}`}>3</div>
           </div>
         </div>
-        <div className="content flex justify-center">
-          {/* <Message step={step} /> */}
-          {renderSteps()}
-        </div>
+        <div className="content flex justify-center">{RenderSteps()}</div>
         <div className="btns">
           <button
             onClick={handlePrev}
@@ -87,14 +110,6 @@ const Multi = () => {
           )}
         </div>
       </div>
-    </div>
-  );
-};
-
-const Message = ({ step }) => {
-  return (
-    <div>
-      <h2>{message[step - 1]}</h2>
     </div>
   );
 };
