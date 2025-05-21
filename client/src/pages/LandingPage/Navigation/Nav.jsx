@@ -1,14 +1,16 @@
 import React from "react";
 import "./Nav.css";
 import logo from "../../../assets/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function Nav() {
+  const location = useLocation();
+
   return (
     <div>
       <div className="nav">
         <div className="content">
-          <img src={logo} alt="" />
+          <img src={logo} alt="Logo" />
           <ul>
             <li>
               <a href="">Home</a>
@@ -25,14 +27,12 @@ function Nav() {
           </ul>
         </div>
         <div className="loginButton">
-          <div className="login">
-            <Link to="/register">
-              <button>Sign Up</button>
-            </Link>
-          </div>
-         <Link to="/login"> <div className="login">
-            <button>Login</button>
-          </div></Link>
+          <Link to="/login">
+            <button className="login-btn">Log in</button>
+          </Link>
+          <Link to="/register">
+            <button className="signup-btn">Sign up</button>
+          </Link>
         </div>
       </div>
     </div>
