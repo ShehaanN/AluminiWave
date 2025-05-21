@@ -7,13 +7,7 @@
       font-family: 'Cantarell', sans-serif;
    
 }
-.mainTopic span{
-      padding-left: 150px;
-      color: #2F4EDA;
-      font-weight: bold;
-      font-family: 'Cantarell', sans-serif;
-      
-}
+
 
 .paragraph{
       display: flex;
@@ -163,7 +157,19 @@
       padding-left: 60px;
       font-weight: 800;
 }
+.Testimonials{
+      padding-left: 170px;
+      color: #2F4EDA;
+      font-weight: bold;
+      font-family: 'Cantarell', sans-serif;
+}
+.Propositions{
+      padding-left: 140px;
+      color: #2F4EDA;
+      font-weight: bold;
+      font-family: 'Cantarell', sans-serif;
 
+}
 
 
 
