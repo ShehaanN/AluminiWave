@@ -1,5 +1,11 @@
-const App = () => {
-  return <div>hello</div>;
-};
+import { AuthProvider } from './contexts/AuthContext';
 
-export default App;
+function App() {
+  return (
+    <AuthProvider>
+      <Router>
+        <AppRoutes />
+      </Router>
+    </AuthProvider>
+  );
+}
