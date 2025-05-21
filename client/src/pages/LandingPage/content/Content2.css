@@ -7,19 +7,11 @@
       font-family: 'Cantarell', sans-serif;
    
 }
-.mainTopic span{
-      padding-left: 150px;
-      color: #2F4EDA;
-      font-weight: bold;
-      font-family: 'Cantarell', sans-serif;
-      
-}
-.mainTopic h1{
-      padding-left: 120px;
-}
+
+
 .paragraph{
       display: flex;
-      gap: 140px;
+      gap: 50px;
       justify-content: center;
       margin-top: -60px;
       font-family: 'Cantarell', sans-serif;
@@ -34,26 +26,27 @@
       padding-left: 10px;
 }
 .joinPart h3{
-      margin-left: 500px;
-      
+      margin-left: 360px;
+      font-size: 30px;
+      font-weight: 800;
       
       
 }
 .joinPart p{
-      margin-left: 350px;
+      margin-left: 280px;
       padding-top: 10px;
       font-family: 'Cantarell', sans-serif;
 
 }
 .joinPart button{
-      margin-left: 550px;
+      margin-left: 520px;
       margin-top: 10px;
       width: 250px;
       height: 60px;
       font-family: 'Cantarell', sans-serif;
       border: none;
       background: #269EB2;
-      border-radius: 10px;
+      border-radius: 5px;
       color: white;
       cursor: pointer;
 }
@@ -151,7 +144,32 @@
 .infoB{
       margin-bottom: -200px;
 }
+.everything{
+      font-size: 25px;
+      padding-left: 20px;
+      font-weight: 800;
+}
+.personalized ,.Building,.Exclusive{
+      font-weight: 600;
+}
+.community{
+      font-size: 25px;
+      padding-left: 60px;
+      font-weight: 800;
+}
+.Testimonials{
+      padding-left: 170px;
+      color: #2F4EDA;
+      font-weight: bold;
+      font-family: 'Cantarell', sans-serif;
+}
+.Propositions{
+      padding-left: 140px;
+      color: #2F4EDA;
+      font-weight: bold;
+      font-family: 'Cantarell', sans-serif;
 
+}
 
 
 
