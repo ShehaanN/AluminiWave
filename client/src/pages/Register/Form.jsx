@@ -93,15 +93,26 @@ export function Personal({ formData, setFormData }) {
                 <option value="student">Student</option>
               </select>
             </div>
-            {/* <div className="flex items-center space-x-2 mt-2">
-              <Checkbox id="terms" className="border-2 border-gray-400" />
+            <div className="flex items-center space-x-2 mt-2">
+              <Checkbox
+                id="terms"
+                className="border-2 border-gray-400"
+                checked={formData.acceptTerms} // Bind to formData
+                onCheckedChange={(checked) => {
+                  // Use onCheckedChange for ShadCN Checkbox
+                  setFormData({
+                    ...formData,
+                    acceptTerms: checked,
+                  });
+                }}
+              />
               <label
                 htmlFor="terms"
                 className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 "
               >
                 Accept terms and conditions
               </label>
-            </div> */}
+            </div>
           </div>
         </form>
       </CardContent>
@@ -120,16 +131,25 @@ export function Signup({ formData, setFormData }) {
       <CardContent>
         <form>
           <div className="grid w-full items-center gap-3 ">
-            <div className="flex flex-col space-y-1.5">
+            {/* <div className="flex flex-col space-y-1.5">
               <Label className="text-lg mb-1" htmlFor="picture">
                 Upload a profile photo
               </Label>
+              {}
+
               <Input
                 id="picture"
                 className="h-10 border-gray-500"
                 type="file"
+                accept="image/*" // Good practice to specify accepted file types
+                onChange={(e) => {
+                  setFormData({
+                    ...formData,
+                    profilePhotoFile: e.target.files[0], // Store the File object
+                  });
+                }}
               />
-            </div>
+            </div> */}
             <div className="flex flex-col space-y-1.5">
               <Label className="text-lg mb-1" htmlFor="name">
                 Name
