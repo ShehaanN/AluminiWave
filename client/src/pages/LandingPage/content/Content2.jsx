@@ -14,7 +14,7 @@ function Content2() {
   return (
     <div>
       <div className="mainTopic">
-        <span>Value Propositions</span>
+        <span className="Propositions">Value Propositions</span>
         <h1 className="everything">Everything you need to succeed</h1>
       </div>
       <div className="paragraph">
@@ -52,7 +52,7 @@ function Content2() {
       <br />
       <div className="hear">
         <div className="mainTopic">
-          <span>Testimonials</span>
+          <span className="Testimonials">Testimonials</span>
           <h1 className=" community">Hear from our community</h1>
         </div>
         <div className="mainPart">
