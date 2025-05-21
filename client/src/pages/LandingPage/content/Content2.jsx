@@ -4,6 +4,8 @@ import active from "../../../assets/active.png";
 import sara from "../../../assets/sara.png";
 import { useNavigate } from "react-router-dom";
 
+
+
 function Content2() {
   const navigate = useNavigate();
   const handleLoginRedirect = () => {
@@ -13,13 +15,13 @@ function Content2() {
     <div>
       <div className="mainTopic">
         <span>Value Propositions</span>
-        <h1>Everything you need to succeed</h1>
+        <h1 className="everything">Everything you need to succeed</h1>
       </div>
       <div className="paragraph">
         <div className="part1">
           <div className="image"></div>
           <div className="para1">
-            <h4>Personalized Mentorship Matching</h4>
+            <h4 className="personalized">Personalized Mentorship Matching</h4>
             <br />
             Find the perfect mentor with our AI-powered <br />
             compatibility system,connecting you with <br />
@@ -29,21 +31,21 @@ function Content2() {
         <div className="part2">
           <div className="image"></div>
           <div className="para2">
-            <h4>Personalized Mentorship Matching</h4>
+            <h4 className="Building">Career-Building Events</h4>
             <br />
-            Find the perfect mentor with our AI-powered <br />
-            compatibility system,connecting you with <br />
-            professionals who understand your journey.
+            Discover industry-specific networking sessions,<br />
+             workshops, and conferences designed to expand your <br />
+              professional horizons.
           </div>
         </div>
         <div className="part3">
           <div className="image"></div>
           <div className="para3">
-            <h4>Personalized Mentorship Matching</h4>
+            <h4 className="Exclusive">Exclusive Job Opportunities</h4>
             <br />
-            Find the perfect mentor with our AI-powered <br />
-            compatibility system,connecting you with <br />
-            professionals who understand your journey.
+            Access positions shared directly by fellow alumni and <br />
+             trusted partners, with application tracking and <br />
+              preparation resources.
           </div>
         </div>
       </div>
@@ -51,7 +53,7 @@ function Content2() {
       <div className="hear">
         <div className="mainTopic">
           <span>Testimonials</span>
-          <h1>Hear from our community</h1>
+          <h1 className=" community">Hear from our community</h1>
         </div>
         <div className="mainPart">
           <div className="partA">
@@ -108,8 +110,8 @@ function Content2() {
         <p>
           Create your profile in minutes and start building meaningful
           professional connections that last a lifetime.
-        </p>
-        <button onClick={handleLoginRedirect}>Create your profile</button>
+        </p><br />
+        <button onClick={handleLoginRedirect} className="profile">Create your profile</button>
       </div>
       <div className="footer">
         <div className="part1">
