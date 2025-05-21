@@ -1,22 +1,44 @@
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import logo from "../../assets/logo.png";
-import { Link } from "react-router-dom";
+import { supabase } from "../../supabaseClient";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function AlumniWaveLogin() {
-  const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [rememberMe, setRememberMe] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+
+    const { data: signInData, error: signInError } =
+      await supabase.auth.signInWithPassword({
+        email: email,
+        password: password,
+      });
+
+    setLoading(false);
+    if (signInError) {
+      setError(signInError.message || "Invalid login credentials.");
+    } else if (signInData.session) {
+      // Login successful!
+      // You would typically have an AuthContext to update global user state
+      navigate("/dashboard"); // Or your intended authenticated route
+    } else {
+      // Should not happen if no error and no session, but as a fallback
+      setError("An unexpected error occurred. Please try again.");
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle login submission here
-    console.log("Login submitted:", { email, password, rememberMe });
+    console.log("Login submitted:", { email, password });
   };
 
   return (
@@ -55,7 +77,7 @@ export default function AlumniWaveLogin() {
                 placeholder="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                // required
+                required
               />
             </div>
           </div>
@@ -78,54 +100,24 @@ export default function AlumniWaveLogin() {
                 </svg>
               </div>
               <input
-                type={showPassword ? "text" : "password"}
+                type="password"
                 className="w-full pl-10 pr-10 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
                 placeholder="Password"
+                v
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                // required
+                required
               />
-              <button
-                type="button"
-                className="absolute inset-y-0 right-0 flex items-center mr-3"
-                onClick={togglePasswordVisibility}
-              >
-                {showPassword ? (
-                  <EyeOff className="h-5 w-5 text-gray-400" />
-                ) : (
-                  <Eye className="h-5 w-5 text-gray-400" />
-                )}
-              </button>
             </div>
           </div>
-
-          <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center">
-              <input
-                id="remember_me"
-                type="checkbox"
-                className="h-4 w-4 text-[#269EB2] focus:ring-cyan-500 border-gray-300 rounded"
-                checked={rememberMe}
-                onChange={(e) => setRememberMe(e.target.checked)}
-              />
-              <label
-                htmlFor="remember_me"
-                className="ml-2 block text-sm text-gray-700"
-              >
-                Remember me
-              </label>
-            </div>
-            {/* <a href="#" className="text-sm text-[#269EB2] hover:text-[#269EB2]">
-              Forgot password?
-            </a> */}
-          </div>
-
+          {error && <p className="text-red-500">{error}</p>}
           <Link to="/dashboard">
             <button
               type="submit"
-              className="w-full py-3 px-4 bg-[#269EB2] hover:bg-[#269EB2] text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500"
+              onClick={handleLogin}
+              className="w-full mt-6 py-3 px-4 bg-[#269EB2] hover:bg-[#269EB2] text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500"
             >
-              Sign in
+              {loading ? "Signing in..." : "Sign in"}
             </button>
           </Link>
         </form>
