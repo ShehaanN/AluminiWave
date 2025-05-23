@@ -3,8 +3,40 @@ import Event1 from "../../assets/Tech-Events1.jpg";
 import Event2 from "../../assets/Tech-Events2.jpg";
 import { Link } from "react-router-dom";
 
+import { useEffect, useState } from "react";
+
+import { getUserData, fetchEvents } from "../../services/dataService";
+
 const Events = () => {
-  const userType = "student";
+  const [userType, setUserType] = useState("");
+  const [events, setEvents] = useState([]);
+  const [test, setTest] = useState();
+  console.log(test);
+
+  console.log(events);
+
+  // console.log(userType);
+
+  useEffect(() => {
+    const loadData = async () => {
+      const userData = await getUserData();
+      if (userData) {
+        setTest(userData);
+        setUserType(userData.profile.role);
+      }
+
+      const events = await fetchEvents();
+      if (events) {
+        setEvents(events);
+      }
+      // Handle events data
+    };
+
+    loadData();
+  }, []);
+
+  // const userType = "student";
+
   return (
     <div className="min-h-screen flex ">
       <Sidebar userType={userType} />
@@ -12,7 +44,7 @@ const Events = () => {
         <div className="p-6">
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-2xl font-bold">Event Management</h1>
-            {userType === "alumini" && (
+            {userType === "alumni" && (
               <div className="flex flex-wrap space-x-4  ">
                 <Link to="/manageevent">
                   <button className="px-4 py-2 bg-[#7a999e] text-white rounded-lg w-full md:w-auto min-h-[44px]">
@@ -35,103 +67,36 @@ const Events = () => {
                   <h2 className="text-xl font-semibold">Upcoming Events</h2>
                 </div>
                 <div className="grid md:grid-cols-3 grid-cols-1 gap-6">
-                  <div id="e1" className="border rounded-lg p-4">
-                    <Link to="/events/e1">
-                      <img
-                        src={Event2}
-                        className="w-full h-48 object-cover rounded mb-4"
-                      />
-                    </Link>
-                    <h3 className="font-semibold mb-2">
-                      Alumni Networking Night
-                    </h3>
-                    <p className="text-gray-600 text-sm mb-2">
-                      <i className="far fa-calendar mr-2"></i>Jun 15, 2024
-                    </p>
-                    <p className="text-gray-600 text-sm">
-                      <i className="fas fa-map-marker-alt mr-2"></i>San
-                      Francisco, CA
-                    </p>
-                  </div>
-                  <div id="e2" className="border rounded-lg p-4">
-                    <Link to="/events/e2">
-                      <img
-                        src={Event1}
-                        className="w-full h-48 object-cover rounded mb-4"
-                      />
-                    </Link>
-                    <h3 className="font-semibold mb-2">
-                      Alumni Networking Night
-                    </h3>
-                    <p className="text-gray-600 text-sm mb-2">
-                      <i className="far fa-calendar mr-2"></i>Jun 15, 2024
-                    </p>
-                    <p className="text-gray-600 text-sm">
-                      <i className="fas fa-map-marker-alt mr-2"></i>San
-                      Francisco, CA
-                    </p>
-                  </div>
-                  <div id="e3" className="border rounded-lg p-4">
-                    <img
-                      src={Event2}
-                      className="w-full h-48 object-cover rounded mb-4"
-                    />
-                    <h3 className="font-semibold mb-2">
-                      Alumni Networking Night
-                    </h3>
-                    <p className="text-gray-600 text-sm mb-2">
-                      <i className="far fa-calendar mr-2"></i>Jun 15, 2024
-                    </p>
-                    <p className="text-gray-600 text-sm">
-                      <i className="fas fa-map-marker-alt mr-2"></i>San
-                      Francisco, CA
-                    </p>
-                  </div>
-                  <div id="e4" className="border rounded-lg p-4">
-                    <img
-                      src={Event1}
-                      className="w-full h-48 object-cover rounded mb-4"
-                    />
-                    <h3 className="font-semibold mb-2">
-                      Alumni Networking Night
-                    </h3>
-                    <p className="text-gray-600 text-sm mb-2">
-                      <i className="far fa-calendar mr-2"></i>Jun 15, 2024
-                    </p>
-                    <p className="text-gray-600 text-sm">
-                      <i className="fas fa-map-marker-alt mr-2"></i>San
-                      Francisco, CA
-                    </p>
-                  </div>
-                  <div id="e5" className="border rounded-lg p-4">
-                    <img
-                      src={Event2}
-                      className="w-full h-48 object-cover rounded mb-4"
-                    />
-                    <h3 className="font-semibold mb-2">
-                      Alumni Networking Night
-                    </h3>
-                    <p className="text-gray-600 text-sm mb-2">
-                      <i className="far fa-calendar mr-2"></i>Jun 15, 2024
-                    </p>
-                    <p className="text-gray-600 text-sm">
-                      <i className="fas fa-map-marker-alt mr-2"></i>San
-                      Francisco, CA
-                    </p>
-                  </div>
-                  <div id="e6" className="border rounded-lg p-4">
-                    <img
-                      src={Event1}
-                      className="w-full h-48 object-cover rounded mb-4"
-                    />
-                    <h3 className="font-semibold mb-2">Tech Career Workshop</h3>
-                    <p className="text-gray-600 text-sm mb-2">
-                      <i className="far fa-calendar mr-2"></i>Jun 20, 2024
-                    </p>
-                    <p className="text-gray-600 text-sm">
-                      <i className="fas fa-video mr-2"></i>Virtual Event
-                    </p>
-                  </div>
+                  {/* -------------------- */}
+
+                  {events.map((el, index) => {
+                    return (
+                      <div
+                        key={index}
+                        id="e1"
+                        className="border rounded-lg p-4"
+                      >
+                        <Link to="/events/e1">
+                          <img
+                            src={
+                              el.banner_image_url ? el.banner_image_url : Event1
+                            }
+                            className="w-full h-48 object-cover rounded mb-4"
+                          />
+                        </Link>
+                        <h3 className="font-semibold mb-2">{el.title}</h3>
+                        <p className="text-gray-600 text-sm mb-2">
+                          <i className="far fa-calendar mr-2"></i>
+                          {el.event_date}
+                        </p>
+                        <p className="text-gray-600 text-sm">
+                          <i className="fas fa-map-marker-alt mr-2"></i>
+                          {el.location}
+                        </p>
+                      </div>
+                    );
+                  })}
+                  {/* --------------------- */}
                 </div>
               </div>
             </div>

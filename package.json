@@ -15,7 +15,7 @@
     "prisma:studio": "cd server && npx prisma studio"
   },
   "devDependencies": {
-    "concurrently": "^8.0.0"
+    "concurrently": "^8.2.2"
   },
   "repository": {
     "type": "git",
