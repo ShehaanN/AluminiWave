@@ -4,37 +4,38 @@ import Event2 from "../../assets/Tech-Events2.jpg";
 import { Link } from "react-router-dom";
 
 import { useEffect, useState } from "react";
-import { supabase } from "../../supabaseClient";
+
+import { getUserData, fetchEvents } from "../../services/dataService";
 
 const Events = () => {
-  // const [profile, setProfile] = useState(null);
   const [userType, setUserType] = useState("");
-  // console.log(profile);
-  console.log(userType);
+  const [events, setEvents] = useState([]);
+  const [test, setTest] = useState();
+  console.log(test);
+
+  console.log(events);
+
+  // console.log(userType);
 
   useEffect(() => {
-    const loadProfile = async () => {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-
-      const userId = session?.user?.id;
-      const userRole = session?.user?.user_metadata?.role;
-
-      if (session) {
-        setUserType(userRole.toString());
+    const loadData = async () => {
+      const userData = await getUserData();
+      if (userData) {
+        setTest(userData);
+        setUserType(userData.profile.role);
       }
-      if (userId) {
-        // const profileData = await fetchUserProfile(userId);
-        // setProfile(profileData);
-        // if (profileData?.role) {
-        //   setUserType(profileData.role.toLowerCase());
-        // }
+
+      const events = await fetchEvents();
+      if (events) {
+        setEvents(events);
       }
+      // Handle events data
     };
 
-    loadProfile();
+    loadData();
   }, []);
+
+  // const userType = "student";
 
   return (
     <div className="min-h-screen flex ">
@@ -66,24 +67,36 @@ const Events = () => {
                   <h2 className="text-xl font-semibold">Upcoming Events</h2>
                 </div>
                 <div className="grid md:grid-cols-3 grid-cols-1 gap-6">
-                  <div id="e1" className="border rounded-lg p-4">
-                    <Link to="/events/e1">
-                      <img
-                        src={Event2}
-                        className="w-full h-48 object-cover rounded mb-4"
-                      />
-                    </Link>
-                    <h3 className="font-semibold mb-2">
-                      Alumni Networking Night
-                    </h3>
-                    <p className="text-gray-600 text-sm mb-2">
-                      <i className="far fa-calendar mr-2"></i>Jun 15, 2024
-                    </p>
-                    <p className="text-gray-600 text-sm">
-                      <i className="fas fa-map-marker-alt mr-2"></i>San
-                      Francisco, CA
-                    </p>
-                  </div>
+                  {/* -------------------- */}
+
+                  {events.map((el, index) => {
+                    return (
+                      <div
+                        key={index}
+                        id="e1"
+                        className="border rounded-lg p-4"
+                      >
+                        <Link to="/events/e1">
+                          <img
+                            src={
+                              el.banner_image_url ? el.banner_image_url : Event1
+                            }
+                            className="w-full h-48 object-cover rounded mb-4"
+                          />
+                        </Link>
+                        <h3 className="font-semibold mb-2">{el.title}</h3>
+                        <p className="text-gray-600 text-sm mb-2">
+                          <i className="far fa-calendar mr-2"></i>
+                          {el.event_date}
+                        </p>
+                        <p className="text-gray-600 text-sm">
+                          <i className="fas fa-map-marker-alt mr-2"></i>
+                          {el.location}
+                        </p>
+                      </div>
+                    );
+                  })}
+                  {/* --------------------- */}
                 </div>
               </div>
             </div>
