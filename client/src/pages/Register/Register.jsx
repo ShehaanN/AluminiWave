@@ -63,11 +63,11 @@ const Register = () => {
   //
 
   const handleNextOrSubmit = async () => {
-    setError(""); // Clear previous errors
-    setMessage(""); // Clear previous messages
+    setError("");
+    setMessage("");
 
     if (step === 1) {
-      // --- Step 1 Submission: Account Creation ---
+      // --- Step 1 Submission: Account Creation & Initial Profile Insert ---
       if (formData.password !== formData.confirmPassword) {
         setError("Passwords do not match.");
         return;
@@ -77,51 +77,98 @@ const Register = () => {
         return;
       }
       setLoading(true);
+
+      // 1. Sign up the user with Supabase Auth
       const { data: signUpData, error: signUpError } =
         await supabase.auth.signUp({
           email: formData.email,
           password: formData.password,
-          options: {
-            data: {
-              role: formData.role,
-            },
-          },
+
+          options: { data: { role: formData.role } },
         });
-      setLoading(false);
 
       if (signUpError) {
         setError(`Registration Error: ${signUpError.message}`);
+        setLoading(false);
         return;
       }
 
-      if (signUpData.user) {
-        setCreatedUser(signUpData.user);
-        setMessage("Account created! Please complete your profile.");
-        setStep(2);
-      } else if (signUpData.session === null && !signUpData.user) {
-        // This case might mean email confirmation is required
+      // Check if user object exists after sign up
+      if (!signUpData.user) {
+        // This scenario (no user object after successful signUp without error) is unusual.
+        // It might happen if email confirmation is ON and Supabase doesn't immediately return the user object
+        // before confirmation. Test this behavior thoroughly.
+        // If it happens, you might need to prompt the user to confirm their email before proceeding.
         setMessage(
-          "Account created! Please check your email to confirm your registration."
+          "Account created! Please check your email to confirm your registration. " +
+            "Once confirmed, you may need to log in to complete your profile."
         );
-
-        if (signUpData.user) setCreatedUser(signUpData.user);
-        setStep(2);
-      } else {
-        setError(
-          "An unexpected issue occurred during sign up. Please try again."
-        );
+        setLoading(false);
+        // Potentially navigate to login or show a message.
+        // Forcing profile completion now without a confirmed user ID is risky.
+        // For a smoother UX if user object IS returned even with pending confirmation:
+        // if (signUpData.user) setCreatedUser(signUpData.user);
+        // But if signUpData.user is null, we must stop or handle differently.
+        // Let's assume for now that signUpData.user IS returned.
+        if (!signUpData.user && !signUpData.session) {
+          // More robust check for pending confirmation
+          setMessage(
+            "Account created! Please check your email to confirm your registration and then complete your profile by logging in."
+          );
+          setLoading(false);
+          // Potentially clear form or navigate to login.
+          return; // Stop further steps if no user object
+        }
       }
+
+      setCreatedUser(signUpData.user); // Store the user object
+
+      // 2. Manually insert into the 'profiles' table
+      // The 'id' for the profiles table MUST be signUpData.user.id
+      // 'email' can also be signUpData.user.email for consistency
+      const initialProfileData = {
+        id: signUpData.user.id, // CRITICAL: Use the ID from the newly created auth user
+        email: signUpData.user.email,
+        role: formData.role,
+        full_name: formData.fullName, // Assuming fullName is collected in Step 1
+        // Add any other fields collected in Step 1 that should go into 'profiles'
+        // e.g., if you had a username field in step 1.
+        // onboarded will default to false in the DB or can be set here explicitly.
+      };
+
+      const { error: profileInsertError } = await supabase
+        .from("profiles")
+        .insert([initialProfileData]); // insert takes an array of objects
+
+      if (profileInsertError) {
+        setError(
+          `Profile Creation Error: ${profileInsertError.message}. ` +
+            `Your account was created, but profile setup failed. Please contact support or try logging in to complete.`
+        );
+        // CRITICAL: Handle this case! The user is in auth.users but not profiles.
+        // You might need a way for them to complete profile setup later, or an admin to fix.
+        // For simplicity, we show an error. Ideally, you might try to delete the auth.user if profile insert fails (requires service_role key via Edge Function).
+        setLoading(false);
+        return;
+      }
+
+      // If both signUp and profileInsert are successful:
+      setLoading(false);
+      setMessage("Account created! Please complete your profile.");
+      setStep(2); // Proceed to the next step of your form
     } else if (step === 2) {
-      // --- Step 2 Submission: Basic Profile Information ---
-      if (!createdUser) {
-        setError("User session not found. Please start over from Step 1.");
-        setStep(1); // Force back to step 1
+      // --- Step 2 Submission: Basic Profile Information (UPDATE) ---
+      if (!createdUser || !createdUser.id) {
+        // Ensure createdUser and its id are available
+        setError(
+          "User session not found or invalid. Please start over from Step 1."
+        );
+        setStep(1);
         return;
       }
       setLoading(true);
 
       const location = parseLocation(formData.locationCityCountry);
-
       const profileUpdates = {
         full_name: formData.fullName,
         gender: formData.gender,
@@ -140,7 +187,7 @@ const Register = () => {
       const { error: profileUpdateError } = await supabase
         .from("profiles")
         .update(profileUpdates)
-        .eq("id", createdUser.id);
+        .eq("id", createdUser.id); // Use the ID from the signed-up user
       setLoading(false);
 
       if (profileUpdateError) {
@@ -150,9 +197,11 @@ const Register = () => {
         setStep(3);
       }
     } else if (step === 3) {
-      // --- Step 3 Submission: Career Interests & Expertise (Save & Register) ---
-      if (!createdUser) {
-        setError("User session not found. Please start over from Step 1.");
+      // --- Step 3 Submission: Career Interests & Expertise (UPDATE & ONBOARDED) ---
+      if (!createdUser || !createdUser.id) {
+        setError(
+          "User session not found or invalid. Please start over from Step 1."
+        );
         setStep(1);
         return;
       }
@@ -160,7 +209,7 @@ const Register = () => {
       const finalProfileUpdates = {
         industries_of_interest: formData.industriesOfInterest,
         skills_expertise: formData.skillsExpertise,
-        onboarded: true,
+        onboarded: true, // Mark profile as fully onboarded
       };
 
       const { error: finalUpdateError } = await supabase
@@ -173,20 +222,18 @@ const Register = () => {
         setError(`Final Profile Update Error: ${finalUpdateError.message}`);
       } else {
         setMessage("Registration complete! Welcome to AluminiWave.");
-        // Navigate after a short delay to allow user to see the message
-        setTimeout(() => {
+        setTimeout(async () => {
+          // Added async here
           const {
             data: { session },
-          } = supabase.auth.getSession(); // Re-check session
+          } = await supabase.auth.getSession();
           if (session) {
-            // If auto-logged in or email confirmed quickly
             navigate("/dashboard");
           } else {
-            // Email confirmation likely still pending
             setMessage(
-              "Registration complete! Please check your email to confirm your account and then log in."
+              "Registration complete! Please check your email to confirm your account, then log in."
             );
-            // navigate('/login'); // Or stay on page with this message
+            // navigate('/login'); // Or simply display message
           }
         }, 2000);
       }
