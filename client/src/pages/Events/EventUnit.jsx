@@ -1,10 +1,39 @@
-import { Link } from "react-router-dom";
-import mdp from "../../assets/mdp.jpg";
-import Saradp from "../../assets/sara.png";
+import { useState, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import { fetchEventById } from "../../services/dataService";
+
 import Event1 from "../../assets/Tech-Events1.jpg";
-import Event2 from "../../assets/Tech-Events2.jpg";
+import Saradp from "../../assets/sara.png";
 
 const EventUnit = () => {
+  const { id } = useParams(); // Get event ID from URL
+  const [event, setEvent] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const loadEventDetails = async () => {
+      try {
+        const eventData = await fetchEventById(id);
+        if (eventData) {
+          setEvent(eventData);
+        } else {
+          setError("Event not found");
+        }
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadEventDetails();
+  }, [id]);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+  if (!event) return <div>Event not found</div>;
+
   return (
     <div>
       <div className="bg-purple-50 py-10">
@@ -13,7 +42,7 @@ const EventUnit = () => {
           <div className="mr-56">
             <Link to="/events">
               <button className="px-6 py-2 bg-[#269EB2] text-white rounded-lg w-full md:w-auto min-h-[44px]">
-                <i class="fa-solid fa-backward mr-2"></i>Back
+                <i className="fa-solid fa-backward mr-2"></i>Back
               </button>
             </Link>
           </div>
@@ -21,22 +50,31 @@ const EventUnit = () => {
         <div className="bg-white rounded-lg shadow p-6 mb-6 mx-48">
           <div className="relative h-64 mb-6">
             <img
-              src={Event2}
+              src={event.banner_image_url || Event1}
               className="w-full h-full object-cover rounded-lg"
               alt="Event Banner"
             />
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-6 text-white">
-              <h1 className="text-3xl font-bold mb-2">
-                Alumni Networking Night
-              </h1>
+              <h1 className="text-3xl font-bold mb-2">{event.title}</h1>
               <div className="flex items-center space-x-4">
                 <span>
-                  <i className="far fa-calendar mr-2"></i>Jun 15, 2024
+                  <i className="far fa-calendar mr-2"></i>
+                  {new Date(event.event_date).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  })}
                 </span>
                 <span>
-                  <i className="fas fa-map-marker-alt mr-2"></i>San Francisco,
-                  CA
+                  <i className="fas fa-map-marker-alt mr-2"></i>
+                  {event.location}
                 </span>
+                {event.time_slot_start && (
+                  <span>
+                    <i className="far fa-clock mr-2"></i>
+                    {event.time_slot_start}
+                  </span>
+                )}
               </div>
             </div>
           </div>
@@ -45,41 +83,10 @@ const EventUnit = () => {
             <div>
               <h2 className="text-xl font-semibold mb-5">Event Description</h2>
               <div className="space-y-3 p-4 bg-gray-50 rounded-lg mb-5">
-                <span className="font-medium w-24 ">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Blanditiis temporibus eius commodi maxime voluptatum libero
-                  placeat! Sequi error neque ea quisquam voluptatem inventore
-                  veritatis, id obcaecati fuga necessitatibus atque nobis. Lorem
-                  ipsum dolor sit, amet consectetur adipisicing elit. Iure
-                  aliquid temporibus quod earum repudiandae magnam neque nostrum
-                  totam nulla illum, autem veritatis ullam doloremque quibusdam
-                  velit maiores quidem quis dolor.
-                </span>
+                <span className="font-medium w-24">{event.description}</span>
               </div>
             </div>
-            <div>
-              <h2 className="text-xl font-semibold mb-5">Featured Speakers</h2>
-              <div className="flex gap-10">
-                <div className="text-center">
-                  <img
-                    src={Saradp}
-                    className="w-20 h-20 rounded-full mx-auto mb-2"
-                    alt="Speaker 1"
-                  />
-                  <h3 className="font-medium">Sarah Johnson</h3>
-                  <p className="text-sm text-gray-600">CEO, Tech Corp</p>
-                </div>
-                <div className="text-center">
-                  <img
-                    src={mdp}
-                    className="w-20 h-20 rounded-full mx-auto mb-2"
-                    alt="Speaker 2"
-                  />
-                  <h3 className="font-medium">Michael Chen</h3>
-                  <p className="text-sm text-gray-600">VP Engineering</p>
-                </div>
-              </div>
-            </div>
+            {/* ...............................................*/}
           </div>
         </div>
       </div>

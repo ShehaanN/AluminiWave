@@ -118,3 +118,19 @@ export const updateEvent = async (eventId, eventData) => {
     return null;
   }
 };
+
+export const fetchEventById = async (eventId) => {
+  try {
+    const { data, error } = await supabase
+      .from("events")
+      .select("*")
+      .eq("id", eventId)
+      .single();
+
+    if (error) throw error;
+    return data;
+  } catch (error) {
+    console.error("Error fetching event details:", error.message);
+    return null;
+  }
+};
