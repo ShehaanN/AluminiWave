@@ -17,12 +17,25 @@ import { Label } from "@/components/ui/label";
 import { Calendar } from "@/components/ui/calendar";
 
 import { Textarea } from "@/components/ui/textarea";
-import { useState } from "react";
+
+import { getUserData } from "../../services/dataService";
+import { useEffect, useState } from "react";
 
 export default function Mentorship() {
-  const userType = "student";
-
   const [date, setDate] = useState(new Date());
+  const [userType, setUserType] = useState("");
+
+  useEffect(() => {
+    const loadData = async () => {
+      const userData = await getUserData();
+
+      if (userData) {
+        setUserType(userData.profile.role);
+      }
+    };
+
+    loadData();
+  }, []);
 
   return (
     <div className="min-h-screen flex ">
@@ -48,7 +61,7 @@ export default function Mentorship() {
                 </Link>
               </div>
             )}
-            {userType === "alumini" && (
+            {userType === "alumni" && (
               <div className="flex ">
                 <Link to="/sturequest">
                   <button className="px-4 py-2 bg-[#269EB2] text-white rounded-lg w-full md:w-auto min-h-[44px]">
@@ -238,7 +251,7 @@ export default function Mentorship() {
                   </Card>
                 )}
 
-                {userType === "alumini" && (
+                {userType === "alumni" && (
                   <Card className="w-[650px] p-8 border-none mt-4 shadow-none">
                     <CardHeader>
                       <CardTitle className="text-2xl">

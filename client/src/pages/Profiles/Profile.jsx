@@ -2,11 +2,25 @@ import React from "react";
 import "./Profile.css";
 import Sidebar from "./../Sidebar/Sidebar";
 import mdp from "./../../assets/mdp.jpg";
+import { getUserData } from "../../services/dataService";
+import { useEffect, useState } from "react";
 
 const Profile = () => {
-  const userType = "student";
+  const [userType, setUserType] = useState("");
 
-  const alumini = {
+  useEffect(() => {
+    const loadData = async () => {
+      const userData = await getUserData();
+
+      if (userData) {
+        setUserType(userData.profile.role);
+      }
+    };
+
+    loadData();
+  }, []);
+
+  const alumni = {
     name: "Dr Sarah Johnson",
     title: "Senior Product Manager at Tech Corp",
     professinal_summary:
@@ -25,7 +39,7 @@ const Profile = () => {
     passout: 2017,
   };
 
-  const userData = userType === "student" ? student : alumini;
+  const userData = userType === "student" ? student : alumni;
 
   return (
     <div className="min-h-screen flex bg-gray-50">
@@ -65,7 +79,7 @@ const Profile = () => {
                       Academic Summary
                     </h2>
                   )}
-                  {userType === "alumini" && (
+                  {userType === "alumni" && (
                     <h2 className="text-xl font-semibold mb-4">
                       Professional Summary
                     </h2>
@@ -83,7 +97,7 @@ const Profile = () => {
                       Technical Skills
                     </h2>
                   )}
-                  {userType === "alumini" && (
+                  {userType === "alumni" && (
                     <h2 className="text-xl font-semibold mb-4">
                       Skills & Expertise
                     </h2>
@@ -115,7 +129,7 @@ const Profile = () => {
                       Academic Timeline
                     </h2>
                   )}
-                  {userType === "alumini" && (
+                  {userType === "alumni" && (
                     <h2 className="text-xl font-semibold mb-4">
                       Experience Timeline
                     </h2>
@@ -134,12 +148,12 @@ const Profile = () => {
                       </div>
                     )}
 
-                    {userType === "alumini" && (
+                    {userType === "alumni" && (
                       <div className="flex">
                         <div>
-                          <h3 className="font-semibold">{alumini.company}</h3>
+                          <h3 className="font-semibold">{alumni.company}</h3>
                           <p className="text-sm text-gray-600">
-                            {alumini.position}
+                            {alumni.position}
                           </p>
                           <p className="text-sm text-gray-500">2017 - 2020</p>
                           <p className="mt-2 text-gray-600">

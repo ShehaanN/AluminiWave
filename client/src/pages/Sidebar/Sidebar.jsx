@@ -31,7 +31,7 @@ const Sidebar = ({ userType }) => {
             <span className="ml-3">Mentorship</span>
           </a>
 
-          {userType === "alumini" && (
+          {userType === "alumni" && (
             <a
               href="/JobPortal"
               className="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50 "

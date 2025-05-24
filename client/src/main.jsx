@@ -24,6 +24,7 @@ import Profile from "./pages/Profiles/Profile.jsx";
 import ManageEvent from "./pages/Events/ManageEvent.jsx";
 import SuperDashboard from "./pages/Dashboard/SuperDashboard.jsx";
 import SuperSettings from "./pages/Settings/SuperSettings.jsx";
+import ManageJob from "./pages/Jobportal/ManageJob.jsx";
 
 const router = createBrowserRouter([
   {
@@ -101,6 +102,10 @@ const router = createBrowserRouter([
   {
     path: "/postjob",
     element: <PostJob />,
+  },
+  {
+    path: "/managejob",
+    element: <ManageJob />,
   },
   {
     path: "/profile",

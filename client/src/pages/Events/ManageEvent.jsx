@@ -142,6 +142,31 @@ const ManageEvent = () => {
               <div className="overflow-x-auto">
                 <Table className="w-full">
                   {/* ...existing table header... */}
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="font-bold text-[17px]">
+                        # Banner
+                      </TableHead>
+                      <TableHead className="font-bold text-[17px]">
+                        Event Title
+                      </TableHead>
+                      <TableHead className="font-bold text-[17px]">
+                        Date
+                      </TableHead>
+                      <TableHead className="font-bold text-[17px]">
+                        Time Slot
+                      </TableHead>
+                      <TableHead className="font-bold text-[17px]">
+                        Location
+                      </TableHead>
+                      <TableHead className="font-bold text-[17px]">
+                        Description
+                      </TableHead>
+                      <TableHead className="flex items-center justify-end mr-24 text-[17px] ">
+                        Actions
+                      </TableHead>
+                    </TableRow>
+                  </TableHeader>
 
                   {error && (
                     <div className="text-red-500 text-sm mt-2">{error}</div>
