@@ -292,33 +292,6 @@ export const deleteJob = async (jobId) => {
   }
 };
 
-export const fetchAlumniMentors = async () => {
-  try {
-    const { data, error } = await supabase
-      .from("profiles")
-      .select(
-        `
-        id,
-        full_name,
-        current_job_title,
-        current_company
-      `
-      )
-      .eq("role", "alumni")
-      .order("full_name");
-
-    if (error) {
-      console.error("Supabase error:", error);
-      throw error;
-    }
-
-    return data || [];
-  } catch (error) {
-    console.error("Error fetching alumni mentors:", error.message);
-    return [];
-  }
-};
-
 export const createMentorshipRequest = async (requestData) => {
   try {
     const {
@@ -472,6 +445,37 @@ export const fetchScheduledSessions = async () => {
     return data || [];
   } catch (error) {
     console.error("Error fetching scheduled sessions:", error.message);
+    throw error;
+  }
+};
+
+export const fetchAlumniMentors = async () => {
+  try {
+    const { data, error } = await supabase
+      .from("profiles")
+      .select(
+        `
+        id,
+        full_name,
+        current_job_title,
+        current_company,
+        profile_photo_url,
+        skills_expertise,
+        professional_summary,
+        industries_of_interest
+      `
+      )
+      .eq("role", "alumni")
+      .order("full_name");
+
+    if (error) {
+      console.error("Error fetching mentors:", error);
+      throw error;
+    }
+
+    return data || [];
+  } catch (error) {
+    console.error("Error fetching alumni mentors:", error.message);
     throw error;
   }
 };

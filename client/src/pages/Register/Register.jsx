@@ -95,45 +95,31 @@ const Register = () => {
 
       // Check if user object exists after sign up
       if (!signUpData.user) {
-        // This scenario (no user object after successful signUp without error) is unusual.
-        // It might happen if email confirmation is ON and Supabase doesn't immediately return the user object
-        // before confirmation. Test this behavior thoroughly.
-        // If it happens, you might need to prompt the user to confirm their email before proceeding.
         setMessage(
           "Account created! Please check your email to confirm your registration. " +
             "Once confirmed, you may need to log in to complete your profile."
         );
         setLoading(false);
-        // Potentially navigate to login or show a message.
-        // Forcing profile completion now without a confirmed user ID is risky.
-        // For a smoother UX if user object IS returned even with pending confirmation:
-        // if (signUpData.user) setCreatedUser(signUpData.user);
-        // But if signUpData.user is null, we must stop or handle differently.
-        // Let's assume for now that signUpData.user IS returned.
+
         if (!signUpData.user && !signUpData.session) {
-          // More robust check for pending confirmation
           setMessage(
             "Account created! Please check your email to confirm your registration and then complete your profile by logging in."
           );
           setLoading(false);
           // Potentially clear form or navigate to login.
-          return; // Stop further steps if no user object
+          return;
         }
       }
 
       setCreatedUser(signUpData.user); // Store the user object
 
       // 2. Manually insert into the 'profiles' table
-      // The 'id' for the profiles table MUST be signUpData.user.id
-      // 'email' can also be signUpData.user.email for consistency
+
       const initialProfileData = {
-        id: signUpData.user.id, // CRITICAL: Use the ID from the newly created auth user
+        id: signUpData.user.id,
         email: signUpData.user.email,
         role: formData.role,
-        full_name: formData.fullName, // Assuming fullName is collected in Step 1
-        // Add any other fields collected in Step 1 that should go into 'profiles'
-        // e.g., if you had a username field in step 1.
-        // onboarded will default to false in the DB or can be set here explicitly.
+        full_name: formData.fullName,
       };
 
       const { error: profileInsertError } = await supabase
@@ -145,9 +131,7 @@ const Register = () => {
           `Profile Creation Error: ${profileInsertError.message}. ` +
             `Your account was created, but profile setup failed. Please contact support or try logging in to complete.`
         );
-        // CRITICAL: Handle this case! The user is in auth.users but not profiles.
-        // You might need a way for them to complete profile setup later, or an admin to fix.
-        // For simplicity, we show an error. Ideally, you might try to delete the auth.user if profile insert fails (requires service_role key via Edge Function).
+
         setLoading(false);
         return;
       }
@@ -196,8 +180,8 @@ const Register = () => {
         setMessage("Basic information saved.");
         setStep(3);
       }
-    } else if (step === 3) {
-      // --- Step 3 Submission: Career Interests & Expertise (UPDATE & ONBOARDED) ---
+    } // In the handleNextOrSubmit function, modify the step 3 submission:
+    else if (step === 3) {
       if (!createdUser || !createdUser.id) {
         setError(
           "User session not found or invalid. Please start over from Step 1."
@@ -205,37 +189,54 @@ const Register = () => {
         setStep(1);
         return;
       }
-      setLoading(true);
-      const finalProfileUpdates = {
-        industries_of_interest: formData.industriesOfInterest,
-        skills_expertise: formData.skillsExpertise,
-        onboarded: true, // Mark profile as fully onboarded
-      };
 
-      const { error: finalUpdateError } = await supabase
-        .from("profiles")
-        .update(finalProfileUpdates)
-        .eq("id", createdUser.id);
-      setLoading(false);
+      try {
+        setLoading(true);
 
-      if (finalUpdateError) {
-        setError(`Final Profile Update Error: ${finalUpdateError.message}`);
-      } else {
+        const finalProfileUpdates = {
+          industries_of_interest: formData.industriesOfInterest,
+          skills_expertise: formData.skillsExpertise,
+          onboarded: true,
+        };
+
+        // console.log("User ID:", createdUser.id);
+        // console.log("Updating profile with:", finalProfileUpdates);
+
+        // Update the profile
+        const { error: updateError } = await supabase
+          .from("profiles")
+          .update(finalProfileUpdates)
+          .eq("id", createdUser.id)
+          .single();
+
+        if (updateError) {
+          console.error("Profile update error:", updateError);
+          throw updateError;
+        }
+
+        // Verify the update
+        const { data: verifyData, error: verifyError } = await supabase
+          .from("profiles")
+          .select("industries_of_interest, skills_expertise, onboarded")
+          .eq("id", createdUser.id)
+          .single();
+
+        if (verifyError) {
+          console.error("Verification error:", verifyError);
+          throw verifyError;
+        }
+
+        console.log("Updated profile:", verifyData);
+
         setMessage("Registration complete! Welcome to AluminiWave.");
-        setTimeout(async () => {
-          // Added async here
-          const {
-            data: { session },
-          } = await supabase.auth.getSession();
-          if (session) {
-            navigate("/dashboard");
-          } else {
-            setMessage(
-              "Registration complete! Please check your email to confirm your account, then log in."
-            );
-            // navigate('/login'); // Or simply display message
-          }
-        }, 2000);
+
+        // Navigate after successful update
+        navigate("/dashboard");
+      } catch (error) {
+        console.error("Error in step 3:", error);
+        setError(`Registration Error: ${error.message}`);
+      } finally {
+        setLoading(false);
       }
     }
   };
@@ -281,41 +282,32 @@ const Register = () => {
             <div className={`${step >= 3 ? "circle active" : "circle"}`}>3</div>
           </div>
         </div>
-
         {/* Display Messages/Errors */}
         {message && !error && (
           <div className="text-center text-green-600 my-4">{message}</div>
         )}
         {error && <div className="text-center text-red-600 my-4">{error}</div>}
-
         <div className="content flex justify-center">{RenderSteps()}</div>
+        // Replace the buttons div near the bottom of the file:
         <div className="btns">
           <button
             onClick={handlePrev}
-            disabled={step <= 1 || loading} // Disable if loading
+            disabled={step <= 1 || loading}
             className={`${step <= 1 ? "btn disabled" : "btn"}`}
           >
             Prev
           </button>
-          {step === 3 ? (
-            <Link to="/dashboard">
-              <button className="btn">Save & Register</button>
-            </Link>
-          ) : (
-            <button
-              onClick={handleNextOrSubmit}
-              disabled={
-                (step === totalSteps && !formData.acceptTerms) || loading
-              } // Example: disable final if terms not accepted or if loading
-              className="btn" // General btn class, specific styling for last step if needed
-            >
-              {loading
-                ? "Processing..."
-                : step === totalSteps
-                ? "Save & Register"
-                : "Next"}
-            </button>
-          )}
+          <button
+            onClick={handleNextOrSubmit}
+            disabled={loading}
+            className="btn"
+          >
+            {loading
+              ? "Processing..."
+              : step === totalSteps
+              ? "Save & Register"
+              : "Next"}
+          </button>
         </div>
       </div>
     </div>

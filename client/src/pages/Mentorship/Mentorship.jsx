@@ -246,15 +246,17 @@ export default function Mentorship() {
 
               {/* -------------------------- */}
               <div className="flex flex-row justify-between">
-                <div className=" mt-4 p-8 ml-24">
-                  {/* -----------calender ------------------*/}
-                  <Calendar
-                    mode="single"
-                    selected={date}
-                    onSelect={setDate}
-                    className="rounded-md border"
-                  />
-                </div>
+                {userType === "student" && (
+                  <div className=" mt-4 p-8 ml-24">
+                    {/* -----------calender ------------------*/}
+                    <Calendar
+                      mode="single"
+                      selected={date}
+                      onSelect={setDate}
+                      className="rounded-md border"
+                    />
+                  </div>
+                )}
 
                 {userType === "student" && (
                   <Card className="w-[650px] p-8 border-none mt-4 shadow-none">
@@ -343,13 +345,13 @@ export default function Mentorship() {
                       <form>
                         <div className="grid w-full items-center gap-3 ">
                           <div className="flex flex-col space-y-1.5">
-                            <Label htmlFor="student">Selected Student</Label>
+                            <Label htmlFor="student">Select Student</Label>
                             <select
                               id="student"
                               name="student"
                               className="border p-2 w-full h-10 rounded-md text-sm mt-2 text-gray-700 border-gray-400"
                             >
-                              <option value="">Select a mentor</option>
+                              <option value="">Select a student</option>
                             </select>
                           </div>
                           <div className="flex flex-col space-y-1.5">

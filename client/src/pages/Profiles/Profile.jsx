@@ -1,49 +1,66 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Profile.css";
 import Sidebar from "./../Sidebar/Sidebar";
 import mdp from "./../../assets/mdp.jpg";
 import { getUserData } from "../../services/dataService";
-import { useEffect, useState } from "react";
 
 const Profile = () => {
+  const [userProfile, setUserProfile] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [userType, setUserType] = useState("");
 
   useEffect(() => {
     const loadData = async () => {
-      const userData = await getUserData();
-
-      if (userData) {
-        setUserType(userData.profile.role);
+      try {
+        const userData = await getUserData();
+        if (userData) {
+          setUserType(userData.profile.role);
+        }
+      } catch (error) {
+        console.error("Error loading data:", error);
+      } finally {
+        setLoading(false);
       }
     };
-
     loadData();
+    loadUserProfile();
   }, []);
 
-  const alumni = {
-    name: "Dr Sarah Johnson",
-    title: "Senior Product Manager at Tech Corp",
-    professinal_summary:
-      "A results-driven product manager with 8+ years of experience in tech industry. Specialized in AI/ML products and data-driven decision making. Passionate about mentoring and helping others grow in their careers.",
-    company: "Tech Corp",
-    position: "Senior Product Manager",
-    joinyear: 2020,
-  };
-  const student = {
-    name: "Alex since",
-    title: "Class of 2023, Computer Science Major",
-    professinal_summary:
-      " Final year Computer Science student with a focus on Artificial Intelligence and Machine Learning. Dean's List recipient for three consecutive semesters. Actively seeking opportunities in software development and data science fields.",
-    course: " Bachelor of Science in Computer Science",
-    institute: "University of Technology",
-    passout: 2017,
+  const loadUserProfile = async () => {
+    try {
+      setLoading(true);
+      const userData = await getUserData();
+
+      if (!userData || !userData.profile) {
+        throw new Error("Could not load profile data");
+      }
+
+      console.log("Loaded profile:", userData.profile);
+      setUserProfile(userData.profile);
+    } catch (err) {
+      console.error("Error loading profile:", err);
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const userData = userType === "student" ? student : alumni;
+  if (loading) {
+    return <div>Loading profile...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  if (!userProfile) {
+    return <div></div>;
+  }
 
   return (
     <div className="min-h-screen flex bg-gray-50">
-      <Sidebar />
+      <Sidebar userType={userType} />
 
       <main className="flex-1 lg:ml-64 ml-0 bg-gray-50">
         <div className="p-6">
@@ -54,111 +71,95 @@ const Profile = () => {
                 <div className="absolute bottom-0 left-0 right-0 p-6 text-white flex items-end">
                   <div className="flex items-center space-x-6">
                     <img
-                      src={mdp}
+                      src={userProfile.profile_photo_url || mdp}
                       className="w-20 h-20 lg:w-24 lg:h-24 rounded-full border-[3px] border-white"
                       alt="Profile Photo"
                     />
                     <div>
                       <h1 className="text-2xl lg:text-3xl font-bold">
-                        {userData.name}
+                        {userProfile.full_name}
                       </h1>
                       <p className="text-base lg:text-lg opacity-90">
-                        {userData.title}
+                        {userProfile.role === "student"
+                          ? `${userProfile.course} at ${userProfile.institute}`
+                          : `${userProfile.current_job_title} at ${userProfile.current_company}`}
                       </p>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            {/* ----------------------- */}
-            <div className="grid grid-cols-3  gap-8 mt-8">
-              <div className="col-span-2  space-y-6">
-                <div className="bg-white rounded-lg shadow-lg p-6">
-                  {userType === "student" && (
-                    <h2 className="text-xl font-semibold mb-4">
-                      Academic Summary
-                    </h2>
-                  )}
-                  {userType === "alumni" && (
-                    <h2 className="text-xl font-semibold mb-4">
-                      Professional Summary
-                    </h2>
-                  )}
 
+            <div className="grid grid-cols-3 gap-8 mt-8">
+              <div className="col-span-2 space-y-6">
+                <div className="bg-white rounded-lg shadow-lg p-6">
+                  <h2 className="text-xl font-semibold mb-4">
+                    {userProfile.role === "student"
+                      ? "Academic Summary"
+                      : "Professional Summary"}
+                  </h2>
                   <p className="text-gray-600 leading-relaxed">
-                    {userData.professinal_summary}
+                    {userProfile.role === "student"
+                      ? userProfile.academic_summary
+                      : userProfile.professional_summary}
                   </p>
                 </div>
               </div>
+
               <div className="col-span-1 space-y-6">
                 <div className="bg-white rounded-lg shadow-lg p-6">
-                  {userType === "student" && (
-                    <h2 className="text-xl font-semibold mb-4">
-                      Technical Skills
-                    </h2>
-                  )}
-                  {userType === "alumni" && (
-                    <h2 className="text-xl font-semibold mb-4">
-                      Skills & Expertise
-                    </h2>
-                  )}
-
+                  <h2 className="text-xl font-semibold mb-4">
+                    {userProfile.role === "student"
+                      ? "Technical Skills"
+                      : "Skills & Expertise"}
+                  </h2>
                   <div className="flex flex-wrap gap-2">
-                    <span className="px-3 py-1 bg-purple-100 text-[#415B68] rounded-full text-sm">
-                      Python
-                    </span>
-                    <span className="px-3 py-1 bg-purple-100 text-[#415B68] rounded-full text-sm">
-                      Java
-                    </span>
-                    <span className="px-3 py-1 bg-purple-100 text-[#415B68] rounded-full text-sm">
-                      Machine Learning
-                    </span>
-                    <span className="px-3 py-1 bg-purple-100 text-[#415B68] rounded-full text-sm">
-                      Web Development
-                    </span>
-                    <span className="px-3 py-1 bg-purple-100 text-[#415B68] rounded-full text-sm">
-                      SQL
-                    </span>
+                    {userProfile.skills_expertise?.map((skill, index) => (
+                      <span
+                        key={index}
+                        className="px-3 py-1 bg-purple-100 text-[#415B68] rounded-full text-sm"
+                      >
+                        {skill}
+                      </span>
+                    ))}
                   </div>
                 </div>
               </div>
+
               <div className="col-span-3 space-y-6">
                 <div className="bg-white rounded-lg shadow-lg p-6">
-                  {userType === "student" && (
-                    <h2 className="text-xl font-semibold mb-4">
-                      Academic Timeline
-                    </h2>
-                  )}
-                  {userType === "alumni" && (
-                    <h2 className="text-xl font-semibold mb-4">
-                      Experience Timeline
-                    </h2>
-                  )}
-
+                  <h2 className="text-xl font-semibold mb-4">
+                    {userProfile.role === "student"
+                      ? "Academic Timeline"
+                      : "Experience Timeline"}
+                  </h2>
                   <div className="space-y-6">
-                    {userType === "student" && (
+                    {userProfile.role === "student" ? (
                       <div className="flex">
                         <div>
-                          <h3 className="font-semibold">{student.course}</h3>
+                          <h3 className="font-semibold">
+                            {userProfile.course}
+                          </h3>
                           <p className="text-sm text-gray-600">
-                            {student.institute}
+                            {userProfile.institute}
                           </p>
-                          <p className="text-sm text-gray-500">2020 - 2023</p>
+                          <p className="text-sm text-gray-500">
+                            {userProfile.graduation_year
+                              ? `Graduating ${userProfile.graduation_year}`
+                              : "Current Student"}
+                          </p>
                         </div>
                       </div>
-                    )}
-
-                    {userType === "alumni" && (
+                    ) : (
                       <div className="flex">
                         <div>
-                          <h3 className="font-semibold">{alumni.company}</h3>
+                          <h3 className="font-semibold">
+                            {userProfile.current_company}
+                          </h3>
                           <p className="text-sm text-gray-600">
-                            {alumni.position}
+                            {userProfile.current_job_title}
                           </p>
-                          <p className="text-sm text-gray-500">2017 - 2020</p>
-                          <p className="mt-2 text-gray-600">
-                            Managed mobile app development team
-                          </p>
+                          <p className="text-sm text-gray-500">Present</p>
                         </div>
                       </div>
                     )}
@@ -166,7 +167,6 @@ const Profile = () => {
                 </div>
               </div>
             </div>
-            {/* ------------------------- */}
           </div>
         </div>
       </main>
