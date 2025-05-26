@@ -291,3 +291,187 @@ export const deleteJob = async (jobId) => {
     throw error;
   }
 };
+
+export const fetchAlumniMentors = async () => {
+  try {
+    const { data, error } = await supabase
+      .from("profiles")
+      .select(
+        `
+        id,
+        full_name,
+        current_job_title,
+        current_company
+      `
+      )
+      .eq("role", "alumni")
+      .order("full_name");
+
+    if (error) {
+      console.error("Supabase error:", error);
+      throw error;
+    }
+
+    return data || [];
+  } catch (error) {
+    console.error("Error fetching alumni mentors:", error.message);
+    return [];
+  }
+};
+
+export const createMentorshipRequest = async (requestData) => {
+  try {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (!user) throw new Error("User not authenticated");
+
+    // Check for existing pending request
+    const { data: existingRequest, error: checkError } = await supabase
+      .from("mentorship_requests")
+      .select("id")
+      .eq("student_user_id", user.id)
+      .eq("alumni_user_id", requestData.mentorId)
+      .eq("status", "pending")
+      .maybeSingle();
+
+    if (checkError) throw checkError;
+
+    if (existingRequest) {
+      throw new Error("You already have a pending request with this mentor.");
+    }
+
+    // Create new request
+    const { data, error } = await supabase
+      .from("mentorship_requests")
+      .insert([
+        {
+          student_user_id: user.id,
+          alumni_user_id: requestData.mentorId,
+          request_message: requestData.message,
+          areas_of_interest: requestData.areas,
+          status: "pending",
+        },
+      ])
+      .select()
+      .single();
+
+    if (error) throw error;
+    return data;
+  } catch (error) {
+    console.error("Error creating mentorship request:", error.message);
+    throw error;
+  }
+};
+
+export const fetchMentorshipRequests = async () => {
+  try {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (!user) throw new Error("Not authenticated");
+
+    const { data, error } = await supabase
+      .from("mentorship_requests")
+      .select(
+        `
+        *,
+        student:profiles!student_user_id (
+          id,
+          full_name,
+          
+          course
+        )
+      `
+      )
+      .eq("alumni_user_id", user.id)
+      .eq("status", "pending")
+      .order("created_at", { ascending: false });
+
+    if (error) throw error;
+    return data || [];
+  } catch (error) {
+    console.error("Error fetching mentorship requests:", error.message);
+    throw error;
+  }
+};
+
+export const scheduleSession = async (requestId, formData) => {
+  try {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (!user) throw new Error("Not authenticated");
+
+    // First insert the session
+    const { data: newSession, error: sessionError } = await supabase
+      .from("mentorship_sessions")
+      .insert([
+        {
+          mentorship_request_id: requestId,
+          student_user_id: formData.student_user_id,
+          alumni_user_id: user.id,
+          session_datetime: new Date(
+            formData.date + "T" + formData.time
+          ).toISOString(),
+          duration_minutes: 60, // Default duration
+          platform: formData.platform,
+          session_url: formData.session_url,
+          agenda_notes: formData.agenda_notes,
+          status: "scheduled",
+        },
+      ])
+      .select()
+      .single();
+
+    if (sessionError) throw sessionError;
+
+    // Then update the request status
+    const { error: requestError } = await supabase
+      .from("mentorship_requests")
+      .update({ status: "scheduled" })
+      .eq("id", requestId);
+
+    if (requestError) throw requestError;
+
+    return newSession;
+  } catch (error) {
+    console.error("Error scheduling session:", error.message);
+    throw error;
+  }
+};
+
+export const fetchScheduledSessions = async () => {
+  try {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (!user) throw new Error("Not authenticated");
+
+    console.log("Current user:", user.id);
+
+    const { data, error } = await supabase
+      .from("mentorship_sessions")
+      .select(
+        `
+        *,
+        alumni:profiles!alumni_user_id (
+          id,
+          full_name,
+          current_job_title,
+          current_company
+        )
+      `
+      )
+      .eq("student_user_id", user.id)
+      .eq("status", "scheduled")
+      .order("session_datetime", { ascending: true });
+
+    console.log("Fetched sessions:", data);
+    if (error) throw error;
+    return data || [];
+  } catch (error) {
+    console.error("Error fetching scheduled sessions:", error.message);
+    throw error;
+  }
+};
