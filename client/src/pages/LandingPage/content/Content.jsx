@@ -8,13 +8,13 @@ function Content() {
       <div className="mainContent">
         <div className="leftContent">
           <div className="header123">
-            <h1>
+            <h1 className="mentor">
               Connect, Mentor,
               <br />
               Grow:
             </h1>
             <span>
-              <h1>
+              <h1 className="network">
                 Your Alumni Network <br />
                 Reimagined
               </h1>

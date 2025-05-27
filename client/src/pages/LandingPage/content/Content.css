@@ -27,9 +27,10 @@
       padding-top: 50px;
       padding-left: 100px;
 }
-span h1{
+.network {
       color: #269EB2;
       font-weight: 800;
+      font-size: 30px;
 }
 .leftContent .para{
       font-family: Cantarell;
@@ -41,8 +42,12 @@ span h1{
 }
 .mainContentButton button{
       width: 140px;
-      height: 60px;
-      border-radius: 10px;
+      height: 45px;
       background: #269EB2;
       border: none;
+      color: white;
+}
+.mentor{
+      font-size: 30px;
+      font-weight: 600;
 }
