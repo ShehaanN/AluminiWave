@@ -26,18 +26,15 @@ export default function AlumniWaveLogin() {
     if (signInError) {
       setError(signInError.message || "Invalid login credentials.");
     } else if (signInData.session) {
-      // Login successful!
-      // You would typically have an AuthContext to update global user state
-      navigate("/dashboard"); // Or your intended authenticated route
+      navigate("/dashboard");
     } else {
-      // Should not happen if no error and no session, but as a fallback
       setError("An unexpected error occurred. Please try again.");
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle login submission here
+
     console.log("Login submitted:", { email, password });
   };
 

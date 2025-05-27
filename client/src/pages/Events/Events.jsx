@@ -76,7 +76,7 @@ const Events = () => {
                         id="e1"
                         className="border rounded-lg p-4"
                       >
-                        <Link to="/events/e1">
+                        <Link to={`/events/${el.id}`}>
                           <img
                             src={
                               el.banner_image_url ? el.banner_image_url : Event1

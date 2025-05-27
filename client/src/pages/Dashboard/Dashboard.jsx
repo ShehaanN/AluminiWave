@@ -11,9 +11,23 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Sidebar from "../Sidebar/Sidebar";
 import { Link } from "react-router-dom";
 import sara from "../../assets/sara.png";
+import { getUserData } from "../../services/dataService";
+import { useEffect, useState } from "react";
 
 const Dashboard = () => {
-  const userType = "alumini";
+  const [userType, setUserType] = useState("");
+
+  useEffect(() => {
+    const loadData = async () => {
+      const userData = await getUserData();
+
+      if (userData) {
+        setUserType(userData.profile.role);
+      }
+    };
+
+    loadData();
+  }, []);
   return (
     <div className="min-h-screen flex">
       <Sidebar userType={userType} />
@@ -52,7 +66,7 @@ const Dashboard = () => {
           </div>
           {/* --------------------------- */}
 
-          {userType === "alumini" && (
+          {userType === "alumni" && (
             <div className="grid grid-cols-3 gap-6 mb-8">
               <div className="bg-white p-6 rounded-lg border border-gray-200">
                 <div className="">
@@ -215,7 +229,7 @@ const Dashboard = () => {
             </div>
           </div>
           {/* --------------------------- */}
-          {userType === "alumini" && (
+          {userType === "alumni" && (
             <>
               <div className="mb-8">
                 <h2 className="text-xl font-bold text-gray-900 mb-6">

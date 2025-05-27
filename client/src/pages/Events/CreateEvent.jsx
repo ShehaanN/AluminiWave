@@ -1,7 +1,7 @@
 // CreateEvent.jsx
 import { useState, useEffect } from "react";
-import { supabase } from "../../supabaseClient"; // adjust path as needed
-import { getUserData, createEvent } from "../../services/dataService"; // Import your functions
+import { supabase } from "../../supabaseClient";
+import { getUserData, createEvent } from "../../services/dataService";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -115,7 +115,6 @@ const CreateEvent = () => {
         banner_image_url = publicUrlData.publicUrl;
       }
 
-      // Continue with event creation
       const eventToInsert = {
         title: formData.title,
         event_date: formData.event_date,
@@ -144,7 +143,6 @@ const CreateEvent = () => {
         status: "upcoming",
       });
 
-      // Navigate after successful creation
       setTimeout(() => navigate(`/events/${insertedEvent.id}`), 1500);
     } catch (error) {
       console.error("Error:", error);

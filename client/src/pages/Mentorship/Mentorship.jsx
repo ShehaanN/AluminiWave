@@ -17,13 +17,81 @@ import { Label } from "@/components/ui/label";
 import { Calendar } from "@/components/ui/calendar";
 
 import { Textarea } from "@/components/ui/textarea";
-import { useState } from "react";
+
+import {
+  getUserData,
+  fetchAlumniMentors,
+  createMentorshipRequest,
+} from "../../services/dataService";
+import { useEffect, useState } from "react";
 
 export default function Mentorship() {
-  const userType = "student";
-
   const [date, setDate] = useState(new Date());
+  const [userType, setUserType] = useState("");
+  const [mentors, setMentors] = useState([]);
+  const [selectedMentor, setSelectedMentor] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [description, setDescription] = useState("");
+  const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
+  console.log(mentors);
+
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const userData = await getUserData();
+        if (userData) {
+          setUserType(userData.profile.role);
+
+          // Fetch mentors if user is a student
+          if (userData.profile.role === "student") {
+            const mentorsData = await fetchAlumniMentors();
+            setMentors(mentorsData);
+          }
+        }
+      } catch (error) {
+        console.error("Error loading data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadData();
+  }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setIsSubmitting(true);
+
+    try {
+      if (!selectedMentor) {
+        throw new Error("Please select a mentor");
+      }
+
+      if (!description.trim()) {
+        throw new Error("Please enter a description");
+      }
+
+      await createMentorshipRequest({
+        mentorId: selectedMentor,
+        message: description,
+        areas: [], // Add areas of interest if needed
+      });
+
+      // Reset form
+      setSelectedMentor("");
+      setDescription("");
+      setDate(new Date());
+
+      alert("Mentorship request sent successfully!");
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
     <div className="min-h-screen flex ">
       <Sidebar userType={userType} />
@@ -48,7 +116,7 @@ export default function Mentorship() {
                 </Link>
               </div>
             )}
-            {userType === "alumini" && (
+            {userType === "alumni" && (
               <div className="flex ">
                 <Link to="/sturequest">
                   <button className="px-4 py-2 bg-[#269EB2] text-white rounded-lg w-full md:w-auto min-h-[44px]">
@@ -178,15 +246,17 @@ export default function Mentorship() {
 
               {/* -------------------------- */}
               <div className="flex flex-row justify-between">
-                <div className=" mt-4 p-8 ml-24">
-                  {/* -----------calender ------------------*/}
-                  <Calendar
-                    mode="single"
-                    selected={date}
-                    onSelect={setDate}
-                    className="rounded-md border"
-                  />
-                </div>
+                {userType === "student" && (
+                  <div className=" mt-4 p-8 ml-24">
+                    {/* -----------calender ------------------*/}
+                    <Calendar
+                      mode="single"
+                      selected={date}
+                      onSelect={setDate}
+                      className="rounded-md border"
+                    />
+                  </div>
+                )}
 
                 {userType === "student" && (
                   <Card className="w-[650px] p-8 border-none mt-4 shadow-none">
@@ -196,21 +266,28 @@ export default function Mentorship() {
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <form>
-                        <div className="grid w-full items-center gap-3 ">
+                      <form onSubmit={handleSubmit}>
+                        <div className="grid w-full items-center gap-3">
                           <div className="flex flex-col space-y-1.5">
-                            <label htmlFor="mentor">Select Mentor</label>
+                            <Label htmlFor="mentor">Select Mentor</Label>
                             <select
                               id="mentor"
                               name="mentor"
-                              className="border p-2 w-full h-10 rounded-md text-sm mt-2 text-gray-700  border-gray-400"
+                              value={selectedMentor}
+                              onChange={(e) =>
+                                setSelectedMentor(e.target.value)
+                              }
+                              className="border p-2 w-full h-10 rounded-md text-sm mt-2 text-gray-700 border-gray-400"
+                              required
                             >
-                              <option value="mentorname">
-                                Dr. Sarah Johnson
-                              </option>
-                              <option value="mentorname">Michael Chen</option>
-                              <option value="mentorname">Emma Williams</option>
-                              <option value="mentorname">David Kumar</option>
+                              <option value="">Select a mentor</option>
+                              {mentors.map((mentor) => (
+                                <option key={mentor.id} value={mentor.id}>
+                                  {mentor.full_name} -{" "}
+                                  {mentor.current_job_title} at{" "}
+                                  {mentor.current_company}
+                                </option>
+                              ))}
                             </select>
                           </div>
 
@@ -224,21 +301,37 @@ export default function Mentorship() {
                             <Textarea
                               placeholder="Type your message here."
                               id="description"
+                              value={description}
+                              onChange={(e) => setDescription(e.target.value)}
                               className="outline-none"
+                              required
                             />
                           </div>
+
+                          {error && (
+                            <div className="text-red-500 text-sm mt-2">
+                              {error}
+                            </div>
+                          )}
                         </div>
+
+                        <CardFooter className="flex justify-between px-0 mt-4">
+                          <Button
+                            type="submit"
+                            disabled={isSubmitting}
+                            className="w-full text-lg bg-[#269EB2] text-white px-7 py-6"
+                          >
+                            {isSubmitting
+                              ? "Sending request..."
+                              : "Request mentor"}
+                          </Button>
+                        </CardFooter>
                       </form>
                     </CardContent>
-                    <CardFooter className="flex  justify-between">
-                      <Button className="w-full text-lg bg-[#269EB2] text-white px-7 py-6">
-                        Request mentor
-                      </Button>
-                    </CardFooter>
                   </Card>
                 )}
 
-                {userType === "alumini" && (
+                {userType === "alumni" && (
                   <Card className="w-[650px] p-8 border-none mt-4 shadow-none">
                     <CardHeader>
                       <CardTitle className="text-2xl">
@@ -251,6 +344,16 @@ export default function Mentorship() {
                     <CardContent className="mt-[-12px]">
                       <form>
                         <div className="grid w-full items-center gap-3 ">
+                          <div className="flex flex-col space-y-1.5">
+                            <Label htmlFor="student">Select Student</Label>
+                            <select
+                              id="student"
+                              name="student"
+                              className="border p-2 w-full h-10 rounded-md text-sm mt-2 text-gray-700 border-gray-400"
+                            >
+                              <option value="">Select a student</option>
+                            </select>
+                          </div>
                           <div className="flex flex-col space-y-1.5">
                             <Label className="text-lg mb-1" htmlFor="date">
                               Available Date
