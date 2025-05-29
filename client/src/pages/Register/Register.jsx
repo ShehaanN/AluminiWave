@@ -288,7 +288,7 @@ const Register = () => {
         )}
         {error && <div className="text-center text-red-600 my-4">{error}</div>}
         <div className="content flex justify-center">{RenderSteps()}</div>
-        // Replace the buttons div near the bottom of the file:
+        
         <div className="btns">
           <button
             onClick={handlePrev}

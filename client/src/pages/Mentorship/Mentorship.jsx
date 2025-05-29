@@ -17,6 +17,16 @@ import { Label } from "@/components/ui/label";
 import { Calendar } from "@/components/ui/calendar";
 
 import { Textarea } from "@/components/ui/textarea";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 import {
   getUserData,
@@ -24,18 +34,19 @@ import {
   createMentorshipRequest,
 } from "../../services/dataService";
 import { useEffect, useState } from "react";
+import { supabase } from "../../supabaseClient";
 
 export default function Mentorship() {
   const [date, setDate] = useState(new Date());
   const [userType, setUserType] = useState("");
   const [mentors, setMentors] = useState([]);
+  const [recommendedMentors, setRecommendedMentors] = useState([]);
   const [selectedMentor, setSelectedMentor] = useState("");
   const [loading, setLoading] = useState(true);
   const [description, setDescription] = useState("");
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  console.log(mentors);
+  const [viewProfileDialog, setViewProfileDialog] = useState(false);
 
   useEffect(() => {
     const loadData = async () => {
@@ -48,10 +59,27 @@ export default function Mentorship() {
           if (userData.profile.role === "student") {
             const mentorsData = await fetchAlumniMentors();
             setMentors(mentorsData);
+
+            const {
+              data: { user },
+            } = await supabase.auth.getUser();
+            if (user) {
+              const { data, error } = await supabase.functions.invoke(
+                "recommend-mentors",
+                {
+                  body: { student_user_id: user.id },
+                }
+              );
+
+              if (error) throw error;
+              setRecommendedMentors(data.recommendations);
+              console.log("Recommended Mentors:", data.recommendations);
+            }
           }
         }
       } catch (error) {
         console.error("Error loading data:", error);
+        setError(error.message);
       } finally {
         setLoading(false);
       }
@@ -77,7 +105,7 @@ export default function Mentorship() {
       await createMentorshipRequest({
         mentorId: selectedMentor,
         message: description,
-        areas: [], // Add areas of interest if needed
+        areas: [],
       });
 
       // Reset form
@@ -129,135 +157,73 @@ export default function Mentorship() {
 
           <div className="grid md:grid-cols-1 grid-cols-1 gap-6">
             <div className="bg-white rounded-lg shadow p-6 min-h-screen">
-              {/* -------------- */}
+              {/* Recommended Mentors Section  */}
               {userType === "student" && (
-                <div className="grid grid-cols-4  gap-6">
-                  <div className="bg-white rounded-lg shadow p-6">
-                    <div className="flex items-center justify-between mb-4">
-                      <img src={sara} className="w-12 h-12 rounded-full" />
-                      <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">
-                        95% Match
-                      </span>
+                <div className="grid grid-cols-4 gap-6">
+                  {loading ? (
+                    <div className="col-span-4 text-center py-8">
+                      Loading recommended mentors...
                     </div>
-                    <h3 className="font-semibold text-lg">Dr. Sarah Johnson</h3>
-                    <p className="text-gray-600 text-sm mb-3">
-                      Senior ML Engineer at Google
-                    </p>
-                    <div className="flex items-center text-sm text-gray-500 mb-4">
-                      <i className="fas fa-briefcase mr-2"></i>15 years
-                      experience
+                  ) : error ? (
+                    <div className="col-span-4 text-center py-8 text-red-500">
+                      {error}
                     </div>
-                    <div className="space-y-2 mb-4">
-                      <span className="inline-block bg-gray-100 rounded-full px-3 py-1 text-sm mr-2">
-                        Machine Learning
-                      </span>
-                      <span className="inline-block bg-gray-100 rounded-full px-3 py-1 text-sm">
-                        Leadership
-                      </span>
+                  ) : recommendedMentors.length === 0 ? (
+                    <div className="col-span-4 text-center py-8">
+                      No recommended mentors found
                     </div>
-                    <button className="w-full bg-[#269EB2] text-white rounded-lg py-3 min-h-[44px]">
-                      View Profile
-                    </button>
-                  </div>
-                  <div className="bg-white rounded-lg shadow p-6">
-                    <div className="flex items-center justify-between mb-4">
-                      <img src={mdp} className="w-12 h-12 rounded-full" />
-                      <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">
-                        88% Match
-                      </span>
-                    </div>
-                    <h3 className="font-semibold text-lg">Michael Chen</h3>
-                    <p className="text-gray-600 text-sm mb-3">
-                      Senior Project Manager at Alibaba
-                    </p>
-                    <div className="flex items-center text-sm text-gray-500 mb-4">
-                      <i className="fas fa-briefcase mr-2"></i>10 years
-                      experience
-                    </div>
-                    <div className="space-y-2 mb-4">
-                      <span className="inline-block bg-gray-100 rounded-full px-3 py-1 text-sm mr-2">
-                        Product Strategy
-                      </span>
-                      <span className="inline-block bg-gray-100 rounded-full px-3 py-1 text-sm">
-                        Startup
-                      </span>
-                    </div>
-                    <button className="w-full bg-[#269EB2] text-white rounded-lg py-3 min-h-[44px]">
-                      View Profile
-                    </button>
-                  </div>
-                  <div className="bg-white rounded-lg shadow p-6">
-                    <div className="flex items-center justify-between mb-4">
-                      <img src={sara} className="w-12 h-12 rounded-full" />
-                      <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">
-                        82% Match
-                      </span>
-                    </div>
-                    <h3 className="font-semibold text-lg">Emma Williams</h3>
-                    <p className="text-gray-600 text-sm mb-3">
-                      Head Marketing Officer at Telecom
-                    </p>
-                    <div className="flex items-center text-sm text-gray-500 mb-4">
-                      <i className="fas fa-briefcase mr-2"></i>12 years
-                      experience
-                    </div>
-                    <div className="space-y-2 mb-4">
-                      <span className="inline-block bg-gray-100 rounded-full px-3 py-1 text-sm mr-2">
-                        Digital Marketing
-                      </span>
-                      <span className="inline-block bg-gray-100 rounded-full px-3 py-1 text-sm">
-                        Strategy
-                      </span>
-                    </div>
-                    <button className="w-full bg-[#269EB2] text-white rounded-lg py-3 min-h-[44px]">
-                      View Profile
-                    </button>
-                  </div>
-                  <div className="bg-white rounded-lg shadow p-6">
-                    <div className="flex items-center justify-between mb-4">
-                      <img src={mdp} className="w-12 h-12 rounded-full" />
-                      <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">
-                        78% Match
-                      </span>
-                    </div>
-                    <h3 className="font-semibold text-lg">David Kumar</h3>
-                    <p className="text-gray-600 text-sm mb-3">
-                      Senior Cloud Engineer at Microsoft
-                    </p>
-                    <div className="flex items-center text-sm text-gray-500 mb-4">
-                      <i className="fas fa-briefcase mr-2"></i>8 years
-                      experience
-                    </div>
-                    <div className="space-y-2 mb-4">
-                      <span className="inline-block bg-gray-100 rounded-full px-3 py-1 text-sm mr-2">
-                        Cloud Computing
-                      </span>
-                      <span className="inline-block bg-gray-100 rounded-full px-3 py-1 text-sm">
-                        DevOps
-                      </span>
-                    </div>
-                    <button className="w-full bg-[#269EB2] text-white rounded-lg py-3 min-h-[44px]">
-                      View Profile
-                    </button>
-                  </div>
+                  ) : (
+                    recommendedMentors.map((mentor) => (
+                      <div
+                        key={mentor.id}
+                        className="bg-white rounded-lg shadow p-6"
+                      >
+                        <div className="flex items-center justify-between mb-4">
+                          <img
+                            src={mentor.profile_photo_url || mdp}
+                            className="w-12 h-12 rounded-full"
+                            alt={mentor.full_name}
+                          />
+                          <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">
+                            {mentor.match_score}% Match
+                          </span>
+                        </div>
+                        <h3 className="font-semibold text-lg">
+                          {mentor.full_name}
+                        </h3>
+                        <p className="text-gray-600 text-sm mb-3">
+                          {mentor.current_job_title} at {mentor.current_company}
+                        </p>
+                        <div className="space-y-2 mb-4">
+                          {mentor.skills_expertise
+                            ?.slice(0, 2)
+                            .map((skill, index) => (
+                              <span
+                                key={index}
+                                className="inline-block bg-gray-100 rounded-full px-3 py-1 text-sm mr-2"
+                              >
+                                {skill}
+                              </span>
+                            ))}
+                        </div>
+                        <button
+                          className="w-full bg-[#269EB2] text-white rounded-lg py-3 min-h-[44px]"
+                          onClick={() => {
+                            setSelectedMentor(mentor);
+                            setViewProfileDialog(true);
+                          }}
+                        >
+                          View Profile
+                        </button>
+                      </div>
+                    ))
+                  )}
                 </div>
               )}
               {userType === "alumni" && <div></div>}
 
               {/* -------------------------- */}
               <div className="flex flex-row justify-between">
-                {userType === "student" && (
-                  <div className=" mt-4 p-8 ml-24">
-                    {/* -----------calender ------------------*/}
-                    <Calendar
-                      mode="single"
-                      selected={date}
-                      onSelect={setDate}
-                      className="rounded-md border"
-                    />
-                  </div>
-                )}
-
                 {userType === "student" && (
                   <Card className="w-[650px] p-8 border-none mt-4 shadow-none">
                     <CardHeader>
@@ -424,6 +390,111 @@ export default function Mentorship() {
           </div>
         </div>
       </main>
+
+      {/* View Profile Dialog */}
+      <Dialog open={viewProfileDialog} onOpenChange={setViewProfileDialog}>
+        <DialogContent className="min-w-5xl top-[85%] left-[77%]">
+          <DialogHeader>
+            <DialogTitle>Mentor Profile</DialogTitle>
+          </DialogHeader>
+          {selectedMentor && (
+            <div className="space-y-6">
+              <div className="flex items-start space-x-6">
+                <Avatar className="h-24 w-24">
+                  <AvatarImage
+                    src={selectedMentor.profile_photo_url || mdp}
+                    alt={selectedMentor.full_name}
+                  />
+                  <AvatarFallback>
+                    {selectedMentor.full_name?.charAt(0)}
+                  </AvatarFallback>
+                </Avatar>
+                <div className="space-y-1">
+                  <h3 className="text-2xl font-semibold">
+                    {selectedMentor.full_name}
+                  </h3>
+                  <p className="text-gray-500">
+                    {selectedMentor.current_job_title} at{" "}
+                    {selectedMentor.current_company}
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-base">
+                      Professional Summary
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-2">
+                    <p className="text-gray-600 leading-relaxed">
+                      {selectedMentor.professional_summary}
+                    </p>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-base">
+                      Skills & Expertise
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex flex-wrap gap-2">
+                      {selectedMentor.skills_expertise?.map((skill) => (
+                        <span
+                          key={skill}
+                          className="px-3 py-1 bg-purple-100 text-[#415B68] rounded-full text-sm"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-base">
+                    Experience Timeline
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div className="flex  space-x-4">
+                      <i className="fas fa-briefcase text-green-500 mt-1.5"></i>
+                      <div>
+                        <div className="flex">
+                          <div>
+                            <h3 className="font-semibold">
+                              {selectedMentor.current_company}{" "}
+                            </h3>
+                            <p className="text-sm text-gray-600">
+                              {selectedMentor.current_job_title}
+                            </p>
+                            <p className="text-sm text-gray-500">2017 - 2020</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          )}
+          <DialogFooter>
+            <Button
+              variant="outline"
+              className="!rounded-button whitespace-nowrap"
+              onClick={() => setViewProfileDialog(false)}
+            >
+              Close
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

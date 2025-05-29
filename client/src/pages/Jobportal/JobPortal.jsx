@@ -44,6 +44,7 @@ export default function JobPortal() {
   // const [timeFilter, setTimeFilter] = useState("Last 30 days");
   const [userType, setUserType] = useState("");
   const [jobs, setJobs] = useState([]);
+  const [recommendedJobs, setRecommendedJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [applicationData, setApplicationData] = useState({
     applicant_name: "",
@@ -54,6 +55,7 @@ export default function JobPortal() {
   });
   const [submitting, setSubmitting] = useState(false);
   const [currentJobId, setCurrentJobId] = useState(null);
+  const [activeTab, setActiveTab] = useState("all");
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
@@ -69,6 +71,22 @@ export default function JobPortal() {
       ...prev,
       resume: file,
     }));
+  };
+
+  const fetchRecommendedJobs = async (userId) => {
+    try {
+      const { data, error } = await supabase.functions.invoke(
+        "recommend-jobs",
+        {
+          body: { alumni_user_id: userId },
+        }
+      );
+
+      if (error) throw error;
+      setRecommendedJobs(data.recommendations);
+    } catch (error) {
+      console.error("Error fetching job recommendations:", error);
+    }
   };
 
   const handleApply = async (e) => {
@@ -148,16 +166,16 @@ export default function JobPortal() {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const [userData, jobsData] = await Promise.all([
-          getUserData(),
-          fetchJobs(),
-        ]);
-
+        const userData = await getUserData();
         if (userData) {
           setUserType(userData.profile.role);
+          if (userData.profile.role === "alumni") {
+            await Promise.all([
+              fetchJobs().then(setJobs),
+              fetchRecommendedJobs(userData.session.user.id),
+            ]);
+          }
         }
-
-        setJobs(jobsData);
       } catch (error) {
         console.error("Error loading data:", error);
       } finally {
@@ -167,6 +185,8 @@ export default function JobPortal() {
 
     loadData();
   }, []);
+
+  const displayJobs = activeTab === "recommended" ? recommendedJobs : jobs;
 
   return (
     <>
@@ -197,7 +217,7 @@ export default function JobPortal() {
               <div className="grid  grid-cols-1 gap-6">
                 <div className="bg-gray-50 rounded-lg  p-6 min-h-screen">
                   {/* Job Search Filters */}
-                  <div className="p-5 mb-6 bg-white rounded-lg shadow-md">
+                  {/* <div className="p-5 mb-6 bg-white rounded-lg shadow-md">
                     <h2 className="mb-4 text-lg font-semibold text-gray-800">
                       Job Search Filters
                     </h2>
@@ -245,16 +265,45 @@ export default function JobPortal() {
                         </div>
                       </div>
                     </div>
+                  </div> */}
+                  {/* Job Tabs */}
+                  <div className="mb-6">
+                    <div className="flex space-x-4 border-b">
+                      <button
+                        className={`py-2 px-4 ${
+                          activeTab === "all"
+                            ? "border-b-2 border-[#269EB2] text-[#269EB2]"
+                            : "text-gray-500"
+                        }`}
+                        onClick={() => setActiveTab("all")}
+                      >
+                        All Jobs
+                      </button>
+                      <button
+                        className={`py-2 px-4 ${
+                          activeTab === "recommended"
+                            ? "border-b-2 border-[#269EB2] text-[#269EB2]"
+                            : "text-gray-500"
+                        }`}
+                        onClick={() => setActiveTab("recommended")}
+                      >
+                        Recommended Jobs
+                      </button>
+                    </div>
                   </div>
 
                   {/* Job Listings */}
                   <div className="grid grid-cols-3 gap-12 mb-6">
                     {loading ? (
-                      <div>Loading jobs...</div>
-                    ) : jobs.length === 0 ? (
-                      <div>No jobs found</div>
+                      <div className="col-span-3 text-center">
+                        Loading jobs...
+                      </div>
+                    ) : displayJobs.length === 0 ? (
+                      <div className="col-span-3 text-center">
+                        No jobs found
+                      </div>
                     ) : (
-                      jobs.map((job) => (
+                      displayJobs.map((job) => (
                         <div
                           key={job.id}
                           className="bg-white rounded-lg shadow-lg p-6"
@@ -264,6 +313,13 @@ export default function JobPortal() {
                               {job.job_title}
                             </h3>
                           </div>
+                          {job.match_score && (
+                            <div className="mb-2">
+                              <span className="px-2 py-1 text-sm bg-green-100 text-green-800 rounded-full">
+                                {job.match_score}% Match
+                              </span>
+                            </div>
+                          )}
                           <p className="mb-3 text-sm text-gray-600">
                             {job.company_name} • {job.location}
                           </p>
@@ -278,6 +334,20 @@ export default function JobPortal() {
                           <p className="mb-4 text-sm text-gray-700">
                             {job.description.substring(0, 150)}...
                           </p>
+                          {job.match_reasons && (
+                            <div className="mb-4">
+                              <p className="text-sm font-medium text-gray-700 mb-1">
+                                Match Reasons:
+                              </p>
+                              <ul className="text-sm text-gray-600">
+                                {job.match_reasons.map((reason, index) => (
+                                  <li key={index} className="flex items-center">
+                                    <span className="mr-1">•</span> {reason}
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
                           <div className="flex justify-between items-center">
                             <span className="text-xs text-gray-500">
                               Posted{" "}
