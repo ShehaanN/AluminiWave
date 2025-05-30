@@ -42,7 +42,7 @@ const Sidebar = ({ userType }) => {
           )}
 
           <a
-            href="#"
+            href="/chat"
             className="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50"
           >
             <i className="fas fa-network-wired w-5"></i>

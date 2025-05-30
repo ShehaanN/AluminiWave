@@ -25,6 +25,7 @@ import ManageEvent from "./pages/Events/ManageEvent.jsx";
 import SuperDashboard from "./pages/Dashboard/SuperDashboard.jsx";
 import SuperSettings from "./pages/Settings/SuperSettings.jsx";
 import ManageJob from "./pages/Jobportal/ManageJob.jsx";
+import Chat from "./pages/Chat/Chat.jsx";
 
 const router = createBrowserRouter([
   {
@@ -112,17 +113,15 @@ const router = createBrowserRouter([
 
     element: <Profile />,
   },
+  {
+    path: "/chat",
+
+    element: <Chat />,
+  },
 ]);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    {/* <Nav /> */}
-    {/* <Content></Content>
-    <Content2></Content2>  */}
-    {/* <Login /> */}
-    {/* {<SignupStep2></SignupStep2> } */}
-    {/* { <SignupStep3></SignupStep3> } */}
-    {/* <SignupComplete></SignupComplete> */}
     <RouterProvider router={router} />
   </StrictMode>
 );
