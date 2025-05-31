@@ -479,3 +479,23 @@ export const fetchAlumniMentors = async () => {
     throw error;
   }
 };
+
+export const fetchUserProfileDetails = async (userId) => {
+  try {
+    const { data, error } = await supabase
+      .from("profiles")
+      .select(
+        `
+        *
+      `
+      )
+      .eq("id", userId)
+      .single();
+
+    if (error) throw error;
+    return data;
+  } catch (error) {
+    console.error("Error fetching user profile details:", error);
+    return null;
+  }
+};
