@@ -727,14 +727,13 @@ const Chat = () => {
                             {msg.sender}
                           </p>
                         )}
-                        <p className="mt-1.5">{msg.message}</p>
-                        {msg.isSelf && (
-                          <div className="text-md mt-1 ">{msg.time}</div>
-                        )}
+                        <p className="mt-1.5 text-lg font-medium">
+                          {msg.message}
+                        </p>
 
                         <div
                           className={`text-xs mt-1 ${
-                            msg.isSelf ? "text-[#269EB2]/50" : "text-gray-500"
+                            msg.isSelf ? "text-white" : "text-gray-500"
                           }`}
                         >
                           {msg.time}

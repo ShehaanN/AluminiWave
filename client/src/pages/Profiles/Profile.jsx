@@ -81,7 +81,7 @@ const Profile = () => {
                       </h1>
                       <p className="text-base lg:text-lg opacity-90">
                         {userProfile.role === "student"
-                          ? `${userProfile.course} at ${userProfile.institute}`
+                          ? `Student at ${userProfile.institute}`
                           : `${userProfile.current_job_title} at ${userProfile.current_company}`}
                       </p>
                     </div>
@@ -99,9 +99,7 @@ const Profile = () => {
                       : "Professional Summary"}
                   </h2>
                   <p className="text-gray-600 leading-relaxed">
-                    {userProfile.role === "student"
-                      ? userProfile.academic_summary
-                      : userProfile.professional_summary}
+                    {userProfile.profile_summary}
                   </p>
                 </div>
               </div>

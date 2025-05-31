@@ -3,6 +3,7 @@ import { Eye, EyeOff } from "lucide-react";
 import logo from "../../assets/logo.png";
 import { supabase } from "../../supabaseClient";
 import { Link, useNavigate } from "react-router-dom";
+import { fetchUserProfile } from "../../services/dataService";
 
 export default function AlumniWaveLogin() {
   const [email, setEmail] = useState("");
@@ -16,19 +17,35 @@ export default function AlumniWaveLogin() {
     setLoading(true);
     setError("");
 
-    const { data: signInData, error: signInError } =
-      await supabase.auth.signInWithPassword({
-        email: email,
-        password: password,
-      });
+    try {
+      // First, attempt to sign in
+      const { data: signInData, error: signInError } =
+        await supabase.auth.signInWithPassword({
+          email: email,
+          password: password,
+        });
 
-    setLoading(false);
-    if (signInError) {
-      setError(signInError.message || "Invalid login credentials.");
-    } else if (signInData.session) {
-      navigate("/dashboard");
-    } else {
-      setError("An unexpected error occurred. Please try again.");
+      if (signInError) throw signInError;
+      if (!signInData.session) throw new Error("No session data");
+
+      // After successful login, fetch the user's profile
+      const userProfile = await fetchUserProfile(signInData.session.user.id);
+
+      if (!userProfile) {
+        throw new Error("Could not fetch user profile");
+      }
+
+      // Check if user is superadmin and redirect accordingly
+      if (userProfile.is_superadmin === true) {
+        navigate("/superdashboard");
+      } else {
+        navigate("/dashboard");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      setError(error.message || "Invalid login credentials.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -108,15 +125,14 @@ export default function AlumniWaveLogin() {
             </div>
           </div>
           {error && <p className="text-red-500">{error}</p>}
-          <Link to="/dashboard">
-            <button
-              type="submit"
-              onClick={handleLogin}
-              className="w-full mt-6 py-3 px-4 bg-[#269EB2] hover:bg-[#269EB2] text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500"
-            >
-              {loading ? "Signing in..." : "Sign in"}
-            </button>
-          </Link>
+
+          <button
+            type="submit"
+            onClick={handleLogin}
+            className="w-full mt-6 py-3 px-4 bg-[#269EB2] hover:bg-[#269EB2] text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500"
+          >
+            {loading ? "Signing in..." : "Sign in"}
+          </button>
         </form>
 
         <div className="mt-8 text-center">

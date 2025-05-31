@@ -44,6 +44,10 @@ import logo from "@/assets/logo.png";
 import dp from "@/assets/mdp.jpg";
 import { Textarea } from "@/components/ui/textarea";
 import sara from "@/assets/sara.png";
+import { supabase } from "../../supabaseClient";
+import { fetchUserProfileDetails } from "../../services/dataService";
+
+import MultiSelect from "../Events/MultiSelect";
 
 const SuperDashboard = () => {
   const [activeTab, setActiveTab] = useState("user-management");
@@ -59,515 +63,278 @@ const SuperDashboard = () => {
   const [isJobFormChanged, setIsJobFormChanged] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [displayedUsers, setDisplayedUsers] = useState([]);
-  const [displayedEvents, setDisplayedEvents] = useState([]);
-  const [displayedJobs, setDisplayedJobs] = useState([]);
+
   const itemsPerPage = 6;
 
-  // Mock user data
-  const users = [
-    {
-      id: 1,
-      name: "John Doe",
-      email: "john.doe@example.com",
-      role: "STUDENT",
-      joinedDate: "2024-03-15",
-      status: "Active",
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      email: "jane.smith@example.com",
-      role: "ALUMNI",
-      joinedDate: "2024-02-10",
-      status: "Active",
-    },
-    {
-      id: 3,
-      name: "Robert Johnson",
-      email: "robert.j@example.com",
-      role: "SUPERADMIN",
-      joinedDate: "2023-11-22",
-      status: "Active",
-    },
-    {
-      id: 4,
-      name: "Emily Davis",
-      email: "emily.davis@example.com",
-      role: "STUDENT",
-      joinedDate: "2024-04-05",
-      status: "Inactive",
-    },
-    {
-      id: 5,
-      name: "Michael Wilson",
-      email: "michael.w@example.com",
-      role: "ALUMNI",
-      joinedDate: "2023-12-18",
-      status: "Active",
-    },
-    {
-      id: 6,
-      name: "Sarah Thompson",
-      email: "sarah.t@example.com",
-      role: "STUDENT",
-      joinedDate: "2024-01-30",
-      status: "Active",
-    },
-    {
-      id: 7,
-      name: "David Brown",
-      email: "david.b@example.com",
-      role: "STUDENT",
-      joinedDate: "2024-01-15",
-    },
-    {
-      id: 8,
-      name: "Lisa Anderson",
-      email: "lisa.a@example.com",
-      role: "ALUMNI",
-      joinedDate: "2023-10-05",
-    },
-    {
-      id: 9,
-      name: "James Wilson",
-      email: "james.w@example.com",
-      role: "STUDENT",
-      joinedDate: "2024-02-28",
-    },
-    {
-      id: 10,
-      name: "Jennifer Lee",
-      email: "jennifer.l@example.com",
-      role: "ALUMNI",
-      joinedDate: "2023-09-12",
-    },
-    {
-      id: 11,
-      name: "Thomas Clark",
-      email: "thomas.c@example.com",
-      role: "STUDENT",
-      joinedDate: "2024-03-20",
-    },
-    {
-      id: 12,
-      name: "Patricia White",
-      email: "patricia.w@example.com",
-      role: "SUPERADMIN",
-      joinedDate: "2023-08-15",
-    },
-    {
-      id: 13,
-      name: "Christopher Harris",
-      email: "chris.h@example.com",
-      role: "STUDENT",
-      joinedDate: "2024-01-05",
-    },
-    {
-      id: 14,
-      name: "Elizabeth Martin",
-      email: "elizabeth.m@example.com",
-      role: "ALUMNI",
-      joinedDate: "2023-11-10",
-    },
-    {
-      id: 15,
-      name: "Daniel Thompson",
-      email: "daniel.t@example.com",
-      role: "STUDENT",
-      joinedDate: "2024-02-15",
-    },
-    {
-      id: 16,
-      name: "Margaret Garcia",
-      email: "margaret.g@example.com",
-      role: "ALUMNI",
-      joinedDate: "2023-10-22",
-    },
-    {
-      id: 17,
-      name: "Joseph Martinez",
-      email: "joseph.m@example.com",
-      role: "STUDENT",
-      joinedDate: "2024-03-05",
-    },
-    {
-      id: 18,
-      name: "Susan Robinson",
-      email: "susan.r@example.com",
-      role: "ALUMNI",
-      joinedDate: "2023-09-30",
-    },
-    {
-      id: 19,
-      name: "Charles Lewis",
-      email: "charles.l@example.com",
-      role: "STUDENT",
-      joinedDate: "2024-02-01",
-    },
-    {
-      id: 20,
-      name: "Jessica Walker",
-      email: "jessica.w@example.com",
-      role: "ALUMNI",
-      joinedDate: "2023-12-05",
-    },
-    {
-      id: 21,
-      name: "Matthew Hall",
-      email: "matthew.h@example.com",
-      role: "STUDENT",
-      joinedDate: "2024-01-20",
-    },
-    {
-      id: 22,
-      name: "Karen Allen",
-      email: "karen.a@example.com",
-      role: "SUPERADMIN",
-      joinedDate: "2023-08-25",
-    },
-    {
-      id: 23,
-      name: "Donald Young",
-      email: "donald.y@example.com",
-      role: "STUDENT",
-      joinedDate: "2024-03-10",
-    },
-    {
-      id: 24,
-      name: "Betty King",
-      email: "betty.k@example.com",
-      role: "ALUMNI",
-      joinedDate: "2023-11-15",
-    },
-    {
-      id: 25,
-      name: "Shehan Nadeesha",
-      email: "shehan@gmail.com",
-      role: "ALUMNI",
-      joinedDate: "2025-05-16",
-    },
-  ];
+  console.log(selectedUser);
 
-  const totalUsers = 1248;
-  const activeStudents = 856;
-  const activeAlumni = 392;
-  const totalResults = users.length;
+  const [stats, setStats] = useState({
+    totalUsers: 0,
+    activeStudents: 0,
+    activeAlumni: 0,
+    totalEvents: 0,
+    upcomingEvents: 0,
+    activeJobs: 0,
+  });
 
-  // Mock events data
-  const events = [
-    {
-      id: 1,
-      title: "Spring Career Fair",
-      date: "2025-05-25",
-      location: "Main Campus",
-      organizer: "Career Services",
-      status: "Upcoming",
-    },
-    {
-      id: 2,
-      title: "Alumni Networking Night",
-      date: "2025-06-10",
-      location: "Downtown Conference Center",
-      organizer: "Alumni Association",
-      status: "Upcoming",
-    },
-    {
-      id: 3,
-      title: "Tech Industry Panel",
-      date: "2025-04-15",
-      location: "Virtual",
-      organizer: "Computer Science Department",
-      status: "Completed",
-    },
-    {
-      id: 4,
-      title: "Resume Workshop",
-      date: "2025-05-05",
-      location: "Student Center",
-      organizer: "Career Services",
-      status: "Completed",
-    },
-    {
-      id: 5,
-      title: "Graduate School Info Session",
-      date: "2025-06-20",
-      location: "Academic Building",
-      organizer: "Graduate Studies Office",
-      status: "Upcoming",
-    },
-    {
-      id: 6,
-      title: "Alumni Reunion",
-      date: "2025-07-15",
-      location: "University Campus",
-      organizer: "Alumni Association",
-      status: "Upcoming",
-    },
-    {
-      id: 7,
-      title: "Job Search Strategies",
-      date: "2025-05-12",
-      location: "Career Services Office",
-      organizer: "Career Services",
-      status: "Completed",
-    },
-    {
-      id: 8,
-      title: "Entrepreneurship Workshop",
-      date: "2025-06-05",
-      location: "Business School",
-      organizer: "Entrepreneurship Center",
-      status: "Upcoming",
-    },
-    {
-      id: 9,
-      title: "Networking Lunch with Alumni",
-      date: "2025-05-30",
-      location: "Dining Hall",
-      organizer: "Alumni Association",
-      status: "Upcoming",
-    },
-    {
-      id: 10,
-      title: "Mental Health Awareness Seminar",
-      date: "2025-04-28",
-      location: "Wellness Center",
-      organizer: "Counseling Services",
-      status: "Completed",
-    },
-    {
-      id: 11,
-      title: "Diversity and Inclusion Workshop",
-      date: "2025-05-18",
-      location: "Cultural Center",
-      organizer: "Diversity Office",
-      status: "Upcoming",
-    },
-    {
-      id: 12,
-      title: "Financial Literacy Seminar",
-      date: "2025-06-25",
-      location: "Finance Department",
-      organizer: "Finance Office",
-      status: "Upcoming",
-    },
-    {
-      id: 13,
-      title: "Public Speaking Workshop",
-      date: "2025-05-22",
-      location: "Communication Department",
-      organizer: "Communication Office",
-      status: "Upcoming",
-    },
-    {
-      id: 14,
-      title: "Career Development Conference",
-      date: "2025-07-01",
-      location: "Convention Center",
-      organizer: "Career Services",
-      status: "Upcoming",
-    },
-  ];
+  const [users, setUsers] = useState([]);
 
-  const totalEvents = 87;
-  const upcommingEvents = 32;
-  const totalEventResults = events.length;
+  const [filteredUsers, setFilteredUsers] = useState([]);
 
-  // Mock jobs data
-  const jobs = [
-    {
-      id: 1,
-      title: "Software Engineer",
-      company: "Tech Solutions Inc.",
-      location: "San Francisco, CA",
-      postedDate: "2025-05-10",
-      status: "Active",
-    },
-    {
-      id: 2,
-      title: "Marketing Specialist",
-      company: "Global Brands",
-      location: "New York, NY",
-      postedDate: "2025-05-08",
-      status: "Active",
-    },
-    {
-      id: 3,
-      title: "Financial Analyst",
-      company: "Investment Partners",
-      location: "Chicago, IL",
-      postedDate: "2025-05-01",
-      status: "Filled",
-    },
-    {
-      id: 4,
-      title: "Product Manager",
-      company: "Innovate Labs",
-      location: "Austin, TX",
-      postedDate: "2025-04-28",
-      status: "Active",
-    },
-    {
-      id: 5,
-      title: "HR Coordinator",
-      company: "Corporate Services",
-      location: "Remote",
-      postedDate: "2025-05-12",
-      status: "Active",
-    },
-    {
-      id: 6,
-      title: "Data Scientist",
-      company: "AI Ventures",
-      location: "Seattle, WA",
-      postedDate: "2025-05-15",
-      status: "Active",
-    },
-    {
-      id: 7,
-      title: "Graphic Designer",
-      company: "Creative Studio",
-      location: "Los Angeles, CA",
-      postedDate: "2025-05-05",
-      status: "Active",
-    },
-    {
-      id: 8,
-      title: "Sales Manager",
-      company: "Retail Corp",
-      location: "Dallas, TX",
-      postedDate: "2025-05-03",
-      status: "Filled",
-    },
-    {
-      id: 9,
-      title: "Cybersecurity Analyst",
-      company: "SecureTech",
-      location: "Washington, DC",
-      postedDate: "2025-05-07",
-      status: "Active",
-    },
-    {
-      id: 10,
-      title: "Content Writer",
-      company: "MediaWorks",
-      location: "Remote",
-      postedDate: "2025-05-09",
-      status: "Active",
-    },
-    {
-      id: 11,
-      title: "UI/UX Designer",
-      company: "DesignHub",
-      location: "San Diego, CA",
-      postedDate: "2025-05-11",
-      status: "Active",
-    },
-    {
-      id: 12,
-      title: "DevOps Engineer",
-      company: "CloudOps",
-      location: "Denver, CO",
-      postedDate: "2025-05-13",
-      status: "Active",
-    },
-    {
-      id: 13,
-      title: "Business Analyst",
-      company: "Enterprise Solutions",
-      location: "Boston, MA",
-      postedDate: "2025-05-06",
-      status: "Active",
-    },
-    {
-      id: 14,
-      title: "Operations Manager",
-      company: "LogisticsPro",
-      location: "Phoenix, AZ",
-      postedDate: "2025-05-04",
-      status: "Filled",
-    },
-    {
-      id: 15,
-      title: "Mobile App Developer",
-      company: "Appify",
-      location: "Orlando, FL",
-      postedDate: "2025-05-02",
-      status: "Active",
-    },
-    {
-      id: 16,
-      title: "SEO Specialist",
-      company: "DigitalBoost",
-      location: "Remote",
-      postedDate: "2025-05-14",
-      status: "Active",
-    },
-    {
-      id: 17,
-      title: "Network Engineer",
-      company: "NetSecure",
-      location: "Houston, TX",
-      postedDate: "2025-05-16",
-      status: "Active",
-    },
-    {
-      id: 18,
-      title: "Project Coordinator",
-      company: "BuildIt",
-      location: "Portland, OR",
-      postedDate: "2025-05-17",
-      status: "Active",
-    },
-    {
-      id: 19,
-      title: "Customer Support Specialist",
-      company: "HelpDesk Inc.",
-      location: "Remote",
-      postedDate: "2025-05-18",
-      status: "Active",
-    },
-    {
-      id: 20,
-      title: "AI Researcher",
-      company: "FutureTech",
-      location: "Palo Alto, CA",
-      postedDate: "2025-05-19",
-      status: "Active",
-    },
-  ];
+  console.log("filterd user", filteredUsers);
+  console.log("users", users);
 
-  const totalJobs = 125;
-  const totalJobResults = jobs.length;
+  const [searchQuery, setSearchQuery] = useState("");
+  const [roleFilter, setRoleFilter] = useState("all-roles");
 
+  // Fetch dashboard stats
   useEffect(() => {
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    setDisplayedUsers(users.slice(startIndex, endIndex));
-    setDisplayedEvents(events.slice(startIndex, endIndex));
-    setDisplayedJobs(jobs.slice(startIndex, endIndex));
-  }, [currentPage]);
+    const fetchStats = async () => {
+      try {
+        // Get users count
+        const { data: usersCount } = await supabase
+          .from("profiles")
+          .select("role", { count: "exact" });
+
+        const { data: eventsData } = await supabase
+          .from("events")
+          .select("status", { count: "exact" });
+
+        const { data: jobsData } = await supabase
+          .from("jobs")
+          .select("*", { count: "exact" })
+          .eq("is_active", true);
+
+        setStats({
+          totalUsers: usersCount?.length || 0,
+          activeStudents:
+            usersCount?.filter((u) => u.role === "student").length || 0,
+          activeAlumni:
+            usersCount?.filter((u) => u.role === "alumni").length || 0,
+          totalEvents: eventsData?.length || 0,
+          upcomingEvents:
+            eventsData?.filter((e) => e.status === "upcoming").length || 0,
+          activeJobs: jobsData?.length || 0,
+        });
+      } catch (error) {
+        console.error("Error fetching stats:", error);
+      }
+    };
+
+    fetchStats();
+  }, []);
+
+  // Fetch users
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("profiles")
+          .select(
+            `
+            id,
+            full_name,
+            email,
+            role,
+            created_at,
+            profile_photo_url
+          `
+          )
+          .order("created_at", { ascending: false });
+
+        if (error) throw error;
+
+        setUsers(data);
+        setFilteredUsers(data);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
+
+    fetchUsers();
+  }, []);
+
+  // Filter users based on search and role
+  useEffect(() => {
+    let filtered = users;
+
+    if (searchQuery) {
+      filtered = filtered.filter(
+        (user) =>
+          user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          user.email.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
+    if (roleFilter !== "all-roles") {
+      filtered = filtered.filter(
+        (user) => user.role.toLowerCase() === roleFilter.toLowerCase()
+      );
+    }
+
+    setFilteredUsers(filtered);
+  }, [searchQuery, roleFilter, users]);
+
+  // Pagination calculations
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const displayedUsers = filteredUsers.slice(startIndex, endIndex);
+  const totalResults = filteredUsers.length;
+  const startItem = totalResults === 0 ? 0 : startIndex + 1;
+  const endItem = Math.min(endIndex, totalResults);
+
+  const [eventStats, setEventStats] = useState({
+    totalEvents: 0,
+    upcomingEvents: 0,
+    completedEvents: 0,
+    cancelledEvents: 0,
+  });
+
+  const [events, setEvents] = useState([]);
+  const [filteredEvents, setFilteredEvents] = useState([]);
+  const [eventSearchQuery, setEventSearchQuery] = useState("");
+  const [eventStatusFilter, setEventStatusFilter] = useState("all-status");
+
+  console.log(filteredEvents);
+
+  //  fetching event stats
+  useEffect(() => {
+    const fetchEventStats = async () => {
+      try {
+        const { data: eventData, error } = await supabase
+          .from("events")
+          .select(
+            "id, status,location,time_slot_start,title,banner_image_url, event_date"
+          );
+
+        if (error) throw error;
+
+        const currentDate = new Date();
+
+        setEventStats({
+          totalEvents: eventData.length,
+          upcomingEvents: eventData.filter(
+            (event) =>
+              new Date(event.event_date) > currentDate &&
+              event.status === "upcoming"
+          ).length,
+          completedEvents: eventData.filter(
+            (event) => event.status === "completed"
+          ).length,
+          cancelledEvents: eventData.filter(
+            (event) => event.status === "cancelled"
+          ).length,
+        });
+
+        setEvents(eventData);
+        setFilteredEvents(eventData);
+      } catch (error) {
+        console.error("Error fetching event stats:", error);
+      }
+    };
+
+    fetchEventStats();
+  }, []);
+
+  //  filtering events
+  useEffect(() => {
+    let filtered = events;
+
+    if (eventSearchQuery) {
+      filtered = filtered.filter(
+        (event) =>
+          event.title.toLowerCase().includes(eventSearchQuery.toLowerCase()) ||
+          event.location.toLowerCase().includes(eventSearchQuery.toLowerCase())
+      );
+    }
+
+    if (eventStatusFilter !== "all-status") {
+      filtered = filtered.filter(
+        (event) =>
+          event.status.toLowerCase() === eventStatusFilter.toLowerCase()
+      );
+    }
+
+    setFilteredEvents(filtered);
+  }, [eventSearchQuery, eventStatusFilter, events]);
+
+  const [jobStats, setJobStats] = useState({
+    totalJobs: 0,
+    activeJobs: 0,
+    applicationsReceived: 0,
+    jobsFilledRate: 0,
+  });
+
+  const [jobs, setJobs] = useState([]);
+  const [filteredJobs, setFilteredJobs] = useState([]);
+  const [jobSearchQuery, setJobSearchQuery] = useState("");
+  const [jobStatusFilter, setJobStatusFilter] = useState("all");
+
+  console.log("filteredJobs", filteredJobs);
+
+  //  fetching job stats
+  useEffect(() => {
+    const fetchJobStats = async () => {
+      try {
+        const { data: jobsData, error } = await supabase.from("jobs").select(`
+          *,
+          job_applications (
+            id,
+            status
+          )
+        `);
+
+        if (error) throw error;
+
+        const stats = {
+          totalJobs: jobsData.length,
+          activeJobs: jobsData.filter((job) => job.is_active).length,
+          applicationsReceived: jobsData.reduce(
+            (total, job) => total + (job.job_applications?.length || 0),
+            0
+          ),
+          jobsFilledRate: (
+            (jobsData.filter((job) => !job.is_active).length /
+              jobsData.length) *
+            100
+          ).toFixed(1),
+        };
+
+        setJobStats(stats);
+        setJobs(jobsData);
+        setFilteredJobs(jobsData);
+      } catch (error) {
+        console.error("Error fetching job stats:", error);
+      }
+    };
+
+    fetchJobStats();
+  }, []);
+
+  //  filtering jobs
+  useEffect(() => {
+    let filtered = jobs;
+
+    if (jobSearchQuery) {
+      filtered = filtered.filter(
+        (job) =>
+          job.title.toLowerCase().includes(jobSearchQuery.toLowerCase()) ||
+          job.company.toLowerCase().includes(jobSearchQuery.toLowerCase())
+      );
+    }
+
+    if (jobStatusFilter !== "all") {
+      filtered = filtered.filter((job) =>
+        jobStatusFilter === "active" ? job.is_active : !job.is_active
+      );
+    }
+
+    setFilteredJobs(filtered);
+  }, [jobSearchQuery, jobStatusFilter, jobs]);
 
   useEffect(() => {
     setCurrentPage(1);
   }, [activeTab]);
-
-  // Calculate pagination display text
-  const startItem = (currentPage - 1) * itemsPerPage + 1;
-  const endItem = Math.min(currentPage * itemsPerPage, totalResults);
-
-  const handleNextPage = () => {
-    if (currentPage * itemsPerPage < totalResults) {
-      setCurrentPage((prev) => prev + 1);
-    }
-  };
-
-  const handlePreviousPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage((prev) => prev - 1);
-    }
-  };
 
   const handleJobFormChange = (e) => {
     e.setIsJobFormChanged(true);
@@ -602,94 +369,62 @@ const SuperDashboard = () => {
     setIsEventFormChanged(false);
   };
 
-  const [activeSettingTab, setActiveSettingTab] = useState("profile");
-  const [accountData, setAccountData] = useState({
-    fullName: "",
-    photo: null,
-    gender: "",
-    dob: "",
-    contactNo: "",
-    passoutYear: "",
-    degreeProgram: "",
-    occupation: "",
-    headline: "",
-    region: "",
-  });
+  const [activeViewTab, setActiveViewTab] = useState("profile");
 
-  const [profileData, setProfileData] = useState({
-    academicSummary: "",
-    technicalSkills: "",
-    academicTimeline: {
-      title: "",
-      institution: "",
-      duration: "",
-      gpa: "",
-    },
-  });
-
-  const handleAccountChange = (e) => {
-    const { name, value, files, type } = e.target;
-    setAccountData((prev) => ({
-      ...prev,
-      [name]: type === "file" ? files[0] : value,
-    }));
-  };
-
-  const handleProfileChange = (e) => {
-    const { name, value } = e.target;
-
-    if (["title", "institution", "duration", "gpa"].includes(name)) {
-      setProfileData((prev) => ({
-        ...prev,
-        academicTimeline: {
-          ...prev.academicTimeline,
-          [name]: value,
+  // Handle user creation
+  const handleAddUser = async (formData) => {
+    try {
+      // First create auth user
+      const { data: authData, error: authError } = await supabase.auth.signUp({
+        email: formData.get("email"),
+        password: formData.get("password"),
+        options: {
+          data: {
+            role: formData.get("role"),
+          },
         },
-      }));
-    } else {
-      setProfileData((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
+      });
+
+      if (authError) throw authError;
+
+      // Then create profile
+      const { error: profileError } = await supabase.from("profiles").insert([
+        {
+          id: authData.user.id,
+          full_name: formData.get("name"),
+          email: formData.get("email"),
+          role: formData.get("role").toLowerCase(),
+          profile_photo_url: null,
+        },
+      ]);
+
+      if (profileError) throw profileError;
+
+      // Refresh users list
+      const fetchUsers = async () => {
+        const { data, error } = await supabase
+          .from("profiles")
+          .select("*")
+          .order("created_at", { ascending: false });
+
+        if (error) throw error;
+        setUsers(data);
+      };
+
+      await fetchUsers();
+      setAddUserDialog(false);
+    } catch (error) {
+      console.error("Error creating user:", error);
+      alert("Failed to create user");
     }
   };
 
-  const handleAccountSubmit = (e) => {
-    e.preventDefault();
-    console.log("Account Data:", accountData);
-  };
-
-  const handleProfileSubmit = (e) => {
-    e.preventDefault();
-    console.log("Profile Data:", profileData);
-  };
-
-  const handleAddUser = (e) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-
-    // Basic validation
-    const name = formData.get("name");
-    const email = formData.get("email");
-    const password = formData.get("password");
-    const role = formData.get("role");
-
-    if (!name || !email || !password || !role) {
-      return;
-    }
-
-    console.log("Adding new user:", Object.fromEntries(formData));
-
-    // Close dialog and reset form
-    setAddUserDialog(false);
-    form.reset();
-  };
-
-  const handleDeleteUser = (user) => {
+  // Handle user deletion
+  const handleDeleteUser = async (user) => {
     setSelectedUser(user);
     setDeleteDialog(true);
   };
+
   const handleDeleteEvent = (event) => {
     setSelectedEvent(event);
     setDeleteEventDialog(true);
@@ -702,6 +437,229 @@ const SuperDashboard = () => {
   const confirmDeleteUser = () => {
     console.log(`Deleted user: ${selectedUser.name}`);
     setDeleteDialog(false);
+  };
+
+  const industryskills = [
+    { value: "Programming", label: "Programming" },
+    { value: "Web Development", label: "Web Development" },
+    { value: "Database Management", label: "Database Management" },
+    { value: "Cloud Computing", label: "Cloud Computing" },
+    { value: "System Design", label: "System Design" },
+    { value: "Patient Care", label: "Patient Care" },
+    { value: "Medical Research", label: "Medical Research" },
+    { value: "Health Informatics", label: "Health Informatics" },
+    { value: "Phlebotomy", label: "Phlebotomy" },
+    { value: "Clinical Documentation", label: "Clinical Documentation" },
+    { value: "Curriculum Design", label: "Curriculum Design" },
+    { value: "Lesson Planning", label: "Lesson Planning" },
+    { value: "Online Teaching", label: "Online Teaching" },
+    { value: "Assessment", label: "Assessment" },
+    { value: "Student Counseling", label: "Student Counseling" },
+    { value: "Accounting", label: "Accounting" },
+    { value: "Financial Analysis", label: "Financial Analysis" },
+    { value: "Investment Management", label: "Investment Management" },
+    { value: "Risk Assessment", label: "Risk Assessment" },
+    { value: "Taxation", label: "Taxation" },
+    { value: "SEO", label: "SEO" },
+    { value: "Content Marketing", label: "Content Marketing" },
+    { value: "Social Media Management", label: "Social Media Management" },
+    { value: "Market Research", label: "Market Research" },
+    { value: "Email Marketing", label: "Email Marketing" },
+    { value: "Network Security", label: "Network Security" },
+    { value: "Threat Analysis", label: "Threat Analysis" },
+    { value: "Penetration Testing", label: "Penetration Testing" },
+    { value: "Security Audits", label: "Security Audits" },
+    { value: "Incident Response", label: "Incident Response" },
+    { value: "CAD", label: "CAD" },
+    { value: "Mathematical Modeling", label: "Mathematical Modeling" },
+    { value: "Structural Analysis", label: "Structural Analysis" },
+    { value: "Project Management", label: "Project Management" },
+    { value: "Thermodynamics", label: "Thermodynamics" },
+    { value: "Recruitment", label: "Recruitment" },
+    { value: "Employee Engagement", label: "Employee Engagement" },
+    { value: "Conflict Resolution", label: "Conflict Resolution" },
+    { value: "Performance Management", label: "Performance Management" },
+    { value: "HR Policies", label: "HR Policies" },
+    { value: "Shopify", label: "Shopify" },
+    { value: "Dropshipping", label: "Dropshipping" },
+    { value: "Product Listing", label: "Product Listing" },
+    { value: "UX Design", label: "UX Design" },
+    { value: "Google Ads", label: "Google Ads" },
+    { value: "Machine Learning", label: "Machine Learning" },
+    { value: "Deep Learning", label: "Deep Learning" },
+    {
+      value: "Natural Language Processing",
+      label: "Natural Language Processing",
+    },
+    { value: "Computer Vision", label: "Computer Vision" },
+    { value: "Model Training", label: "Model Training" },
+  ];
+
+  const [profileData, setProfileData] = useState(null);
+  const [formData, setFormData] = useState({
+    profile_summary: "",
+
+    skillsExpertise: [],
+    fullName: "",
+    gender: "",
+    dob: "",
+    city: "",
+    country: "",
+    passoutYear: "",
+    jobPosition: "",
+    company: "",
+    course: "",
+    institute: "",
+    photo: null,
+  });
+
+  console.log("profileData", profileData);
+  console.log("formData", formData);
+
+  // fetch profile data when user is selected
+  useEffect(() => {
+    const fetchProfileData = async () => {
+      if (selectedUser?.id) {
+        const data = await fetchUserProfileDetails(selectedUser.id);
+        if (data) {
+          setProfileData(data);
+
+          setFormData({
+            profile_summary: data.profile_summary || "",
+            skillsExpertise: data.skills_expertise || [],
+            fullName: data.full_name || "",
+            gender: data.gender || "",
+            dob: data.date_of_birth || "",
+            city: data.location_city || "",
+            country: data.location_country || "",
+            passoutYear: data.graduation_year || "",
+            jobPosition: data.current_job_title || "",
+            company: data.current_company || "",
+            course: data.course || "",
+            institute: data.institute || "",
+          });
+        }
+      }
+    };
+    fetchProfileData();
+  }, [selectedUser?.id]);
+
+  const handleProfileSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const { error: profileError } = await supabase
+        .from("profiles")
+        .update({
+          profile_summary: formData.profile_summary,
+          skills_expertise: formData.skillsExpertise,
+        })
+        .eq("id", selectedUser.id);
+
+      if (profileError) throw profileError;
+
+      // Handle timeline updates
+      if (selectedUser.role === "alumni") {
+        const { error: timelineError } = await supabase
+          .from("profiles")
+          .update({
+            current_job_title: formData.jobPosition,
+            current_company: formData.company,
+          })
+          .eq("id", selectedUser.id);
+        if (timelineError) throw timelineError;
+      } else {
+        const { error: timelineError } = await supabase
+          .from("profiles")
+          .update({
+            course: formData.course,
+            institute: formData.institute,
+          })
+          .eq("id", selectedUser.id);
+        if (timelineError) throw timelineError;
+      }
+
+      alert("Profile updated successfully");
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      alert("Failed to update profile: " + error.message);
+    }
+  };
+
+  const handleAccountSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      let photoUrl = formData.photo;
+
+      if (formData.photo instanceof File) {
+        const fileExt = formData.photo.name.split(".").pop();
+        const fileName = `${selectedUser.id}/${Date.now()}.${fileExt}`;
+
+        // Upload with proper metadata
+        const { data: uploadData, error: uploadError } = await supabase.storage
+          .from("profile-pictures")
+          .upload(fileName, formData.photo, {
+            cacheControl: "3600",
+            upsert: true,
+            contentType: formData.photo.type,
+            duplex: "half",
+          });
+
+        if (uploadError) {
+          console.error("Storage error:", uploadError);
+          throw new Error(`Failed to upload photo: ${uploadError.message}`);
+        }
+
+        // Get the public URL after successful upload
+        const {
+          data: { publicUrl },
+        } = supabase.storage.from("profile-pictures").getPublicUrl(fileName);
+
+        photoUrl = publicUrl;
+      }
+
+      // Update profile data
+      const { error: profileError } = await supabase
+        .from("profiles")
+        .update({
+          full_name: formData.fullName,
+          gender: formData.gender,
+          date_of_birth: formData.dob,
+          location_city: formData.city,
+          location_country: formData.country,
+          graduation_year: formData.passoutYear,
+          profile_photo_url: photoUrl,
+          updated_at: new Date().toISOString(),
+        })
+        .eq("id", selectedUser.id);
+
+      if (profileError) {
+        console.error("Profile update error:", profileError);
+        throw profileError;
+      }
+
+      // Refresh data
+      const updatedData = await fetchUserProfileDetails(selectedUser.id);
+      if (updatedData) {
+        setProfileData(updatedData);
+        setFormData((prev) => ({
+          ...prev,
+          photo: null,
+        }));
+      }
+
+      alert("Account details updated successfully");
+    } catch (error) {
+      console.error("Error updating account:", error);
+      alert(`Failed to update account: ${error.message}`);
+    }
+  };
+
+  const handleskillsExpertiseChange = (selectedOptions) => {
+    const selectedValues = selectedOptions.map((option) => option.value);
+    setFormData((prev) => ({
+      ...prev,
+      skillsExpertise: selectedValues,
+    }));
   };
 
   return (
@@ -784,7 +742,7 @@ const SuperDashboard = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-3xl font-bold">{totalUsers}</div>
+                  <div className="text-3xl font-bold">{stats.totalUsers}</div>
                 </CardContent>
               </Card>
               <Card>
@@ -794,7 +752,9 @@ const SuperDashboard = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-3xl font-bold">{activeStudents} </div>
+                  <div className="text-3xl font-bold">
+                    {stats.activeStudents}{" "}
+                  </div>
                 </CardContent>
               </Card>
               <Card>
@@ -804,7 +764,9 @@ const SuperDashboard = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-3xl font-bold">{activeAlumni} </div>
+                  <div className="text-3xl font-bold">
+                    {stats.activeAlumni}{" "}
+                  </div>
                 </CardContent>
               </Card>
             </div>
@@ -817,12 +779,14 @@ const SuperDashboard = () => {
                     type="text"
                     placeholder="Search users..."
                     className="pl-10 border-gray-300"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
                   />
                   <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                     <i className="fas fa-search text-gray-400"></i>
                   </div>
                 </div>
-                <Select defaultValue="all-roles">
+                <Select value={roleFilter} onValueChange={setRoleFilter}>
                   <SelectTrigger className="w-[180px] !rounded-button">
                     <SelectValue placeholder="Filter by role" />
                   </SelectTrigger>
@@ -858,26 +822,27 @@ const SuperDashboard = () => {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {displayedUsers.map((user) => (
+                    {filteredUsers.slice(startIndex, endIndex).map((user) => (
                       <TableRow key={user.id}>
                         <TableCell>
                           <Avatar>
-                            <AvatarImage src={sara} alt={user.name} />
-                            <AvatarFallback>
-                              {user.name.charAt(0)}
-                            </AvatarFallback>
+                            <AvatarImage
+                              src={user.profile_photo_url || dp}
+                              alt={user.name}
+                            />
+                            <AvatarFallback>{user.full_name}</AvatarFallback>
                           </Avatar>
                         </TableCell>
                         <TableCell className="font-medium">
-                          {user.name}
+                          {user.full_name}
                         </TableCell>
                         <TableCell>{user.email}</TableCell>
                         <TableCell>
                           <Badge
                             variant={
-                              user.role === "SUPERADMIN"
+                              user.role === "superadmin"
                                 ? "destructive"
-                                : user.role === "ALUMNI"
+                                : user.role === "alumni"
                                 ? "outline"
                                 : "default"
                             }
@@ -885,7 +850,7 @@ const SuperDashboard = () => {
                             {user.role}
                           </Badge>
                         </TableCell>
-                        <TableCell>{user.joinedDate}</TableCell>
+                        <TableCell>{user.created_at}</TableCell>
 
                         <TableCell className="text-right">
                           <div className="flex justify-end space-x-2">
@@ -894,7 +859,13 @@ const SuperDashboard = () => {
                               size="sm"
                               className="!rounded-button whitespace-nowrap cursor-pointer text-blue-600 border-blue-600 hover:bg-blue-50"
                               onClick={() => {
-                                setSelectedUser(user);
+                                setSelectedUser({
+                                  name: user.full_name,
+                                  id: user.id,
+                                  email: user.email,
+                                  role: user.role,
+                                  profile_photo_url: user.profile_photo_url,
+                                });
                                 setViewProfileDialog(true);
                               }}
                             >
@@ -905,7 +876,7 @@ const SuperDashboard = () => {
                               variant="outline"
                               size="sm"
                               className="!rounded-button whitespace-nowrap cursor-pointer text-red-600 border-red-600 hover:bg-red-50"
-                              onClick={() => handleDeleteUser(user)}
+                              onClick={() => handleDeleteUser(user.id)}
                             >
                               <i className="fas fa-trash-alt"></i>
                             </Button>
@@ -920,28 +891,29 @@ const SuperDashboard = () => {
             {/* Pagination */}
             <div className="flex items-center justify-between">
               <div className="text-sm text-gray-500">
-                Showing {startItem} to {endItem} of {totalResults} results
+                Showing {startItem} to {endItem} of {filteredUsers.length}{" "}
+                results
               </div>
               <div className="flex space-x-2">
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={handlePreviousPage}
+                  onClick={() =>
+                    setCurrentPage((prev) => Math.max(1, prev - 1))
+                  }
                   disabled={currentPage === 1}
                   className="!rounded-button whitespace-nowrap cursor-pointer"
-                  id="previous-button"
                 >
-                  <i className="fas fa-chevron-left mr-1"></i> Previous
+                  <i className="fas fa-chevron-left mr-2"></i> Previous
                 </Button>
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={handleNextPage}
-                  disabled={currentPage * itemsPerPage >= totalResults}
+                  onClick={() => setCurrentPage((prev) => prev + 1)}
+                  disabled={endIndex >= filteredUsers.length}
                   className="!rounded-button whitespace-nowrap cursor-pointer"
-                  id="next-button"
                 >
-                  Next <i className="fas fa-chevron-right ml-1"></i>
+                  Next <i className="fas fa-chevron-right ml-2"></i>
                 </Button>
               </div>
             </div>
@@ -962,7 +934,9 @@ const SuperDashboard = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-3xl font-bold">{totalEvents}</div>
+                  <div className="text-3xl font-bold">
+                    {eventStats.totalEvents}
+                  </div>
                 </CardContent>
               </Card>
               <Card>
@@ -972,12 +946,15 @@ const SuperDashboard = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-3xl font-bold">{upcommingEvents}</div>
+                  <div className="text-3xl font-bold">
+                    {eventStats.upcomingEvents}
+                  </div>
                 </CardContent>
               </Card>
             </div>
 
             {/* Event List Controls */}
+
             <div className="flex justify-between items-center mb-4">
               <div className="flex items-center space-x-4 w-2/3">
                 <div className="relative w-full max-w-md">
@@ -985,12 +962,17 @@ const SuperDashboard = () => {
                     type="text"
                     placeholder="Search events..."
                     className="pl-10 border-gray-300"
+                    value={eventSearchQuery}
+                    onChange={(e) => setEventSearchQuery(e.target.value)}
                   />
                   <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                     <i className="fas fa-search text-gray-400"></i>
                   </div>
                 </div>
-                <Select defaultValue="all-status">
+                <Select
+                  value={eventStatusFilter}
+                  onValueChange={setEventStatusFilter}
+                >
                   <SelectTrigger className="w-[180px] !rounded-button">
                     <SelectValue placeholder="Filter by status" />
                   </SelectTrigger>
@@ -1015,6 +997,7 @@ const SuperDashboard = () => {
                 <Table>
                   <TableHeader>
                     <TableRow>
+                      <TableHead>Banner</TableHead>
                       <TableHead>Title</TableHead>
                       <TableHead>Date</TableHead>
                       <TableHead>Time</TableHead>
@@ -1025,33 +1008,43 @@ const SuperDashboard = () => {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {displayedEvents.map((event) => (
+                    {filteredEvents.slice(startIndex, endIndex).map((event) => (
                       <TableRow key={event.id}>
+                        <TableCell>
+                          <img
+                            src={event.banner_image_url || dp}
+                            alt="Event Banner"
+                            width={80}
+                            height={160}
+                            className="w-20 h-auto aspect-auto brightness-90 transition-transform duration-300 hover:brightness-105 hover:scale-105 hover:shadow-lg"
+                          />
+                        </TableCell>
                         <TableCell className="font-medium">
                           {event.title}
                         </TableCell>
-                        <TableCell>{event.date}</TableCell>
-                        <TableCell>8:30 AM</TableCell>
+                        <TableCell>{event.event_date}</TableCell>
+                        <TableCell>{event.time_slot_start}</TableCell>
                         <TableCell>{event.location}</TableCell>
-                        <TableCell>{event.organizer}</TableCell>
+                        <TableCell>Organizer</TableCell>
                         <TableCell>
                           <Badge
                             variant={
-                              event.status === "Upcoming"
+                              event.status === "upcoming"
                                 ? "default"
-                                : event.status === "Completed"
+                                : event.status === "completed"
                                 ? "outline"
                                 : "secondary"
                             }
                             className={
-                              event.status === "Upcoming"
+                              event.status === "upcoming"
                                 ? "bg-blue-100 text-blue-800"
-                                : event.status === "Completed"
+                                : event.status === "completed"
                                 ? "bg-green-100 text-green-800"
                                 : "bg-gray-100 text-gray-800"
                             }
                           >
-                            {event.status}
+                            {event.status.charAt(0).toUpperCase() +
+                              event.status.slice(1)}
                           </Badge>
                         </TableCell>
                         <TableCell className="text-right">
@@ -1070,9 +1063,7 @@ const SuperDashboard = () => {
                             <Button
                               variant="outline"
                               size="sm"
-                              onClick={() => {
-                                handleDeleteEvent(event);
-                              }}
+                              onClick={() => handleDeleteEvent(event)}
                               className="!rounded-button whitespace-nowrap cursor-pointer text-red-600 border-red-600 hover:bg-red-50"
                             >
                               <i className="fas fa-trash-alt"></i>
@@ -1090,14 +1081,17 @@ const SuperDashboard = () => {
               <div className="text-sm text-gray-500">
                 Showing <span className="font-medium">{startItem}</span> to{" "}
                 <span className="font-medium">{endItem}</span> of{" "}
-                <span className="font-medium">{totalEventResults}</span> results
+                <span className="font-medium">{filteredEvents.length}</span>{" "}
+                results
               </div>
               <div className="flex space-x-2">
                 <Button
                   variant="outline"
                   size="sm"
                   disabled={currentPage === 1}
-                  onClick={handlePreviousPage}
+                  onClick={() =>
+                    setCurrentPage((prev) => Math.max(1, prev - 1))
+                  }
                   className="!rounded-button whitespace-nowrap cursor-pointer"
                 >
                   <i className="fas fa-chevron-left mr-2"></i> Previous
@@ -1105,7 +1099,8 @@ const SuperDashboard = () => {
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={handleNextPage}
+                  onClick={() => setCurrentPage((prev) => prev + 1)}
+                  disabled={endIndex >= filteredEvents.length}
                   className="!rounded-button whitespace-nowrap cursor-pointer"
                 >
                   Next <i className="fas fa-chevron-right ml-2"></i>
@@ -1121,7 +1116,7 @@ const SuperDashboard = () => {
               </h2>
             </div>
             {/* Analytics Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
               <Card>
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-medium text-gray-500">
@@ -1129,7 +1124,31 @@ const SuperDashboard = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-3xl font-bold">{totalJobs}</div>
+                  <div className="text-3xl font-bold">{jobStats.totalJobs}</div>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm font-medium text-gray-500">
+                    Active Jobs
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-3xl font-bold">
+                    {jobStats.activeJobs}
+                  </div>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm font-medium text-gray-500">
+                    Applications Received
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-3xl font-bold">
+                    {jobStats.applicationsReceived}
+                  </div>
                 </CardContent>
               </Card>
             </div>
@@ -1142,17 +1161,30 @@ const SuperDashboard = () => {
                     type="text"
                     placeholder="Search jobs..."
                     className="pl-10 border-gray-300"
+                    value={jobSearchQuery}
+                    onChange={(e) => setJobSearchQuery(e.target.value)}
                   />
                   <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                     <i className="fas fa-search text-gray-400"></i>
                   </div>
                 </div>
+                <Select
+                  value={jobStatusFilter}
+                  onValueChange={setJobStatusFilter}
+                >
+                  <SelectTrigger className="w-[180px] !rounded-button">
+                    <SelectValue placeholder="Filter by status" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Jobs</SelectItem>
+                    <SelectItem value="active">Active</SelectItem>
+                    <SelectItem value="filled">Filled</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
               <Button
                 className="!rounded-button whitespace-nowrap bg-[#415B68] text-white"
-                onClick={() => {
-                  setAddJobDialog(true);
-                }}
+                onClick={() => setAddJobDialog(true)}
               >
                 <i className="fas fa-plus mr-2"></i> Add Job
               </Button>
@@ -1167,20 +1199,37 @@ const SuperDashboard = () => {
                       <TableHead>Company</TableHead>
                       <TableHead>Location</TableHead>
                       <TableHead>Posted Date</TableHead>
-
+                      <TableHead>Status</TableHead>
+                      <TableHead>Applications</TableHead>
                       <TableHead className="text-right">Actions</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {displayedJobs.map((job) => (
+                    {filteredJobs.slice(startIndex, endIndex).map((job) => (
                       <TableRow key={job.id}>
                         <TableCell className="font-medium">
-                          {job.title}
+                          {job.job_title}
                         </TableCell>
-                        <TableCell>{job.company}</TableCell>
+                        <TableCell>{job.company_name}</TableCell>
                         <TableCell>{job.location}</TableCell>
-                        <TableCell>{job.postedDate}</TableCell>
-
+                        <TableCell>
+                          {new Date(job.created_at).toLocaleDateString()}
+                        </TableCell>
+                        <TableCell>
+                          <Badge
+                            variant={job.is_active ? "default" : "secondary"}
+                            className={
+                              job.is_active
+                                ? "bg-green-100 text-green-800"
+                                : "bg-gray-100 text-gray-800"
+                            }
+                          >
+                            {job.is_active ? "Active" : "Filled"}
+                          </Badge>
+                        </TableCell>
+                        <TableCell>
+                          {job.job_applications?.length || 0}
+                        </TableCell>
                         <TableCell className="text-right">
                           <div className="flex justify-end space-x-2">
                             <Button
@@ -1197,9 +1246,7 @@ const SuperDashboard = () => {
                             <Button
                               variant="outline"
                               size="sm"
-                              onClick={() => {
-                                handleDeleteJob(job);
-                              }}
+                              onClick={() => handleDeleteJob(job)}
                               className="!rounded-button whitespace-nowrap cursor-pointer text-red-600 border-red-600 hover:bg-red-50"
                             >
                               <i className="fas fa-trash-alt"></i>
@@ -1217,13 +1264,16 @@ const SuperDashboard = () => {
               <div className="text-sm text-gray-500">
                 Showing <span className="font-medium">{startItem}</span> to{" "}
                 <span className="font-medium">{endItem}</span> of{" "}
-                <span className="font-medium">{totalJobResults}</span> results
+                <span className="font-medium">{filteredJobs.length}</span>{" "}
+                results
               </div>
               <div className="flex space-x-2">
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={handlePreviousPage}
+                  onClick={() =>
+                    setCurrentPage((prev) => Math.max(1, prev - 1))
+                  }
                   disabled={currentPage === 1}
                   className="!rounded-button whitespace-nowrap cursor-pointer"
                 >
@@ -1232,7 +1282,8 @@ const SuperDashboard = () => {
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={handleNextPage}
+                  onClick={() => setCurrentPage((prev) => prev + 1)}
+                  disabled={endIndex >= filteredJobs.length}
                   className="!rounded-button whitespace-nowrap cursor-pointer"
                 >
                   Next <i className="fas fa-chevron-right ml-2"></i>
@@ -1251,26 +1302,31 @@ const SuperDashboard = () => {
           </DialogHeader>
           {selectedUser && (
             <div className="space-y-6">
-              <div className="flex items-start  space-x-6 ">
+              <div className="flex items-start space-x-6">
                 <Avatar className="h-24 w-24">
-                  <AvatarImage src={sara} alt={selectedUser.name} />
-                  <AvatarFallback>{selectedUser.name.charAt(0)}</AvatarFallback>
+                  <AvatarImage
+                    src={selectedUser.profile_photo_url || dp}
+                    alt={selectedUser.name || "User"}
+                  />
+                  <AvatarFallback>
+                    {selectedUser.name ? selectedUser.name.charAt(0) : "U"}
+                  </AvatarFallback>
                 </Avatar>
                 <div className="space-y-1">
                   <h3 className="text-2xl font-semibold">
-                    {selectedUser.name}
+                    {selectedUser.name || "Unknown User"}
                   </h3>
                   <p className="text-gray-500">{selectedUser.email}</p>
                   <Badge
                     variant={
-                      selectedUser.role === "SUPERADMIN"
+                      selectedUser.role === "superadmin"
                         ? "destructive"
-                        : selectedUser.role === "ALUMNI"
+                        : selectedUser.role === "alumni"
                         ? "outline"
                         : "default"
                     }
                   >
-                    {selectedUser.role}
+                    {selectedUser.role || "USER"}
                   </Badge>
                 </div>
               </div>
@@ -1279,14 +1335,14 @@ const SuperDashboard = () => {
                 <main>
                   <div>
                     <div className="max-w-7xl mx-auto ">
-                      <div className="bg-white rounded-lg shadow-lg p-4 lg:p-6 min-h-[59vh]">
+                      <div className="bg-white rounded-lg shadow-lg p-4 min-h-[50vh]">
                         {/* Tab Navigation */}
                         <div className="border-b border-gray-200">
-                          <div className="flex lg:space-x-8 space-x-4 overflow-x-auto pb-2">
+                          <div className="flex  space-x-4 overflow-x-auto pb-2">
                             <button
-                              onClick={() => setActiveSettingTab("profile")}
+                              onClick={() => setActiveViewTab("profile")}
                               className={`px-4 py-2 whitespace-nowrap min-h-[44px] min-w-[44px] flex items-center ${
-                                activeTab === "profile"
+                                activeViewTab === "profile"
                                   ? "text-[#269EB2] border-b-2 border-[#269EB2]"
                                   : "text-gray-500"
                               }`}
@@ -1294,9 +1350,9 @@ const SuperDashboard = () => {
                               Profile
                             </button>
                             <button
-                              onClick={() => setActiveSettingTab("account")}
+                              onClick={() => setActiveViewTab("account")}
                               className={`px-4 py-2 whitespace-nowrap min-h-[44px] min-w-[44px] flex items-center ${
-                                activeTab === "account"
+                                activeViewTab === "account"
                                   ? "text-[#269EB2] border-b-2 border-[#269EB2]"
                                   : "text-gray-500"
                               }`}
@@ -1304,11 +1360,9 @@ const SuperDashboard = () => {
                               Account
                             </button>
                             <button
-                              onClick={() =>
-                                setActiveSettingTab("changepassword")
-                              }
+                              onClick={() => setActiveViewTab("changepassword")}
                               className={`px-4 py-2 whitespace-nowrap min-h-[44px] min-w-[44px] flex items-center ${
-                                activeTab === "changepassword"
+                                activeViewTab === "changepassword"
                                   ? "text-[#269EB2] border-b-2 border-[#269EB2]"
                                   : "text-gray-500"
                               }`}
@@ -1319,79 +1373,119 @@ const SuperDashboard = () => {
                         </div>
 
                         {/* Tab Content */}
-                        <div className="mt-8 space-y-6">
-                          {activeSettingTab === "profile" && (
+                        <div className=" space-y-6  max-h-[46vh] overflow-y-auto">
+                          {activeViewTab === "profile" && (
                             <form onSubmit={handleProfileSubmit}>
                               <div className="grid lg:grid-cols-1 grid-cols-1 gap-4">
-                                <div className="border-2 border-dashed w-full border-gray-300 rounded-lg p-4 cursor-move">
+                                <div className="border-2 border-dashed w-full border-gray-300 rounded-lg p-4">
                                   <div className="flex justify-between flex-wrap gap-4">
                                     <div className="flex-1 min-w-[250px]">
-                                      <label>Academic Summary</label>
+                                      <label>
+                                        {selectedUser.role === "alumni"
+                                          ? "Professional Summary"
+                                          : "Academic Summary"}
+                                      </label>
                                       <textarea
                                         name="academicSummary"
-                                        value={profileData.academicSummary}
-                                        onChange={handleProfileChange}
+                                        value={formData.profile_summary}
+                                        onChange={(e) =>
+                                          setFormData({
+                                            ...formData,
+                                            profile_summary: e.target.value,
+                                          })
+                                        }
                                         className="border p-2 w-full text-sm mt-2 text-gray-600 border-gray-400"
                                       />
                                     </div>
 
                                     <div className="flex-1 min-w-[250px]">
                                       <label>Technical Skills</label>
-                                      <input
-                                        type="text"
-                                        name="technicalSkills"
-                                        value={profileData.technicalSkills}
-                                        onChange={handleProfileChange}
-                                        className="border p-2 w-full text-sm mt-2 text-gray-600 border-gray-400"
+                                      <MultiSelect
+                                        selectedOptions={
+                                          formData.skillsExpertise
+                                        }
+                                        onChange={handleskillsExpertiseChange}
+                                        options={industryskills}
                                       />
                                     </div>
 
                                     <div className="w-full mt-4">
-                                      <label>Academic Timeline</label>
+                                      {selectedUser.role === "alumni" ? (
+                                        <h3>Experienced Timeline</h3>
+                                      ) : (
+                                        <h3>Academic Timeline</h3>
+                                      )}
+
                                       <div className="border-2 border-dashed p-4 rounded mb-3 space-y-2 border-gray-300 mt-2">
-                                        <div className="grid lg:grid-cols-2 gap-4">
-                                          <input
-                                            type="text"
-                                            name="title"
-                                            placeholder="Title"
-                                            value={
-                                              profileData.academicTimeline.title
-                                            }
-                                            onChange={handleProfileChange}
-                                            className="border p-2 w-full"
-                                          />
-                                          <input
-                                            type="text"
-                                            name="institution"
-                                            placeholder="Institution"
-                                            value={
-                                              profileData.academicTimeline
-                                                .institution
-                                            }
-                                            onChange={handleProfileChange}
-                                            className="border p-2 w-full"
-                                          />
-                                          <input
-                                            type="text"
-                                            name="duration"
-                                            placeholder="Duration"
-                                            value={
-                                              profileData.academicTimeline
-                                                .duration
-                                            }
-                                            onChange={handleProfileChange}
-                                            className="border p-2 w-full"
-                                          />
-                                          <input
-                                            type="text"
-                                            name="gpa"
-                                            placeholder="GPA (if any)"
-                                            value={
-                                              profileData.academicTimeline.gpa
-                                            }
-                                            onChange={handleProfileChange}
-                                            className="border p-2 w-full"
-                                          />
+                                        <div className="grid grid-cols-2 gap-4">
+                                          {selectedUser.role === "alumni" ? (
+                                            <>
+                                              <div>
+                                                <label>Job position</label>
+                                                <input
+                                                  type="text"
+                                                  name="jobPosition"
+                                                  value={formData.jobPosition}
+                                                  onChange={(e) =>
+                                                    setFormData({
+                                                      ...formData,
+                                                      jobPosition:
+                                                        e.target.value,
+                                                    })
+                                                  }
+                                                  className="border p-2 w-full"
+                                                />
+                                              </div>
+                                              <div>
+                                                <label>Company</label>
+                                                <input
+                                                  type="text"
+                                                  name="company"
+                                                  value={formData.company}
+                                                  onChange={(e) =>
+                                                    setFormData({
+                                                      ...formData,
+                                                      company: e.target.value,
+                                                    })
+                                                  }
+                                                  className="border p-2 w-full"
+                                                />
+                                              </div>
+                                            </>
+                                          ) : (
+                                            <>
+                                              <div>
+                                                <label>Course</label>
+                                                <input
+                                                  type="text"
+                                                  name="course"
+                                                  value={formData.course}
+                                                  onChange={(e) =>
+                                                    setFormData({
+                                                      ...formData,
+                                                      course: e.target.value,
+                                                    })
+                                                  }
+                                                  className="border p-2 w-full"
+                                                />
+                                              </div>
+                                              <div>
+                                                <label>Institute</label>
+                                                <input
+                                                  type="text"
+                                                  name="institute"
+                                                  value={formData.institute}
+                                                  onChange={(e) =>
+                                                    setFormData({
+                                                      ...formData,
+                                                      institute: e.target.value,
+                                                    })
+                                                  }
+                                                  className="border p-2 w-full"
+                                                />
+                                              </div>
+                                            </>
+                                          )}
                                         </div>
                                       </div>
                                     </div>
@@ -1410,122 +1504,135 @@ const SuperDashboard = () => {
                             </form>
                           )}
 
-                          {activeSettingTab === "account" && (
+                          {activeViewTab === "account" && (
                             <div className="grid lg:grid-cols-1 grid-cols-1 gap-4">
                               <div className="border-2 border-dashed w-full border-gray-300 rounded-lg p-4 cursor">
                                 <form onSubmit={handleAccountSubmit}>
-                                  <div className="flex justify-between flex-wrap">
-                                    <div className="w-60 mt-4">
+                                  <div className="grid grid-cols-3 gap-4">
+                                    <div className="w-full mt-4">
                                       <label>Full Name</label>
                                       <input
                                         type="text"
                                         name="fullName"
-                                        value={accountData.fullName}
-                                        onChange={handleAccountChange}
+                                        value={formData.fullName}
+                                        onChange={(e) =>
+                                          setFormData({
+                                            ...formData,
+                                            fullName: e.target.value,
+                                          })
+                                        }
                                         className="border p-2 w-full text-sm mt-2 text-gray-600 border-gray-400"
                                       />
                                     </div>
 
-                                    <div className="w-60 mt-4">
+                                    <div className="w-full mt-4">
                                       <label>Photo</label>
                                       <input
                                         type="file"
                                         name="photo"
-                                        onChange={handleAccountChange}
+                                        onChange={(e) => {
+                                          const file = e.target.files[0];
+                                          if (
+                                            file &&
+                                            file.type.startsWith("image/")
+                                          ) {
+                                            setFormData((prev) => ({
+                                              ...prev,
+                                              photo: file,
+                                            }));
+                                          } else {
+                                            alert(
+                                              "Please select an image file"
+                                            );
+                                          }
+                                        }}
                                         className="border p-2 w-full text-sm mt-2 text-gray-600 border-gray-400"
+                                        accept="image/*"
                                       />
                                     </div>
 
-                                    <div className="w-60 mt-4">
+                                    <div className="w-full mt-4">
                                       <label>Gender</label>
                                       <select
                                         name="gender"
-                                        value={accountData.gender}
-                                        onChange={handleAccountChange}
+                                        value={formData.gender}
+                                        onChange={(e) =>
+                                          setFormData({
+                                            ...formData,
+                                            gender: e.target.value,
+                                          })
+                                        }
                                         className="border p-2 w-full text-sm mt-2 text-gray-600 border-gray-400"
                                       >
-                                        <option value="">Select</option>
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
                                       </select>
                                     </div>
 
-                                    <div className="w-60 mt-4">
+                                    <div className="w-full mt-4">
                                       <label>Date of Birth</label>
                                       <input
                                         type="date"
                                         name="dob"
-                                        value={accountData.dob}
-                                        onChange={handleAccountChange}
+                                        value={formData.dob}
+                                        onChange={(e) =>
+                                          setFormData({
+                                            ...formData,
+                                            dob: e.target.value,
+                                          })
+                                        }
                                         className="border p-2 w-full text-sm mt-2 text-gray-600 border-gray-400"
                                       />
                                     </div>
-
-                                    <div className="w-60 mt-4">
-                                      <label>Contact No.</label>
-                                      <input
-                                        type="tel"
-                                        name="contactNo"
-                                        value={accountData.contactNo}
-                                        onChange={handleAccountChange}
-                                        className="border p-2 w-full text-sm mt-2 text-gray-600 border-gray-400"
-                                      />
-                                    </div>
-
-                                    <div className="w-60 mt-4">
-                                      <label>Passout Year</label>
-                                      <input
-                                        type="number"
-                                        name="passoutYear"
-                                        value={accountData.passoutYear}
-                                        onChange={handleAccountChange}
-                                        className="border p-2 w-full text-sm mt-2 text-gray-600 border-gray-400"
-                                      />
-                                    </div>
-
-                                    <div className="w-60 mt-4">
-                                      <label>Degree Program</label>
-                                      <input
-                                        type="text"
-                                        name="degreeProgram"
-                                        value={accountData.degreeProgram}
-                                        onChange={handleAccountChange}
-                                        className="border p-2 w-full text-sm mt-2 text-gray-600 border-gray-400"
-                                      />
-                                    </div>
-
-                                    <div className="w-60 mt-4">
-                                      <label>Occupation</label>
-                                      <input
-                                        type="text"
-                                        name="occupation"
-                                        value={accountData.occupation}
-                                        onChange={handleAccountChange}
-                                        className="border p-2 w-full text-sm mt-2 text-gray-600 border-gray-400"
-                                      />
-                                    </div>
-
-                                    <div className="w-60 mt-4">
-                                      <label>Professional headline</label>
-                                      <input
-                                        type="text"
-                                        name="headline"
-                                        value={accountData.headline}
-                                        onChange={handleAccountChange}
-                                        className="border p-2 w-full text-sm mt-2 text-gray-600 border-gray-400"
-                                      />
-                                    </div>
-
-                                    <div className="w-60 mt-4">
-                                      <label>Region</label>
-                                      <input
-                                        type="text"
-                                        name="region"
-                                        value={accountData.region}
-                                        onChange={handleAccountChange}
-                                        className="border p-2 w-full text-sm mt-2 text-gray-600 border-gray-400"
-                                      />
-                                    </div>
+                                    {selectedUser.role === "alumni" && (
+                                      <>
+                                        <div className="w-full mt-4">
+                                          <label>Passout Year</label>
+                                          <input
+                                            type="number"
+                                            name="passoutYear"
+                                            value={formData.passoutYear}
+                                            onChange={(e) =>
+                                              setFormData({
+                                                ...formData,
+                                                passoutYear: e.target.value,
+                                              })
+                                            }
+                                            className="border p-2 w-full text-sm mt-2 text-gray-600 border-gray-400"
+                                          />
+                                        </div>
+                                        <div className="w-full mt-4">
+                                          <label> City</label>
+                                          <input
+                                            type="text"
+                                            name="city"
+                                            value={formData.city}
+                                            onChange={(e) =>
+                                              setFormData({
+                                                ...formData,
+                                                city: e.target.value,
+                                              })
+                                            }
+                                            className="border p-2 w-full text-sm mt-2 text-gray-600 border-gray-400"
+                                          />
+                                        </div>
+                                        <div className="w-full mt-4">
+                                          <label> Country</label>
+                                          <input
+                                            type="text"
+                                            name="country"
+                                            value={formData.country}
+                                            onChange={(e) =>
+                                              setFormData({
+                                                ...formData,
+                                                country: e.target.value,
+                                              })
+                                            }
+                                            className="border p-2 w-full text-sm mt-2 text-gray-600 border-gray-400"
+                                          />
+                                        </div>
+                                      </>
+                                    )}
                                   </div>
 
                                   <button
@@ -1539,7 +1646,7 @@ const SuperDashboard = () => {
                             </div>
                           )}
 
-                          {activeSettingTab === "changepassword" && (
+                          {activeViewTab === "changepassword" && (
                             <form onSubmit={handleProfileSubmit}>
                               <div className="border-2 border-dashed w-full border-gray-300 rounded-lg p-4 space-y-2.5">
                                 <div className="flex flex-col space-y-1.5">
@@ -1662,9 +1769,8 @@ const SuperDashboard = () => {
                   <SelectValue placeholder="Select user role" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="STUDENT">Student</SelectItem>
-                  <SelectItem value="ALUMNI">Alumni</SelectItem>
-                  <SelectItem value="SUPERADMIN">Superadmin</SelectItem>
+                  <SelectItem value="student">Student</SelectItem>
+                  <SelectItem value="alumni">Alumni</SelectItem>
                 </SelectContent>
               </Select>
             </div>
