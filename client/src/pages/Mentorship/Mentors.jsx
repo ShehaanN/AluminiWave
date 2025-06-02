@@ -204,7 +204,7 @@ const Mentors = () => {
                   </CardHeader>
                   <CardContent className="space-y-2">
                     <p className="text-gray-600 leading-relaxed">
-                      {selectedUser.professional_summary}
+                      {selectedUser.profile_summary}
                     </p>
                   </CardContent>
                 </Card>

@@ -1071,10 +1071,10 @@ const SuperDashboard = () => {
     skillsExpertise: [],
     fullName: "",
     gender: "",
-    dob: "",
+    dob: null,
     city: "",
     country: "",
-    passoutYear: "",
+    passoutYear: null,
     jobPosition: "",
     company: "",
     course: "",
@@ -1154,20 +1154,18 @@ const SuperDashboard = () => {
   const handleAccountSubmit = async (e) => {
     e.preventDefault();
     try {
-      let photoUrl = formData.photo;
+      let photoUrl = selectedUser.profile_photo_url || null;
 
       if (formData.photo instanceof File) {
         const fileExt = formData.photo.name.split(".").pop();
         const fileName = `${selectedUser.id}/${Date.now()}.${fileExt}`;
 
-        // Upload with proper metadata
         const { data: uploadData, error: uploadError } = await supabase.storage
           .from("profile-pictures")
           .upload(fileName, formData.photo, {
             cacheControl: "3600",
             upsert: true,
             contentType: formData.photo.type,
-            duplex: "half",
           });
 
         if (uploadError) {
@@ -1175,7 +1173,6 @@ const SuperDashboard = () => {
           throw new Error(`Failed to upload photo: ${uploadError.message}`);
         }
 
-        // Get the public URL after successful upload
         const {
           data: { publicUrl },
         } = supabase.storage.from("profile-pictures").getPublicUrl(fileName);
@@ -1183,19 +1180,30 @@ const SuperDashboard = () => {
         photoUrl = publicUrl;
       }
 
+      // Create base update object
+      const updateData = {
+        full_name: formData.fullName,
+        gender: formData.gender,
+        date_of_birth: formData.dob,
+        updated_at: new Date().toISOString(),
+      };
+
+      // Only add photo URL if it exists
+      if (photoUrl) {
+        updateData.profile_photo_url = photoUrl;
+      }
+
+      // Add alumni specific fields
+      if (selectedUser.role === "alumni") {
+        updateData.graduation_year = formData.passoutYear;
+        updateData.location_city = formData.city;
+        updateData.location_country = formData.country;
+      }
+
       // Update profile data
       const { error: profileError } = await supabase
         .from("profiles")
-        .update({
-          full_name: formData.fullName,
-          gender: formData.gender,
-          date_of_birth: formData.dob,
-          location_city: formData.city,
-          location_country: formData.country,
-          graduation_year: formData.passoutYear,
-          profile_photo_url: photoUrl,
-          updated_at: new Date().toISOString(),
-        })
+        .update(updateData)
         .eq("id", selectedUser.id);
 
       if (profileError) {
@@ -1203,23 +1211,13 @@ const SuperDashboard = () => {
         throw profileError;
       }
 
-      // Refresh data
-      const updatedData = await fetchUserProfileDetails(selectedUser.id);
-      if (updatedData) {
-        setProfileData(updatedData);
-        setFormData((prev) => ({
-          ...prev,
-          photo: null,
-        }));
-      }
-
       alert("Account details updated successfully");
+      window.location.reload();
     } catch (error) {
       console.error("Error updating account:", error);
       alert(`Failed to update account: ${error.message}`);
     }
   };
-
   const handleskillsExpertiseChange = (selectedOptions) => {
     const selectedValues = selectedOptions.map((option) => option.value);
     setFormData((prev) => ({
