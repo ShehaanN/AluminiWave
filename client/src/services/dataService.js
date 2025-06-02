@@ -461,7 +461,7 @@ export const fetchAlumniMentors = async () => {
         current_company,
         profile_photo_url,
         skills_expertise,
-        professional_summary,
+        profile_summary,
         industries_of_interest
       `
       )

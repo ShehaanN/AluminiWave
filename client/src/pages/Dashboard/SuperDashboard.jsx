@@ -60,13 +60,12 @@ const SuperDashboard = () => {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [editJobDialog, setEditJobDialog] = useState(false);
   const [selectedJob, setSelectedJob] = useState(null);
+
   const [isJobFormChanged, setIsJobFormChanged] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
 
   const itemsPerPage = 6;
-
-  console.log(selectedUser);
 
   const [stats, setStats] = useState({
     totalUsers: 0,
@@ -81,11 +80,8 @@ const SuperDashboard = () => {
 
   const [filteredUsers, setFilteredUsers] = useState([]);
 
-  console.log("filterd user", filteredUsers);
-  console.log("users", users);
-
-  const [searchQuery, setSearchQuery] = useState("");
-  const [roleFilter, setRoleFilter] = useState("all-roles");
+  // const [searchQuery, setSearchQuery] = useState("");
+  // const [roleFilter, setRoleFilter] = useState("all-roles");
 
   // Fetch dashboard stats
   useEffect(() => {
@@ -137,7 +133,8 @@ const SuperDashboard = () => {
             email,
             role,
             created_at,
-            profile_photo_url
+            profile_photo_url,
+            is_superadmin
           `
           )
           .order("created_at", { ascending: false });
@@ -155,25 +152,25 @@ const SuperDashboard = () => {
   }, []);
 
   // Filter users based on search and role
-  useEffect(() => {
-    let filtered = users;
+  // useEffect(() => {
+  //   let filtered = users;
 
-    if (searchQuery) {
-      filtered = filtered.filter(
-        (user) =>
-          user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          user.email.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-    }
+  //   if (searchQuery) {
+  //     filtered = filtered.filter(
+  //       (user) =>
+  //         user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  //         user.email.toLowerCase().includes(searchQuery.toLowerCase())
+  //     );
+  //   }
 
-    if (roleFilter !== "all-roles") {
-      filtered = filtered.filter(
-        (user) => user.role.toLowerCase() === roleFilter.toLowerCase()
-      );
-    }
+  //   if (roleFilter !== "all-roles") {
+  //     filtered = filtered.filter(
+  //       (user) => user.role.toLowerCase() === roleFilter.toLowerCase()
+  //     );
+  //   }
 
-    setFilteredUsers(filtered);
-  }, [searchQuery, roleFilter, users]);
+  //   setFilteredUsers(filtered);
+  // }, [searchQuery, roleFilter, users]);
 
   // Pagination calculations
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -192,10 +189,8 @@ const SuperDashboard = () => {
 
   const [events, setEvents] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
-  const [eventSearchQuery, setEventSearchQuery] = useState("");
-  const [eventStatusFilter, setEventStatusFilter] = useState("all-status");
-
-  console.log(filteredEvents);
+  // const [eventSearchQuery, setEventSearchQuery] = useState("");
+  // const [eventStatusFilter, setEventStatusFilter] = useState("all-status");
 
   //  fetching event stats
   useEffect(() => {
@@ -204,7 +199,7 @@ const SuperDashboard = () => {
         const { data: eventData, error } = await supabase
           .from("events")
           .select(
-            "id, status,location,time_slot_start,title,banner_image_url, event_date"
+            "id, status,location,time_slot_start,title,banner_image_url, event_date,description"
           );
 
         if (error) throw error;
@@ -237,26 +232,26 @@ const SuperDashboard = () => {
   }, []);
 
   //  filtering events
-  useEffect(() => {
-    let filtered = events;
+  // useEffect(() => {
+  //   let filtered = events;
 
-    if (eventSearchQuery) {
-      filtered = filtered.filter(
-        (event) =>
-          event.title.toLowerCase().includes(eventSearchQuery.toLowerCase()) ||
-          event.location.toLowerCase().includes(eventSearchQuery.toLowerCase())
-      );
-    }
+  //   if (eventSearchQuery) {
+  //     filtered = filtered.filter(
+  //       (event) =>
+  //         event.title.toLowerCase().includes(eventSearchQuery.toLowerCase()) ||
+  //         event.location.toLowerCase().includes(eventSearchQuery.toLowerCase())
+  //     );
+  //   }
 
-    if (eventStatusFilter !== "all-status") {
-      filtered = filtered.filter(
-        (event) =>
-          event.status.toLowerCase() === eventStatusFilter.toLowerCase()
-      );
-    }
+  //   if (eventStatusFilter !== "all-status") {
+  //     filtered = filtered.filter(
+  //       (event) =>
+  //         event.status.toLowerCase() === eventStatusFilter.toLowerCase()
+  //     );
+  //   }
 
-    setFilteredEvents(filtered);
-  }, [eventSearchQuery, eventStatusFilter, events]);
+  //   setFilteredEvents(filtered);
+  // }, [eventSearchQuery, eventStatusFilter, events]);
 
   const [jobStats, setJobStats] = useState({
     totalJobs: 0,
@@ -267,10 +262,8 @@ const SuperDashboard = () => {
 
   const [jobs, setJobs] = useState([]);
   const [filteredJobs, setFilteredJobs] = useState([]);
-  const [jobSearchQuery, setJobSearchQuery] = useState("");
-  const [jobStatusFilter, setJobStatusFilter] = useState("all");
-
-  console.log("filteredJobs", filteredJobs);
+  // const [jobSearchQuery, setJobSearchQuery] = useState("");
+  // const [jobStatusFilter, setJobStatusFilter] = useState("all");
 
   //  fetching job stats
   useEffect(() => {
@@ -312,41 +305,133 @@ const SuperDashboard = () => {
   }, []);
 
   //  filtering jobs
-  useEffect(() => {
-    let filtered = jobs;
+  // useEffect(() => {
+  //   let filtered = jobs;
 
-    if (jobSearchQuery) {
-      filtered = filtered.filter(
-        (job) =>
-          job.title.toLowerCase().includes(jobSearchQuery.toLowerCase()) ||
-          job.company.toLowerCase().includes(jobSearchQuery.toLowerCase())
-      );
-    }
+  //   if (jobSearchQuery) {
+  //     filtered = filtered.filter(
+  //       (job) =>
+  //         job.title.toLowerCase().includes(jobSearchQuery.toLowerCase()) ||
+  //         job.company.toLowerCase().includes(jobSearchQuery.toLowerCase())
+  //     );
+  //   }
 
-    if (jobStatusFilter !== "all") {
-      filtered = filtered.filter((job) =>
-        jobStatusFilter === "active" ? job.is_active : !job.is_active
-      );
-    }
+  //   if (jobStatusFilter !== "all") {
+  //     filtered = filtered.filter((job) =>
+  //       jobStatusFilter === "active" ? job.is_active : !job.is_active
+  //     );
+  //   }
 
-    setFilteredJobs(filtered);
-  }, [jobSearchQuery, jobStatusFilter, jobs]);
+  //   setFilteredJobs(filtered);
+  // }, [jobSearchQuery, jobStatusFilter, jobs]);
 
   useEffect(() => {
     setCurrentPage(1);
   }, [activeTab]);
 
-  const handleJobFormChange = (e) => {
-    e.setIsJobFormChanged(true);
-  };
-  const handleEditJob = (e) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    const formData = new FormData(form);
+  const [jobForm, setJobForm] = useState({
+    job_title: "",
+    company_name: "",
+    location: "",
+    job_type: "",
+    salary_range_min: "",
+    salary_range_max: "",
+    qualification_requirements: "",
+    description: "",
+    key_skills: "",
+    reference_email: "",
+    application_deadline: "",
+    industry: [],
+  });
 
-    console.log("Updating job:", Object.fromEntries(formData));
-    setEditJobDialog(false);
-    setIsJobFormChanged(false);
+  const handleJobFormChange = (e, field = null) => {
+    setIsJobFormChanged(true);
+
+    if (field === "industry") {
+      setJobForm((prev) => ({
+        ...prev,
+        industry: e,
+      }));
+      return;
+    }
+
+    const { id, value } = e.target;
+    setJobForm((prev) => ({
+      ...prev,
+      [id]: value,
+    }));
+  };
+  useEffect(() => {
+    if (selectedJob) {
+      setJobForm({
+        job_title: selectedJob.job_title || "",
+        company_name: selectedJob.company_name || "",
+        location: selectedJob.location || "",
+        job_type: selectedJob.job_type || "",
+        salary_range_min: selectedJob.salary_range_min || "",
+        salary_range_max: selectedJob.salary_range_max || "",
+        qualification_requirements:
+          selectedJob.qualification_requirements || "",
+        description: selectedJob.description || "",
+        // Convert array back to comma-separated string for display
+        key_skills: Array.isArray(selectedJob.key_skills)
+          ? selectedJob.key_skills.join(", ")
+          : selectedJob.key_skills || "",
+        reference_email: selectedJob.reference_email || "",
+        application_deadline: selectedJob.application_deadline || "",
+        industry: selectedJob.industry || [],
+      });
+    }
+  }, [selectedJob]);
+
+  const handleEditJob = async (e) => {
+    e.preventDefault();
+
+    try {
+      // Convert comma-separated key_skills string to array
+      const keySkillsArray = jobForm.key_skills
+        .split(",")
+        .map((skill) => skill.trim());
+
+      const { error: updateError } = await supabase
+        .from("jobs")
+        .update({
+          job_title: jobForm.job_title,
+          company_name: jobForm.company_name,
+          location: jobForm.location,
+          job_type: jobForm.job_type,
+          salary_range_min: jobForm.salary_range_min,
+          salary_range_max: jobForm.salary_range_max,
+          qualification_requirements: jobForm.qualification_requirements,
+          description: jobForm.description,
+          key_skills: keySkillsArray,
+          reference_email: jobForm.reference_email,
+          application_deadline: jobForm.application_deadline,
+          industry: jobForm.industry,
+
+          updated_at: new Date().toISOString(),
+        })
+        .eq("id", selectedJob.id);
+
+      if (updateError) throw updateError;
+
+      // Refresh jobs data
+      const { data: refreshedJobs, error: refreshError } = await supabase
+        .from("jobs")
+        .select("*, job_applications(*)")
+        .order("created_at", { ascending: false });
+
+      if (refreshError) throw refreshError;
+
+      setJobs(refreshedJobs);
+      setFilteredJobs(refreshedJobs);
+      setEditJobDialog(false);
+      setIsJobFormChanged(false);
+      alert("Job updated successfully");
+    } catch (error) {
+      console.error("Error updating job:", error);
+      alert(`Failed to update job: ${error.message}`);
+    }
   };
 
   const [addUserDialog, setAddUserDialog] = useState(false);
@@ -356,31 +441,95 @@ const SuperDashboard = () => {
   const [editEventDialog, setEditEventDialog] = useState(false);
   const [isEventFormChanged, setIsEventFormChanged] = useState(false);
 
-  const handleEventFormChange = (e) => {
-    e.setIsEventFormChanged(true);
-  };
-  const handleEditEvent = (e) => {
+  const handleEditEvent = async (e) => {
     e.preventDefault();
-    const form = e.currentTarget;
-    const formData = new FormData(form);
+    try {
+      let bannerUrl = selectedEvent.banner_image_url;
 
-    console.log("Updating event:", Object.fromEntries(formData));
-    setEditEventDialog(false);
-    setIsEventFormChanged(false);
+      // Handle banner upload if a new file is selected
+      if (editEventForm.banner instanceof File) {
+        const fileExt = editEventForm.banner.name.split(".").pop();
+        const fileName = `${selectedEvent.id}-${Date.now()}.${fileExt}`;
+
+        const { data: uploadData, error: uploadError } = await supabase.storage
+          .from("event-banners")
+          .upload(fileName, editEventForm.banner, {
+            cacheControl: "3600",
+            upsert: true,
+            contentType: editEventForm.banner.type,
+          });
+
+        if (uploadError) {
+          console.error("Banner upload error:", uploadError);
+          throw new Error("Failed to upload banner");
+        }
+
+        // Get the public URL
+        const {
+          data: { publicUrl },
+        } = supabase.storage.from("event-banners").getPublicUrl(fileName);
+
+        bannerUrl = publicUrl;
+      }
+
+      // Update event data
+      const { error: updateError } = await supabase
+        .from("events")
+        .update({
+          title: editEventForm.title || selectedEvent.title,
+          event_date: editEventForm.date || selectedEvent.event_date,
+          time_slot_start: editEventForm.time || selectedEvent.time_slot_start,
+          location: editEventForm.location || selectedEvent.location,
+          organizer: editEventForm.organizer || selectedEvent.organizer,
+          description: editEventForm.description || selectedEvent.description,
+          banner_image_url: bannerUrl,
+          updated_at: new Date().toISOString(),
+        })
+        .eq("id", selectedEvent.id);
+
+      if (updateError) throw updateError;
+
+      // Refresh events data
+      const { data: refreshedEvents, error: refreshError } = await supabase
+        .from("events")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (refreshError) throw refreshError;
+
+      setEvents(refreshedEvents);
+      setFilteredEvents(refreshedEvents);
+      setEditEventDialog(false);
+      setIsEventFormChanged(false);
+      alert("Event updated successfully");
+    } catch (error) {
+      console.error("Error updating event:", error);
+      alert(`Failed to update event: ${error.message}`);
+    }
   };
 
   const [activeViewTab, setActiveViewTab] = useState("profile");
 
+  const [newUserForm, setNewUserForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+    role: "",
+  });
+
   // Handle user creation
-  const handleAddUser = async (formData) => {
+
+  const handleAddUser = async (e) => {
+    e.preventDefault(); // Prevent default form submission
+
     try {
       // First create auth user
       const { data: authData, error: authError } = await supabase.auth.signUp({
-        email: formData.get("email"),
-        password: formData.get("password"),
+        email: newUserForm.email,
+        password: newUserForm.password,
         options: {
           data: {
-            role: formData.get("role"),
+            role: newUserForm.role,
           },
         },
       });
@@ -391,32 +540,280 @@ const SuperDashboard = () => {
       const { error: profileError } = await supabase.from("profiles").insert([
         {
           id: authData.user.id,
-          full_name: formData.get("name"),
-          email: formData.get("email"),
-          role: formData.get("role").toLowerCase(),
-          profile_photo_url: null,
+          full_name: newUserForm.name,
+          email: newUserForm.email,
+          role: newUserForm.role.toLowerCase(),
         },
       ]);
 
       if (profileError) throw profileError;
 
       // Refresh users list
-      const fetchUsers = async () => {
-        const { data, error } = await supabase
-          .from("profiles")
-          .select("*")
-          .order("created_at", { ascending: false });
+      const { data, error } = await supabase
+        .from("profiles")
+        .select("*")
+        .order("created_at", { ascending: false });
 
-        if (error) throw error;
-        setUsers(data);
-      };
-
-      await fetchUsers();
+      if (error) throw error;
+      setUsers(data);
+      setFilteredUsers(data);
+      // Reset form and close dialog
+      setNewUserForm({
+        name: "",
+        email: "",
+        password: "",
+        role: "",
+      });
       setAddUserDialog(false);
+
+      // Show success message
+      alert("User created successfully!");
     } catch (error) {
       console.error("Error creating user:", error);
-      alert("Failed to create user");
+      alert(`Failed to create user: ${error.message}`);
     }
+  };
+
+  const [newEventForm, setNewEventForm] = useState({
+    title: "",
+    event_date: "",
+    time_slot_start: "",
+    location: "",
+    description: "",
+    organizer: "",
+    bannerFile: null,
+    status: "upcoming",
+  });
+
+  const handleAddEvent = async (e) => {
+    e.preventDefault();
+
+    try {
+      // Get current user
+      const {
+        data: { user },
+        error: userError,
+      } = await supabase.auth.getUser();
+
+      if (userError) throw userError;
+
+      let banner_image_url = null;
+
+      // Handle banner image upload if exists
+      if (newEventForm.bannerFile) {
+        const file = newEventForm.bannerFile;
+        const fileName = `banners/${Date.now()}_${file.name.replace(
+          /\s+/g,
+          "_"
+        )}`;
+
+        if (file.size > 5000000) {
+          throw new Error(
+            "File size too large. Please upload a file smaller than 5MB."
+          );
+        }
+
+        // Upload the file
+        const { data: uploadData, error: uploadError } = await supabase.storage
+          .from("event-banners")
+          .upload(fileName, file, {
+            cacheControl: "3600",
+            upsert: false,
+          });
+
+        if (uploadError) throw uploadError;
+
+        // Get the public URL
+        const { data: publicUrlData } = supabase.storage
+          .from("event-banners")
+          .getPublicUrl(uploadData.path);
+
+        banner_image_url = publicUrlData.publicUrl;
+      }
+
+      const { data: newEvent, error: insertError } = await supabase
+        .from("events")
+        .insert([
+          {
+            title: newEventForm.title,
+            event_date: newEventForm.event_date,
+            time_slot_start: newEventForm.time_slot_start,
+            location: newEventForm.location,
+            description: newEventForm.description,
+            organizer: newEventForm.organizer,
+            banner_image_url: banner_image_url,
+            status: "upcoming",
+            created_at: new Date().toISOString(),
+            created_by_user_id: user.id, // Add this line
+          },
+        ])
+        .select()
+        .single();
+
+      if (insertError) throw insertError;
+
+      // Refresh events list
+      const { data: refreshedEvents, error: refreshError } = await supabase
+        .from("events")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (refreshError) throw refreshError;
+
+      setEvents(refreshedEvents);
+      setFilteredEvents(refreshedEvents);
+      setAddEventDialog(false);
+
+      // Reset form
+      setNewEventForm({
+        title: "",
+        event_date: "",
+        time_slot_start: "",
+        location: "",
+        description: "",
+        organizer: "",
+        bannerFile: null,
+        status: "upcoming",
+      });
+
+      alert("Event created successfully!");
+    } catch (error) {
+      console.error("Error creating event:", error);
+      alert(`Failed to create event: ${error.message}`);
+    }
+  };
+
+  const handleNewEventFormChange = (e) => {
+    const { id, value, files, type } = e.target;
+    if (type === "file") {
+      setNewEventForm((prev) => ({ ...prev, bannerFile: files[0] }));
+    } else {
+      setNewEventForm((prev) => ({
+        ...prev,
+        [id.replace("event-", "")]: value,
+      }));
+    }
+  };
+
+  const handleEventFormChange = (e) => {
+    const { name, value, type, files } = e.target;
+    setIsEventFormChanged(true);
+    setEditEventForm((prev) => ({
+      ...prev,
+      [name]: type === "file" ? files[0] : value,
+    }));
+  };
+
+  const [newJobForm, setNewJobForm] = useState({
+    job_title: "",
+    company_name: "",
+    location: "",
+    job_type: "",
+    salary_range_min: "",
+    salary_range_max: "",
+    qualification_requirements: "",
+    description: "",
+    key_skills: "",
+    reference_email: "",
+    application_deadline: "",
+    industry: [],
+    is_active: true,
+  });
+
+  const handleNewJobFormChange = (e) => {
+    const { id, value } = e.target;
+    setNewJobForm((prev) => ({
+      ...prev,
+      [id]: value,
+    }));
+  };
+
+  const handleAddJob = async (e) => {
+    e.preventDefault();
+
+    try {
+      // Get current user
+      const {
+        data: { user },
+        error: userError,
+      } = await supabase.auth.getUser();
+      if (userError) throw userError;
+
+      // Convert key_skills string to array
+      const keySkillsArray = newJobForm.key_skills
+        .split(",")
+        .map((skill) => skill.trim());
+
+      // Create new job
+      const { data: newJob, error: insertError } = await supabase
+        .from("jobs")
+        .insert([
+          {
+            job_title: newJobForm.job_title,
+            company_name: newJobForm.company_name,
+            location: newJobForm.location,
+            job_type: newJobForm.job_type,
+            salary_range_min: parseInt(newJobForm.salary_range_min),
+            salary_range_max: parseInt(newJobForm.salary_range_max),
+            qualification_requirements: newJobForm.qualification_requirements,
+            description: newJobForm.description,
+            key_skills: keySkillsArray,
+            reference_email: newJobForm.reference_email,
+            application_deadline: newJobForm.application_deadline,
+            industry: newJobForm.industry,
+            is_active: true,
+            created_at: new Date().toISOString(),
+            posted_by_user_id: user.id,
+          },
+        ])
+        .select()
+        .single();
+
+      if (insertError) throw insertError;
+
+      // Refresh jobs list
+      const { data: refreshedJobs, error: refreshError } = await supabase
+        .from("jobs")
+        .select("*, job_applications(*)")
+        .order("created_at", { ascending: false });
+
+      if (refreshError) throw refreshError;
+
+      setJobs(refreshedJobs);
+      setFilteredJobs(refreshedJobs);
+      setAddJobDialog(false);
+
+      // Reset form
+      setNewJobForm({
+        job_title: "",
+        company_name: "",
+        location: "",
+        job_type: "",
+        salary_range_min: "",
+        salary_range_max: "",
+        qualification_requirements: "",
+        description: "",
+        key_skills: "",
+        reference_email: "",
+        application_deadline: "",
+        industry: [],
+        is_active: true,
+      });
+
+      alert("Job created successfully!");
+    } catch (error) {
+      console.error("Error creating job:", error);
+      alert(`Failed to create job: ${error.message}`);
+    }
+  };
+
+  const handlenewindustryChange = (selectedOptions) => {
+    setIsJobFormChanged(true);
+    const selectedValues = selectedOptions.map((option) => option.value);
+    setNewJobForm((prev) => ({
+      ...prev,
+      industry: selectedValues,
+    }));
   };
 
   // Handle user deletion
@@ -434,9 +831,181 @@ const SuperDashboard = () => {
     setDeleteJobDialog(true);
   };
 
-  const confirmDeleteUser = () => {
-    console.log(`Deleted user: ${selectedUser.name}`);
-    setDeleteDialog(false);
+  const confirmDeleteUser = async () => {
+    try {
+      // Get current logged-in user
+      const {
+        data: { user: currentUser },
+        error: userError,
+      } = await supabase.auth.getUser();
+      if (userError) throw userError;
+
+      // Get current user's profile to check if they are superadmin
+      const { data: currentUserProfile, error: profileError } = await supabase
+        .from("profiles")
+        .select("id, is_superadmin")
+        .eq("id", currentUser.id)
+        .single();
+
+      if (profileError) throw profileError;
+
+      // Check if user is superadmin
+      if (!currentUserProfile.is_superadmin) {
+        alert("Only superadmin can delete users");
+        setDeleteDialog(false);
+        return;
+      }
+
+      // Check if trying to delete own account
+      if (currentUserProfile.id === selectedUser.id) {
+        alert("You cannot delete your own superadmin account");
+        setDeleteDialog(false);
+        return;
+      }
+
+      // Call the database function to delete user
+      const { error: deleteError } = await supabase.rpc(
+        "delete_user_completely",
+        {
+          target_user_id: selectedUser.id,
+        }
+      );
+
+      if (deleteError) throw deleteError;
+
+      // Refresh users list
+      const { data: refreshedUsers, error: refreshError } = await supabase
+        .from("profiles")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (refreshError) throw refreshError;
+
+      setUsers(refreshedUsers);
+      setFilteredUsers(refreshedUsers);
+      setDeleteDialog(false);
+
+      alert("User deleted successfully");
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      alert(`Failed to delete user: ${error.message}`);
+    }
+  };
+
+  const confirmDeleteEvent = async () => {
+    try {
+      // Get current user's profile to check if they are superadmin
+      const {
+        data: { user },
+        error: userError,
+      } = await supabase.auth.getUser();
+      if (userError) throw userError;
+
+      const { data: adminCheck, error: adminError } = await supabase
+        .from("profiles")
+        .select("is_superadmin")
+        .eq("id", user.id)
+        .single();
+
+      if (adminError) throw adminError;
+
+      // Verify superadmin status
+      if (!adminCheck.is_superadmin) {
+        alert("Only superadmin can delete events");
+        setDeleteEventDialog(false);
+        return;
+      }
+
+      // Delete event
+      const { error: deleteError } = await supabase
+        .from("events")
+        .delete()
+        .eq("id", selectedEvent.id);
+
+      if (deleteError) throw deleteError;
+
+      // Delete event banner from storage if exists
+      if (selectedEvent.banner_image_url) {
+        const fileName = selectedEvent.banner_image_url.split("/").pop();
+        const { error: storageError } = await supabase.storage
+          .from("event-banners")
+          .remove([fileName]);
+
+        if (storageError) console.error("Error deleting banner:", storageError);
+      }
+
+      // Refresh events list
+      const { data: refreshedEvents, error: refreshError } = await supabase
+        .from("events")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (refreshError) throw refreshError;
+
+      // Update state
+      setEvents(refreshedEvents);
+      setFilteredEvents(refreshedEvents);
+      setDeleteEventDialog(false);
+      setSelectedEvent(null);
+
+      alert("Event deleted successfully");
+    } catch (error) {
+      console.error("Error deleting event:", error);
+      alert(`Failed to delete event: ${error.message}`);
+    }
+  };
+
+  const confirmDeleteJob = async () => {
+    try {
+      // Get current user's profile to check if they are superadmin
+      const {
+        data: { user },
+        error: userError,
+      } = await supabase.auth.getUser();
+      if (userError) throw userError;
+
+      const { data: adminCheck, error: adminError } = await supabase
+        .from("profiles")
+        .select("is_superadmin")
+        .eq("id", user.id)
+        .single();
+
+      if (adminError) throw adminError;
+
+      // Verify superadmin status
+      if (!adminCheck.is_superadmin) {
+        alert("Only superadmin can delete jobs");
+        setDeleteJobDialog(false);
+        return;
+      }
+
+      // Delete the job
+      const { error: deleteError } = await supabase
+        .from("jobs")
+        .delete()
+        .eq("id", selectedJob.id);
+
+      if (deleteError) throw deleteError;
+
+      // Refresh jobs list
+      const { data: refreshedJobs, error: refreshError } = await supabase
+        .from("jobs")
+        .select("*, job_applications(*)")
+        .order("created_at", { ascending: false });
+
+      if (refreshError) throw refreshError;
+
+      // Update state
+      setJobs(refreshedJobs);
+      setFilteredJobs(refreshedJobs);
+      setDeleteJobDialog(false);
+      setSelectedJob(null);
+
+      alert("Job deleted successfully");
+    } catch (error) {
+      console.error("Error deleting job:", error);
+      alert(`Failed to delete job: ${error.message}`);
+    }
   };
 
   const industryskills = [
@@ -502,19 +1071,16 @@ const SuperDashboard = () => {
     skillsExpertise: [],
     fullName: "",
     gender: "",
-    dob: "",
+    dob: null,
     city: "",
     country: "",
-    passoutYear: "",
+    passoutYear: null,
     jobPosition: "",
     company: "",
     course: "",
     institute: "",
     photo: null,
   });
-
-  console.log("profileData", profileData);
-  console.log("formData", formData);
 
   // fetch profile data when user is selected
   useEffect(() => {
@@ -588,20 +1154,18 @@ const SuperDashboard = () => {
   const handleAccountSubmit = async (e) => {
     e.preventDefault();
     try {
-      let photoUrl = formData.photo;
+      let photoUrl = selectedUser.profile_photo_url || null;
 
       if (formData.photo instanceof File) {
         const fileExt = formData.photo.name.split(".").pop();
         const fileName = `${selectedUser.id}/${Date.now()}.${fileExt}`;
 
-        // Upload with proper metadata
         const { data: uploadData, error: uploadError } = await supabase.storage
           .from("profile-pictures")
           .upload(fileName, formData.photo, {
             cacheControl: "3600",
             upsert: true,
             contentType: formData.photo.type,
-            duplex: "half",
           });
 
         if (uploadError) {
@@ -609,7 +1173,6 @@ const SuperDashboard = () => {
           throw new Error(`Failed to upload photo: ${uploadError.message}`);
         }
 
-        // Get the public URL after successful upload
         const {
           data: { publicUrl },
         } = supabase.storage.from("profile-pictures").getPublicUrl(fileName);
@@ -617,19 +1180,30 @@ const SuperDashboard = () => {
         photoUrl = publicUrl;
       }
 
+      // Create base update object
+      const updateData = {
+        full_name: formData.fullName,
+        gender: formData.gender,
+        date_of_birth: formData.dob,
+        updated_at: new Date().toISOString(),
+      };
+
+      // Only add photo URL if it exists
+      if (photoUrl) {
+        updateData.profile_photo_url = photoUrl;
+      }
+
+      // Add alumni specific fields
+      if (selectedUser.role === "alumni") {
+        updateData.graduation_year = formData.passoutYear;
+        updateData.location_city = formData.city;
+        updateData.location_country = formData.country;
+      }
+
       // Update profile data
       const { error: profileError } = await supabase
         .from("profiles")
-        .update({
-          full_name: formData.fullName,
-          gender: formData.gender,
-          date_of_birth: formData.dob,
-          location_city: formData.city,
-          location_country: formData.country,
-          graduation_year: formData.passoutYear,
-          profile_photo_url: photoUrl,
-          updated_at: new Date().toISOString(),
-        })
+        .update(updateData)
         .eq("id", selectedUser.id);
 
       if (profileError) {
@@ -637,23 +1211,13 @@ const SuperDashboard = () => {
         throw profileError;
       }
 
-      // Refresh data
-      const updatedData = await fetchUserProfileDetails(selectedUser.id);
-      if (updatedData) {
-        setProfileData(updatedData);
-        setFormData((prev) => ({
-          ...prev,
-          photo: null,
-        }));
-      }
-
       alert("Account details updated successfully");
+      window.location.reload();
     } catch (error) {
       console.error("Error updating account:", error);
       alert(`Failed to update account: ${error.message}`);
     }
   };
-
   const handleskillsExpertiseChange = (selectedOptions) => {
     const selectedValues = selectedOptions.map((option) => option.value);
     setFormData((prev) => ({
@@ -661,32 +1225,230 @@ const SuperDashboard = () => {
       skillsExpertise: selectedValues,
     }));
   };
+  const handleindustryChange = (selectedOptions) => {
+    setIsJobFormChanged(true);
+    const selectedValues = selectedOptions.map((option) => option.value);
+    setJobForm((prev) => ({
+      ...prev,
+      industry: selectedValues,
+    }));
+  };
+
+  const [editEventForm, setEditEventForm] = useState({
+    title: "",
+    date: "",
+    time: "",
+    location: "",
+    organizer: "",
+    description: "",
+    banner: null,
+  });
+
+  useEffect(() => {
+    if (selectedEvent) {
+      setEditEventForm({
+        title: selectedEvent.title || "",
+        date: selectedEvent.event_date || "",
+        time: selectedEvent.time_slot_start || "",
+        location: selectedEvent.location || "",
+        organizer: selectedEvent.organizer || "",
+        description: selectedEvent.description || "",
+        banner: null,
+      });
+    }
+  }, [selectedEvent]);
+
+  const industryOptions = [
+    {
+      value: "Information Technology (IT) & Software Development",
+      label: "Information Technology (IT) & Software Development",
+    },
+    {
+      value: "Healthcare & Life Sciences",
+      label: "Healthcare & Life Sciences",
+    },
+    {
+      value: "Education & Academia",
+      label: "Education & Academia",
+    },
+    { value: "Finance & Banking", label: "Finance & Banking" },
+    {
+      value: "Engineering & Manufacturing",
+      label: "Engineering & Manufacturing",
+    },
+    {
+      value: "Marketing & Advertising",
+      label: "Marketing & Advertising",
+    },
+    { value: "Sales & Retail", label: "Sales & Retail" },
+    {
+      value: "Human Resources (HR) & Recruitment",
+      label: "Human Resources (HR) & Recruitment",
+    },
+    {
+      value: "Legal & Compliance",
+      label: "Legal & Compliance",
+    },
+    {
+      value: "Consulting & Business Services",
+      label: "Consulting & Business Services",
+    },
+    {
+      value: "Government & Public Administration",
+      label: "Government & Public Administration",
+    },
+    { value: "Non-Profit & NGOs", label: "Non-Profit & NGOs" },
+    {
+      value: "Media & Communications",
+      label: "Media & Communications",
+    },
+    {
+      value: "Design & Creative Arts",
+      label: "Design & Creative Arts",
+    },
+    {
+      value: "Architecture & Urban Planning",
+      label: "Architecture & Urban Planning",
+    },
+    {
+      value: "Agriculture & Environmental Science",
+      label: "Agriculture & Environmental Science",
+    },
+    {
+      value: "Aerospace & Defense",
+      label: "Aerospace & Defense",
+    },
+    {
+      value: "Hospitality & Tourism",
+      label: "Hospitality & Tourism",
+    },
+    {
+      value: "Transportation & Logistics",
+      label: "Transportation & Logistics",
+    },
+    {
+      value: "Real Estate & Property Management",
+      label: "Real Estate & Property Management",
+    },
+    {
+      value: "Telecommunications",
+      label: "Telecommunications",
+    },
+    {
+      value: "Energy & Utilities",
+      label: "Energy & Utilities",
+    },
+    {
+      value: "Sports & Recreation",
+      label: "Sports & Recreation",
+    },
+    { value: "Fashion & Apparel", label: "Fashion & Apparel" },
+    { value: "Automotive", label: "Automotive" },
+    {
+      value: "Pharmaceuticals & Biotech",
+      label: "Pharmaceuticals & Biotech",
+    },
+    {
+      value: "Construction & Civil Engineering",
+      label: "Construction & Civil Engineering",
+    },
+    { value: "Event Management", label: "Event Management" },
+    { value: "E-commerce", label: "E-commerce" },
+    { value: "Cybersecurity", label: "Cybersecurity" },
+    {
+      value: "Research & Development (R&D)",
+      label: "Research & Development (R&D)",
+    },
+    {
+      value: "Entertainment & Film Industry",
+      label: "Entertainment & Film Industry",
+    },
+    {
+      value: "Publishing & Journalism",
+      label: "Publishing & Journalism",
+    },
+    { value: "Food & Beverage", label: "Food & Beverage" },
+    { value: "Blockchain & Web3", label: "Blockchain & Web3" },
+    {
+      value: "Artificial Intelligence & Data Science",
+      label: "Artificial Intelligence & Data Science",
+    },
+    {
+      value: "Customer Support & Service",
+      label: "Customer Support & Service",
+    },
+    {
+      value: "Supply Chain Management",
+      label: "Supply Chain Management",
+    },
+    {
+      value: "Gaming & Game Development",
+      label: "Gaming & Game Development",
+    },
+    { value: "Insurance", label: "Insurance" },
+  ];
+
+  const [currentUser, setCurrentUser] = useState("");
+
+  useEffect(() => {
+    const CurrentUser = async () => {
+      try {
+        // Get current logged-in user
+        const {
+          data: { user: currentUser },
+          error: userError,
+        } = await supabase.auth.getUser();
+        if (userError) throw userError;
+
+        // Get current user's profile to check if they are superadmin
+        const { data: currentUserProfile, error: profileError } = await supabase
+          .from("profiles")
+          .select("id, full_name, email, role, is_superadmin,profile_photo_url")
+          .eq("id", currentUser.id)
+          .single();
+
+        if (profileError) throw profileError;
+
+        setCurrentUser(currentUserProfile);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    CurrentUser();
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
+      {/* header */}
       <header className="bg-white border-b border-gray-200 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
           <div className="flex items-center">
             <img src={logo} alt="AlumniWave Logo" className="h-20 w-auto" />
           </div>
           <div className="flex items-center">
-            <span className="mr-4 text-md text-gray-600">Welcome, Admin</span>
+            <span className="mr-4 text-md text-gray-600">
+              Welcome,{" "}
+              {currentUser?.full_name
+                ? currentUser.full_name.split(" ")[0]
+                : ""}
+            </span>
 
             <div>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Avatar className="cursor-pointer size-10">
-                    <AvatarImage src={dp} alt="Admin" />
+                    <AvatarImage
+                      src={currentUser.profile_photo_url || dp}
+                      alt="Admin"
+                    />
                     <AvatarFallback>AD</AvatarFallback>
                   </Avatar>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-40">
                   <DropdownMenuLabel>My Account</DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <Link to="/supersettings">
-                    <DropdownMenuItem>Update Profile</DropdownMenuItem>
-                  </Link>
+
                   <Link to="/">
                     <DropdownMenuItem>Log out</DropdownMenuItem>
                   </Link>
@@ -772,8 +1534,8 @@ const SuperDashboard = () => {
             </div>
 
             {/* User List Controls */}
-            <div className="flex justify-between items-center mb-4">
-              <div className="flex items-center space-x-4 w-2/3">
+            <div className="flex justify-end items-center mb-4">
+              {/* <div className="flex items-center space-x-4 w-2/3">
                 <div className="relative w-full max-w-md">
                   <Input
                     type="text"
@@ -797,7 +1559,7 @@ const SuperDashboard = () => {
                     <SelectItem value="superadmin">Superadmin</SelectItem>
                   </SelectContent>
                 </Select>
-              </div>
+              </div> */}
 
               <Button
                 className="!rounded-button bg-[#415B68] text-white whitespace-nowrap"
@@ -840,14 +1602,16 @@ const SuperDashboard = () => {
                         <TableCell>
                           <Badge
                             variant={
-                              user.role === "superadmin"
+                              user.is_superadmin === true
                                 ? "destructive"
                                 : user.role === "alumni"
-                                ? "outline"
-                                : "default"
+                                ? "secondary"
+                                : "outline"
                             }
                           >
-                            {user.role}
+                            {user.is_superadmin === true
+                              ? "superadmin"
+                              : user.role}
                           </Badge>
                         </TableCell>
                         <TableCell>{user.created_at}</TableCell>
@@ -876,7 +1640,7 @@ const SuperDashboard = () => {
                               variant="outline"
                               size="sm"
                               className="!rounded-button whitespace-nowrap cursor-pointer text-red-600 border-red-600 hover:bg-red-50"
-                              onClick={() => handleDeleteUser(user.id)}
+                              onClick={() => handleDeleteUser(user)}
                             >
                               <i className="fas fa-trash-alt"></i>
                             </Button>
@@ -955,8 +1719,8 @@ const SuperDashboard = () => {
 
             {/* Event List Controls */}
 
-            <div className="flex justify-between items-center mb-4">
-              <div className="flex items-center space-x-4 w-2/3">
+            <div className="flex justify-end items-center mb-4">
+              {/* <div className="flex items-center space-x-4 w-2/3">
                 <div className="relative w-full max-w-md">
                   <Input
                     type="text"
@@ -983,7 +1747,7 @@ const SuperDashboard = () => {
                     <SelectItem value="cancelled">Cancelled</SelectItem>
                   </SelectContent>
                 </Select>
-              </div>
+              </div> */}
               <Button
                 className="!rounded-button whitespace-nowrap bg-[#415B68] text-white"
                 onClick={() => setAddEventDialog(true)}
@@ -1154,8 +1918,8 @@ const SuperDashboard = () => {
             </div>
 
             {/* Job List Controls */}
-            <div className="flex justify-between items-center mb-4">
-              <div className="flex items-center space-x-4 w-2/3">
+            <div className="flex justify-end items-center mb-4">
+              {/* <div className="flex items-center space-x-4 w-2/3">
                 <div className="relative w-full max-w-md">
                   <Input
                     type="text"
@@ -1181,7 +1945,7 @@ const SuperDashboard = () => {
                     <SelectItem value="filled">Filled</SelectItem>
                   </SelectContent>
                 </Select>
-              </div>
+              </div> */}
               <Button
                 className="!rounded-button whitespace-nowrap bg-[#415B68] text-white"
                 onClick={() => setAddJobDialog(true)}
@@ -1564,6 +2328,7 @@ const SuperDashboard = () => {
                                         }
                                         className="border p-2 w-full text-sm mt-2 text-gray-600 border-gray-400"
                                       >
+                                        <option value="">Select Gender</option>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
                                       </select>
@@ -1729,6 +2494,14 @@ const SuperDashboard = () => {
               <Input
                 id="user-name"
                 name="name"
+                required
+                value={newUserForm.name}
+                onChange={(e) => {
+                  setNewUserForm((prev) => ({
+                    ...prev,
+                    name: e.target.value,
+                  }));
+                }}
                 placeholder="Enter user name"
                 className="w-full"
               />
@@ -1741,6 +2514,14 @@ const SuperDashboard = () => {
                 id="user-email"
                 name="email"
                 type="email"
+                required
+                value={newUserForm.email}
+                onChange={(e) => {
+                  setNewUserForm((prev) => ({
+                    ...prev,
+                    email: e.target.value,
+                  }));
+                }}
                 placeholder="Enter email address"
                 className="w-full"
               />
@@ -1753,6 +2534,14 @@ const SuperDashboard = () => {
                 id="user-password"
                 name="password"
                 type="password"
+                required
+                value={newUserForm.password}
+                onChange={(e) => {
+                  setNewUserForm((prev) => ({
+                    ...prev,
+                    password: e.target.value,
+                  }));
+                }}
                 placeholder="Enter password"
                 className="w-full"
               />
@@ -1761,7 +2550,16 @@ const SuperDashboard = () => {
               <label htmlFor="user-role" className="text-sm font-medium">
                 Role
               </label>
-              <Select name="role" defaultValue="">
+              <Select
+                name="role"
+                onValueChange={(value) => {
+                  setNewUserForm((prev) => ({
+                    ...prev,
+                    role: value,
+                  }));
+                }}
+                value={newUserForm.role}
+              >
                 <SelectTrigger
                   id="user-role"
                   className="w-full !rounded-button"
@@ -1769,23 +2567,10 @@ const SuperDashboard = () => {
                   <SelectValue placeholder="Select user role" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="student">Student</SelectItem>
                   <SelectItem value="alumni">Alumni</SelectItem>
+                  <SelectItem value="student">Student</SelectItem>
                 </SelectContent>
               </Select>
-            </div>
-
-            <div className="space-y-2">
-              <label htmlFor="user-avatar" className="text-sm font-medium">
-                Avatar
-              </label>
-              <Input
-                id="user-avatar"
-                name="avatar"
-                type="file"
-                accept="image/*"
-                className="w-full"
-              />
             </div>
           </form>
           <DialogFooter className="mt-6">
@@ -1800,6 +2585,12 @@ const SuperDashboard = () => {
               type="submit"
               form="add-user-form"
               className="!rounded-button whitespace-nowrap bg-[#269EB2] text-white"
+              disabled={
+                !newUserForm.name ||
+                !newUserForm.email ||
+                !newUserForm.password ||
+                !newUserForm.role
+              }
             >
               Add User
             </Button>
@@ -1808,19 +2599,29 @@ const SuperDashboard = () => {
       </Dialog>
       {/* Add Event Dialog */}
       <Dialog open={addEventDialog} onOpenChange={setAddEventDialog}>
-        <DialogContent className=" top-[93%]">
+        <DialogContent className="top-[93%]">
           <DialogHeader>
             <DialogTitle>Add New Event</DialogTitle>
             <DialogDescription>
-              Fill in the user details below
+              Fill in the event details below
             </DialogDescription>
           </DialogHeader>
-          <form id="add-event-form" className="space-y-4">
+          <form
+            id="add-event-form"
+            onSubmit={handleAddEvent}
+            className="space-y-4"
+          >
             <div className="space-y-2">
               <label htmlFor="event-title" className="text-sm font-medium">
                 Event Title
               </label>
-              <Input id="event-title" name="title" className="w-full" />
+              <Input
+                id="event-title"
+                value={newEventForm.title}
+                onChange={handleNewEventFormChange}
+                required
+                className="w-full"
+              />
             </div>
             <div className="space-y-2">
               <label htmlFor="event-date" className="text-sm font-medium">
@@ -1828,19 +2629,31 @@ const SuperDashboard = () => {
               </label>
               <Input
                 id="event-date"
-                name="event-date"
                 type="date"
+                value={newEventForm.event_date}
+                onChange={(e) => {
+                  setNewEventForm({
+                    ...newEventForm,
+                    event_date: e.target.value,
+                  });
+                }}
+                required
                 className="w-full"
               />
             </div>
             <div className="space-y-2">
-              <label htmlFor="event-time" className="text-sm font-medium">
+              <label
+                htmlFor="event-time_slot_start"
+                className="text-sm font-medium"
+              >
                 Time Slot
               </label>
               <Input
-                id="event-time"
-                name="event-time"
+                id="event-time_slot_start"
                 type="time"
+                value={newEventForm.time_slot_start}
+                onChange={handleNewEventFormChange}
+                required
                 className="w-full"
               />
             </div>
@@ -1850,7 +2663,9 @@ const SuperDashboard = () => {
               </label>
               <Input
                 id="event-location"
-                name="event-location"
+                value={newEventForm.location}
+                onChange={handleNewEventFormChange}
+                required
                 className="w-full"
               />
             </div>
@@ -1860,7 +2675,9 @@ const SuperDashboard = () => {
               </label>
               <Input
                 id="event-organizer"
-                name="event-organizer"
+                value={newEventForm.organizer}
+                onChange={handleNewEventFormChange}
+                required
                 className="w-full"
               />
             </div>
@@ -1872,20 +2689,22 @@ const SuperDashboard = () => {
                 Description
               </label>
               <Textarea
+                id="event-description"
+                value={newEventForm.description}
+                onChange={handleNewEventFormChange}
+                required
                 placeholder="Type your message here."
-                id="description"
               />
             </div>
-
             <div className="space-y-2">
               <label htmlFor="event-banner" className="text-sm font-medium">
                 Event Banner
               </label>
               <Input
                 id="event-banner"
-                name="event-banner"
                 type="file"
                 accept="image/*"
+                onChange={handleNewEventFormChange}
                 className="w-full"
               />
             </div>
@@ -1893,7 +2712,7 @@ const SuperDashboard = () => {
           <DialogFooter className="mt-6">
             <Button
               variant="outline"
-              className="!rounded-button whitespace-nowrap "
+              className="!rounded-button whitespace-nowrap"
               onClick={() => setAddEventDialog(false)}
             >
               Cancel
@@ -1902,6 +2721,11 @@ const SuperDashboard = () => {
               type="submit"
               form="add-event-form"
               className="!rounded-button whitespace-nowrap bg-[#269EB2] text-white"
+              disabled={
+                !newEventForm.title ||
+                !newEventForm.event_date ||
+                !newEventForm.location
+              }
             >
               Add Event
             </Button>
@@ -1910,80 +2734,174 @@ const SuperDashboard = () => {
       </Dialog>
       {/* Add Job Dialog */}
       <Dialog open={addJobDialog} onOpenChange={setAddJobDialog}>
-        <DialogContent className=" top-[90%]">
+        <DialogContent className="max-w-[50rem] min-w-[43rem] top-[95%] left-[70%] max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>Add New Job</DialogTitle>
             <DialogDescription>Fill in the Job details below</DialogDescription>
           </DialogHeader>
-          <form
-            onSubmit={handleEditJob}
-            id="edit-job-form"
-            className="space-y-4"
-          >
-            <div className="space-y-2">
-              <label htmlFor="job-title" className="text-sm font-medium">
-                Job Title *
-              </label>
-              <Input
-                id="job-title"
-                name="title"
-                required
-                defaultValue={selectedJob?.title}
-                onChange={handleJobFormChange}
-                className="w-full"
-              />
-            </div>
-            <div className="space-y-2">
-              <label htmlFor="job-company" className="text-sm font-medium">
-                Company Name *
-              </label>
-              <Input
-                id="job-company"
-                name="company"
-                required
-                defaultValue={selectedJob?.company}
-                onChange={handleJobFormChange}
-                className="w-full"
-              />
-            </div>
-            <div className="space-y-2">
-              <label htmlFor="job-location" className="text-sm font-medium">
-                Location *
-              </label>
-              <Input
-                id="job-location"
-                name="location"
-                required
-                defaultValue={selectedJob?.location}
-                onChange={handleJobFormChange}
-                className="w-full"
-              />
-            </div>
-            <div className="space-y-2">
-              <label htmlFor="job-description" className="text-sm font-medium">
-                Description *
-              </label>
-              <textarea
-                id="job-description"
-                name="description"
-                required
-                className="w-full min-h-[100px] rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
-                defaultValue={selectedJob?.description || ""}
-                onChange={handleJobFormChange}
-              />
-            </div>
-            <div className="space-y-2">
-              <label htmlFor="job-requirements" className="text-sm font-medium">
-                Requirements *
-              </label>
-              <textarea
-                id="job-requirements"
-                name="requirements"
-                required
-                className="w-full min-h-[100px] rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
-                defaultValue={selectedJob?.requirements || ""}
-                onChange={handleJobFormChange}
-              />
+          <form id="add-job-form" onSubmit={handleAddJob}>
+            <div className="grid w-full items-center gap-3">
+              <div className="flex flex-col space-y-1.5">
+                <Label className="text-lg mb-1" htmlFor="job_title">
+                  Job Title
+                </Label>
+                <Input
+                  id="job_title"
+                  className="h-10"
+                  placeholder="Job Position"
+                  value={newJobForm.job_title}
+                  onChange={handleNewJobFormChange}
+                  required
+                />
+              </div>
+
+              <div className="flex flex-col space-y-1.5">
+                <Label className="text-lg mb-1">Company Details</Label>
+                <div className="flex flex-row justify-between gap-4">
+                  <Input
+                    id="company_name"
+                    type="text"
+                    className="h-10"
+                    placeholder="Company Name"
+                    value={newJobForm.company_name}
+                    onChange={handleNewJobFormChange}
+                    required
+                  />
+
+                  <Input
+                    id="location"
+                    type="text"
+                    className="h-10"
+                    placeholder="Location"
+                    value={newJobForm.location}
+                    onChange={handleNewJobFormChange}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="flex flex-col space-y-1.5">
+                <Label className="text-lg mb-1" htmlFor="job_type">
+                  Job Type
+                </Label>
+                <Input
+                  id="job_type"
+                  type="text"
+                  className="h-10"
+                  placeholder="Full-time, Part-time, etc."
+                  value={newJobForm.job_type}
+                  onChange={handleNewJobFormChange}
+                  required
+                />
+              </div>
+
+              <div className="flex flex-col space-y-1.5">
+                <Label className="text-lg mb-1">Salary Range</Label>
+                <div className="flex flex-row justify-between gap-4">
+                  <Input
+                    id="salary_range_min"
+                    type="number"
+                    className="h-10"
+                    value={newJobForm.salary_range_min}
+                    onChange={handleNewJobFormChange}
+                    placeholder="Minimum Salary"
+                    required
+                  />
+                  <Input
+                    id="salary_range_max"
+                    type="number"
+                    className="h-10"
+                    value={newJobForm.salary_range_max}
+                    onChange={handleNewJobFormChange}
+                    placeholder="Maximum Salary"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="flex flex-col space-y-1.5">
+                <Label
+                  className="text-lg mb-1"
+                  htmlFor="qualification_requirements"
+                >
+                  Qualification Requirements
+                </Label>
+                <Textarea
+                  id="qualification_requirements"
+                  placeholder="Required qualifications"
+                  value={newJobForm.qualification_requirements}
+                  onChange={handleNewJobFormChange}
+                  required
+                />
+              </div>
+
+              <div className="flex flex-col space-y-1.5">
+                <Label className="text-lg mb-1" htmlFor="description">
+                  Job Description
+                </Label>
+                <Textarea
+                  id="description"
+                  placeholder="Detailed job description"
+                  value={newJobForm.description}
+                  onChange={handleNewJobFormChange}
+                  required
+                />
+              </div>
+
+              <div className="flex flex-col space-y-1.5">
+                <Label className="text-lg mb-1" htmlFor="key_skills">
+                  Key Skills
+                </Label>
+                <Input
+                  id="key_skills"
+                  type="text"
+                  className="h-10"
+                  placeholder="Skills (comma-separated)"
+                  value={newJobForm.key_skills}
+                  onChange={handleNewJobFormChange}
+                  required
+                />
+              </div>
+
+              <div className="flex flex-col space-y-1.5">
+                <Label className="text-lg mb-1" htmlFor="reference_email">
+                  Reference Email
+                </Label>
+                <Input
+                  id="reference_email"
+                  type="email"
+                  className="h-10"
+                  placeholder="Contact Email"
+                  value={newJobForm.reference_email}
+                  onChange={handleNewJobFormChange}
+                  required
+                />
+              </div>
+
+              <div className="flex flex-col space-y-1.5">
+                <Label className="text-lg mb-1" htmlFor="application_deadline">
+                  Application Deadline
+                </Label>
+                <Input
+                  id="application_deadline"
+                  type="date"
+                  className="h-10"
+                  value={newJobForm.application_deadline}
+                  onChange={handleNewJobFormChange}
+                  required
+                />
+              </div>
+
+              <div className="flex flex-col space-y-1.5">
+                <Label className="text-lg mb-1" htmlFor="industry">
+                  Industry
+                </Label>
+                <MultiSelect
+                  options={industryOptions}
+                  selectedOptions={newJobForm.industry}
+                  onChange={handlenewindustryChange}
+                />
+              </div>
             </div>
           </form>
           <DialogFooter className="mt-6">
@@ -1996,8 +2914,9 @@ const SuperDashboard = () => {
             </Button>
             <Button
               type="submit"
-              form="add-event-form"
+              form="add-job-form"
               className="!rounded-button whitespace-nowrap bg-[#269EB2] text-white"
+              disabled={!newJobForm.job_title || !newJobForm.company_name}
             >
               Add Job
             </Button>
@@ -2012,8 +2931,8 @@ const SuperDashboard = () => {
             <DialogTitle>Delete User</DialogTitle>
             <DialogDescription>
               Are you sure you want to delete user:{" "}
-              <span className="font-medium">{selectedUser?.name}</span>? This
-              action cannot be undone.
+              <span className="font-medium">{selectedUser?.full_name}</span>?
+              This action cannot be undone.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
@@ -2056,7 +2975,7 @@ const SuperDashboard = () => {
             <Button
               variant="destructive"
               className="!rounded-button whitespace-nowrap bg-red-500"
-              onClick={confirmDeleteUser}
+              onClick={confirmDeleteEvent}
             >
               Delete Event
             </Button>
@@ -2085,7 +3004,7 @@ const SuperDashboard = () => {
             <Button
               variant="destructive"
               className="!rounded-button whitespace-nowrap bg-red-500"
-              onClick={confirmDeleteUser}
+              onClick={confirmDeleteJob}
             >
               Delete Job
             </Button>
@@ -2094,7 +3013,7 @@ const SuperDashboard = () => {
       </Dialog>
       {/* Edit Event Dialog */}
       <Dialog open={editEventDialog} onOpenChange={setEditEventDialog}>
-        <DialogContent className="max-w-2xl top-[96%]">
+        <DialogContent className="max-w-2xl top-[90%]">
           <DialogHeader>
             <DialogTitle>Edit Event</DialogTitle>
             <DialogDescription>
@@ -2128,7 +3047,7 @@ const SuperDashboard = () => {
                   name="date"
                   type="date"
                   required
-                  defaultValue={selectedEvent?.date}
+                  defaultValue={selectedEvent?.event_date}
                   onChange={handleEventFormChange}
                   className="w-full"
                 />
@@ -2141,7 +3060,7 @@ const SuperDashboard = () => {
                   id="event-time"
                   name="time"
                   type="time"
-                  defaultValue="09:00"
+                  defaultValue={selectedEvent?.time_slot_start}
                   onChange={handleEventFormChange}
                   className="w-full"
                 />
@@ -2168,7 +3087,7 @@ const SuperDashboard = () => {
                 id="event-organizer"
                 name="organizer"
                 required
-                defaultValue={selectedEvent?.organizer}
+                defaultValue="Organizer"
                 onChange={handleEventFormChange}
                 className="w-full"
               />
@@ -2202,28 +3121,6 @@ const SuperDashboard = () => {
                 onChange={handleEventFormChange}
               />
             </div>
-            <div className="space-y-2">
-              <label htmlFor="event-status" className="text-sm font-medium">
-                Status
-              </label>
-              <Select
-                name="status"
-                defaultValue={selectedEvent?.status || "Upcoming"}
-                onValueChange={() => setIsEventFormChanged(true)}
-              >
-                <SelectTrigger
-                  id="event-status"
-                  className="w-full !rounded-button"
-                >
-                  <SelectValue placeholder="Select event status" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="Upcoming">Upcoming</SelectItem>
-                  <SelectItem value="Completed">Completed</SelectItem>
-                  <SelectItem value="Cancelled">Cancelled</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
           </form>
           <DialogFooter className="mt-6">
             <Button
@@ -2247,80 +3144,175 @@ const SuperDashboard = () => {
 
       {/* Edit Job Dialog */}
       <Dialog open={editJobDialog} onOpenChange={setEditJobDialog}>
-        <DialogContent className="max-w-2xl top-[90%]">
+        <DialogContent className="max-w-[50rem] min-w-[43rem] top-[95%] left-[70%] max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>Edit Job Posting</DialogTitle>
             <DialogDescription>Modify the job details below</DialogDescription>
           </DialogHeader>
-          <form
-            onSubmit={handleEditJob}
-            id="edit-job-form"
-            className="space-y-4"
-          >
-            <div className="space-y-2">
-              <label htmlFor="job-title" className="text-sm font-medium">
-                Job Title
-              </label>
-              <Input
-                id="job-title"
-                name="title"
-                required
-                defaultValue={selectedJob?.title}
-                onChange={handleJobFormChange}
-                className="w-full"
-              />
-            </div>
-            <div className="space-y-2">
-              <label htmlFor="job-company" className="text-sm font-medium">
-                Company Name
-              </label>
-              <Input
-                id="job-company"
-                name="company"
-                required
-                defaultValue={selectedJob?.company}
-                onChange={handleJobFormChange}
-                className="w-full"
-              />
-            </div>
-            <div className="space-y-2">
-              <label htmlFor="job-location" className="text-sm font-medium">
-                Location
-              </label>
-              <Input
-                id="job-location"
-                name="location"
-                required
-                defaultValue={selectedJob?.location}
-                onChange={handleJobFormChange}
-                className="w-full"
-              />
-            </div>
-            <div className="space-y-2">
-              <label htmlFor="job-description" className="text-sm font-medium">
-                Description
-              </label>
-              <textarea
-                id="job-description"
-                name="description"
-                required
-                className="w-full min-h-[100px] rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
-                defaultValue={selectedJob?.description || ""}
-                onChange={handleJobFormChange}
-              />
-            </div>
-            <div className="space-y-2">
-              <label htmlFor="job-requirements" className="text-sm font-medium">
-                Requirements
-              </label>
-              <textarea
-                id="job-requirements"
-                name="requirements"
-                required
-                className="w-full min-h-[100px] rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
-                defaultValue={selectedJob?.requirements || ""}
-                onChange={handleJobFormChange}
-              />
+
+          {/* --------------------------- */}
+          <form id="edit-job-form" onSubmit={handleEditJob}>
+            <div className="grid w-full items-center gap-3">
+              <div className="flex flex-col space-y-1.5">
+                <Label className="text-lg mb-1" htmlFor="job_title">
+                  Job Title
+                </Label>
+                <Input
+                  id="job_title"
+                  className="h-10"
+                  placeholder="Job Position"
+                  value={jobForm?.job_title}
+                  onChange={handleJobFormChange}
+                  required
+                />
+              </div>
+
+              <div className="flex flex-col space-y-1.5">
+                <Label className="text-lg mb-1">Company Details</Label>
+                <div className="flex flex-row justify-between gap-4">
+                  <Input
+                    id="company_name"
+                    type="text"
+                    className="h-10"
+                    placeholder="Company Name"
+                    value={jobForm.company_name}
+                    onChange={handleJobFormChange}
+                    required
+                  />
+                  <Input
+                    id="location"
+                    type="text"
+                    className="h-10"
+                    placeholder="Location"
+                    value={jobForm.location}
+                    onChange={handleJobFormChange}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="flex flex-col space-y-1.5">
+                <Label className="text-lg mb-1" htmlFor="job_type">
+                  Job Type
+                </Label>
+                <Input
+                  id="job_type"
+                  type="text"
+                  className="h-10"
+                  placeholder="Full-time, Part-time, etc."
+                  value={jobForm.job_type}
+                  onChange={handleJobFormChange}
+                  required
+                />
+              </div>
+
+              <div className="flex flex-col space-y-1.5">
+                <Label className="text-lg mb-1">Salary Range</Label>
+                <div className="flex flex-row justify-between gap-4">
+                  <Input
+                    id="salary_range_min"
+                    type="number"
+                    className="h-10"
+                    placeholder="Minimum Salary"
+                    value={jobForm.salary_range_min}
+                    onChange={handleJobFormChange}
+                    required
+                  />
+                  <Input
+                    id="salary_range_max"
+                    type="number"
+                    className="h-10"
+                    placeholder="Maximum Salary"
+                    value={jobForm.salary_range_max}
+                    onChange={handleJobFormChange}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="flex flex-col space-y-1.5">
+                <Label
+                  className="text-lg mb-1"
+                  htmlFor="qualification_requirements"
+                >
+                  Qualification Requirements
+                </Label>
+                <Textarea
+                  id="qualification_requirements"
+                  placeholder="Required qualifications"
+                  value={jobForm.qualification_requirements}
+                  onChange={handleJobFormChange}
+                  required
+                />
+              </div>
+
+              <div className="flex flex-col space-y-1.5">
+                <Label className="text-lg mb-1" htmlFor="description">
+                  Job Description
+                </Label>
+                <Textarea
+                  id="description"
+                  placeholder="Detailed job description"
+                  value={jobForm.description}
+                  onChange={handleJobFormChange}
+                  required
+                />
+              </div>
+
+              <div className="flex flex-col space-y-1.5">
+                <Label className="text-lg mb-1" htmlFor="key_skills">
+                  Key Skills
+                </Label>
+                <Input
+                  id="key_skills"
+                  type="text"
+                  className="h-10"
+                  placeholder="Skills (comma-separated)"
+                  value={jobForm.key_skills}
+                  onChange={handleJobFormChange}
+                  required
+                />
+              </div>
+
+              <div className="flex flex-col space-y-1.5">
+                <Label className="text-lg mb-1" htmlFor="reference_email">
+                  Reference Email
+                </Label>
+                <Input
+                  id="reference_email"
+                  type="email"
+                  className="h-10"
+                  placeholder="Contact Email"
+                  value={jobForm.reference_email}
+                  onChange={handleJobFormChange}
+                  required
+                />
+              </div>
+
+              <div className="flex flex-col space-y-1.5">
+                <Label className="text-lg mb-1" htmlFor="application_deadline">
+                  Application Deadline
+                </Label>
+                <Input
+                  id="application_deadline"
+                  type="date"
+                  className="h-10"
+                  value={jobForm.application_deadline}
+                  onChange={handleJobFormChange}
+                  required
+                />
+              </div>
+
+              <div className="flex flex-col space-y-1.5">
+                <Label className="text-lg mb-1" htmlFor="industry">
+                  Industry
+                </Label>
+                <MultiSelect
+                  options={industryOptions} // Array of {value, label} objects
+                  selectedOptions={jobForm.industry} // Array of {value, label} objects
+                  onChange={handleindustryChange}
+                />
+              </div>
             </div>
           </form>
           <DialogFooter className="mt-6">
