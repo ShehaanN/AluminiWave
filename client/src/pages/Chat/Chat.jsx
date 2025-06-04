@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -154,6 +154,7 @@ const Chat = () => {
           `
           )
           .neq("id", userData.userId)
+          .eq("is_superadmin", false)
           .order("full_name");
 
         if (error) throw error;

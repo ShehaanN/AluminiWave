@@ -466,6 +466,7 @@ export const fetchAlumniMentors = async () => {
       `
       )
       .eq("role", "alumni")
+      .eq("is_superadmin", false)
       .order("full_name");
 
     if (error) {
