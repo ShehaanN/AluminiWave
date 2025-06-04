@@ -152,7 +152,6 @@ export default function Mentorship() {
 
               if (error) throw error;
               setRecommendedMentors(data.recommendations);
-              console.log("Recommended Mentors:", data.recommendations);
             }
           }
         }
