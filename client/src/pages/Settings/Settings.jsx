@@ -28,7 +28,15 @@ const Settings = () => {
     photo: null,
   });
 
-  console.log("SelectedUserDAta", selectedUser);
+  const [passwordForm, setPasswordForm] = useState({
+    email: "",
+    currentPassword: "",
+    newPassword: "",
+    confirmPassword: "",
+  });
+  const [passwordError, setPasswordError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   useEffect(() => {
     const loadUserProfile = async () => {
       try {
@@ -39,7 +47,17 @@ const Settings = () => {
           throw new Error("Could not load profile data");
         }
 
-        console.log("Loaded profile:", userData.profile);
+        const {
+          data: { user },
+          error: userError,
+        } = await supabase.auth.getUser();
+        if (userError) throw userError;
+
+        setPasswordForm((prev) => ({
+          ...prev,
+          email: user.email,
+        }));
+
         setSelectedUser(userData.profile);
         setFormData({
           profile_summary: userData.profile.profile_summary || "",
@@ -77,6 +95,62 @@ const Settings = () => {
     loadData();
     loadUserProfile();
   }, []);
+
+  const handleChangePasswordSubmit = async (e) => {
+    e.preventDefault();
+    setPasswordError("");
+    setIsSubmitting(true);
+
+    try {
+      if (
+        !passwordForm.currentPassword ||
+        !passwordForm.newPassword ||
+        !passwordForm.confirmPassword
+      ) {
+        throw new Error("All fields are required");
+      }
+
+      if (passwordForm.newPassword !== passwordForm.confirmPassword) {
+        throw new Error("New passwords don't match");
+      }
+
+      if (passwordForm.newPassword.length < 6) {
+        throw new Error("New password must be at least 6 characters long");
+      }
+
+      // Verify current password by trying to sign in
+      const { error: signInError } = await supabase.auth.signInWithPassword({
+        email: passwordForm.email,
+        password: passwordForm.currentPassword,
+      });
+
+      if (signInError) {
+        throw new Error("Current password is incorrect");
+      }
+
+      // Update password
+      const { error: updateError } = await supabase.auth.updateUser({
+        password: passwordForm.newPassword,
+      });
+
+      if (updateError) throw updateError;
+
+      // Clear form and show success
+      setPasswordForm((prev) => ({
+        ...prev,
+        currentPassword: "",
+        newPassword: "",
+        confirmPassword: "",
+      }));
+
+      alert("Password updated successfully!");
+    } catch (error) {
+      console.error("Password change error:", error);
+      setPasswordError(error.message);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const industryskills = [
     { value: "Programming", label: "Programming" },
@@ -171,7 +245,6 @@ const Settings = () => {
         photoUrl = publicUrl;
       }
 
-      // Create base update object
       const updateData = {
         full_name: formData.fullName,
         gender: formData.gender,
@@ -223,7 +296,6 @@ const Settings = () => {
 
       if (profileError) throw profileError;
 
-      // Handle timeline updates
       if (selectedUser.role === "alumni") {
         const { error: timelineError } = await supabase
           .from("profiles")
@@ -254,8 +326,6 @@ const Settings = () => {
   if (loading) {
     return <div>Loading profile...</div>;
   }
-
-  console.log("Formdatalog", formData);
 
   return (
     <div>
@@ -300,6 +370,7 @@ const Settings = () => {
                     >
                       Account
                     </button>
+
                     <button
                       onClick={() => setActiveViewTab("changepassword")}
                       className={`px-4 py-2 whitespace-nowrap min-h-[44px] min-w-[44px] flex items-center ${
@@ -581,35 +652,95 @@ const Settings = () => {
                   )}
 
                   {activeViewTab === "changepassword" && (
-                    <form onSubmit={handleProfileSubmit}>
+                    <form onSubmit={handleChangePasswordSubmit}>
                       <div className="border-2 border-dashed w-full border-gray-300 rounded-lg p-4 space-y-2.5">
+                        {passwordError && (
+                          <div className="text-red-500 text-sm mb-4 p-2 bg-red-50 rounded">
+                            {passwordError}
+                          </div>
+                        )}
+
+                        <div className="flex flex-col space-y-1.5">
+                          <Label className="text-md mb-1" htmlFor="email">
+                            Email
+                          </Label>
+                          <Input
+                            id="email"
+                            type="email"
+                            value={passwordForm.email}
+                            className="h-10 w-1/2"
+                            disabled
+                          />
+                        </div>
+
+                        <div className="flex flex-col space-y-1.5">
+                          <Label className="text-md mb-1" htmlFor="currentpass">
+                            Current Password
+                          </Label>
+                          <Input
+                            id="currentpass"
+                            type="password"
+                            value={passwordForm.currentPassword}
+                            onChange={(e) =>
+                              setPasswordForm((prev) => ({
+                                ...prev,
+                                currentPassword: e.target.value,
+                              }))
+                            }
+                            className="h-10 w-1/2"
+                            placeholder="Enter current password"
+                          />
+                        </div>
+
                         <div className="flex flex-col space-y-1.5">
                           <Label className="text-md mb-1" htmlFor="newpass">
                             New Password
                           </Label>
                           <Input
                             id="newpass"
+                            type="password"
+                            value={passwordForm.newPassword}
+                            onChange={(e) =>
+                              setPasswordForm((prev) => ({
+                                ...prev,
+                                newPassword: e.target.value,
+                              }))
+                            }
                             className="h-10 w-1/2"
-                            placeholder=""
+                            placeholder="Enter new password"
                           />
                         </div>
+
                         <div className="flex flex-col space-y-1.5">
                           <Label className="text-md mb-1" htmlFor="confirmpass">
-                            Confirm Password
+                            Confirm new Password
                           </Label>
                           <Input
                             id="confirmpass"
+                            type="password"
+                            value={passwordForm.confirmPassword}
+                            onChange={(e) =>
+                              setPasswordForm((prev) => ({
+                                ...prev,
+                                confirmPassword: e.target.value,
+                              }))
+                            }
                             className="h-10 w-1/2"
-                            placeholder=""
+                            placeholder="Confirm new password"
                           />
                         </div>
 
                         <div>
                           <button
                             type="submit"
-                            className="bg-[#269EB2] text-white px-4 py-2 rounded-lg mr-4 mt-6"
+                            disabled={isSubmitting}
+                            className={`bg-[#269EB2] text-white px-4 py-2 rounded-lg mr-4 mt-6 ${
+                              isSubmitting
+                                ? "opacity-50 cursor-not-allowed"
+                                : ""
+                            }`}
                           >
-                            Reset
+                            {isSubmitting ? "Updating..." : "Reset Password"}
                           </button>
                         </div>
                       </div>
