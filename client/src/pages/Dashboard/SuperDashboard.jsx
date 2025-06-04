@@ -1089,60 +1089,603 @@ const SuperDashboard = () => {
     }
   };
 
-  const industryskills = [
-    { value: "Programming", label: "Programming" },
-    { value: "Web Development", label: "Web Development" },
-    { value: "Database Management", label: "Database Management" },
-    { value: "Cloud Computing", label: "Cloud Computing" },
-    { value: "System Design", label: "System Design" },
-    { value: "Patient Care", label: "Patient Care" },
-    { value: "Medical Research", label: "Medical Research" },
-    { value: "Health Informatics", label: "Health Informatics" },
-    { value: "Phlebotomy", label: "Phlebotomy" },
-    { value: "Clinical Documentation", label: "Clinical Documentation" },
-    { value: "Curriculum Design", label: "Curriculum Design" },
-    { value: "Lesson Planning", label: "Lesson Planning" },
-    { value: "Online Teaching", label: "Online Teaching" },
-    { value: "Assessment", label: "Assessment" },
-    { value: "Student Counseling", label: "Student Counseling" },
-    { value: "Accounting", label: "Accounting" },
-    { value: "Financial Analysis", label: "Financial Analysis" },
-    { value: "Investment Management", label: "Investment Management" },
-    { value: "Risk Assessment", label: "Risk Assessment" },
-    { value: "Taxation", label: "Taxation" },
-    { value: "SEO", label: "SEO" },
-    { value: "Content Marketing", label: "Content Marketing" },
-    { value: "Social Media Management", label: "Social Media Management" },
-    { value: "Market Research", label: "Market Research" },
-    { value: "Email Marketing", label: "Email Marketing" },
-    { value: "Network Security", label: "Network Security" },
-    { value: "Threat Analysis", label: "Threat Analysis" },
-    { value: "Penetration Testing", label: "Penetration Testing" },
-    { value: "Security Audits", label: "Security Audits" },
-    { value: "Incident Response", label: "Incident Response" },
-    { value: "CAD", label: "CAD" },
-    { value: "Mathematical Modeling", label: "Mathematical Modeling" },
-    { value: "Structural Analysis", label: "Structural Analysis" },
-    { value: "Project Management", label: "Project Management" },
-    { value: "Thermodynamics", label: "Thermodynamics" },
-    { value: "Recruitment", label: "Recruitment" },
-    { value: "Employee Engagement", label: "Employee Engagement" },
-    { value: "Conflict Resolution", label: "Conflict Resolution" },
-    { value: "Performance Management", label: "Performance Management" },
-    { value: "HR Policies", label: "HR Policies" },
-    { value: "Shopify", label: "Shopify" },
-    { value: "Dropshipping", label: "Dropshipping" },
-    { value: "Product Listing", label: "Product Listing" },
-    { value: "UX Design", label: "UX Design" },
-    { value: "Google Ads", label: "Google Ads" },
-    { value: "Machine Learning", label: "Machine Learning" },
-    { value: "Deep Learning", label: "Deep Learning" },
+  const allindustries = [
     {
-      value: "Natural Language Processing",
-      label: "Natural Language Processing",
+      label: "Information Technology",
+      value: "Information Technology",
+      skills: [
+        "Software Development (Backend, Frontend, Full-Stack)",
+        "Web Development (HTML, CSS, JavaScript, Frameworks)",
+        "Mobile Development (iOS, Android, Cross-Platform)",
+        "UI/UX Design & Research",
+        "DevOps & SRE (CI/CD, Docker, Kubernetes)",
+        "Database Management (SQL, NoSQL, Administration)",
+        "Cloud Computing (AWS, Azure, GCP, Cloud Architecture)",
+        "Cybersecurity (Ethical Hacking, Forensics, SecOps)",
+        "Machine Learning & AI (NLP, Computer Vision)",
+        "Data Science & Analytics (Big Data, Data Engineering, Business Intelligence)",
+        "IT Support & Helpdesk",
+        "Networking (Design, Administration, Security)",
+        "System Administration (Linux, Windows)",
+        "Version Control (Git, GitHub, GitLab)",
+        "Agile & Scrum Methodologies",
+        "QA & Software Testing (Manual, Automated)",
+        "Technical Writing & Documentation",
+        "API Design & Development",
+        "Embedded Systems Development",
+        "Firmware Engineering",
+        "Blockchain Development",
+        "IoT Solutions Architecture",
+        "Cloud Security",
+        "Data Privacy & Compliance",
+        "Game Development (Programming)",
+      ],
     },
-    { value: "Computer Vision", label: "Computer Vision" },
-    { value: "Model Training", label: "Model Training" },
+    {
+      label: "Healthcare & Life Sciences",
+      value: "Healthcare & Life Sciences",
+      skills: [
+        "Patient Care (Direct, Indirect)",
+        "Medical Terminology",
+        "Clinical Procedures & Protocols",
+        "Medical Coding & Billing",
+        "Health Informatics & EHR/EMR Management",
+        "Pharmacology & Pharmacy Operations",
+        "Surgery Assistance & Surgical Technology",
+        "Health Policy & Administration",
+        "Medical Equipment Handling & Maintenance",
+        "Nursing (RN, LPN, NP, Specialties)",
+        "Physiotherapy & Rehabilitation",
+        "Telemedicine & Remote Patient Monitoring",
+        "Medical Imaging (X-Ray, MRI, CT, Ultrasound)",
+        "Laboratory Science & Technology",
+        "Public Health & Epidemiology",
+        "Mental Health Counseling & Psychiatry",
+        "Dental Hygiene & Assisting",
+        "Geriatrics & Palliative Care",
+        "Pediatrics",
+        "Biostatistics",
+        "Clinical Trial Management",
+        "Regulatory Affairs (Healthcare)",
+        "Genetics & Genomics",
+        "Medical Research",
+        "Occupational Therapy",
+        "Speech-Language Pathology",
+        "Healthcare Management",
+      ],
+    },
+    {
+      label: "Finance & Accounting",
+      value: "Finance & Accounting",
+      skills: [
+        "Financial Analysis & Modeling",
+        "Accounting (GAAP, IFRS)",
+        "Budgeting & Forecasting",
+        "Taxation (Corporate, Personal)",
+        "Auditing (Internal, External)",
+        "Investment Management & Portfolio Strategy",
+        "Financial Planning (Personal, Corporate)",
+        "Risk Management (Credit, Market, Operational)",
+        "Corporate Finance & M&A",
+        "Bookkeeping & Payroll",
+        "Advanced Excel & VBA",
+        "Financial Reporting & Compliance (SOX, SEC)",
+        "FinTech & Financial Software",
+        "Quantitative Analysis & Algorithmic Trading",
+        "Asset Management",
+        "Forensic Accounting",
+        "Securities Trading & Brokerage",
+        "Wealth Management",
+        "Private Equity & Venture Capital",
+        "Treasury Management",
+        "Actuarial Science",
+      ],
+    },
+    {
+      label: "Education & Training",
+      value: "Education & Training",
+      skills: [
+        "Curriculum Design & Development",
+        "Lesson Planning & Delivery",
+        "Classroom Management & Student Engagement",
+        "Instructional Design & E-Learning Development",
+        "Student Assessment & Evaluation",
+        "Education Technology Integration (LMS, EdTech tools)",
+        "Special Education & Inclusive Practices",
+        "Academic Advising & Counseling",
+        "Tutoring & Mentoring",
+        "Educational Leadership & Administration",
+        "Online Teaching & Facilitation",
+        "Pedagogy & Andragogy",
+        "Child Development & Early Childhood Education",
+        "Educational Psychology",
+        "Corporate Training & Development",
+        "Vocational Training",
+        "ESL/TESOL Instruction",
+        "Research in Education",
+        "Grant Writing (Education)",
+      ],
+    },
+    {
+      label: "Engineering (Multidisciplinary)",
+      value: "Engineering (Multidisciplinary)",
+      skills: [
+        "Mechanical Design & Engineering (CAD, CAM, FEA)",
+        "Electrical Systems Design & Engineering (Circuit Design, Power Systems)",
+        "Civil & Structural Engineering (Structural Analysis, Infrastructure)",
+        "Chemical Engineering & Process Design",
+        "Software Engineering (see IT)",
+        "Aerospace Engineering & Aeronautics",
+        "Biomedical Engineering & Medical Devices",
+        "Environmental Engineering & Sustainability",
+        "Industrial Engineering & Operations Management",
+        "Materials Science & Engineering",
+        "Robotics & Automation Engineering",
+        "Project Management (Engineering Projects)",
+        "Quality Control & Assurance (Engineering)",
+        "Thermodynamics & Fluid Mechanics",
+        "Control Systems Engineering",
+        "Petroleum Engineering",
+        "Nuclear Engineering",
+        "Geotechnical Engineering",
+        "Systems Engineering",
+        "Manufacturing Engineering",
+        "Automotive Engineering",
+      ],
+    },
+    {
+      label: "Marketing, Advertising & PR",
+      value: "Marketing, Advertising & PR",
+      skills: [
+        "SEO/SEM & PPC Advertising",
+        "Content Marketing & Strategy",
+        "Email Marketing & Automation",
+        "Social Media Management & Marketing",
+        "Brand Strategy & Management",
+        "Market Research & Analysis",
+        "Digital Advertising (Display, Video)",
+        "Digital Analytics & Reporting (Google Analytics)",
+        "Copywriting & Content Creation",
+        "Public Relations & Media Outreach",
+        "Marketing Automation Platforms (HubSpot, Marketo)",
+        "CRM Software Management",
+        "Affiliate Marketing",
+        "Video Marketing & Production",
+        "Influencer Marketing",
+        "Growth Hacking & User Acquisition",
+        "Conversion Rate Optimization (CRO)",
+        "Product Marketing",
+        "Event Marketing",
+        "Graphic Design (Marketing Materials)",
+      ],
+    },
+    {
+      label: "Human Resources & Talent Acquisition",
+      value: "Human Resources & Talent Acquisition",
+      skills: [
+        "Recruitment & Sourcing",
+        "Employee Relations & Engagement",
+        "Payroll & Compensation Administration",
+        "Training & Development Program Management",
+        "Performance Management Systems",
+        "HRIS & HR Technology",
+        "Conflict Resolution & Mediation",
+        "Labor Law & Compliance",
+        "Interviewing & Selection",
+        "Benefits Administration & Design",
+        "Talent Management & Succession Planning",
+        "Organizational Development",
+        "Workforce Planning & Analytics",
+        "Change Management",
+        "Employer Branding",
+        "Diversity, Equity, & Inclusion (DEI) Initiatives",
+      ],
+    },
+    {
+      label: "Legal Services",
+      value: "Legal Services",
+      skills: [
+        "Legal Research & Writing",
+        "Contract Drafting & Negotiation",
+        "Litigation & Court Procedures",
+        "Regulatory Compliance & Corporate Governance",
+        "Corporate Law (M&A, Securities)",
+        "Case Management & E-Discovery",
+        "Paralegal Support",
+        "Criminal Law & Procedure",
+        "Intellectual Property Law (Patents, Trademarks, Copyrights)",
+        "Real Estate Law",
+        "Family Law",
+        "Environmental Law",
+        "Tax Law",
+        "International Law",
+        "Mediation & Arbitration",
+        "Legal Tech Software",
+      ],
+    },
+    {
+      label: "Construction & Skilled Trades",
+      value: "Construction & Skilled Trades",
+      skills: [
+        "Blueprint Reading & Interpretation",
+        "Masonry & Concrete Work",
+        "Carpentry & Woodworking",
+        "Construction Project Management",
+        "Safety Protocols & OSHA Compliance",
+        "Welding & Fabrication",
+        "Electrical Installation & Wiring",
+        "Plumbing & Pipefitting",
+        "Site Supervision & Management",
+        "Cost Estimation & Bidding",
+        "HVAC Installation & Repair",
+        "Heavy Equipment Operation",
+        "Surveying",
+        "Building Codes & Regulations",
+        "Sustainable & Green Building",
+        "Painting & Finishing",
+        "Roofing",
+      ],
+    },
+    {
+      label: "Hospitality, Tourism & Event Management",
+      value: "Hospitality, Tourism & Event Management",
+      skills: [
+        "Customer Service Excellence",
+        "Event Planning & Coordination",
+        "Hotel & Resort Management",
+        "Travel & Tour Coordination",
+        "Food & Beverage Service & Management",
+        "Reservations & Booking Systems",
+        "Cultural Awareness & Sensitivity",
+        "Tour Guiding & Interpretation",
+        "Multilingual Communication",
+        "Hospitality Property Management Systems (PMS)",
+        "Revenue Management & Pricing Strategy",
+        "Catering Management",
+        "Conference & Convention Services",
+        "Guest Relations",
+        "Cruise Line Operations",
+      ],
+    },
+    {
+      label: "Manufacturing & Production",
+      value: "Manufacturing & Production",
+      skills: [
+        "Production Planning & Scheduling",
+        "CNC Machining & Programming",
+        "Assembly Line Operations & Management",
+        "Quality Assurance & Control (QA/QC)",
+        "Lean Manufacturing & Six Sigma",
+        "Welding & Metal Fabrication",
+        "Machine Operation & Maintenance",
+        "Supply Chain & Logistics (Manufacturing)",
+        "Technical Drawing & CAD/CAM",
+        "Robotics & Automation in Manufacturing",
+        "Process Improvement & Optimization",
+        "Inventory Control & Management",
+        "PLC Programming & Industrial Controls",
+        "Industrial Maintenance & Repair",
+        "Safety Management (Manufacturing)",
+      ],
+    },
+    {
+      label: "Retail & E-commerce",
+      value: "Retail & E-commerce",
+      skills: [
+        "Sales & Customer Engagement",
+        "Point of Sale (POS) Systems",
+        "Merchandising & Visual Display",
+        "Inventory Management & Stock Control",
+        "E-commerce Platform Management (Shopify, Magento, etc.)",
+        "Product Knowledge & Demonstration",
+        "Cash Handling & Reconciliation",
+        "Store Management & Operations",
+        "Loss Prevention & Security",
+        "Retail Analytics & Sales Reporting",
+        "Supply Chain & Logistics (Retail)",
+        "Customer Relationship Management (CRM - Retail)",
+        "Omnichannel Retail Strategy",
+        "Digital Marketing for E-commerce",
+      ],
+    },
+    {
+      label: "Arts, Design & Creative Industries",
+      value: "Arts, Design & Creative Industries",
+      skills: [
+        "Graphic Design & Visual Communication",
+        "Illustration & Digital Art",
+        "Creative Direction & Art Direction",
+        "Art History & Theory",
+        "Photography & Photo Editing",
+        "Animation (2D, 3D, Motion Graphics)",
+        "3D Modeling & Rendering",
+        "Typography & Layout Design",
+        "Video Editing & Post-Production",
+        "Design Software (Adobe Creative Suite, etc.)",
+        "User Interface (UI) Design",
+        "User Experience (UX) Design",
+        "Industrial & Product Design",
+        "Fashion Design & Merchandising",
+        "Interior Design & Space Planning",
+        "Web Design",
+        "Sound Design & Audio Engineering",
+        "Game Art & Design",
+        "Fine Arts (Painting, Sculpture, etc.)",
+      ],
+    },
+    {
+      label: "Transportation, Logistics & Supply Chain",
+      value: "Transportation, Logistics & Supply Chain",
+      skills: [
+        "Fleet Management & Maintenance",
+        "Logistics Planning & Coordination",
+        "Supply Chain Management & Optimization",
+        "Route Planning & Optimization",
+        "Warehouse Operations & Management (WMS)",
+        "Customs & International Trade Compliance",
+        "Inventory Management & Control",
+        "Freight Forwarding & Brokerage",
+        "Dispatch & Scheduling",
+        "Safety & Regulatory Compliance (DOT, IATA)",
+        "Transportation Management Systems (TMS)",
+        "Last-Mile Delivery Solutions",
+        "Procurement & Sourcing",
+        "Demand Forecasting & Planning",
+        "Cold Chain Logistics",
+        "Maritime & Air Cargo Operations",
+      ],
+    },
+    {
+      label: "Agriculture, Food Production & Environmental Science",
+      value: "Agriculture, Food Production & Environmental Science",
+      skills: [
+        "Crop Management & Agronomy",
+        "Soil Science & Conservation",
+        "Irrigation Systems & Water Management",
+        "Agrochemicals Handling & Pest Management",
+        "Environmental Policy & Regulation",
+        "Conservation Planning & Land Management",
+        "Animal Husbandry & Livestock Management",
+        "Sustainable Farming & Organic Practices",
+        "Food Science & Technology",
+        "Food Safety & HACCP",
+        "Aquaculture & Fisheries Management",
+        "Forestry & Arboriculture",
+        "Environmental Monitoring & Impact Assessment",
+        "Renewable Energy in Agriculture",
+        "GIS & Remote Sensing (Agri/Env)",
+        "Horticulture & Viticulture",
+      ],
+    },
+    {
+      label: "Media, Communication & Publishing",
+      value: "Media, Communication & Publishing",
+      skills: [
+        "Journalism (Investigative, Broadcast, Print, Digital)",
+        "Public Speaking & Presentation",
+        "Social Media Strategy & Community Management",
+        "Podcasting & Audio Production",
+        "Media Production (Video, Audio)",
+        "Broadcasting (Radio, TV)",
+        "Copywriting & Editing (for various media)",
+        "Storytelling & Narrative Development",
+        "Scriptwriting (Film, TV, Web)",
+        "Content Strategy & Management (CMS)",
+        "Digital Media Management",
+        "Photojournalism",
+        "Technical Communication",
+        "Corporate Communications & Public Affairs",
+        "Publishing Operations (Editing, Typesetting, Rights)",
+      ],
+    },
+    {
+      label: "Real Estate & Property Management",
+      value: "Real Estate & Property Management",
+      skills: [
+        "Property Management & Tenant Relations",
+        "Real Estate Law & Regulations",
+        "Sales & Leasing (Residential, Commercial)",
+        "Market Analysis & Valuation",
+        "Contract Negotiation & Closing",
+        "Real Estate Appraisal",
+        "Client Relationship Management (Real Estate)",
+        "Real Estate Software (MLS, CRM)",
+        "Site Evaluation & Development",
+        "Real Estate Investment Strategies",
+        "Mortgage Brokering & Lending",
+        "Home Inspection",
+        "Urban Planning & Zoning",
+      ],
+    },
+    {
+      label: "Scientific Research & Development",
+      value: "Scientific Research & Development",
+      skills: [
+        "Data Analysis & Statistical Modeling (R, Python, SPSS)",
+        "Experimental Design & Methodology",
+        "Scientific Writing & Publication",
+        "Laboratory Techniques & Management (e.g., PCR, Microscopy, Spectroscopy)",
+        "Literature Review & Synthesis",
+        "Hypothesis Testing & Validation",
+        "Research Project Management",
+        "Peer Review Process",
+        "Fieldwork & Data Collection",
+        "Grant Writing & Funding Acquisition",
+        "Bioinformatics & Computational Biology",
+        "Materials Science Research",
+        "Physics, Chemistry, Biology (Specialized sub-fields)",
+        "Clinical Research Design & Execution",
+        "Ethical Conduct in Research",
+      ],
+    },
+    {
+      label: "Government & Public Administration",
+      value: "Government & Public Administration",
+      skills: [
+        "Public Policy Analysis & Development",
+        "Governance & Public Sector Management",
+        "Legislative Process & Bill Drafting",
+        "Public Speaking & Community Engagement",
+        "Budgeting & Public Finance",
+        "Regulatory Compliance & Enforcement",
+        "Grant Management & Administration",
+        "Urban & Regional Planning",
+        "International Relations & Diplomacy",
+        "Emergency Management & Disaster Response",
+        "Intelligence Analysis",
+        "Social Program Management",
+        "Election Administration",
+      ],
+    },
+    {
+      label: "Consulting (Management, IT, Specialized)",
+      value: "Consulting (Management, IT, Specialized)",
+      skills: [
+        "Business Analysis & Process Improvement",
+        "Strategy Development & Implementation",
+        "Project & Program Management",
+        "Client Relationship & Stakeholder Management",
+        "Change Management & Organizational Transformation",
+        "Data Analysis & Interpretation for Business",
+        "Presentation & Workshop Facilitation",
+        "Problem Solving & Critical Thinking",
+        "Industry-Specific Expertise (e.g., Financial, Healthcare, Tech)",
+        "Market Entry Strategy",
+        "Management Consulting Frameworks",
+        "IT Consulting (Systems, Infrastructure, Software)",
+        "Financial Advisory",
+      ],
+    },
+    {
+      label: "Non-Profit & Social Services",
+      value: "Non-Profit & Social Services",
+      skills: [
+        "Fundraising & Donor Relations",
+        "Grant Writing & Management",
+        "Volunteer Coordination & Management",
+        "Community Outreach & Engagement",
+        "Program Development & Evaluation",
+        "Advocacy & Policy Influence",
+        "Social Work & Case Management",
+        "Non-profit Financial Management & Accounting",
+        "Impact Assessment & Reporting",
+        "Counseling & Support Services",
+        "Crisis Intervention",
+        "Public Speaking (for advocacy)",
+        "Non-profit Leadership & Governance",
+      ],
+    },
+    {
+      label: "Energy (Oil, Gas, Renewables, Utilities)",
+      value: "Energy (Oil, Gas, Renewables, Utilities)",
+      skills: [
+        "Energy Policy & Regulation",
+        "Renewable Energy Technologies (Solar, Wind, Hydro, Geothermal)",
+        "Grid Management & Smart Grid Technology",
+        "Petroleum Engineering & Geoscience",
+        "Drilling & Well Operations",
+        "Power Plant Operations & Maintenance",
+        "Environmental Impact Assessment (Energy Sector)",
+        "Resource Exploration & Extraction",
+        "Energy Trading & Markets",
+        "Safety Engineering & Compliance (Energy)",
+        "Energy Storage Solutions",
+        "Utility Operations & Management",
+        "Nuclear Energy & Safety",
+        "Pipeline Engineering & Management",
+      ],
+    },
+    {
+      label: "Automotive & Aerospace Manufacturing/Maintenance",
+      value: "Automotive & Aerospace Manufacturing/Maintenance",
+      skills: [
+        "Automotive Design & Engineering",
+        "Aerospace Design & Engineering",
+        "Vehicle Diagnostics & Repair",
+        "Aircraft Maintenance, Repair & Overhaul (MRO)",
+        "Assembly Line Operations (Automotive/Aerospace)",
+        "Quality Control & Assurance (Automotive/Aerospace)",
+        "Electric Vehicle (EV) Technology",
+        "Autonomous Driving Systems",
+        "Avionics Systems",
+        "Sales & After-Sales Service (Automotive)",
+        "Supply Chain Management (Automotive/Aerospace)",
+        "Engine Mechanics & Rebuilding",
+        "Auto Body Repair & Painting",
+        "Flight Systems & Controls",
+        "Motorsport Engineering",
+      ],
+    },
+    {
+      label: "Security & Protective Services",
+      value: "Security & Protective Services",
+      skills: [
+        "Law Enforcement & Criminal Justice",
+        "Private Security & Guarding",
+        "Physical Security Systems (CCTV, Access Control)",
+        "Surveillance & Investigation Techniques",
+        "Emergency Dispatch & Response",
+        "Firefighting & Rescue Operations",
+        "Corrections & Offender Management",
+        "Cybersecurity Operations (see IT)",
+        "Loss Prevention & Asset Protection",
+        "Executive Protection & Close Protection",
+        "Risk Assessment & Security Management",
+        "Crisis Management & De-escalation",
+      ],
+    },
+    {
+      label: "Gaming & Interactive Entertainment",
+      value: "Gaming & Interactive Entertainment",
+      skills: [
+        "Game Design (Mechanics, Narrative, Level)",
+        "Game Development & Programming (Unity, Unreal)",
+        "2D/3D Art & Animation for Games",
+        "Sound Design & Music Composition (Games)",
+        "QA Testing & Debugging (Games)",
+        "UX/UI Design for Games",
+        "Game Production & Project Management",
+        "Monetization Strategies",
+        "Virtual Reality (VR) & Augmented Reality (AR) Development",
+        "Community Management (Gaming)",
+        "Esports Management & Operations",
+      ],
+    },
+    {
+      label: "Personal Care, Wellness & Fitness",
+      value: "Personal Care, Wellness & Fitness",
+      skills: [
+        "Cosmetology (Hair, Skin, Nails)",
+        "Barbering",
+        "Esthetics & Skincare",
+        "Massage Therapy",
+        "Personal Training & Fitness Instruction",
+        "Nutrition & Dietetics Counseling",
+        "Yoga & Pilates Instruction",
+        "Holistic Health Practices",
+        "Spa Management & Operations",
+        "Makeup Artistry",
+        "Life Coaching",
+        "Acupuncture & Traditional Medicine",
+      ],
+    },
+    {
+      label: "Insurance Services",
+      value: "Insurance Services",
+      skills: [
+        "Underwriting (Life, Health, P&C)",
+        "Claims Adjusting & Processing",
+        "Actuarial Analysis (Insurance)",
+        "Risk Assessment & Management (Insurance)",
+        "Insurance Sales & Brokerage",
+        "Policy Administration & Customer Service",
+        "Insurance Law & Compliance",
+        "Reinsurance",
+        "Loss Control & Prevention",
+        "Insurance Fraud Investigation",
+        "Insurtech & Digital Transformation",
+      ],
+    },
   ];
 
   const [profileData, setProfileData] = useState(null);
@@ -1150,6 +1693,7 @@ const SuperDashboard = () => {
     profile_summary: "",
 
     skillsExpertise: [],
+    industries_of_interest: [],
     fullName: "",
     gender: "",
     dob: null,
@@ -1171,10 +1715,12 @@ const SuperDashboard = () => {
         const data = await fetchUserProfileDetails(selectedUser.id);
         if (data) {
           setProfileData(data);
+          console.log("datar", data);
 
           setFormData({
             profile_summary: data.profile_summary || "",
             skillsExpertise: data.skills_expertise || [],
+            industries_of_interest: data.industries_of_interest || [],
             fullName: data.full_name || "",
             gender: data.gender || "",
             dob: data.date_of_birth || "",
@@ -1302,7 +1848,21 @@ const SuperDashboard = () => {
       alert(`Failed to update account: ${error.message}`);
     }
   };
+
+  const industrySelectOptions = allindustries.map((industry) => ({
+    value: industry.value,
+    label: industry.label,
+  }));
+
+  const selectedIndustrySkills = formData.industries_of_interest
+
+    .map((industryValue) => {
+      const industry = allindustries.find((ind) => ind.value === industryValue);
+      return industry ? industry.skills : [];
+    })
+    .flat();
   const handleskillsExpertiseChange = (selectedOptions) => {
+    setIsJobFormChanged(true);
     const selectedValues = selectedOptions.map((option) => option.value);
     setFormData((prev) => ({
       ...prev,
@@ -1315,6 +1875,14 @@ const SuperDashboard = () => {
     setJobForm((prev) => ({
       ...prev,
       industry: selectedValues,
+    }));
+  };
+
+  const handleIndustriesChange = (selectedOptions) => {
+    const selectedValues = selectedOptions.map((option) => option.value);
+    setFormData((prev) => ({
+      ...prev,
+      industries_of_interest: selectedValues,
     }));
   };
 
@@ -1341,136 +1909,6 @@ const SuperDashboard = () => {
       });
     }
   }, [selectedEvent]);
-
-  const industryOptions = [
-    {
-      value: "Information Technology (IT) & Software Development",
-      label: "Information Technology (IT) & Software Development",
-    },
-    {
-      value: "Healthcare & Life Sciences",
-      label: "Healthcare & Life Sciences",
-    },
-    {
-      value: "Education & Academia",
-      label: "Education & Academia",
-    },
-    { value: "Finance & Banking", label: "Finance & Banking" },
-    {
-      value: "Engineering & Manufacturing",
-      label: "Engineering & Manufacturing",
-    },
-    {
-      value: "Marketing & Advertising",
-      label: "Marketing & Advertising",
-    },
-    { value: "Sales & Retail", label: "Sales & Retail" },
-    {
-      value: "Human Resources (HR) & Recruitment",
-      label: "Human Resources (HR) & Recruitment",
-    },
-    {
-      value: "Legal & Compliance",
-      label: "Legal & Compliance",
-    },
-    {
-      value: "Consulting & Business Services",
-      label: "Consulting & Business Services",
-    },
-    {
-      value: "Government & Public Administration",
-      label: "Government & Public Administration",
-    },
-    { value: "Non-Profit & NGOs", label: "Non-Profit & NGOs" },
-    {
-      value: "Media & Communications",
-      label: "Media & Communications",
-    },
-    {
-      value: "Design & Creative Arts",
-      label: "Design & Creative Arts",
-    },
-    {
-      value: "Architecture & Urban Planning",
-      label: "Architecture & Urban Planning",
-    },
-    {
-      value: "Agriculture & Environmental Science",
-      label: "Agriculture & Environmental Science",
-    },
-    {
-      value: "Aerospace & Defense",
-      label: "Aerospace & Defense",
-    },
-    {
-      value: "Hospitality & Tourism",
-      label: "Hospitality & Tourism",
-    },
-    {
-      value: "Transportation & Logistics",
-      label: "Transportation & Logistics",
-    },
-    {
-      value: "Real Estate & Property Management",
-      label: "Real Estate & Property Management",
-    },
-    {
-      value: "Telecommunications",
-      label: "Telecommunications",
-    },
-    {
-      value: "Energy & Utilities",
-      label: "Energy & Utilities",
-    },
-    {
-      value: "Sports & Recreation",
-      label: "Sports & Recreation",
-    },
-    { value: "Fashion & Apparel", label: "Fashion & Apparel" },
-    { value: "Automotive", label: "Automotive" },
-    {
-      value: "Pharmaceuticals & Biotech",
-      label: "Pharmaceuticals & Biotech",
-    },
-    {
-      value: "Construction & Civil Engineering",
-      label: "Construction & Civil Engineering",
-    },
-    { value: "Event Management", label: "Event Management" },
-    { value: "E-commerce", label: "E-commerce" },
-    { value: "Cybersecurity", label: "Cybersecurity" },
-    {
-      value: "Research & Development (R&D)",
-      label: "Research & Development (R&D)",
-    },
-    {
-      value: "Entertainment & Film Industry",
-      label: "Entertainment & Film Industry",
-    },
-    {
-      value: "Publishing & Journalism",
-      label: "Publishing & Journalism",
-    },
-    { value: "Food & Beverage", label: "Food & Beverage" },
-    { value: "Blockchain & Web3", label: "Blockchain & Web3" },
-    {
-      value: "Artificial Intelligence & Data Science",
-      label: "Artificial Intelligence & Data Science",
-    },
-    {
-      value: "Customer Support & Service",
-      label: "Customer Support & Service",
-    },
-    {
-      value: "Supply Chain Management",
-      label: "Supply Chain Management",
-    },
-    {
-      value: "Gaming & Game Development",
-      label: "Gaming & Game Development",
-    },
-    { value: "Insurance", label: "Insurance" },
-  ];
 
   const [currentUser, setCurrentUser] = useState("");
 
@@ -2259,7 +2697,22 @@ const SuperDashboard = () => {
                                           formData.skillsExpertise
                                         }
                                         onChange={handleskillsExpertiseChange}
-                                        options={industryskills}
+                                        options={selectedIndustrySkills.map(
+                                          (skill) => ({
+                                            value: skill,
+                                            label: skill,
+                                          })
+                                        )}
+                                      />
+                                    </div>
+                                    <div className="flex-1 min-w-[250px]">
+                                      <label>Industry</label>
+                                      <MultiSelect
+                                        selectedOptions={
+                                          formData.industries_of_interest
+                                        }
+                                        onChange={handleIndustriesChange}
+                                        options={industrySelectOptions}
                                       />
                                     </div>
 
@@ -3083,7 +3536,7 @@ const SuperDashboard = () => {
                   Industry
                 </Label>
                 <MultiSelect
-                  options={industryOptions}
+                  options={industrySelectOptions}
                   selectedOptions={newJobForm.industry}
                   onChange={handlenewindustryChange}
                 />
@@ -3494,8 +3947,8 @@ const SuperDashboard = () => {
                   Industry
                 </Label>
                 <MultiSelect
-                  options={industryOptions} // Array of {value, label} objects
-                  selectedOptions={jobForm.industry} // Array of {value, label} objects
+                  options={industrySelectOptions}
+                  selectedOptions={jobForm.industry}
                   onChange={handleindustryChange}
                 />
               </div>

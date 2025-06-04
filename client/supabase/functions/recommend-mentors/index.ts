@@ -82,6 +82,7 @@ serve(async (req: Request) => {
         "id, full_name, profile_photo_url, skills_expertise, industries_of_interest, current_job_title, current_company"
       )
       .eq("role", "alumni")
+      .eq("is_superadmin", false)
       .neq("id", student_user_id);
 
     if (alumniError || !alumniProfilesData) {
