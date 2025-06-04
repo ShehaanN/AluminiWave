@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../../supabaseClient";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -28,9 +28,7 @@ const Dashboard = () => {
   const [activeMentorships, setActiveMentorships] = useState([]);
   const [loading, setLoading] = useState(true);
   const [recentJobs, setRecentJobs] = useState([]);
-
-  console.log("userdata", user);
-  console.log("activementorshipsdata", activeMentorships);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const loadDashboardData = async () => {
@@ -135,6 +133,23 @@ const Dashboard = () => {
     loadDashboardData();
   }, []);
 
+  const handleLogout = async () => {
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) {
+        throw error;
+      }
+      // Clear any local state if needed
+      setUser(null);
+      setUserType("");
+      // Redirect to login page
+      navigate("/");
+    } catch (error) {
+      console.error("Error signing out:", error.message);
+      alert("Error signing out. Please try again.");
+    }
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -164,9 +179,14 @@ const Dashboard = () => {
                   <DropdownMenuItem>Update Profile</DropdownMenuItem>
                 </Link>
 
-                <Link to="/">
-                  <DropdownMenuItem>Log out</DropdownMenuItem>
-                </Link>
+                <DropdownMenuItem
+                  onSelect={(e) => {
+                    e.preventDefault();
+                    handleLogout();
+                  }}
+                >
+                  Log out
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>

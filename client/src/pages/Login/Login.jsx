@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import logo from "../../assets/logo.png";
 import { supabase } from "../../supabaseClient";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { fetchUserProfile } from "../../services/dataService";
 
 export default function AlumniWaveLogin() {
@@ -11,6 +11,7 @@ export default function AlumniWaveLogin() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -25,22 +26,23 @@ export default function AlumniWaveLogin() {
           password: password,
         });
 
+      if (signInData.session) {
+        // After successful login, fetch the user's profile
+        const userProfile = await fetchUserProfile(signInData.session.user.id);
+
+        if (!userProfile) {
+          throw new Error("Could not fetch user profile");
+        }
+
+        // navigation path based on user role
+        const from =
+          location.state?.from?.pathname ||
+          (userProfile.is_superadmin ? "/superdashboard" : "/dashboard");
+
+        navigate(from, { replace: true });
+      }
       if (signInError) throw signInError;
       if (!signInData.session) throw new Error("No session data");
-
-      // After successful login, fetch the user's profile
-      const userProfile = await fetchUserProfile(signInData.session.user.id);
-
-      if (!userProfile) {
-        throw new Error("Could not fetch user profile");
-      }
-
-      // Check if user is superadmin and redirect accordingly
-      if (userProfile.is_superadmin === true) {
-        navigate("/superdashboard");
-      } else {
-        navigate("/dashboard");
-      }
     } catch (error) {
       console.error("Login error:", error);
       setError(error.message || "Invalid login credentials.");
