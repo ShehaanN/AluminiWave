@@ -1,6 +1,6 @@
 import Sidebar from "../Sidebar/Sidebar";
 import { Link } from "react-router-dom";
-import sara from "../../assets/sara.png";
+
 import mdp from "../../assets/mdp.jpg";
 
 import { Button } from "@/components/ui/button";
@@ -198,6 +198,7 @@ export default function Mentorship() {
       setIsSubmitting(false);
     }
   };
+
   return (
     <div className="min-h-screen flex ">
       <Sidebar userType={userType} />
@@ -247,13 +248,13 @@ export default function Mentorship() {
                     </div>
                   ) : recommendedMentors.length === 0 ? (
                     <div className="col-span-4 text-center py-8">
-                      No recommended mentors found
+                      {/* No recommended mentors found */}
                     </div>
                   ) : (
                     recommendedMentors.map((mentor) => (
                       <div
                         key={mentor.id}
-                        className="bg-white rounded-lg shadow p-6"
+                        className="bg-white rounded-lg shadow p-6 flex flex-col h-full"
                       >
                         <div className="flex items-center justify-between mb-4">
                           <img
@@ -272,26 +273,31 @@ export default function Mentorship() {
                           {mentor.current_job_title} at {mentor.current_company}
                         </p>
                         <div className="space-y-2 mb-4">
-                          {mentor.skills_expertise
-                            ?.slice(0, 2)
-                            .map((skill, index) => (
-                              <span
-                                key={index}
-                                className="inline-block bg-gray-100 rounded-full px-3 py-1 text-sm mr-2"
-                              >
-                                {skill}
-                              </span>
-                            ))}
+                          <p className="text-sm font-medium text-gray-800 mb-1">
+                            Match Reasons:
+                          </p>
+                          <ul className="text-sm text-gray-600">
+                            {mentor.match_reasons
+                              ?.slice(0, 6)
+                              .map((skill, index) => (
+                                <li key={index} className="flex items-center">
+                                  <span className="mr-2 text-3xl">•</span>{" "}
+                                  {skill}
+                                </li>
+                              ))}
+                          </ul>
                         </div>
-                        <button
-                          className="w-full bg-[#269EB2] text-white rounded-lg py-3 min-h-[44px]"
-                          onClick={() => {
-                            setSelectedMentor(mentor);
-                            setViewProfileDialog(true);
-                          }}
-                        >
-                          View Profile
-                        </button>
+                        <div className="mt-auto">
+                          <button
+                            className="w-full bg-[#269EB2] text-white rounded-lg py-3 min-h-[44px]"
+                            onClick={() => {
+                              setSelectedMentor(mentor);
+                              setViewProfileDialog(true);
+                            }}
+                          >
+                            View Profile
+                          </button>
+                        </div>
                       </div>
                     ))
                   )}
