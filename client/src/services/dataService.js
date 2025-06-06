@@ -30,6 +30,25 @@ export const fetchEvents = async () => {
     return [];
   }
 };
+export const fetchOwnEvents = async (userId) => {
+  try {
+    if (!userId) {
+      throw new Error("User ID is required");
+    }
+
+    const { data, error } = await supabase
+      .from("events")
+      .select("*")
+      .eq("created_by_user_id", userId)
+      .order("created_at", { ascending: false });
+
+    if (error) throw error;
+    return data;
+  } catch (error) {
+    console.error("Error fetching events:", error.message);
+    return [];
+  }
+};
 
 export const getCurrentSession = async () => {
   try {
