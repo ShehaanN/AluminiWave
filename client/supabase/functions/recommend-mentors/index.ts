@@ -79,7 +79,7 @@ serve(async (req: Request) => {
     const { data: alumniProfilesData, error: alumniError } = await supabase
       .from("profiles")
       .select(
-        "id, full_name, profile_photo_url, skills_expertise, industries_of_interest, current_job_title, current_company"
+        "id, full_name, profile_photo_url, skills_expertise, industries_of_interest, current_job_title, current_company,profile_summary"
       )
       .eq("role", "alumni")
       .eq("is_superadmin", false)
