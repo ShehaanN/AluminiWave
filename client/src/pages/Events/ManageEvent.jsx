@@ -24,7 +24,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useEffect, useState } from "react";
 import {
-  fetchEvents,
+  fetchOwnEvents,
+  getUserData,
   deleteEvent,
   updateEvent,
 } from "../../services/dataService";
@@ -42,13 +43,28 @@ const ManageEvent = () => {
   });
 
   const [error, setError] = useState(null);
+  const [user, setUser] = useState(null);
 
   // Fetch events
   useEffect(() => {
     const loadEvents = async () => {
-      const eventData = await fetchEvents();
-      setEvents(eventData);
+      try {
+        const userData = await getUserData();
+        if (!userData?.session?.user?.id) {
+          throw new Error("No user session found");
+        }
+
+        const userId = userData.session.user.id;
+        setUser(userId);
+
+        const eventData = await fetchOwnEvents(userId);
+        setEvents(eventData);
+      } catch (error) {
+        console.error("Error loading events:", error);
+        setError(error.message);
+      }
     };
+
     loadEvents();
   }, []);
 
