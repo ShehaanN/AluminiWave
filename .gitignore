@@ -1,6 +1,5 @@
 # IDE and OS files
 .idea/
-.vscode/
 *.swp
 *~
 .DS_Store
@@ -12,7 +11,6 @@ client/node_modules/
 server/node_modules/
 
 # Environment files
-.env
 client/.env
 client/.env.*
 server/.env
@@ -39,3 +37,4 @@ pnpm-debug.log*
 
 # Coverage directory
 coverage/
+config.bat
