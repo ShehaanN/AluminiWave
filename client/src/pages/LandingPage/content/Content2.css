@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Cantarell:wght@400;700&display=swap');
- 
-.ValuePropositions{
-      display: flex;
-      justify-content: center;
+@import url("https://fonts.googleapis.com/css2?family=Cantarell:wght@400;700&display=swap");
+
+.ValuePropositions {
+  display: flex;
+  justify-content: center;
 }
 .features {
-      width: 1440px;
-      justify-content: center;
+  width: 1440px;
+  justify-content: center;
 }

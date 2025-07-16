@@ -13,7 +13,7 @@ function ValuePropositions() {
             </h2>
           </div>
 
-          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 px-6">
+          <div className="max-w-[100rem] mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 px-6">
             {/* Card 1 */}
             <div className="flex flex-row items-start text-start gap-4">
               <div className="bg-[#269EB2] p-3 rounded-md mb-4 mt-2 ">
@@ -25,7 +25,7 @@ function ValuePropositions() {
                 </h3>
                 <p className="text-gray-500 text-sm">
                   Find the perfect mentor with our AI-powered compatibility
-                  system, connecting you with professionals who understand your
+                  system,connecting you with professionals who understand your
                   journey.
                 </p>
               </div>
@@ -38,12 +38,11 @@ function ValuePropositions() {
               </div>
               <div className="">
                 <h3 className="font-semibold text-sm mb-2">
-                  Personalized Mentorship Matching
+                  Career-Building Events
                 </h3>
                 <p className="text-gray-500 text-sm">
-                  Find the perfect mentor with our AI-powered compatibility
-                  system, connecting you with professionals who understand your
-                  journey.
+                  Discover industry-specific networking sessions, workshops, and
+                  conferences designed to expand your professional horizons.
                 </p>
               </div>
             </div>
@@ -55,12 +54,11 @@ function ValuePropositions() {
               </div>
               <div className="">
                 <h3 className="font-semibold text-sm mb-2">
-                  Personalized Mentorship Matching
+                  Exclusive Job Opportunities
                 </h3>
                 <p className="text-gray-500 text-sm">
-                  Find the perfect mentor with our AI-powered compatibility
-                  system, connecting you with professionals who understand your
-                  journey.
+                  Access positions shared directly by fellow alumni and trusted
+                  partners, with application tracking and preparation resources.
                 </p>
               </div>
             </div>

@@ -8,7 +8,7 @@ function Content() {
       <div className="mainContent">
         <div className="leftContent">
           <div className="header123">
-            <h1 className="mentor">
+            <h1 className="mentor font-extrabold ">
               Connect, Mentor,
               <br />
               Grow:

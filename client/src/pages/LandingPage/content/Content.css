@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Cantarell:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Cantarell:wght@400;700&display=swap");
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Cantarell', sans-serif;
+  font-family: "Cantarell", sans-serif;
 }
 
 /* Wrapper */
@@ -20,8 +20,8 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 1440px;
-  padding:   2rem;
+  max-width: fit-content;
+  padding: 2rem;
 }
 
 /* Left Section */
@@ -45,12 +45,12 @@
 .network {
   font-size: 30px;
   font-weight: 800;
-  color: #269EB2;
+  color: #269eb2;
 }
 
 .para {
   font-size: 16px;
-  color: #6B7280;
+  color: #6b7280;
   line-height: 1.6;
   margin-bottom: 2rem;
 }
@@ -64,7 +64,7 @@
 .mainContentButton button {
   width: 140px;
   height: 45px;
-  background: #269EB2;
+  background: #269eb2;
   border: none;
   color: white;
   cursor: pointer;

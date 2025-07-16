@@ -5,23 +5,14 @@
 }
 
 /* Navbar container */
-.navbar{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-    /* padding: 10px; */
-  background-color: #ffffff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
+
 .nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 1440px;
+  /* width: 1440px; */
 
-  padding: 10px 20px ;
-
- 
+  padding: 10px 20px;
 }
 
 /* Logo */
@@ -59,7 +50,7 @@ img {
 
 /* Underline Effect */
 .content li a::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   bottom: -2px;
