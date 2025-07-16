@@ -1,30 +1,14 @@
 import React from "react";
 import "./Nav.css";
-import logo from "../../../assets/logo.png";
-import { Link, useLocation } from "react-router-dom";
+import logo from "../../../assets/logo-home.png";
+import { Link } from "react-router-dom";
 
 function Nav() {
-  const location = useLocation();
-
   return (
-    <div>
-      <div className="nav">
+    <div className="navbar mt-2 px-3 ">
+      <div className="nav mb-2 ">
         <div className="content">
           <img src={logo} alt="Logo" />
-          <ul>
-            <li>
-              <a href="">Home</a>
-            </li>
-            <li>
-              <a href="">About</a>
-            </li>
-            <li>
-              <a href="">Features</a>
-            </li>
-            <li>
-              <a href="">Contact</a>
-            </li>
-          </ul>
         </div>
         <div className="loginButton">
           <Link to="/login">

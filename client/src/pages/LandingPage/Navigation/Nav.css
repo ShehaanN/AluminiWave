@@ -5,14 +5,14 @@
 }
 
 /* Navbar container */
+
 .nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
-  background-color: #ffffff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  height: 90px;
+  /* width: 1440px; */
+
+  padding: 10px 20px;
 }
 
 /* Logo */
@@ -25,6 +25,7 @@ img {
 .content {
   display: flex;
   align-items: center;
+  max-width: 1200px;
 }
 
 /* Navigation links */
@@ -49,7 +50,7 @@ img {
 
 /* Underline Effect */
 .content li a::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   bottom: -2px;
@@ -67,8 +68,8 @@ img {
 .loginButton {
   display: flex;
   gap: 20px;
-  margin-right: 100px;
-  margin-bottom: 12px;
+  /* margin-right: 100px;
+  margin-bottom: 12px; */
 }
 
 /* Common button styles */
