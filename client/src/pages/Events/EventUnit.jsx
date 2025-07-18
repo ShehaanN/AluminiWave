@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { fetchEventById } from "../../services/dataService";
 
 import Event1 from "../../assets/Tech-Events1.jpg";
+import eb from "../../assets/EventBanner.png";
 import Saradp from "../../assets/sara.png";
 
 const EventUnit = () => {
@@ -50,7 +51,7 @@ const EventUnit = () => {
         <div className="bg-white rounded-lg shadow p-6 mb-6 mx-48">
           <div className="relative h-64 mb-6">
             <img
-              src={event.banner_image_url || Event1}
+              src={event.banner_image_url || eb}
               className="w-full h-full object-cover rounded-lg"
               alt="Event Banner"
             />

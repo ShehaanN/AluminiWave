@@ -1,5 +1,6 @@
 import Sidebar from "../Sidebar/Sidebar";
 import Event1 from "../../assets/Tech-Events1.jpg";
+import eb from "../../assets/EventBanner.png";
 import Event2 from "../../assets/Tech-Events2.jpg";
 import { Link } from "react-router-dom";
 
@@ -78,9 +79,7 @@ const Events = () => {
                       >
                         <Link to={`/events/${el.id}`}>
                           <img
-                            src={
-                              el.banner_image_url ? el.banner_image_url : Event1
-                            }
+                            src={el.banner_image_url ? el.banner_image_url : eb}
                             className="w-full h-48 object-cover rounded mb-4"
                           />
                         </Link>

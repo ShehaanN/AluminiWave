@@ -42,6 +42,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import logo from "@/assets/logo.png";
 import dp from "@/assets/mdp.jpg";
+import eb from "@/assets/EventBanner.png";
 import { Textarea } from "@/components/ui/textarea";
 import sara from "@/assets/sara.png";
 import { supabase } from "../../supabaseClient";
@@ -2304,7 +2305,7 @@ const SuperDashboard = () => {
                       <TableRow key={event.id}>
                         <TableCell>
                           <img
-                            src={event.banner_image_url || dp}
+                            src={event.banner_image_url || eb}
                             alt="Event Banner"
                             width={80}
                             height={160}
