@@ -68,15 +68,15 @@ function ValuePropositions() {
           {/* Stats Section */}
           <div className="bg-[#269EB2] text-white py-12 px-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             <div>
-              <h3 className="text-3xl font-bold">5000+</h3>
+              <h3 className="text-3xl font-bold">50+</h3>
               <p className="text-sm mt-2">Active Mentorships</p>
             </div>
             <div>
-              <h3 className="text-3xl font-bold">15000+</h3>
+              <h3 className="text-3xl font-bold">50+</h3>
               <p className="text-sm mt-2">Alumni Members</p>
             </div>
             <div>
-              <h3 className="text-3xl font-bold">1000+</h3>
+              <h3 className="text-3xl font-bold">10+</h3>
               <p className="text-sm mt-2">Events Hosted</p>
             </div>
             <div>
